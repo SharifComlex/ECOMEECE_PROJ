@@ -1,4 +1,28 @@
-﻿
+﻿@{ 
+    var chips = new List<string>();
+    chips.Add("/assets/AllCapsAndChips/Chips/10Original/original gold chip/IMG_3368.jpg");
+    chips.Add("/assets/AllCapsAndChips/Chips/13Dice/Gold/20220216_180700.jpeg");
+
+    var caps = new List<string>();
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3041.JPG");
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3042.JPG");
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3043.JPG");
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3044.JPG");
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3045.JPG");
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3046.JPG");
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3047.JPG");
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3048.JPG");
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3050.JPG");
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3051.JPG");
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3052.JPG");
+    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3053.JPG");
+}
+<style>
+    .select-chip img, .select-cap img{
+        cursor:pointer;
+    }
+</style>
+
 <!--product details start-->
 <div class="product_details">
     <div class="container">
@@ -6,34 +30,35 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product-details-tab">
 
-                    <div id="img-1" class="zoomWrapper single-zoom">
-                        <a href="#">
-                            <img id="zoom1" src="~/assets/AllCapsAndChips/capswithchips/9-25.jpg" data-zoom-image="~/assets/AllCapsAndChips/capswithchips/9-25.jpg" alt="big-1">
+                    <div id="img-1" class="zoomWrapper">
+                        <a href="#" style="position:relative;display:block">
+                            <img id="zoom1" src="/assets/AllCapsAndChips/capswithchips/9-25.jpg" alt="big-1">
+                            <img id="zoom2" style="position:absolute;left:0px;top:0px;" src="" alt="">
                         </a>
                     </div>
 
                     <div class="single-zoom-thumb">
                         <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
                             <li>
-                                <a href="#" class="elevatezoom-gallery active" data-update="" data-image="~/assets/AllCapsAndChips/capswithchips/2-34.jpg" data-zoom-image="~/assets/AllCapsAndChips/capswithchips/2-34.jpg">
-                                    <img src="~/assets/AllCapsAndChips/capswithchips/2-34.jpg" alt="zo-th-1" />
+                                <a href="#" class="elevatezoom-gallery" data-update="" data-image="/assets/AllCapsAndChips/capswithchips/2-34.jpg" data-zoom-image="~/assets/AllCapsAndChips/capswithchips/2-34.jpg">
+                                    <img src="/assets/AllCapsAndChips/capswithchips/2-34.jpg" alt="zo-th-1" />
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="elevatezoom-gallery active" data-update="" data-image="~/assets/AllCapsAndChips/capswithchips/6-24.jpg" data-zoom-image="~/assets/AllCapsAndChips/capswithchips/6-24.jpg">
-                                    <img src="~/assets/AllCapsAndChips/capswithchips/6-24.jpg" alt="zo-th-1" />
+                                <a href="#" class="elevatezoom-gallery" data-update="" data-image="/assets/AllCapsAndChips/capswithchips/6-24.jpg" data-zoom-image="~/assets/AllCapsAndChips/capswithchips/6-24.jpg">
+                                    <img src="/assets/AllCapsAndChips/capswithchips/6-24.jpg" alt="zo-th-1" />
                                 </a>
                                 
                             </li>
                             <li>
-                                <a href="#" class="elevatezoom-gallery active" data-update="" data-image="~/assets/AllCapsAndChips/capswithchips/8-24.jpg" data-zoom-image="~/assets/AllCapsAndChips/capswithchips/8-24.jpg">
-                                    <img src="~/assets/AllCapsAndChips/capswithchips/8-24.jpg" alt="zo-th-1" />
+                                <a href="#" class="elevatezoom-gallery" data-update="" data-image="/assets/AllCapsAndChips/capswithchips/8-24.jpg" data-zoom-image="~/assets/AllCapsAndChips/capswithchips/8-24.jpg">
+                                    <img src="/assets/AllCapsAndChips/capswithchips/8-24.jpg" alt="zo-th-1" />
                                 </a>
 
                             </li>
                             <li>
-                                <a href="#" class="elevatezoom-gallery active" data-update="" data-image="~/assets/AllCapsAndChips/capswithchips/5-24.jpg" data-zoom-image="~/assets/AllCapsAndChips/capswithchips/5-24.jpg">
-                                    <img src="~/assets/AllCapsAndChips/capswithchips/5-24.jpg" alt="zo-th-1" />
+                                <a href="#" class="elevatezoom-gallery" data-update="" data-image="/assets/AllCapsAndChips/capswithchips/5-24.jpg" data-zoom-image="~/assets/AllCapsAndChips/capswithchips/5-24.jpg">
+                                    <img src="/assets/AllCapsAndChips/capswithchips/5-24.jpg" alt="zo-th-1" />
                                 </a>
 
                             </li>
@@ -66,132 +91,51 @@
                             <span class="old_price">$80.00</span>
                             <span class="current_price">$70.00</span>
                         </div>
-                        <div class="product_desc">
-                            <p>eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in </p>
-                        </div>
                         <div class="product_meta">
-                            <span>Chips </span>
+                            <span>Colour</span>
                         </div>
                         <div class="row">
                             <div class="col-lg-2 col-md-3">
                                 <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/Chips/10Original/original gold chip/IMG_3368.jpg" alt=""></a>
+                                    <div class="portfolio_thumb select-cap">
+                                        <img src="/assets/AllCapsAndChips/withoutChip/1-33.png" alt="">
                                     </div>
                                 </div>
                             </div>
+                            @foreach (var item in caps)
+                            {
+                                <div class="col-lg-2 col-md-3">
+                                    <div class="single_portfolio">
+                                        <div class="portfolio_thumb select-cap">
+                                            <img src="@item" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="product_meta">
+                            <span>Chip </span>
+                        </div>
+                        <div class="row">
                             <div class="col-lg-2 col-md-3">
                                 <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/Chips/13Dice/Gold/20220216_180700.jpeg" alt=""></a>
+                                    <div class="portfolio_thumb select-chip">
+                                        <img src="/assets/AllCapsAndChips/Chips/13Dice/Gold/20220216_180700.jpeg" data-chip="/assets/AllCapsAndChips/withoutChip/c-1-33.png" alt="">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/Chips/10Original/original gold chip/IMG_3368.jpg" alt=""></a>
+                            @foreach (var item in chips)
+                            {
+                                <div class="col-lg-2 col-md-3">
+                                    <div class="single_portfolio">
+                                        <div class="portfolio_thumb select-chip">
+                                            <img src="@item" alt="">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
+                        </div>
 
-                        </div>
-                        <div class="product_meta">
-                            <span>Caps </span>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3041.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3042.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3043.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3044.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3045.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3046.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3047.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3048.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3050.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3050.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3051.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3052.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb">
-                                        <a href="portfolio-details.html"><img src="~/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3053.JPG" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="product_variant quantity">
                             <label>quantity</label>
                             <input min="1" max="100" value="1" type="number">
@@ -337,3 +281,30 @@
         </div>
     </div>
 </section>
+
+
+@section Scripts{ 
+    <script>
+        $(".select-chip").click(function () {
+            $(".select-chip").each(function () {
+                $(this).css({"border" : "none"});
+            })
+
+            $(this).css({ "border": "solid" });
+
+            var url = $(this).find("img").attr("data-chip");
+            $("#zoom2").attr("src", url);
+        });
+
+        $(".select-cap").click(function () {
+            $(".select-cap").each(function () {
+                $(this).css({ "border": "none" });
+            })
+
+            $(this).css({ "border": "solid" });
+
+            var url = $(this).find("img").attr("src");
+            $("#zoom1").attr("src", url);
+        });
+    </script>
+}

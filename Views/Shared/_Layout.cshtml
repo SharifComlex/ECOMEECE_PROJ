@@ -443,7 +443,7 @@
         </div>
         <!--header bottom end-->
     </header>
-   @RenderBody()
+    @RenderBody()
     <!--footer area start-->
     <footer class="footer_widgets">
         <div class="container">
@@ -717,7 +717,7 @@
     <script src="/assets/js/scrollup.js"></script>
     <script src="/assets/js/ajax.chimp.js"></script>
     <script src="/assets/js/jquery.ui.js"></script>
-    <script src="/assets/js/jquery.elevatezoom.js"></script>
+    @*<script src="/assets/js/jquery.elevatezoom.js"></script>*@
     <script src="/assets/js/imagesloaded.js"></script>
     <script src="/assets/js/isotope.main.js"></script>
     <script src="/assets/js/jqquery.ripples.js"></script>
@@ -727,6 +727,7 @@
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
 
+    @RenderSection("Scripts", false)
 
 
 </body>
