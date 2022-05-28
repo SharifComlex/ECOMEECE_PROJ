@@ -1,0 +1,312 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RoshanTv Administration Panel</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+
+    <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
+    <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css">
+
+    <link rel="stylesheet" href="/css/adminlte.min.css?v=3.2.0">
+
+    <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
+
+    <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .themelist {
+            cursor: pointer;
+        }
+
+        .themeSelect {
+            border: solid 1px #28a745 !important;
+        }
+
+        .label-success {
+            background-color: #5cb85c;
+        }
+
+        .label-danger {
+            background-color: #d9534f;
+        }
+
+        .label {
+            display: inline;
+            padding: 0.2em 0.6em 0.3em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            color: #fff;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25em;
+        }
+
+        .select2[style] {
+            width: 100% !important;
+        }
+
+        .select2-container--default .select2-selection--single, .select2-dropdown {
+            border: 1px solid #d2d6de;
+        }
+
+        .select2-selection {
+            height: 38px !important;
+        }
+
+        .select2-selection__rendered {
+            padding-left: 4px !important;
+        }
+
+        .select2-selection__choice {
+            color: #000 !important;
+        }
+
+        .select2-container--default.select2-container--focus .select2-selection--multiple {
+            border: solid #80bdff 1px !important;
+
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            top: 4px !important;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-comments"></i>
+                        <span class="badge badge-danger navbar-badge">3</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="/assets/img/user1-128x128.jpg"
+                                     alt="User Avatar"
+                                     class="img-size-50 mr-3 img-circle" />
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        Brad Diesel
+                                        <span class="float-right text-sm text-danger">
+                                            <i class="fas fa-star"></i>
+                                        </span>
+                                    </h3>
+                                    <p class="text-sm">Call me whenever you can...</p>
+                                    <p class="text-sm text-muted">
+                                        <i class="far fa-clock mr-1"></i> 4 Hours Ago
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="/assets/img/user8-128x128.jpg"
+                                     alt="User Avatar"
+                                     class="img-size-50 img-circle mr-3" />
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        John Pierce
+                                        <span class="float-right text-sm text-muted">
+                                            <i class="fas fa-star"></i>
+                                        </span>
+                                    </h3>
+                                    <p class="text-sm">I got your message bro</p>
+                                    <p class="text-sm text-muted">
+                                        <i class="far fa-clock mr-1"></i> 4 Hours Ago
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="/assets/img/user3-128x128.jpg"
+                                     alt="User Avatar"
+                                     class="img-size-50 img-circle mr-3" />
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        Nora Silvester
+                                        <span class="float-right text-sm text-warning">
+                                            <i class="fas fa-star"></i>
+                                        </span>
+                                    </h3>
+                                    <p class="text-sm">The subject goes here</p>
+                                    <p class="text-sm text-muted">
+                                        <i class="far fa-clock mr-1"></i> 4 Hours Ago
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                    </div>
+                </li>
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-warning navbar-badge">15</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">15 Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i> 4 new messages
+                            <span class="float-right text-muted text-sm">3 mins</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-users mr-2"></i> 8 friend requests
+                            <span class="float-right text-muted text-sm">12 hours</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-file mr-2"></i> 3 new reports
+                            <span class="float-right text-muted text-sm">2 days</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <button type="button" class="btn" data-toggle="dropdown" aria-expanded="false">
+                        <i class="far fa-user"></i>
+                    </button>
+                    <div class="dropdown-menu" role="menu" style="left: inherit; right: 0px;">
+                        <a class="dropdown-item" href="/account/password">
+                            <i class="fa fa-lock fa-fw" aria-hidden="true"></i>
+                            Change Password
+                        </a>
+                        <a class="dropdown-item" href="/account/logout">
+                            <i class="fas fa-sign-out-alt fa-fw"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+
+        <partial name="_NavSuperAdmin" />
+
+        @RenderBody()
+
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2022 RoshanTv.</strong>
+            All rights reserved.
+        </footer>
+    </div>
+
+
+    <script src="/plugins/jquery/jquery.min.js"></script>
+
+    <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/plugins/chart.js/Chart.min.js"></script>
+
+    <script src="/plugins/sparklines/sparkline.js"></script>
+
+    <script src="/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+
+    <script src="/plugins/jquery-knob/jquery.knob.min.js"></script>
+
+    <script src="/plugins/moment/moment.min.js"></script>
+    <script src="/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <script src="/plugins/summernote/summernote-bs4.min.js"></script>
+
+    <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+    <!-- datatables -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.2.0/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="/js/adminlte.js?v=3.2.0"></script>
+
+    <script>
+        const sidebarLinks = $('.nav-sidebar').find('.nav-link');
+
+        $(sidebarLinks).each(function (index, el) {
+            $(el).removeClass('active');
+        });
+
+        $(sidebarLinks).each(function (index, el) {
+            var href = $(el).attr('href');
+            if (href == window.location.pathname) {
+                $(el).addClass('active');
+            }
+        });
+
+        $(".nav-link").each(function () {
+            if ($(this).hasClass("active")) {
+                if ($(this).parent().parent().parent().hasClass("nav-treeview")) {
+                    $(this).parent().parent().parent().addClass("menu-open");
+                    $(this).parent().parent().css("display", "block");
+                }
+                else if ($(this).parent().parent().parent().parent().parent().hasClass("nav-treeview")) {
+                    $(this).parent().parent().parent().parent().parent().addClass("menu-open");
+                    $(this).parent().parent().css("display", "block");
+                }
+                else if ($(this).parent().parent().hasClass("nav-treeview")) {
+                    $(this).parent().parent().addClass("menu-open");
+                    $(this).parent().parent().css("display", "block");
+                }
+            }
+        });
+    </script>
+
+    @RenderSection("scripts", false)
+</body>
+</html>

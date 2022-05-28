@@ -1,1 +1,0 @@
-# ECOMEECE_PROJ

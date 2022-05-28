@@ -1,0 +1,58 @@
+﻿@model ECap.Admin.Areas.SuperAdmin.Models.SubCategories.EditSubCategory
+
+<div class="content-wrapper">
+
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">SubCategories</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/superadmin/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/superadmin/categories">SubCategories</a></li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Edit Category</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form id="ecap-form" method="post">
+                        @Html.AntiForgeryToken()
+                        <input asp-for="Id" type="hidden" />
+
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select asp-for="CategoryId" asp-items="ViewBag.CategoryId" class="form-control">
+                                <option>Select</option>
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="f_name">Name *</label>
+                            <input asp-for="Name" type="text" placeholder="Name" class="form-control" />
+                        </div>
+
+                    </form>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button type="submit" form="ecap-form" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+    </section>
+</div>
+
