@@ -1,0 +1,58 @@
+﻿@model Microflake.TheComputerShop.ViewModel.Currency.EditCurrency
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "inputForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Base_Currency)
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @*<div class="form-group">
+        <label>
+            @Microflake.TheComputerShop.Web.Admin.Language.Language.Currency_Rate
+        </label>
+        @Html.EditorFor(model => model.Currency_Rate, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Currency_Rate, "", new { @class = "text-danger" })
+    </div>*@
+    <div class="form-group">
+        <labels>@Microflake.TheComputerShop.Web.Admin.Language.Language.Is_Base_Currency</labels>
+        <div class="toggle lg">
+
+            <label>
+
+                @if (Model.Base_Currency)
+                {
+
+                    <input id="switch-1" type="checkbox" checked><span class="button-indecator"></span>
+                }
+                else
+                {
+
+                    <input id="switch-1" type="checkbox"><span class="button-indecator"></span>
+                }
+                <input name="Base_Currency" hidden id="Base_Currency" value="False" />
+            </label>
+        </div>
+    </div>
+
+}
+<script>
+    $("#Base_Currency").hide();
+    $("#switch-1").click(function () {
+        debugger;
+        var IsFeatured = $("#Base_Currency").val();
+        if (IsFeatured == "False") {
+            $("#Base_Currency").val("True");
+
+        } else {
+            $("#Base_Currency").val("False");
+
+
+        }
+    });
+
+
+</script>

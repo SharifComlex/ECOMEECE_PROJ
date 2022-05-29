@@ -1,0 +1,34 @@
+﻿@model Microflake.TheComputerShop.ViewModel.Category.EditCategory
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "inputForm" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-group">
+        <label class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.Category (English)</label>
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.English, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.English, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.Category (Arabic)</label>
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.Arabic, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Arabic, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="custom-control custom-checkbox">
+            @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "custom-control-input" } })
+            <label class="custom-control-label" for="Status">@Microflake.TheComputerShop.Web.Admin.Language.Language.Status</label>
+        </div>
+    </div>
+}

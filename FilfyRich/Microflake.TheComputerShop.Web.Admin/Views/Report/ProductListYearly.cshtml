@@ -1,0 +1,143 @@
+﻿@using Microflake.TheComputerShop.Web.Admin.Language;
+@{
+    ViewBag.Title = "ProductListYearly";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+<style>
+    .content-header {
+        position: relative;
+    }
+
+    #SelectYear-Wrapper {
+        position: absolute !important;
+        top: 10px;
+        /*left: 200px;*/
+    }
+
+    .small-box div p {
+        padding-top: 17px;
+    }
+
+    #SelectYear-Wrapper > .select2[style] {
+        width: 250px !important;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/">@Language.Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">@Language.Products</a></li>
+                        <li class="breadcrumb-item active">@Language.List</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@Language.Products</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="tile">
+                <h3 class="tile-title">@Language.Year</h3>
+                <div class="tile-body">
+                    <form class="Rentcalculation row">
+                        <div class="form-group col-md-3">
+
+                            @Html.DropDownList("SelectYear", (IEnumerable<SelectListItem>)ViewBag.Years, "Select_Year", new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-md-3" style="width:100px;position:relative" id="datepicker">
+
+                            <div id="SelectYear-Wrapper">
+                                <i id="loading" class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div id="Daily">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div id="Daily">
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+@*<section class="content-header">
+
+        <div id="SelectYear-Wrapper">
+            @Html.DropDownList("SelectYear", (IEnumerable<SelectListItem>)ViewBag.Years, "Select_Year", new { @class = "form-control" })
+            <i id="loading" class="fa fa-spinner fa-spin"></i>
+        </div>
+    </section>
+    <div class="col-md-12">
+        <div id="Daily">
+
+        </div>
+    </div>*@
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#SelectYear').select2();
+        });
+        $("#SelectYear").change(function () {
+            $("#loading").show();
+            getStats($(this).val());
+        });
+        $("#SelectYear").change(function () {
+            date = $(this).val();
+            $("#loading").show();
+            var SelectYear = $("#SelectYear").val();
+            if (SelectYear == "" || SelectYear == null) {
+                $("#loading").hide();
+                $("#SelectYear").css("border", "solid 1px red");
+
+            }
+            else {
+                getStats(SelectYear);
+            }
+
+
+        });
+        function getStats(SelectYear) {
+            debugger;
+            $.ajax({
+                url: '/Report/ProductListYearlyreport',
+                type: 'post',
+                //data: "year=" + year + "&month=" + Months,
+                data: "SelectYear=" + SelectYear,
+                success: function (response) {
+                    debugger;
+                    $("#loading").hide();
+                    $("#Daily").html(response);
+                    $("#loading").hide();
+                }
+            });
+
+        }
+
+
+          getStats("@DateTime.UtcNow.Year");
+    </script>
+}
+
+
+
+

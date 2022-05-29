@@ -1,0 +1,33 @@
+﻿@using Microflake.TheComputerShop.Web.Admin.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+
+    <form class="login-form" method="post">
+        @Html.AntiForgeryToken()
+
+        <h3 class="login-head">SIGN IN</h3>
+        <div class="form-group mb-3">
+            <label for="emailaddress">Email address</label>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter your email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="password">Password</label>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "password" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+      
+        <p>
+            @Html.ActionLink("Register as a new user", "Register")
+        </p>
+        <p>
+            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+        </p>
+        <div class="form-group btn-container">
+            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+        </div>
+    </form>

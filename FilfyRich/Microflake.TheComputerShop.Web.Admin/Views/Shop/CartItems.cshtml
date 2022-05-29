@@ -1,0 +1,89 @@
+﻿﻿@model Microflake.TheComputerShop.ViewModel.ShoppingCartViewModel
+
+
+<div class="main-content-wrap pt-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form action="#" class="cart-table">
+                    <div class="table-content table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="cart-product-name">Product</th>
+                                    <th class="plantmore-product-price"> Price</th>
+                                    <th class="plantmore-product-quantity">Quantity</th>
+                                    <th class="plantmore-product-remove">remove</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                { var rate = item.Product.SellPrice * ViewBag.Currency;
+                                     var discount = item.Product.Discount * ViewBag.Currency;
+                                <tr>
+                                    <td class="plantmore-product-thumbnail">
+                                        <a href="#">
+                                            <img id="imagePreview" src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
+                                            @item.Product.English<br />
+                                         
+                                        </a>
+                                    
+                                   <td class="plantmore-product-price"><span class="amount">@ViewBag.CurrencySimbal @rate </span></td>
+                                   <td class="plantmore-product-quantity">
+
+                                       <a href="/shop/RemoveFromCart/@item.ProductId">
+                                           <input type="button" value="-" class="minus" id="min">
+                                       </a>
+                                       <input name="qty" readonly type="text" value="@item.Count" class="qty quantity">
+                                       <a href="/shop/AddToCart/@item.ProductId">
+                                           <input type="button" value="+" class="plus" id="plus">
+                                       </a>
+                                      
+                                   </td>
+                                    <td class="plantmore-product-remove"><a href="@Url.Action("RemoveFromCart", "Shop", new { id = item.ProductId })"><i class="fa fa-times"></i></a></td>
+
+
+                                </tr>
+                                }
+                                </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-5 ml-auto">
+                            <div class="cart-page-total">
+                               
+                                <a href="/Shop/Index">Continue Shopping</a>
+                            </div>
+                        </div>
+                        <div class="col-md-5 ml-auto">
+                            <div class="cart-page-total">
+                                <h2>Cart totals</h2>
+                                <ul>
+                                    <li>Total <span>@Model.Total</span></li>
+
+                                </ul>
+                                <a href="/Shop/Checkout">Proceed to checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<script>
+    $('.minus').click(function(){
+  quantityField = $(this).next();
+  if (quantityField.val() != 0) {
+     quantityField.val(parseInt(quantityField.val(), 10) - 1);
+  }
+});
+    $('.plus').click(function(){
+  quantityField = $(this).prev();
+  quantityField.val(parseInt(quantityField.val(), 10) + 1);
+});
+</script>
+}

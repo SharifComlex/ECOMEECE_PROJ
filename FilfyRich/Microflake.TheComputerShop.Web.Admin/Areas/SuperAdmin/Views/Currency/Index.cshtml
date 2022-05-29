@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+@model List<Microflake.TheComputerShop.ViewModel.Currency.ListCurrency>
+@{
+    var routeData = Request.RequestContext.RouteData;
+    var area = routeData.DataTokens["area"].ToString();
+    var ControllerName = routeData.Values["Controller"].ToString();
+    var ControllerPath = "/" + ControllerName;
+    var lang = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+}
+<style>
+    .Image-wrapper {
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 110px !important;
+        height: 111px !important;
+        overflow: hidden;
+    }
+</style>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/"> @Microflake.TheComputerShop.Web.Admin.Language.Language.Home</a></li>
+                        <li class="breadcrumb-item">@Microflake.TheComputerShop.Web.Admin.Language.Language.Currency_Managment</li>
+                        <li class="breadcrumb-item active"> @Microflake.TheComputerShop.Web.Admin.Language.Language.List</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@Microflake.TheComputerShop.Web.Admin.Language.Language.Currency_Managment</h4>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body table-responsive">
+            
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "Curr" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        <table class="table tblData  table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+                            <thead>
+                                <tr>
+                                    <th>@Microflake.TheComputerShop.Web.Admin.Language.Language.Id</th>
+                                    <th>@Microflake.TheComputerShop.Web.Admin.Language.Language.Name</th>
+
+                                    @*<th>@Microflake.TheComputerShop.Web.Admin.Language.Language.Currency_Rate</th>*@
+                                    <th>@Microflake.TheComputerShop.Web.Admin.Language.Language.Is_Base_Currency</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              @*@foreach (var item in Model)
+
+                              {
+                                    <tr>
+                                        <td >@item.Id</td>
+                                        <td >@item.Name</td>
+                                        <td>@Html.TextBoxFor(m => item.Currency_Rate)</td>
+                                        <td>@Html.CheckBoxFor(m => item.Base_Currency)</td>
+                                    </tr>
+                                }*@
+                                @for (int i = 0; i < Model.Count; i++)
+                                 {@Html.HiddenFor(x=>x[i].Id)
+                                <tr>
+                                    <td>@Model[i].Id</td>
+                                    <td>@Model[i].Name</td>
+                                    @*<td>@Html.TextBoxFor(m => m[i].Currency_Rate)</td>*@
+                                    <td>@Html.CheckBoxFor(m => m[i].Base_Currency)</td>
+                                    <span class="text-danger" data-valmsg-for="Base_Currency"></span>
+                                </tr>
+                                 }
+                            </tbody>
+                        </table>
+                   
+
+
+                    }
+
+                    <div class="row">
+                        <div class="offset-10 col-md-2">
+                            <button class="btn btn-primary btn-currency"> Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $("body").on("click", ".btn-currency", function (e) {
+            debugger;
+                var formData = $("#Curr").serialize();
+
+                var $btn = $(this);
+                $btn.find("i").removeClass("fa-plus");
+                $btn.find("i").addClass("fa-spinner");
+                $btn.find("i").addClass("fa-spin");
+
+                $.ajax({
+                    cache: false,
+                    type: "post",
+                    timeout: 5000,
+                   url: '@Url.Action("Edit", "Currency")',
+                    data: formData,
+                    success: function (responce) {
+                    
+                        if (responce.status == true) {
+
+                            $.simplyToast("Currencies Updated ", 'success');
+                        }
+
+                        else {
+                            debugger;
+                             for (var i = 0; i < responce.errors.length; i++) {
+                                 $("[data-valmsg-for='" + responce.errors[i].Key + "']").html(responce.errors[i].Errors[0]);
+                                  $.simplyToast(responce.errors[i].Errors[0], 'danger');
+                        }
+                        }
+                      
+                    },
+                    error: function (responce) {
+                     
+                         
+                    }
+                });
+        });
+
+        $('input:checkbox').click(function() {
+        $('input:checkbox').not(this).prop('checked', false);
+    });
+    </script>
+}
+
+

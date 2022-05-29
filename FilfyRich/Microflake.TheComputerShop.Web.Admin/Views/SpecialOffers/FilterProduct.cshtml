@@ -1,0 +1,376 @@
+﻿@using Microsoft.AspNet.Identity;
+@model Microflake.TheComputerShop.ViewModel.Products.ListProduct
+@{
+    ViewBag.Title = "FilterProduct";
+    //Layout = null;
+    //Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
+}
+<style>
+    .whislist {
+        color: red;
+    }
+</style>
+<!-- tab-content start -->
+<div class="tab-content">
+    <div class="shop-bar-inner">
+        <div class="product-view-mode">
+            <!-- shop-item-filter-list start -->
+            <ul role="tablist" class="nav shop-item-filter-list">
+                <li role="presentation" class="active"><a href="#grid-view" aria-controls="grid-view" role="tab" data-toggle="tab" class="active show" aria-selected="true"><i class="fa fa-th"></i></a></li>
+                <li role="presentation"><a href="#list-view" aria-controls="list-view" role="tab" data-toggle="tab"><i class="fa fa-th-list"></i></a></li>
+            </ul>
+            <!-- shop-item-filter-list end -->
+        </div>
+        <div class="toolbar-amount">
+            <span>
+                Showing @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + 1) – @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + (Model.Productlist.Where(x => x.DealOfTheWeek == true).Count() < Model.Pager.PageSize ? Model.Productlist.Where(x => x.DealOfTheWeek == true).Count() : Model.Pager.PageSize)) of @Model.Pager.TotalItems Products
+            </span>
+        </div>
+    </div>
+
+    <div id="grid-view" class="tab-pane fade active show" role="tabpanel">
+        <div class="shop-product-area">
+            <div class="row">
+                @if (Model != null && Model.Productlist.Where(x => x.DealOfTheWeek == true).Count() > 0)
+                {
+                    foreach (var item in Model.Productlist.Where(x => x.DealOfTheWeek == true))
+                    {
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <!-- single-product-area start -->
+                            <div class="single-product-area mt-30">
+                                <div class="product-thumb">
+                                    <a href="single-product.html">
+                                        <img id="primary-image" src="@Config.Products@(item.Image1)" onerror="this.src='/Public/default-image.jpg';" />
+                                        <img class="secondary-image" src="@Config.Products@(item.Image)" onerror="this.src='/Public/default-image.jpg';" alt="">
+
+                                        @*<img class="primary-image" src="/content/FrontEnd/img/product/2.jpg" alt="">*@
+                                        @*<img class="secondary-image" src="/content/FrontEnd/img/product/1.jpg" alt="">*@
+                                    </a>
+                                    @if (item.IsNew)
+                                    {
+                                        <div class="label-product label_new">New</div>
+
+                                    }
+                                    <div class="action-links">
+
+                                        @if (Model.Whislists.FirstOrDefault(x => x.ProductId == item.Id) != null)
+                                        {
+                                            <a title="Remove from Wish List"><i class="icon-heart whislist " id="whislist_btn" data-href="@Url.Action("Create", "Whislist", new { controller = "Whislist", id = item.Id })"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a title="Add to Wish List"><i class="icon-heart  " id="whislist_btn" data-href="@Url.Action("Create", "Whislist", new { controller = "Whislist", id = item.Id })"></i></a>
+
+                                        }  <a data-href="@Url.Action("ProductQuickView", "Product", new { controller = "Product", id = item.Id })" class="btn-add" title="Quick View"><i class="icon-magnifier icons"></i></a>
+
+                                    </div>
+                                </div>
+                                <div class="product-caption">
+                                    <h4 class="product-name"><a href="#">@item.English</a></h4>
+                                    <div class="price-box">
+                                        @{ var discount = item.Discount * Model.Currency;
+                                            var rate = item.SellPrice * Model.Currency;
+                                        }
+
+                                        <span class="new-price">@Model.CurrencySimbal @item.SellPrice</span>
+                                        <span class="old-price">@Model.CurrencySimbal @item.Discount</span>
+                                    </div>
+                                    <a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })" class="action-cart-btn">
+                                        Add to Cart
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- single-product-area end -->
+                        </div>
+                    }
+
+                }
+                else
+                {
+                    <div class="alert alert-warning mt-5" role="alert">
+                        Sorry No Record Exist
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div id="list-view" class="tab-pane fade" role="tabpanel">
+        <div class="row">
+            <div class="col">
+                @if (Model != null && Model.Productlist.Where(x => x.DealOfTheWeek == true).Count() > 0)
+                {
+                    foreach (var item in Model.Productlist.Where(x => x.DealOfTheWeek == true))
+                    {
+                        <div class="row product-layout-list">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="product-thumb">
+                                    <a href="single-product.html">
+                                        <img id="primary-image" src="@Config.Products@(item.Image1)" onerror="this.src='/Public/default-image.jpg';" />
+                                        <img class="secondary-image" src="@Config.Products@(item.Image)" onerror="this.src='/Public/default-image.jpg';" alt="">
+                                    </a>
+                                    @if (item.IsNew)
+                                    {
+                                        <div class="label-product label_new">New</div>
+
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <div class="product-caption">
+                                    <h4 class="product-name"><a href="single-product.html">@item.English</a></h4>
+                                    @*<div class="rating-box">
+                                            <ul class="rating d-flex">
+                                                <li><i class="icon-star"></i></li>
+                                                <li><i class="icon-star"></i></li>
+                                                <li><i class="icon-star"></i></li>
+                                                <li><i class="icon-star"></i></li>
+                                                <li><i class="icon-star"></i></li>
+                                            </ul>
+                                        </div>*@
+                                <div class="price-box">
+                                    @{
+                                        var rate = item.SellPrice * Model.Currency;
+                                        var discount = item.Discount * Model.Currency;
+                                    }
+
+                                    <span class="new-price">@Model.CurrencySimbal @item.SellPrice</span>
+                                    <span class="old-price">@Model.CurrencySimbal @item.Discount</span>
+                                </div>
+                                    <p class="product-des">@item.Description</p>
+                                    <ul class="quick-add-to-cart">
+                                        <li><a class="add-to-cart" href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })"><i class="icon-basket-loaded"></i> Add to cart</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning mt-5" role="alert">
+                        Sorry No Record Exist
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- paginatoin-area start -->
+    @*<div class="paginatoin-area">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="pagination-box">
+                        <li><a class="active" href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li>
+                            <a class="Next" href="#"> >|</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+    <div class="paginatoin-area">
+
+        @if (Model.Pager.EndPage > 1)
+        {
+            <nav>
+                <ul class="pagination-box">
+                    @if (Model.Pager.CurrentPage > 1)
+                    {
+                        <li class="prev">
+                            <a class="pageDataLink" data-href="@Url.Action("FilterProduct", "SpecialOffers")">
+                                <i class="la la-long-arrow-left"></i>First
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="pageDataLink" data-href="@Url.Action("FilterProduct", "SpecialOffers", new { page = Model.Pager.CurrentPage - 1, sortBy = Model.SortBy , categoryID = Model.CategoryID})">
+                                <i class="la la-long-arrow-left"></i>Prev
+                            </a>
+                        </li>
+                    }
+
+                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                    {
+                        <li class=" @(page == Model.Pager.CurrentPage ? "active" : "")">
+                            <a class="pageDataLink" data-href="@Url.Action("FilterProduct", "SpecialOffers", new { page = page , sortBy = Model.SortBy, categoryID = Model.CategoryID})">@page</a>
+                        </li>
+                    }
+
+                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="pageDataLink" data-href="@Url.Action("FilterProduct", "SpecialOffers", new { page = Model.Pager.CurrentPage + 1, sortBy = Model.SortBy, categoryID = Model.CategoryID})">
+                                Next <i class="la la-long-arrow-right"></i>
+                            </a>
+                        </li>
+                        <li class="next">
+                            <a class="pageDataLink" data-href="@Url.Action("FilterProduct", "SpecialOffers", new { page = Model.Pager.TotalPages, sortBy = Model.SortBy, categoryID = Model.CategoryID})">
+                                Last <i class="la la-long-arrow-right"></i>
+                            </a>
+                        </li>
+                    }
+            </nav>
+        }
+    </div>
+    <!-- paginatoin-area end -->
+</div>
+<!-- tab-content end -->
+
+<input type="hidden" id="MaximumPrice" value="@Model.MaximumPrice" />
+<input type="hidden" id="SearchTerm" value="@Model.SearchTerm" />
+<input type="hidden" id="SortBy" value="@Model.SortBy" />
+<input type="hidden" id="CategoryID" value="@Model.CategoryID" />
+<input type="hidden" id="SubCategoryID" value="@Model.SubCategoryID" />
+<script src="/content/FrontEnd/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="~/Scripts/simplytoast/simply-toast.min.js"></script>
+<link href="~/Scripts/simplytoast/simply-toast.css" rel="stylesheet" />
+
+<script>
+    $(".pageDataLink").click(function () {
+        var url = $(this).attr("data-href");
+
+        if (url != "" || url != undefined) {
+            GetData(url);
+        }
+    });
+    $(".icon-heart").click(function () {
+
+        var url = $(this).attr("data-href");
+        debugger;
+        var whishlist = document.getElementById("whislist_btn").classList.contains("whislist");
+        if (whishlist == false) {
+
+            $(this).addClass("whislist");
+            $.ajax({
+                url: url,
+                type: 'post',
+                //data: "year=" + year + "&month=" + Months,
+
+                success: function (responce) {
+                    debugger;
+
+                    if (responce.status == true) {
+                        $.simplyToast("Product Added to your Whishlist", 'success');
+                        $.ajax({
+                            type: "Post",
+                            url: '/Whislist/WhishListCount'
+
+
+                        }).done(
+                            function (responce) {
+                                debugger;
+                                if (responce != null) {
+
+                                    $("#WhishListCount").html(responce.data);
+                                }
+                            })
+                    }
+
+                    else {
+                        debugger;
+                        $(".icon-heart").removeClass("whislist");
+                        for (var i = 0; i < responce.errors.length; i++) {
+                            $("[data-valmsg-for='" + responce.errors[i].Key + "']").html(responce.errors[i].Errors[0]);
+                            $.simplyToast(responce.errors[i].Errors[0], 'danger');
+                        }
+                    }
+
+
+                }
+            });
+
+        }
+        else {
+            $(this).removeClass("whislist");
+            $.ajax({
+                url: url,
+                type: 'post',
+                //data: "year=" + year + "&month=" + Months,
+
+                success: function (responce) {
+                    debugger;
+
+                    if (responce.status == true) {
+                        $.simplyToast("Product Removed to your Whishlist", 'success');
+                        $.ajax({
+                            type: "Post",
+                            url: '/Whislist/WhishListCount'
+
+
+                        }).done(
+                            function (responce) {
+                                debugger;
+                                if (responce != null) {
+
+                                    $("#WhishListCount").html(responce.data);
+                                }
+                            })
+                    }
+
+                    else {
+                        debugger;
+
+                        $(".icon-heart").addClass("whislist");
+                        for (var i = 0; i < responce.errors.length; i++) {
+                            $("[data-valmsg-for='" + responce.errors[i].Key + "']").html(responce.errors[i].Errors[0]);
+                            $.simplyToast(responce.errors[i].Errors[0], 'danger');
+                        }
+                    }
+
+
+                }
+            });
+        }
+
+
+    });
+    //var products;
+    //$(".productAddToCart").click(function () {
+    //    var existingCookieData = $.cookie('CartProducts');
+
+    //    if (existingCookieData != undefined && existingCookieData != "" && existingCookieData != null) {
+    //        products = existingCookieData.split('-');
+    //    }
+    //    else {
+    //        products = [];
+    //    }
+
+    //    var productID = $(this).attr('data-id');
+
+    //    products.push(productID);
+
+    //    $.cookie('CartProducts', products.join('-'), { path: '/' });
+
+    //    updateCartProducts();
+
+    //    swal("Done", "Product Added to Cart!", "success");
+    //});
+    $(".btn-add").click(function () {
+        debugger;
+        var url = $(this).attr("data-href");
+
+        $.ajax({
+            type: "Post",
+            url: url,
+            success: function (responce) {
+
+                $("#exampleModalCenter").html(responce);
+                $(".modal").modal("show");
+
+                $btn.find("i").addClass("fa-plus");
+                $btn.find("i").removeClass("fa-spinner");
+                $btn.find("i").removeClass("fa-spin");
+            },
+            error: function (ex) {
+                $(".modal").modal("show");
+                $btn.find("i").addClass("fa-plus");
+                $btn.find("i").removeClass("fa-spinner");
+                $btn.find("i").removeClass("fa-spin");
+            }
+        });
+    });
+
+</script>
+
+
+

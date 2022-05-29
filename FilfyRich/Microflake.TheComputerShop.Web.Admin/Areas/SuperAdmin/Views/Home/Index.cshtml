@@ -1,0 +1,389 @@
+﻿
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="app-title">
+                <div>
+                    <h1><i class="fa fa-dashboard"></i>@Microflake.TheComputerShop.Web.Admin.Language.Language.SuperAdmin</h1>
+
+                </div>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    <li class="breadcrumb-item"><a href="#">@Microflake.TheComputerShop.Web.Admin.Language.Language.Dashboard</a></li>
+                </ul>
+                <ul class="app-breadcrumb breadcrumb">
+                    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                    <li class="breadcrumb-item"><a href="/Home/Index">@Microflake.TheComputerShop.Web.Admin.Language.Language.Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="row">
+
+        <section class="content-header">
+
+            <div id="SelectYear-Wrapper">
+                <div style="width:175px;position:relative; margin-left:20px;" id="datepicker">
+                    <input id="byDate" style="padding-left: 35px;
+        border: solid 1px #d2d6de;
+        line-height: 25px;" type="date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                    <i class="fa fa-calendar" style="position:absolute;left:12px;top:13px;"></i>
+                </div>
+                <i id="loading" class="fa fa-spinner fa-spin" style="position:absolute;top:12px;left:185px;"></i>
+            </div>
+        </section>
+    </div>*@
+
+    <div class="row mt-2">
+
+        <div class="col-md-3">
+            <div class="widget-small primary">
+                <i class="icon fa fa-users fa-3x"></i>
+                <div class="info">
+                    <h6>@Microflake.TheComputerShop.Web.Admin.Language.Language.Active <span> @Microflake.TheComputerShop.Web.Admin.Language.Language.Products</span> </h6>
+                    <p><b>@ViewBag.ActiveProducts</b></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="widget-small info">
+                @*<i class="icon fa fa-balance-scale fa-3x"></i>*@
+                <i class="icon fa fa-money" aria-hidden="true"></i>
+                <div class="info">
+                    <h6>@Microflake.TheComputerShop.Web.Admin.Language.Language.Categories</h6>
+                    <p><b>@ViewBag.Categories</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="widget-small warning">
+                <i class="icon fa fa-files-o fa-3x"></i>
+                <div class="info">
+                    <h6>@Microflake.TheComputerShop.Web.Admin.Language.Language.Expenses</h6>
+                    <p><b>@ViewBag.InActiveProducts</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="widget-small danger">
+                <i class="icon fa fa-star fa-3x"></i>
+                <div class="info">
+                    <h6>@Microflake.TheComputerShop.Web.Admin.Language.Language.Profit/@Microflake.TheComputerShop.Web.Admin.Language.Language.Loss</h6>
+                    <p><b> @ViewBag.Expenses</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <!-- Left col -->
+        <div class="col-md-6">
+            @*<section class="col-lg-12">
+                    <div style="position:relative">
+                        <h4>Profit / Loss</h4>
+                    </div>
+                    <div id="Appointments" style="background:#fff;max-height:100px;">
+                    </div>
+                </section>*@
+            <div class="tile">
+                <h3 class="tile-title">@Microflake.TheComputerShop.Web.Admin.Language.Language.Profit/@Microflake.TheComputerShop.Web.Admin.Language.Language.Loss</h3>
+                <div id="Appointments">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="tile">
+                <h3 class="tile-title">@Microflake.TheComputerShop.Web.Admin.Language.Language.Requests</h3>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <canvas class="embed-responsive-item" id="pieChartDemo" width="475" height="267" style="width: 475px; height: 267px;"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@*<div class="row">
+    <div class="col-md-12">
+        <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <div class="row">
+              
+                <section class="col-lg-12">
+                    <div style="position:relative">
+                        <h4>Time</h4>
+                    </div>
+                    <div id="peak" style="background:#fff;">
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>*@
+    <script src="~/content/apexcharts.js"></script>
+    <!-- end row -->
+    @section Scripts{
+
+        <script>
+
+        $("#SelectYear").change(function () {
+        debugger;
+        var cid = $(this).children("option:selected").attr("value");
+           $("#loading").show();
+            getStats(cid);
+
+        });
+       var totaloptions = {
+			chart: {
+                type: 'area',
+                 height: 250,
+                stacked: false,
+            },
+            colors: ['#00E396'],
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    inverseColors: false,
+                    opacityFrom: 0.5,
+                    opacityTo: 0,
+                    stops: [0, 90, 100]
+                },
+            },
+            markers: {
+                size: 4,
+                opacity: 0.9,
+                colors: ["#00E396"],
+                strokeColor: "#fff",
+                strokeWidth: 2,
+
+                hover: {
+                    size: 7,
+                }
+            },
+			series: [{
+				name: 'Profit ',
+				data: []
+			}],
+			xaxis: {
+				categories: ["January", "February", "March", "April", "May", "June", "July", "August", "September","Octobar","November","December"]
+			}
+		}
+
+		var appointments = new ApexCharts(document.querySelector("#Appointments"), totaloptions);
+
+		appointments.render();
+
+
+        // var chartDepartment = new ApexCharts(
+        //        document.querySelector("#bydepartment"),
+        //        {
+        //        chart: {
+        //            height: 380,
+        //            type: 'bar'
+        //        },
+        //        plotOptions: {
+        //            bar: {
+        //                barHeight: '100%',
+        //                distributed: true,
+        //                horizontal: true,
+        //                dataLabels: {
+        //                    position: 'bottom'
+        //                },
+        //            }
+        //        },
+        //        colors: ['#33b2df', '#546E7A', '#d4526e', '#13d8aa', '#A5978B', '#2b908f', '#f9a3a4', '#90ee7e', '#f48024', '#69d2e7'],
+        //        dataLabels: {
+        //            enabled: true,
+        //            textAnchor: 'start',
+        //            style: {
+        //                colors: ['#fff']
+        //            },
+        //            formatter: function (val, opt) {
+        //                return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val
+        //            },
+        //            offsetX: 0,
+        //            dropShadow: {
+        //                enabled: true
+        //            }
+        //            },
+        //            series: [{
+        //                    data: []
+        //                }],
+        //        stroke: {
+        //            width: 2,
+        //            colors: ['#fff']
+        //        },
+        //        xaxis: {
+        //            categories: [],
+        //        },
+        //        yaxis: {
+        //            labels: {
+        //                show: false
+        //            }
+        //        },
+        //        tooltip: {
+        //            theme: 'dark',
+        //            x: {
+        //                show: false
+        //            },
+        //            y: {
+        //                title: {
+        //                    formatter: function () {
+        //                        return ''
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    );
+        //chartDepartment.render();
+
+         function getpearkhours() {
+                $.ajax({
+                url: '/SuperAdmin/Home/getpearkhours',
+                type: 'post',
+                //data : "year=" + year,
+                success: function (response) {
+
+
+                    
+
+                appointments.updateSeries([{
+                    name: 'Profit/Loss',
+                    data: response.GhraphTotal
+                }]);
+
+
+
+                    $("#loading").hide();
+                }
+            });
+
+        }
+            getpearkhours();
+        //getStats("@DateTime.UtcNow.Year");
+        </script>
+
+        <script type="text/javascript">
+
+        var pdata = [
+            {
+                value: @ViewBag.InActiveProducts,
+                color: "#46BFBD",
+                highlight: "#5AD3D1",
+                label: "Due Payments"
+            },
+            {
+                value:@ViewBag.ActiveProducts,
+                color: "#F7464A",
+                highlight: "#FF5A5E",
+                label: "Maintenance"
+            }
+        ]
+
+        var ctxp = $("#pieChartDemo").get(0).getContext("2d");
+        var pieChart = new Chart(ctxp).Pie(pdata);
+        </script>
+        @*<script>
+        var date = "@DateTime.Now.ToString("MM/dd/yyyy")";
+            //Peak Chart
+    var peak = new ApexCharts(
+        document.querySelector("#peak"),
+        {
+            chart: {
+                type: 'area',
+                stacked: false,
+                height: 355,
+                zoom: {
+                    type: 'x',
+                    enabled: true,
+                    autoScaleYaxis: true
+                },
+                toolbar: {
+                    autoSelected: 'zoom'
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            series:[{
+                    name: 'Time',
+                    data: []
+                }],
+            markers: {
+                size: 0,
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    inverseColors: false,
+                    opacityFrom: 0.5,
+                    opacityTo: 0,
+                    stops: [0, 90, 100]
+                },
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (val) {
+                        return val;//(val / 1000000).toFixed(0);
+                    },
+                },
+            },
+           xaxis: {
+            type: "datetime",
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            }
+            },
+
+            tooltip: {
+                shared: false,
+                y: {
+                    formatter: function (val) {
+                        return val; //(val / 1000000).toFixed(0)
+                    }
+                }
+            }
+        }
+    );
+        peak.render();
+
+          $("#byDate").change(function () {
+        date = $(this).val();
+         $("#loading").show();
+        loadChartData(date);
+    });
+
+   function loadChartData() {
+       $.ajax({
+            url: '/SuperAdmin/Home/getpearkhours',
+            type: 'post',
+           
+            success: function (response) {
+                var series = [];
+                debugger
+                for (var i = 0; i < response.data.length; i++) {
+                    series.push([response.data[i].Time, response.data[i].Count]);
+                }
+
+                peak.updateSeries([{
+                    name: 'Appointments',
+                    data: series
+                }]);
+                 $("#loading").hide();
+            }
+        });
+            //Table.ajax.reload();
+        }
+
+     loadChartData();
+        </script>*@
+
+    }

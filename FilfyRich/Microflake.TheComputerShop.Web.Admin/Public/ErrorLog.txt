@@ -1,0 +1,36 @@
+DateTime : 10/17/2020 12:15:00 AM
+
+
+MessageThe context cannot be used while the model is being created. This exception may be thrown if the context is used inside the OnModelCreating method or if the same context instance is accessed by multiple threads concurrently. Note that instance members of DbContext and related classes are not guaranteed to be thread safe.
+
+StackTrace   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.AsNoTracking()
+   at System.Data.Entity.Infrastructure.DbQuery`1.AsNoTracking()
+   at Microflake.TheComputerShop.Application.Categories.CategoryService.<ToList>d__4.MoveNext() in E:\Sir Fahad\E-Commerce  working\E Commerce sir fazal Working\Microflake.TheComputerShop\Application\Categories\CategoryService.cs:line 34
+DateTime : 10/17/2020 14:41:38
+
+
+MessageThe context cannot be used while the model is being created. This exception may be thrown if the context is used inside the OnModelCreating method or if the same context instance is accessed by multiple threads concurrently. Note that instance members of DbContext and related classes are not guaranteed to be thread safe.
+
+StackTrace   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.AsNoTracking()
+   at System.Data.Entity.Infrastructure.DbQuery`1.AsNoTracking()
+   at Microflake.TheComputerShop.Application.Categories.CategoryService.<ToList>d__4.MoveNext() in E:\Sir Fahad\E-Commerce  working\E Commerce sir fazal Working\Microflake.TheComputerShop\Application\Categories\CategoryService.cs:line 34
+DateTime : 10/28/2020 13:01:30
+
+
+MessageStore update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=472540 for information on understanding and handling optimistic concurrency exceptions.
+
+StackTrace   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at Microflake.TheComputerShop.Application.Categories.CategoryService.<Update>d__8.MoveNext() in E:\Sir Fahad\E-Commerce  working\E Commerce sir fazal Working\Microflake.TheComputerShop\Application\Categories\CategoryService.cs:line 165
+
+Inner Exception : Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=472540 for information on understanding and handling optimistic concurrency exceptions.
+------******------

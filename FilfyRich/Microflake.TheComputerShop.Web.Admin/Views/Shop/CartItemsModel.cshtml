@@ -1,0 +1,31 @@
+﻿﻿@model Microflake.TheComputerShop.ViewModel.ShoppingCartViewModel
+
+    <ul class="mini-cart-sub">
+        @foreach (var item in Model.Items)
+        {var rate = item.Product.SellPrice * ViewBag.Currency;
+                               
+            <li class="single-cart">
+                <div class="cart-img">
+                    <a href="single-product.html">
+                        <img id="imagePreview" src="@Config.Products@(item.Product.Image1)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
+                    </a>
+                </div>
+                <div class="cart-info">
+                    <a href="single-product.html">@item.Product.English</a>
+                    <p class="cart-quantity">× @item.Count</p>
+                    <p class="cart-price">@ViewBag.CurrencySimbal @rate </p>
+                </div>
+            </li>
+            }
+
+            <li class="cart-total-box">
+                <h5>Total :<span class="float-right">@Model.Total</span></h5>
+              
+            </li>
+            <li>
+                <p class="text-center cart-button">
+                    <a href="/shop/CartItems">@Microflake.TheComputerShop.Web.Admin.Language.Language.ViewCart</a>
+                    <a href="/shop/Checkout">@Microflake.TheComputerShop.Web.Admin.Language.Language.Checkout</a>
+                </p>
+            </li>
+        </ul>

@@ -1,0 +1,107 @@
+﻿﻿@model Microflake.TheComputerShop.ViewModel.Products.EditProduct
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-inner-area row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="single-product-tab">
+                            <div class="zoomWrapper">
+                                <div id="img-1" class="zoomWrapper single-zoom">
+                                    <a href="#">
+                                        <img id="zoom1" src="@Config.Products@(Model.ProductImage)" onerror="this.src='/Public/default-image.jpg';"  data-zoom-image="@Config.Products@(Model.ProductImage)" alt="big-1">
+                                    </a>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <!-- product-thumbnail-content start -->
+                        <div class="quick-view-content">
+                            <div class="product-info">
+                                <h2>@Model.Title</h2>
+                                @{
+                                    var rate = Model.SellPrice * ViewBag.Currency;
+                                    
+                                    var discount = Model.Discount * ViewBag.Currency;
+                                }
+                                <div class="price-box">
+                                    <span class="new-price"> @ViewBag.CurrencySimbal   @rate</span>
+                                    <span class="old-price"> @ViewBag.CurrencySimbal  @discount</span>
+                                </div>
+                                <ul class="list-unstyled">
+
+                                    <li>@Model.Description</li>
+
+                                </ul>
+
+
+                                <ul class="quick-add-to-cart">
+                                    <li><a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = Model.Id })" class="add-to-cart"><i class="icon-basket-loaded"></i> Add to cart</a></li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                        <!-- product-thumbnail-content end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@*<div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <div class="modal_tab">
+                    <div class="tab-content product-details-large">
+                        <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                            <div class="modal_tab_img">
+                                <a href="#"><img src="@Config.Products@(Model.ProductImage)" alt=""></a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12">
+                <div class="modal_right">
+                    <div class="modal_title mb-10">
+                        <h2>@Model.Title s</h2>
+                    </div>
+                    <div class="modal_price mb-10">
+                        <span class="new_price">Rs @Model.SellPrice</span>
+                        <span class="old_price">Rs @Model.Discount</span>
+                    </div>
+                    <div class="modal_description mb-15">
+                        <p>@Model.Description </p>
+                    </div>
+                    <div class="variants_selects">
+
+                        <div class="modal_add_to_cart">
+                            <form action="/shop/AddtoCart/@Model.Id">
+
+                                <button type="submit">add to cart</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal_social">
+                        <h2>Share this product</h2>
+                        <ul>
+                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <li class="google-plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+

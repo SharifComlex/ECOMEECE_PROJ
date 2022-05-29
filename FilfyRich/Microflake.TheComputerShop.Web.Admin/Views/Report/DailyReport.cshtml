@@ -1,0 +1,157 @@
+﻿@using Microflake.TheComputerShop.Web.Admin.Language;
+@model Microflake.TheComputerShop.ViewModel.Products.ListProduct
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<style>
+
+    @@media print {
+        .page-title-box {
+            display: none !important;
+        }
+
+        #BuildingId {
+            display: none !important;
+        }
+    }
+</style>
+
+
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/">@Language.Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">@Language.Products</a></li>
+                        <li class="breadcrumb-item active">@Language.List</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@Language.Products</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+    <div class="row">
+
+
+        <div style="width:175px;position:relative; margin-left:20px;" id="datepicker">
+            <input id="byDate" style="padding-left: 35px;
+            border: solid 1px #d2d6de;
+            line-height: 25px;" type="date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+            <i class="fa fa-calendar" style="position:absolute;left:12px;top:13px;"></i>
+        </div>
+        <i id="loading" class="fa fa-spinner fa-spin" style="position:absolute;top:12px;left:185px;"></i>
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="tile">
+                <h3 class="tile-title">@Language.Category</h3>
+                <div class="tile-body">
+
+
+                    <table class="table hidetable table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>@Language.Title</th>
+                                <th>@Language.Description</th>
+                                <th>@Language.Price</th>
+                                <th>@Language.SellPrice</th>
+
+                                <th>@Language.Created</th>
+                                @*<th>@AdminPanel.LanguageFiles.ColumnName.Action</th>*@
+                            </tr>
+                        </thead>
+
+                    </table>
+                    <div id="Daily">
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+
+        </div>
+
+
+
+    </div>
+
+</div>
+<!-- end row -->
+@section Scripts{
+
+
+    <script>
+        var listUrl = "";
+        var columns = [];
+         $("#SelectYear-Wrapper").hide();
+
+        $("#byDate").change(function () {
+            date = $(this).val();
+            $("#SelectYear-Wrapper").show();
+            var byDate = $("#byDate").val();
+            if (byDate == "" || byDate == null) {
+                  $("#SelectYear-Wrapper").hide();
+                $("#byDate").css("border", "solid 1px red");
+
+            }
+            else {
+                getStats(byDate );
+            }
+
+
+    });
+
+
+        $(".btn-load").click(function () {
+            var year = $("#SelectYear").val();
+            var month = $("#monthlyfilter").val();
+
+            console.log(year);
+            console.log(month);
+
+            if (year == "" || year == null) {
+                $("#SelectYear").css("border", "solid 1px red");
+
+            } else if (month === undefined || month === "" || month == null) {
+                  $("#monthlyfilter").css("border", "solid 1px red");
+            } else {
+                getStats(year, month);
+            }
+        });
+
+        function getStats(byDate) {
+            debugger;
+                $.ajax({
+                url: '/Report/DailyReportView',
+                type: 'post',
+                    //data: "year=" + year + "&month=" + Months,
+                    data: "date=" + byDate,
+                success: function (response) {
+                      debugger;
+                    $("#SelectYear-Wrapper").hide();
+                    $(".hidetable").hide();
+                    $("#Daily").html(response);
+                    $("#SelectYear-Wrapper").hide();
+                }
+            });
+
+        }
+
+        getStats("@DateTime.UtcNow");
+    </script>
+}
+
+

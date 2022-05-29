@@ -1,0 +1,40 @@
+﻿
+@model List<Microflake.TheComputerShop.ViewModel.Category.ListCategory>
+@{
+    Layout = null;
+
+}
+    <ul class="dorpdown-menu">
+        @foreach (var category in Model)
+        {
+            <li><a class="dataLink " href="@Url.Action("Index", "Shop", new { categoryID = category.Id })">@category.English</a></li>
+        }
+    </ul>
+@*<div class="currency">
+        <form action="#">
+            <button class="setting-btn">Currency: @Model.FirstOrDefault(x=>x.Base_Currency == true).Name <i class="icon-arrow-down"></i></button>
+            <ul class="setting-list">
+                @foreach (var item in Model.Where(x=>x.Base_Currency == false))
+                {
+                    <li>
+
+                        <a class="Currency" data-href="@Url.Action("SetCurrency", "Currency", new { controller = "Currency", Name = item.Name })">@item.Name</a>
+                    </li>
+                }
+
+
+            </ul>
+
+        </form>
+    </div>*@
+<script>
+    var CurrentPageUrl = "";
+    CurrentPageUrl = window.location.href;
+    $(".Currency").click(function () {
+        debugger;
+        var path = $(this).attr("data-href");
+        window.location.href = path + "&url=" + CurrentPageUrl;
+
+    });
+</script>
+

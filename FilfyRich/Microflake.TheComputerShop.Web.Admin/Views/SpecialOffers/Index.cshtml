@@ -1,0 +1,419 @@
+﻿@using Microflake.TheComputerShop.ViewModel
+@model Microflake.TheComputerShop.ViewModel.Products.ListProduct
+@{
+    ViewBag.Title = "Index";
+}
+@*<style>
+
+
+        .mt-100 {
+            margin-top: 150px
+        }
+
+        .filter-group {
+            border-bottom: 1px solid #e4e4e4
+        }
+
+
+
+        .radio-btn {
+            position: relative
+        }
+
+            .radio-btn input {
+                position: absolute;
+                z-index: -1;
+                opacity: 0
+            }
+
+                .radio-btn input:checked ~ .btn {
+                    border-color: #3167eb;
+                    background-color: #3167eb;
+                    color: #fff
+                }
+
+        .btn-light {
+            display: inline-block;
+            font-weight: 600;
+            /*color: #343a40;*/
+            color: #9d4d4a;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-color: #9d4d4a;
+            border: 1px solid #9d4d4a;
+            padding: 0.45rem 0.85rem;
+            font-size: 10px;
+            line-height: 1.5;
+            border-radius: 0.37rem
+        }
+
+            .btn-light:hover {
+                background-color: #fff;
+                border-color: #9d4d4a
+            }
+
+        .btn-medium {
+            font-size: 12px;
+            padding: 10px 22px;
+            display: inline-block;
+            margin-right: 20px;
+            letter-spacing: 2px;
+            border: 1px solid #9d4d4a;
+            width: 100%
+        }
+
+        .highlight-button:hover {
+            background-color: #9d4d4a;
+            border: 2px solid #9d4d4a;
+            color: #9d4d4a
+        }
+
+        .custom-control {
+            position: relative;
+            display: block;
+            min-height: 1.5rem;
+            padding-left: 1.5rem
+        }
+    </style>*@
+@Html.HiddenFor(x => x.MaximumPrice)
+<!-- breadcrumb-area start -->
+<div class="breadcrumb-area ptb-30 bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Special Offers</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb-area end -->
+<!-- main-content-wrap start -->
+<div class="main-content-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 order-2 order-lg-1">
+                <!-- filter-wrapper start -->
+                <div class="filter-wrapper pt-100">
+                    <div class="single-categories-1 blog-search">
+                        <h3 class="blog-categorie-title">Search</h3>
+                        <form role="search" method="get" action="@Url.Action("Index", "SpecialOffers")" class="blog-search-form">
+                            <div class="form-input">
+                                <input type="text" class="input-text" placeholder="Search …" value="@Model.SearchTerm" name="searchTerm">
+                                <button type="submit" class="blog-search-button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- filter-wrap start -->
+                    <div class="filter-wrap mb-30">
+                        <h4 class="filter-title">Price</h4>
+                        <!-- filter-price-content start -->
+                        <div class="filter-price-content">
+                            <form action="#" method="post">
+                                <div id="price-slider" class="price-slider"></div>
+                                <div class="filter-price-wapper">
+                                    <div class="filter-price-cont">
+                                        <div class="input-type">
+                                            <input type="text" class="amount" value="0" id="min-price" readonly="" />
+                                        </div>
+                                        <span>—</span>
+                                        <div class="input-type">
+                                            <input type="text" class="amount" id="max-price" readonly="" />
+                                        </div>
+                                        @*<p class="amount input-type" >
+                                Price: <input type="text" id="amount" disabled="">
+                            </p>*@
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <!-- filter-price-content end -->
+                    </div>
+                    <!-- filter-wrap end -->
+                    <!-- filter-wrap start -->
+                    <div class="filter-wrap mb-30">
+
+                        <div class="list_group_item">
+                            <article class="filter-group">
+                                @foreach (var category in Model.Categorylist)
+                                {<h4 data-href="@Url.Action("FilterProduct", "SpecialOffers", new {  categoryID = category.Id ,sortBy = Model.SortBy })" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) " class="filter-title">@category.English</h4>
+                                @*@*<header class="card-header">
+                        <a data-href="@Url.Action("FilterProduct", "Home", new {  categoryID = category.Id ,sortBy = Model.SortBy })"  class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) " data-toggle="collapse" data-target="#collapse_aside1" data-abc="true" aria-expanded="false" class="collapsed">
+                            <i class="icon-control fa fa-chevron-down"></i>
+                            <h6 class="title">@category.English </h6>
+                        </a>
+                    </header>*@
+                                @*<div class="filter-content collapse" id="collapse_aside1" style="">
+                    <div class="card-body">*@
+                                <ul class="list-menu">
+                                    @foreach (var item in Model.SubCategorylist.Where(x => x.CategoryId == category.Id))
+                                    {
+
+
+                                        <li>
+                                            <label class="custom-control">
+                                                <input data-href="@Url.Action("FilterProduct", "SpecialOffers", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">
+                                                <span class="custom-control-label">@item.English </span>
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+
+                            }
+                            </article>
+                            <ul>
+                                @*@foreach (var category in Model.SubCategorylist)
+                    {
+                        <li>
+                            <label class="custom-control">
+                                <input  data-href="@Url.Action("FilterProduct", "Home", new {  categoryID = category.Category.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">
+                                <span class="custom-control-label">@category.Category.English </span>
+                            </label>
+                        </li>
+                    }*@
+
+                            </ul>
+                        </div>
+                    </div>
+                    @*<div class="filter-wrap mb-30">
+                <h4 class="filter-title">Categories</h4>
+                <div class="list_group_item">
+                    <article class="filter-group">
+                        @foreach (var category in Model.Categorylist)
+                        {
+                            <header class="card-header">
+                                <a data-href="@Url.Action("FilterProduct", "SpecialOffers", new {  categoryID = category.Id ,sortBy = Model.SortBy })" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) " data-toggle="collapse" data-target="#collapse_aside1" data-abc="true" aria-expanded="false" class="collapsed">
+                                    <i class="icon-control fa fa-chevron-down"></i>
+                                    <h6 class="title">@category.English </h6>
+                                </a>
+                            </header>
+                            <div class="filter-content collapse" id="collapse_aside1" style="">
+                                <div class="card-body">
+                                    <ul class="list-menu">
+                                        @foreach (var item in Model.SubCategorylist.Where(x => x.CategoryId == category.Id))
+                                        {
+
+
+                                            <li>
+                                                <label class="custom-control">
+                                                    <input data-href="@Url.Action("FilterProduct", "SpecialOffers", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">
+                                                    <span class="custom-control-label">@item.English </span>
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    </article>
+                    <ul>
+                        @foreach (var category in Model.SubCategorylist)
+        {
+            <li>
+                <label class="custom-control">
+                    <input  data-href="@Url.Action("FilterProduct", "Home", new {  categoryID = category.Category.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">
+                    <span class="custom-control-label">@category.Category.English </span>
+                </label>
+            </li>
+        }
+
+                    </ul>
+                </div>
+            </div>*@
+                    <!-- filter-wrap end -->
+                    <!-- filter-wrap start -->
+                    <div class="filter-wrap mb-30">
+                        <h4 class="filter-title">Sorting Filters</h4>
+                        <div class="list_group_item">
+                            <ul>
+                                <li>
+                                    <label class="custom-control">
+                                        <input @*checked=""*@ data-href="@Url.Action("FilterProduct", "SpecialOffers", new { sortBy = (int)SortByEnum.Default, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Default ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Default - Newest </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input @*checked=""*@ data-href="@Url.Action("FilterProduct", "SpecialOffers", new { sortBy = (int)SortByEnum.Popularity, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Popularity ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Popularity </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input @*checked=""*@ data-href="@Url.Action("FilterProduct", "SpecialOffers", new { sortBy = (int)SortByEnum.PriceLowToHigh, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.PriceLowToHigh ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: low to high </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input @*checked=""*@ data-href="@Url.Action("FilterProduct", "SpecialOffers", new { sortBy = (int)SortByEnum.PriceHighToLow, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.PriceHighToLow ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: high to low </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input @*checked=""*@ data-href="@Url.Action("FilterProduct", "SpecialOffers", new { sortBy = (int)SortByEnum.Between0to50, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between0to50 ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: 0 to 500 </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input @*checked=""*@ data-href="@Url.Action("FilterProduct", "SpecialOffers", new { sortBy = (int)SortByEnum.Between50to100, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between50to100 ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: 500 to 1000 </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input @*checked=""*@ data-href="@Url.Action("FilterProduct", "SpecialOffers", new { sortBy = (int)SortByEnum.Between100to150, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between100to150 ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: 1000 to 1500 </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input @*checked=""*@ data-href="@Url.Action("FilterProduct", "SpecialOffers", new { sortBy = (int)SortByEnum.Between150to200, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between150to200 ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: 1500 to 2000 </span>
+                                    </label>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- filter-wrap end -->
+                    <!-- filter-wrap start -->
+                    <a href="@Url.Action("Index", "SpecialOffers")" class="btn mb-4" style="background-color:#9d4d4a; color:white;">Reset Filters</a>
+                    <!-- filter-wrap end -->
+                    <!-- filter-wrap start -->
+                    <div class="filter-wrap">
+                        <div class="single-banner-image">
+                            <a href="#"><img alt="" src="/content/FrontEnd/img/banner/4.jpg"></a>
+                        </div>
+                    </div>
+                    <!-- filter-wrap end -->
+                </div>
+                <!-- filter-wrapper end -->
+            </div>
+            <div class="col-lg-9 order-1 order-lg-2">
+                <div class="shop-top-bar pt-100">
+
+                    <!-- product-select-box start -->
+                    @*<div class="product-select-box">
+                            <div class="product-short">
+                                <label>Sort By: </label>
+                                <select class="nice-select">
+                                    <option value="Relevance">Relevance</option>
+                                    <option value="Name">Name (A - Z)</option>
+                                    <option value="Name">Name (Z - A)</option>
+                                    <option value="Price">Price (Low &gt; High)</option>
+                                    <option value="Rating">Rating (Lowest)</option>
+                                    <option value="Model-asc">Model (A - Z)</option>
+                                    <option value="Model-az">Model (Z - A)</option>
+                                </select>
+                            </div>
+                        </div>*@
+                    <!-- product-select-box end -->
+                </div>
+                <div class="shop-products-wrapper" id="ProductsDiv">
+
+
+                    @{
+
+                        Html.RenderPartial("FilterProduct", Model);
+
+                    }
+                    <!--  shop-products-wrapper end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    @section scripts{
+        <script>
+      $('input:checkbox').click(function() {
+        $('input:checkbox').not(this).prop('checked', false);
+    });
+         $(".dataLink").click(function () {
+
+        var url = $(this).attr("data-href");
+
+        if (url != "" || url != undefined) {
+            GetData(url);
+        }
+        });
+         function GetData(dUrl) {
+
+		console.log("getdata in");
+		//showLoader();
+
+		$.ajax({
+           url: dUrl,
+			data: {
+				minimumPrice : priceSlider.slider("values", 0),
+				maximumPrice : priceSlider.slider("values", 1)
+			}
+		})
+        .done(function (response) {
+            console.log("done");
+
+        	$("#ProductsDiv").html(response);
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	console.log("fail");
+        	alert("FAIL");
+        })
+		.always(function(){
+			console.log("always");
+
+		});
+		console.log("getdata out");
+	}
+
+
+        // Price Range Slider
+        var callTimeout;
+          $("#min-price").val(0);
+
+        $("#max-price").val( @Model.MaximumPrice);
+	    var priceSlider = $(".price-slider").slider({
+		range: true,
+		min: 0,
+		max: @Model.MaximumPrice,
+		values: [0,@Model.MaximumPrice],
+        slide: function (event, ui) {
+            debugger
+			var minPrice = ui.values[0];
+			var maxPrice = ui.values[1];
+            //var minPrice =$("#min-price").val();
+            //var maxPrice = $("#max-price").val();
+
+            $("#min-price").val(minPrice);
+
+            $("#max-price").val(maxPrice);
+			//$(".amount").val("$" + minPrice + ".00" + " - " + "$" + maxPrice + ".00");
+            //$(".amount").val("$" + minPrice + ".00" + " - " + "$" + maxPrice + ".00");
+
+			clearTimeout(callTimeout);
+			callTimeout = setTimeout(PriceRangeChange, 500);
+		}
+    });
+        function PriceRangeChange(){
+		$.ajax({
+			url: '@Url.Action("FilterProduct", "SpecialOffers")',
+			data: {
+				searchTerm: $("#SearchTerm").val(),
+				sortBy: $("#SortBy").val(),
+                categoryID: $("#CategoryID").val(),
+
+				minimumPrice : $("#min-price").val(),
+				maximumPrice : $("#max-price").val()
+			}
+		})
+        .done(function (response) {
+        	$("#ProductsDiv").html(response);
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+	}
+        //
+
+
+
+
+
+        </script>
+    }
+

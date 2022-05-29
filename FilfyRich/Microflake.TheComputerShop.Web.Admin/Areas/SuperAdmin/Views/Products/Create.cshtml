@@ -1,0 +1,364 @@
+﻿@model Microflake.TheComputerShop.ViewModel.Products.CreateProduct
+@{
+    var routeData = Request.RequestContext.RouteData;
+    var area = routeData.DataTokens["area"].ToString();
+    var ControllerName = routeData.Values["Controller"].ToString();
+    var ControllerPath = "/" + ControllerName;
+    var lang = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+}
+<style>
+    textarea {
+        resize: none;
+    }
+
+    #imagePreview {
+        width: 100%;
+    }
+
+    #imagePreview1 {
+        width: 100%;
+    }
+
+    .image-wrapper1 {
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 172px !important;
+        height: 131px !important;
+        overflow: hidden;
+    }
+
+        .image-wrapper1:hover .select-image1 {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    .select-image1 {
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        top: 0;
+        background: rgba(0,0,0,0.5);
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.5s linear;
+        cursor: pointer;
+    }
+
+        .select-image1 i {
+            font-size: 50px;
+            margin: 28% 36%;
+            color: #c0c0c0;
+        }
+    /*2nd*/
+    .image-wrapper {
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 172px !important;
+        height: 131px !important;
+        overflow: hidden;
+    }
+
+        .image-wrapper:hover .select-image {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    .select-image {
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        top: 0;
+        background: rgba(0,0,0,0.5);
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.5s linear;
+        cursor: pointer;
+    }
+
+        .select-image i {
+            font-size: 50px;
+            margin: 28% 36%;
+            color: #c0c0c0;
+        }
+
+    .modal-dialog {
+        width: 80%;
+    }
+</style>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "inputForm" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row">
+        <div class="col-md-7" >
+            <div class="form-group" style="margin-left:-15px;margin-right:-15px;">
+                <label class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.Product (English)</label>
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.English, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.English, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" style="margin-left:-15px;margin-right:-15px;">
+                <label class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.Product (Arabic)</label>
+                <div  class="col-md-12">
+                    @Html.EditorFor(model => model.Arabic, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Arabic, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*<div class="form-group">
+            <label>@Microflake.TheComputerShop.Web.Admin.Language.Language.Title</label>
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        </div>*@
+            <div class="form-group">
+                <label>@Microflake.TheComputerShop.Web.Admin.Language.Language.Price</label>
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>@Microflake.TheComputerShop.Web.Admin.Language.Language.SellPrice</label>
+                @Html.EditorFor(model => model.SellPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SellPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="image-wrapper">
+
+                <img id="imagePreview" src="~/Public/default-image.jpg" />
+                <div class="select-image">
+                    <i class="fa fa-plus"></i>
+                </div>
+            </div>
+            <input type="file" name="Product" class="uploadProfileImage" style="display:none" />
+            @Html.HiddenFor(model => model.ProductImage)
+            @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger image-error" })
+            <br />
+            <div class="image-wrapper1">
+
+                <img id="imagePreview1" src="~/Public/default-image.jpg" />
+                <div class="select-image1">
+                    <i class="fa fa-plus"></i>
+                </div>
+            </div>
+            <input type="file" name="Product" class="uploadProfileImage1" style="display:none" />
+            @Html.HiddenFor(model => model.ProductImage1)
+            @Html.ValidationMessageFor(model => model.ProductImage1, "", new { @class = "text-danger image-error" })
+
+        </div>
+    </div>
+
+    <div style="margin-left:-15px;margin-right:-15px;">
+        <div class="form-group">
+            <label class="col-md-12">Sub @Microflake.TheComputerShop.Web.Admin.Language.Language.Category</label>
+            <div class="col-md-12">
+                @Html.DropDownListFor(model => model.SubCategoryId, null, "Select Category", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SubCategoryId, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group" >
+        <label style="margin-left:-15px;margin-right:-15px;" class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.Discount</label>
+        @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label style="margin-left:-15px;margin-right:-15px;" class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.Qty</label>
+        @Html.EditorFor(model => model.Qty, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Qty, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label style="margin-left:-15px;margin-right:-15px;" class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.Description</label>
+        @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <labels>@Microflake.TheComputerShop.Web.Admin.Language.Language.IsFeatured</labels>
+                <div class="toggle lg">
+
+                    <label>
+
+                        @if (Model.IsFeatured)
+                        {
+
+                            <input id="switch-1" type="checkbox" checked><span class="button-indecator"></span>
+                        }
+                        else
+                        {
+
+                            <input id="switch-1" type="checkbox"><span class="button-indecator"></span>
+                        }
+                        <input name="IsFeatured" id="IsFeatured" value="False" />
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <labels>@Microflake.TheComputerShop.Web.Admin.Language.Language.IsNew</labels>
+                <div class="toggle lg">
+
+                    <label>
+
+                        @if (Model.IsNew)
+                        {
+
+                            <input id="switch-2" type="checkbox" checked><span class="button-indecator"></span>
+                        }
+                        else
+                        {
+
+                            <input id="switch-2" type="checkbox"><span class="button-indecator"></span>
+                        }
+                        <input name="IsNew" id="IsNew" value="False" />
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<script>
+    $("#IsFeatured").hide();
+     $("#IsNew").hide();
+     $("#switch-1").click(function () {
+            debugger;
+            var IsFeatured = $("#IsFeatured").val();
+            if (IsFeatured == "False") {
+                $("#IsFeatured").val("True");
+
+            } else {
+                $("#IsFeatured").val("False");
+
+
+            }
+     });
+       $("#switch-2").click(function () {
+            debugger;
+            var IsNew = $("#IsNew").val();
+            if (IsNew == "False") {
+                $("#IsNew").val("True");
+
+            } else {
+                $("#IsNew").val("False");
+
+
+            }
+        });
+
+      $('#inputForm select').select2();
+     $(".select-image").click(function () {
+        $(".uploadProfileImage").trigger("click");
+    });
+
+    $(".uploadProfileImage").change(function () {
+        debugger;
+        $(".select-image").html('<i class="fa fa-spinner fa-spin"></i>');
+
+        var profileImage = new FormData();
+        var file = $(this)[0].files[0];
+        profileImage.append("Product", file)
+
+        $.ajax({
+            url: "/@area/Products/upload",
+            type: "post",
+            data: profileImage,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.status) {
+                    $("#ProductImage").val(response.file);
+                    $("#imagePreview").attr("src", "@Config.Products" + response.file);
+                    $(".select-image").html('<i class="fa fa-plus"></i>');
+                      $(".image-error").html("");
+                } else {
+                    $(".image-error").html(response.message);
+                    $(".select-image").html('<i class="fa fa-plus"></i>');
+                }
+            }
+        });
+    });
+
+
+    //2nd
+     $(".select-image1").click(function () {
+        $(".uploadProfileImage1").trigger("click");
+    });
+
+    $(".uploadProfileImage1").change(function () {
+        debugger;
+        $(".select-image1").html('<i class="fa fa-spinner fa-spin"></i>');
+
+        var profileImage = new FormData();
+        var file = $(this)[0].files[0];
+        profileImage.append("Product", file)
+
+        $.ajax({
+            url: "/@area/Products/upload",
+            type: "post",
+            data: profileImage,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.status) {
+                    $("#ProductImage1").val(response.file);
+                    $("#imagePreview1").attr("src", "@Config.Products" + response.file);
+                    $(".select-image1").html('<i class="fa fa-plus"></i>');
+                      $(".image-error").html("");
+                } else {
+                    $(".image-error").html(response.message);
+                    $(".select-image1").html('<i class="fa fa-plus"></i>');
+                }
+            }
+        });
+    });
+
+
+
+           $("#CategoryId").change(function () {
+                  debugger;
+               var id = $(this).val();
+               $.ajax(
+                            {
+                                url: "/@area/Attributes/GetAttributeByCategoryId/" + id
+                            }
+                        ).done(function (GetAttributeByCategoryId) {
+                            $("#categoriesdiv").html(GetAttributeByCategoryId);
+
+                        });
+                    });
+       @*$("#CategoryId").change(function () {
+        var id = $(this).val();
+
+        $.ajax({
+            url: '/@area/Brands/ByCategoryId/' + id,
+            type: 'get',
+            success: function (response) {
+                $('#BrandId').html(response);
+                $('#SubBrandId').html("<option value=\"\">Select SubBrand</option>");
+                $('#DepartmentId').html("<option value=\"\">Select</option>");
+            }
+        });
+       });*@
+
+      $("#BrandId").change(function () {
+        var id = $(this).val();
+
+        $.ajax({
+            url: '/@area/SubBrands/ByBrandId/' + id,
+            type: 'get',
+            success: function (response) {
+                $('#SubBrandId').html(response);
+
+                $('#DepartmentId').html("<option value=\"\">@Microflake.TheComputerShop.Web.Admin.Language.Language.Select</option>");
+            }
+        });
+    });
+</script>
