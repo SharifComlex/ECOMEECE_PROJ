@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div class="main-content-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 order-2 order-lg-1">
+                <!-- filter-wrapper start -->
+                <div class="filter-wrapper pt-100">
+                    <div class="single-categories-1 blog-search">
+                        <h3 class="blog-categorie-title">Search</h3>
+                        <form role="search" method="get" action="@Url.Action("Index", "Shop")" class="blog-search-form">
+                            <div class="form-input">
+                                <input type="text" class="input-text" placeholder="Search …" value="@Model.SearchTerm" name="searchTerm">
+                                <button type="submit" class="blog-search-button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- filter-wrap start -->
+                    <div class="filter-wrap mb-30">
+                        <h4 class="filter-title">Price</h4>
+                        <!-- filter-price-content start -->
+                        <div class="filter-price-content">
+                            <form action="#" method="post">
+                                <div id="price-slider" class="price-slider"></div>
+                                <div class="filter-price-wapper">
+                                    <div class="filter-price-cont">
+                                        <div class="input-type">
+                                            <input type="text" class="amount" value="0" id="min-price" readonly="" />
+                                        </div>
+                                        <span>—</span>
+                                        <div class="input-type">
+                                            <input type="text" class="amount" id="max-price" readonly="" />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <!-- filter-price-content end -->
+                    </div>
+                    <!-- filter-wrap end -->
+                    <!-- filter-wrap start -->
+                    <div class="filter-wrap mb-30">
+
+                        <div class="list_group_item">
+                            <article class="filter-group">
+                                @foreach (var category in Model.Categorylist)
+                                {<h4 data-href="@Url.Action("FilterProduct", "Shop", new {  categoryID = category.Id ,sortBy = Model.SortBy })" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) " class="filter-title">@category.English</h4>
+
+                                <ul class="list-menu">
+                                    @foreach (var item in Model.SubCategorylist.Where(x => x.CategoryId == category.Id))
+                                    {
+
+
+                                        <li>
+                                            <label class="custom-control">
+                                                <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">
+                                                <span class="custom-control-label">@item.English </span>
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+
+                            }
+                            </article>
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- filter-wrap end -->
+                    <!-- filter-wrap start -->
+                    <div class="filter-wrap mb-30">
+                        <h4 class="filter-title">Sorting Filters</h4>
+                        <div class="list_group_item">
+                            <ul>
+                                <li>
+                                    <label class="custom-control">
+                                        <input data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Default, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Default ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Default - Newest </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Popularity, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Popularity ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Popularity </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.PriceLowToHigh, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.PriceLowToHigh ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: low to high </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.PriceHighToLow, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.PriceHighToLow ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: high to low </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between0to50, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between0to50 ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: 0 to 500 </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between50to100, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between50to100 ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: 500 to 1000 </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between100to150, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between100to150 ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: 1000 to 1500 </span>
+                                    </label>
+                                    <label class="custom-control">
+                                        <input data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between150to200, categoryID = Model.CategoryID  })" type="checkbox" class="dataLink @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between150to200 ? "checked" : string.Empty : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">Price: 1500 to 2000 </span>
+                                    </label>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- filter-wrap end -->
+                    <!-- filter-wrap start -->
+                    <a href="@Url.Action("Index", "Shop")" class="btn mb-4" style="background-color:#9d4d4a; color:white;">Reset Filters</a>
+                    <!-- filter-wrap end -->
+                    <!-- filter-wrap start -->
+                    <div class="filter-wrap">
+                        <div class="single-banner-image">
+                            <a href="#"><img alt="" src="/content/FrontEnd/img/banner/4.jpg"></a>
+                        </div>
+                    </div>
+                    <!-- filter-wrap end -->
+                </div>
+                <!-- filter-wrapper end -->
+            </div>
+            <div class="col-lg-9 order-1 order-lg-2">
+                <div class="shop-top-bar pt-100">
+
+
+                </div>
+                <div class="shop-products-wrapper" id="ProductsDiv">
+
+
+                    @{
+
+                        Html.RenderPartial("FilterProduct", Model);
+
+                    }
+                    <!--  shop-products-wrapper end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -28,6 +28,11 @@ namespace Microflake.TheComputerShop.Web.Admin.Controllers
             _categoryService = categoryService;
 
         }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
         public async Task<ActionResult> Index(string searchTerm, int? Page,int? subcategoryID, int? categoryID, int? minimumPrice, int? maximumPrice, int? sortBy)
         {
 
