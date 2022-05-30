@@ -7,6 +7,7 @@
 <div class="shop_area">
     <div class="container">
         <div class="row">
+
             <div class="col-lg-3 col-md-12">
                 <!--sidebar widget start-->
                 <div class="sidebar_widget">
@@ -26,19 +27,6 @@
                             <input type="text" name="text" id="amount">
                             <button type="submit">Filter</button>
 
-                            @*<div id="price-slider" class="price-slider"></div>
-                                <div class="filter-price-wapper">
-                                    <div class="filter-price-cont">
-                                        <div class="input-type">
-                                            <input type="text" class="amount" value="0" id="min-price" readonly="" />
-                                        </div>
-                                        <span>—</span>
-                                        <div class="input-type">
-                                            <input type="text" class="amount" id="max-price" readonly="" />
-                                        </div>
-
-                                    </div>
-                                </div>*@
                         </form>
                     </div>
 
@@ -49,7 +37,26 @@
                             <li><a href="#">SamSung</a> <span>(1)</span> </li>
                         </ul>
                     </div>
-                    <div class="widget_list widget_color">
+                    <div class="widget_list widget_brands">
+                        @foreach (var category in Model.Categorylist)
+                        {
+                            <h4 data-href="@Url.Action("FilterProduct", "Shop", new {  categoryID = category.Id ,sortBy = Model.SortBy })" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) " class="filter-title">@category.English</h4>
+
+                        <ul class="list-menu">
+                            @foreach (var item in Model.SubCategorylist.Where(x => x.CategoryId == category.Id))
+                            {
+
+
+                                <li>
+                                    <label class="custom-control">
+                                        <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">
+                                        <span class="custom-control-label">@item.English </span>
+                                    </label>
+                                </li>
+                            }
+                        </ul>
+
+                    }
                         <h2>Color</h2>
                         <ul>
                             <li><a href="#">Gold </a> <span>(4)</span></li>
@@ -58,7 +65,8 @@
 
                         </ul>
                     </div>
-                    <div class="widget_list tag-cloud">
+
+                    @*<div class="widget_list tag-cloud">
                         <h2>Tags</h2>
                         <div class="tag_widget">
                             <ul>
@@ -188,7 +196,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div>*@
 
                 </div>
                 <!--sidebar widget end-->

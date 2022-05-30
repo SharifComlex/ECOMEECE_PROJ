@@ -6963,7 +6963,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: 17px;
   border-radius: 3px;
   border: 1px solid #888;
-  color: transparent;
+ /* color: transparent;*/
   top: 50%;
   left: 0;
   transform: translatey(-50%);
