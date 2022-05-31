@@ -6,7 +6,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Utilities.Email
+namespace Microflake.Core.Utilities.Email
 {
   public  class EmailSent
     {

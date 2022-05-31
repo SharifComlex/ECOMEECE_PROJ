@@ -1,8 +1,8 @@
-﻿using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Utilities.Logger;
-using Microflake.TheComputerShop.Utilities.Response;
-using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.Orders;
+﻿using Microflake.Core.Persistence;
+using Microflake.Core.Utilities.Logger;
+using Microflake.Core.Utilities.Response;
+using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.Orders;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Application.Orders
+namespace Microflake.Core.Application.Orders
 {
    public class OrderService : IOrderService
     {
@@ -65,7 +65,7 @@ namespace Microflake.TheComputerShop.Application.Orders
                         Id = x.Product.Id,
                         FirstName = x.Order.FirstName,
                         LastName = x.Order.LastName,
-                        PRoductTitle = x.Product.Title,
+                        PRoductTitle = x.Product.Name,
                         Quanty = x.Quantity,
                         UnitPrice = x.UnitPrice,
                         Total = x.Product.Price * x.Quantity,
@@ -130,7 +130,7 @@ namespace Microflake.TheComputerShop.Application.Orders
                         Id = x.Product.Id,
                         FirstName = x.Order.FirstName,
                         LastName = x.Order.LastName,
-                        PRoductTitle = x.Product.Title,
+                        PRoductTitle = x.Product.Name,
                         Quanty = x.Quantity,
                         UnitPrice = x.UnitPrice,
                         Total = x.Product.Price * x.Quantity,

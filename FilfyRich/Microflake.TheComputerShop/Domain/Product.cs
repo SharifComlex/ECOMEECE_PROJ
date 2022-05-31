@@ -6,29 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Domain
+namespace Microflake.Core.Domain
 {
     public class Product : BaseEntity
     {
 
         public long Id { get; set; }
 
-        public string Title { get; set; }
+        public string Name { get; set; }
 
-        [Column(TypeName = "varchar")]
-        [MaxLength(190)]
-        public string English { get; set; }
-
-        [Column(TypeName = "nvarchar")]
-        [MaxLength(190)]
-        public string Arabic { get; set; }
         public double Price { get; set; }
 
         public double SellPrice { get; set; }
-
-
         public double Discount { get; set; }
-
 
         public int Qty { get; set; }
         public string Description { get; set; }
@@ -53,6 +43,7 @@ namespace Microflake.TheComputerShop.Domain
         // For Deal Of The Week
 
         public bool DealOfTheWeek { get; set; }
+        
         [Column(TypeName = "datetime2")]
         public DateTime DealTillDate { get; set; }
     }

@@ -1,6 +1,6 @@
-﻿using Microflake.TheComputerShop.Application.Currencies;
-using Microflake.TheComputerShop.ViewModel.Currency;
-using Microflake.TheComputerShop.Web.Admin.Controllers;
+﻿using Microflake.Core.Application.Currencies;
+using Microflake.Core.ViewModel.Currency;
+using Microflake.Web.Controllers;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
+namespace Microflake.Web.Areas.SuperAdmin.Controllers
 {
     [Authorize(Roles = "SuperAdmin")]
     public class CurrencyController : BaseController

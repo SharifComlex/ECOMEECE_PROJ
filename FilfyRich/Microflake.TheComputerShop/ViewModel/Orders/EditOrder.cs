@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.ViewModel.Orders
+namespace Microflake.Core.ViewModel.Orders
 {
     public class EditOrder
     {

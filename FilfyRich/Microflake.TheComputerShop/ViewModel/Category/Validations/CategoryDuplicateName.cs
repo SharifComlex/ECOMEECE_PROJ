@@ -1,4 +1,4 @@
-﻿using Microflake.TheComputerShop.Persistence;
+﻿using Microflake.Core.Persistence;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.ViewModel.Category.Validations
+namespace Microflake.Core.ViewModel.Category.Validations
 {
     public class CategoryDuplicateName : ValidationAttribute
     {
@@ -22,7 +22,7 @@ namespace Microflake.TheComputerShop.ViewModel.Category.Validations
                     var obj = validationContext.ObjectInstance;
                     var id = (long)obj.GetType().GetProperty("Id").GetValue(obj);
 
-                    if (db.Categories.Where(x => x.English == name && x.Id != id).FirstOrDefault() == null)
+                    if (db.Categories.Where(x => x.Name == name && x.Id != id).FirstOrDefault() == null)
                     {
                         return ValidationResult.Success;
                     }
@@ -34,7 +34,7 @@ namespace Microflake.TheComputerShop.ViewModel.Category.Validations
                 catch (Exception)
                 {
 
-                    if (db.Categories.Where(x => x.English == name).FirstOrDefault() == null)
+                    if (db.Categories.Where(x => x.Name == name).FirstOrDefault() == null)
                     {
                         return ValidationResult.Success;
                     }

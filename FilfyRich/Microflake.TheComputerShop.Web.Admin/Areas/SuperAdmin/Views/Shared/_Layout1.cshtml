@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@using Microflake.TheComputerShop.Web.Admin.Language;
+@using Microflake.Web.Language;
 @using System.Data.Entity
 @{
     var routeData = Request.RequestContext.RouteData;
@@ -7,7 +7,7 @@
     var controllerName = routeData.Values["Controller"].ToString();
     Config.BaseUrl = ((areaName != null) ? "/" + areaName.ToString() : "") + "/" + controllerName;
 
-    var CurrentUser = Microflake.TheComputerShop.Utilities.GetCurrentUser.Get(User.Identity.GetUserId());
+    var CurrentUser = Microflake.Core.Utilities.GetCurrentUser.Get(User.Identity.GetUserId());
     var lang = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
 
 
@@ -717,33 +717,33 @@
             <li class="treeview">
                 <a href="#" data-toggle="treeview" class="app-menu__item">
                     <i class="app-menu__icon fas fa-file-excel"></i>
-                    <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Administration</span>
+                    <span class="app-menu__label">@Microflake.Web.Language.Language.Administration</span>
                     <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
                         <a href="/Superadmin/Products" class="app-menu__item">
                             <i class="app-menu__icon fas fa-tachometer-alt"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Products</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Products</span>
                         </a>
                     </li>
                     <li>
                         <a href="/Superadmin/DealOfTheWeeks" class="app-menu__item">
                             <i class="app-menu__icon fas fa-tachometer-alt"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Deal_Of_The_Week</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Deal_Of_The_Week</span>
                         </a>
                     </li>
                     <li>
                         <a href="/Superadmin/Categories" class="app-menu__item">
                             <i class="app-menu__icon fe-airplay"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Categories</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Categories</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/Superadmin/Orders" class="app-menu__item">
                             <i class="app-menu__icon fe-airplay"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Orders</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Orders</span>
                         </a>
 
                     </li>
@@ -773,35 +773,35 @@
             <li class="treeview">
                 <a href="#" data-toggle="treeview" class="app-menu__item">
                     <i class="app-menu__icon fas fa-file-excel"></i>
-                    <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Reports</span>
+                    <span class="app-menu__label">@Microflake.Web.Language.Language.Reports</span>
                     <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
                         <a href="/report/CategoryWise" class="app-menu__item">
                             <i class="app-menu__icon fe-airplay"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Category_Wise</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Category_Wise</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/report/WeeklyReport" class="app-menu__item">
                             <i class="app-menu__icon fe-airplay"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Weekly_Report</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Weekly_Report</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/report/DailyReport" class="app-menu__item">
                             <i class="app-menu__icon fe-airplay"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Daily_Report</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Daily_Report</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/report/ProductListYearly" class="app-menu__item">
                             <i class="app-menu__icon fe-airplay"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Yearly_Report</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Yearly_Report</span>
                         </a>
 
                     </li>

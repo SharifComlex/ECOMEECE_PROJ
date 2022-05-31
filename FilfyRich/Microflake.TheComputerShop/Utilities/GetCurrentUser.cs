@@ -1,12 +1,12 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Utilities
+namespace Microflake.Core.Utilities
 {
     public class GetCurrentUser
     {

@@ -1,7 +1,7 @@
-﻿using Microflake.TheComputerShop.Application.Categories;
-using Microflake.TheComputerShop.Application.Products;
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Web.Admin.Models;
+﻿using Microflake.Core.Application.Categories;
+using Microflake.Core.Application.Products;
+using Microflake.Core.Persistence;
+using Microflake.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Controllers
+namespace Microflake.Web.Controllers
 {
     public class ProductController : BaseController
     {

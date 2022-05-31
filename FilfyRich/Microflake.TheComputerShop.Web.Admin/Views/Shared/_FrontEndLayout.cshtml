@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>@Microflake.TheComputerShop.Web.Admin.Language.Language.Home   || @Microflake.TheComputerShop.Lang.Validations.Ecommerce </title>
+    <title>@Microflake.Web.Language.Language.Home   || @Microflake.Core.Lang.Validations.Ecommerce </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
@@ -147,6 +147,7 @@
         min-height: 1.5rem;
         padding-left: 1.5rem
     }
+
 </style>
 <body>
     <!--[if lt IE 8]>
@@ -171,7 +172,7 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="/Home/Index">@Microflake.TheComputerShop.Web.Admin.Language.Language.Home  </a>
+                                    <a href="/Home/Index">@Microflake.Web.Language.Language.Home  </a>
 
                                 </li>
                                 @*<li class="mega_parent">
@@ -179,7 +180,7 @@
 
                                 </li>*@
                                 <li>
-                                    <a href="/Shop/Index">@Microflake.TheComputerShop.Web.Admin.Language.Language.Shop <i class="icon-arrow-down"></i></a>
+                                    <a href="/Shop/Index">@Microflake.Web.Language.Language.Shop <i class="icon-arrow-down"></i></a>
 
                                     <div id="CurrencyList">
 
@@ -187,15 +188,15 @@
                                 </li>
 
                                 <li class="mega_parent">
-                                    <a href="/SpecialOffers/Index">@Microflake.TheComputerShop.Web.Admin.Language.Language.SpecialOffers</a>
+                                    <a href="/SpecialOffers/Index">@Microflake.Web.Language.Language.SpecialOffers</a>
 
                                 </li>
                                 <li class="mega_parent">
-                                    <a href="/Home/AboutUs">@Microflake.TheComputerShop.Web.Admin.Language.Language.AboutUs</a>
+                                    <a href="/Home/AboutUs">@Microflake.Web.Language.Language.AboutUs</a>
 
                                 </li>
                                 <li class="mega_parent">
-                                    <a href="/Home/ContactUs">@Microflake.TheComputerShop.Web.Admin.Language.Language.ContactUs</a>
+                                    <a href="/Home/ContactUs">@Microflake.Web.Language.Language.ContactUs</a>
 
                                 </li>
                                 <li>
@@ -261,19 +262,19 @@
                                 </button>
                                 <div class="dropdown-menu setting-content">
                                     <div class="account">
-                                        <button class="setting-btn">@Microflake.TheComputerShop.Web.Admin.Language.Language.MyAccount <i class="icon-arrow-down"></i></button>
+                                        <button class="setting-btn">@Microflake.Web.Language.Language.MyAccount <i class="icon-arrow-down"></i></button>
                                         <ul class="setting-list">
                                             @if (User.Identity.IsAuthenticated)
                                             {
-                                                <li><a href="/UserDashboard/Index">@Microflake.TheComputerShop.Web.Admin.Language.Language.MyAccount</a></li>
-                                                <li><a href="/Account/Logoff">@Microflake.TheComputerShop.Web.Admin.Language.Language.Logout</a></li>
+                                                <li><a href="/UserDashboard/Index">@Microflake.Web.Language.Language.MyAccount</a></li>
+                                                <li><a href="/Account/Logoff">@Microflake.Web.Language.Language.Logout</a></li>
 
 
                                             }
                                             else
                                             {
-                                                <li><a href="/Account/login">@Microflake.TheComputerShop.Web.Admin.Language.Language.Login</a></li>
-                                                <li><a href="/Account/Register">@Microflake.TheComputerShop.Web.Admin.Language.Language.Register</a></li>
+                                                <li><a href="/Account/login">@Microflake.Web.Language.Language.Login</a></li>
+                                                <li><a href="/Account/Register">@Microflake.Web.Language.Language.Register</a></li>
 
                                             }
 

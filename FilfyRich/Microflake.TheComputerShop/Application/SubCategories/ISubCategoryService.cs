@@ -1,13 +1,13 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.Category;
-using Microflake.TheComputerShop.ViewModel.SubCategories;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.Category;
+using Microflake.Core.ViewModel.SubCategories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 
-namespace Microflake.TheComputerShop.Application.SubCategories
+namespace Microflake.Core.Application.SubCategories
 {
    public interface ISubCategoryService
     {

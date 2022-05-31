@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 
 using System.Web;
-using Microflake.TheComputerShop.Persistence;
+using Microflake.Core.Persistence;
 
-namespace Microflake.TheComputerShop.Web.Admin.Controllers
+namespace Microflake.Web.Controllers
 {
     
     public abstract class BaseController : Controller

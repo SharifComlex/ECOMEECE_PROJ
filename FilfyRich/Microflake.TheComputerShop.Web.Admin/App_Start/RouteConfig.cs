@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Microflake.TheComputerShop.Web.Admin
+namespace Microflake.Web
 {
     public class RouteConfig
     {
@@ -17,7 +17,7 @@ namespace Microflake.TheComputerShop.Web.Admin
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] { "Microflake.TheComputerShop.Web.Admin.Controllers" }
+                namespaces: new[] { "Microflake.Web.Controllers" }
             );
         }
     }

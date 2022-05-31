@@ -1,28 +1,14 @@
-﻿@model Microflake.TheComputerShop.ViewModel.Category.CreateCategory
+﻿@model Microflake.Core.ViewModel.Category.CreateCategory
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "inputForm" }))
 {
     @Html.AntiForgeryToken()
 
-    @*<div class="form-group">
-            <label>@Microflake.TheComputerShop.Web.Admin.Language.Language.Name</label>
+    <div class="form-group">
+        <label class="col-md-12">Name</label>
+        <div class="col-md-12">
             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-        </div>*@
-
-    <div class="form-group">
-        <label class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.Category (English)</label>
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.English, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.English, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.Category (Arabic)</label>
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.Arabic, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Arabic, "", new { @class = "text-danger" })
         </div>
     </div>
 

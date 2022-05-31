@@ -1,5 +1,5 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Microflake.TheComputerShop.Web.Admin
+namespace Microflake.Web
 {
     public partial class Startup
     {

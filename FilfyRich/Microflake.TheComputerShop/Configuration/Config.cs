@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace Microflake.TheComputerShop
+namespace Microflake.Core
 {
     public class Config
     {

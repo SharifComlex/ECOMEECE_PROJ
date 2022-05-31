@@ -1,8 +1,8 @@
-﻿using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Utilities.Logger;
-using Microflake.TheComputerShop.Utilities.Response;
-using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.Subscribers;
+﻿using Microflake.Core.Persistence;
+using Microflake.Core.Utilities.Logger;
+using Microflake.Core.Utilities.Response;
+using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.Subscribers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Application.Subscribers
+namespace Microflake.Core.Application.Subscribers
 {
   public  class SubsribersService : ISubscribersService
     {

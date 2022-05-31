@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
-@model List<Microflake.TheComputerShop.ViewModel.Currency.ListCurrency>
+@model List<Microflake.Core.ViewModel.Currency.ListCurrency>
 @{
     var routeData = Request.RequestContext.RouteData;
     var area = routeData.DataTokens["area"].ToString();
@@ -28,12 +28,12 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="/"> @Microflake.TheComputerShop.Web.Admin.Language.Language.Home</a></li>
-                        <li class="breadcrumb-item">@Microflake.TheComputerShop.Web.Admin.Language.Language.Currency_Managment</li>
-                        <li class="breadcrumb-item active"> @Microflake.TheComputerShop.Web.Admin.Language.Language.List</li>
+                        <li class="breadcrumb-item"><a href="/"> @Microflake.Web.Language.Language.Home</a></li>
+                        <li class="breadcrumb-item">@Microflake.Web.Language.Language.Currency_Managment</li>
+                        <li class="breadcrumb-item active"> @Microflake.Web.Language.Language.List</li>
                     </ol>
                 </div>
-                <h4 class="page-title">@Microflake.TheComputerShop.Web.Admin.Language.Language.Currency_Managment</h4>
+                <h4 class="page-title">@Microflake.Web.Language.Language.Currency_Managment</h4>
             </div>
         </div>
     </div>
@@ -55,11 +55,11 @@
 
                             <thead>
                                 <tr>
-                                    <th>@Microflake.TheComputerShop.Web.Admin.Language.Language.Id</th>
-                                    <th>@Microflake.TheComputerShop.Web.Admin.Language.Language.Name</th>
+                                    <th>@Microflake.Web.Language.Language.Id</th>
+                                    <th>@Microflake.Web.Language.Language.Name</th>
 
-                                    @*<th>@Microflake.TheComputerShop.Web.Admin.Language.Language.Currency_Rate</th>*@
-                                    <th>@Microflake.TheComputerShop.Web.Admin.Language.Language.Is_Base_Currency</th>
+                                    @*<th>@Microflake.Web.Language.Language.Currency_Rate</th>*@
+                                    <th>@Microflake.Web.Language.Language.Is_Base_Currency</th>
                                 </tr>
                             </thead>
                             <tbody>

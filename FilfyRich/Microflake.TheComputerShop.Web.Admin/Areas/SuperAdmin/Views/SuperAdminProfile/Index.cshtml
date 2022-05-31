@@ -1,11 +1,11 @@
-﻿@model Microflake.TheComputerShop.ViewModel.Profile.SuperAdminProfileViewModel
+﻿@model Microflake.Core.ViewModel.Profile.SuperAdminProfileViewModel
 @using Microsoft.AspNet.Identity
 @using System.Data.Entity
 @{
     var routeData = Request.RequestContext.RouteData;
     var AreaName = routeData.DataTokens["area"].ToString();
     var ControllerName = "/" + AreaName + "/" + routeData.Values["Controller"].ToString();
-    var CurrentUser = Microflake.TheComputerShop.Utilities.GetCurrentUser.Get(User.Identity.GetUserId());
+    var CurrentUser = Microflake.Core.Utilities.GetCurrentUser.Get(User.Identity.GetUserId());
 
 }
 
@@ -80,12 +80,12 @@
 
             <form id="changePassword" method="post" autocomplete="off">
                 @Html.AntiForgeryToken()
-                <h1 style="margin-left:15px;">@Microflake.TheComputerShop.Web.Admin.Language.Language.Update_Profile</h1>
+                <h1 style="margin-left:15px;">@Microflake.Web.Language.Language.Update_Profile</h1>
                 <hr style="margin-bottom: 40px;" />
                 <div class="row form-group">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.Old_Password</label>
+                            <label class="col-md-12">@Microflake.Web.Language.Language.Old_Password</label>
                             <div class="col-md-12 form-has-image">
                                 @Html.EditorFor(model => model.OldPassword, new { htmlAttributes = new { @class = "form-control", @type = "password", @placeholder = "Old Password" } })
                                 @Html.ValidationMessageFor(model => model.OldPassword, "", new { @class = "text-danger" })
@@ -94,7 +94,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.New_Password</label>
+                            <label class="col-md-12">@Microflake.Web.Language.Language.New_Password</label>
                             <div class="col-md-12 form-has-image">
                                 @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "form-control", @type = "password", @placeholder = "New Password" } })
                                 @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
@@ -103,7 +103,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.Confirm_Password</label>
+                            <label class="col-md-12">@Microflake.Web.Language.Language.Confirm_Password</label>
                             <div class="col-md-12 form-has-image">
                                 @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @type = "password", @placeholder = "Confirm Password" } })
                                 @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
@@ -116,7 +116,7 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <button id="btnChangePassword" class="btn btn-primary">@Microflake.TheComputerShop.Web.Admin.Language.Language.Update_Profile</button>
+                        <button id="btnChangePassword" class="btn btn-primary">@Microflake.Web.Language.Language.Update_Profile</button>
                     </div>
                 </div>
             </form>

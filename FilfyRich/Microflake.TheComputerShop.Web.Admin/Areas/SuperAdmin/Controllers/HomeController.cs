@@ -1,7 +1,7 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Web.Admin.Controllers;
-using Microflake.TheComputerShop.Web.Admin.Models;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
+using Microflake.Web.Controllers;
+using Microflake.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
+namespace Microflake.Web.Areas.SuperAdmin.Controllers
 {
     [Authorize(Roles = "SuperAdmin")]
     public class HomeController : BaseController

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Microflake.TheComputerShop.Web.Admin.Startup))]
+[assembly: OwinStartup(typeof(Microflake.Web.Startup))]
 
-namespace Microflake.TheComputerShop.Web.Admin
+namespace Microflake.Web
 {
     public partial class Startup
     {

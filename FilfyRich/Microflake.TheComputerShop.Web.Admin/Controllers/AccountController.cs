@@ -1,7 +1,7 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Utilities.Email;
-using Microflake.TheComputerShop.Web.Admin.Models;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
+using Microflake.Core.Utilities.Email;
+using Microflake.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -15,7 +15,7 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Controllers
+namespace Microflake.Web.Controllers
 {
     public class AccountController : Controller
     {

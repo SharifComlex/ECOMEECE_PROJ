@@ -1,9 +1,9 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Utilities.Logger;
-using Microflake.TheComputerShop.Utilities.Response;
-using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.WhishList;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
+using Microflake.Core.Utilities.Logger;
+using Microflake.Core.Utilities.Response;
+using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.WhishList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Application.Whislists
+namespace Microflake.Core.Application.Whislists
 {
   public  class WhislistService  :IWhislistService
     {
@@ -39,8 +39,7 @@ namespace Microflake.TheComputerShop.Application.Whislists
                     {
                         Id = x.Id,
                         productId = x.Product.Id,
-                        productEnglish = x.Product.English,
-                        productArabic = x.Product.Arabic,
+                        productName = x.Product.Name,
                         productPrice = x.Product.SellPrice,
                         Image = x.Product.Image,
                         Image1 = x.Product.Image1,

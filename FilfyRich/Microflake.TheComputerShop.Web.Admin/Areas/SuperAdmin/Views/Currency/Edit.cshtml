@@ -1,4 +1,4 @@
-﻿@model Microflake.TheComputerShop.ViewModel.Currency.EditCurrency
+﻿@model Microflake.Core.ViewModel.Currency.EditCurrency
 
 @{
     ViewBag.Title = "Edit";
@@ -12,13 +12,13 @@
 
     @*<div class="form-group">
         <label>
-            @Microflake.TheComputerShop.Web.Admin.Language.Language.Currency_Rate
+            @Microflake.Web.Language.Language.Currency_Rate
         </label>
         @Html.EditorFor(model => model.Currency_Rate, new { htmlAttributes = new { @class = "form-control" } })
         @Html.ValidationMessageFor(model => model.Currency_Rate, "", new { @class = "text-danger" })
     </div>*@
     <div class="form-group">
-        <labels>@Microflake.TheComputerShop.Web.Admin.Language.Language.Is_Base_Currency</labels>
+        <labels>@Microflake.Web.Language.Language.Is_Base_Currency</labels>
         <div class="toggle lg">
 
             <label>

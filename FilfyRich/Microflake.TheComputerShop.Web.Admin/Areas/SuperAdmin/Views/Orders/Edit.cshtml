@@ -1,4 +1,4 @@
-﻿@model Microflake.TheComputerShop.ViewModel.Orders.EditOrder
+﻿@model Microflake.Core.ViewModel.Orders.EditOrder
 
 @{
     ViewBag.Title = "Edit";
@@ -9,13 +9,13 @@
     @Html.AntiForgeryToken()
      @Html.HiddenFor(x => x.IsPaid)
     <div class="form-group">
-           <label for="cars">@Microflake.TheComputerShop.Web.Admin.Language.Language.Order_Status</label>
+           <label for="cars">@Microflake.Web.Language.Language.Order_Status</label>
 
            <select name="Status" class="form-control">
-               <option value="Pending" @(Model.Status == "Pending" ? "selected" : string.Empty)>@Microflake.TheComputerShop.Web.Admin.Language.Language.Pending</option>
-               <option value="In Progress" @(Model.Status == "In Progress" ? "selected" : string.Empty)>@Microflake.TheComputerShop.Web.Admin.Language.Language.In_Progress</option>
-               <option value="Dispatched" @(Model.Status == "Dispatched" ? "selected" : string.Empty)>@Microflake.TheComputerShop.Web.Admin.Language.Language.Dispatched</option>
-               <option value="Completed" @(Model.Status == "Completed" ? "selected" : string.Empty)>@Microflake.TheComputerShop.Web.Admin.Language.Language.Completed</option>
+               <option value="Pending" @(Model.Status == "Pending" ? "selected" : string.Empty)>@Microflake.Web.Language.Language.Pending</option>
+               <option value="In Progress" @(Model.Status == "In Progress" ? "selected" : string.Empty)>@Microflake.Web.Language.Language.In_Progress</option>
+               <option value="Dispatched" @(Model.Status == "Dispatched" ? "selected" : string.Empty)>@Microflake.Web.Language.Language.Dispatched</option>
+               <option value="Completed" @(Model.Status == "Completed" ? "selected" : string.Empty)>@Microflake.Web.Language.Language.Completed</option>
 
            </select>
             @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })

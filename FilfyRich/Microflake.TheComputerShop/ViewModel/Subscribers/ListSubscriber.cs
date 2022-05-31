@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.ViewModel.Subscribers
+namespace Microflake.Core.ViewModel.Subscribers
 {
   public  class ListSubscriber
     {

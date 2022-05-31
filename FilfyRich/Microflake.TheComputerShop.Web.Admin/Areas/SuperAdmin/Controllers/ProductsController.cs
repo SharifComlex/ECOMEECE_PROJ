@@ -1,20 +1,19 @@
 ﻿
-using Microflake.TheComputerShop.Application.Categories;
-using Microflake.TheComputerShop.Application.Products;
-using Microflake.TheComputerShop.Application.SubCategories;
-using Microflake.TheComputerShop.ViewModel.Products;
-using Microflake.TheComputerShop.Web.Admin.Controllers;
-using Microflake.TheComputerShop.Web.Admin.Models;
+using Microflake.Core;
+using Microflake.Core.Application.Categories;
+using Microflake.Core.Application.Products;
+using Microflake.Core.Application.SubCategories;
+using Microflake.Core.ViewModel.Products;
+using Microflake.Web.Controllers;
 using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
+namespace Microflake.Web.Areas.SuperAdmin.Controllers
 {
     [Authorize(Roles = "SuperAdmin")]
     public class ProductsController : BaseController
@@ -73,7 +72,7 @@ namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(CreateProduct model)
         {
-            if (model.English == null && model.Arabic == null)
+            if (model.Name == null)
             {
                 ModelState.AddModelError("English", Language.Language.This_Field_is_Required);
 
@@ -150,7 +149,7 @@ namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
         public async Task<ActionResult> Edit(EditProduct model)
         {
 
-            if (model.English == null && model.Arabic == null)
+            if (model.Name == null)
             {
                 ModelState.AddModelError("English", Language.Language.This_Field_is_Required);
 

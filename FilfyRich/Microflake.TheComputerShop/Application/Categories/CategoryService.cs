@@ -1,18 +1,17 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Utilities.Logger;
-using Microflake.TheComputerShop.Utilities.Response;
-using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.Category;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
+using Microflake.Core.Utilities.Logger;
+using Microflake.Core.Utilities.Response;
+using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.Category;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Application.Categories
+namespace Microflake.Core.Application.Categories
 {
     public class CategoryService : ICategoryService
     {
@@ -34,14 +33,13 @@ namespace Microflake.TheComputerShop.Application.Categories
                 var list = await _context
                     .Categories
                     .AsNoTracking()
-                    .OrderBy(x => x.English)
+                    .OrderBy(x => x.Name)
                     .ToListAsync();
 
                 return _response.Create(true, "Fatched", list.Select(x => new ListCategory
                 {
                     Id = x.Id,
-                    English = x.English,
-                    Arabic = x.Arabic,
+                    Name = x.Name,
                     Status = x.Status
                 }).ToList());
             }
@@ -89,14 +87,7 @@ namespace Microflake.TheComputerShop.Application.Categories
             {
                 var entity = new Category();
 
-                entity.English = model.English;
-                entity.Arabic = model.Arabic;
-
-                entity.Status = true;
-                entity.CreatedAt = DateTime.UtcNow;
-                entity.CreatedById = userId;
-                entity.ModifiedAt = DateTime.UtcNow;
-                entity.ModifiedById = userId;
+                entity.Name = model.Name;
 
                 _context.Categories.Add(entity);
                 var result = await _context.SaveChangesAsync();
@@ -130,11 +121,8 @@ namespace Microflake.TheComputerShop.Application.Categories
                 {
                     return _response.Create(true, "Fatched", new EditCategory {
                         Id = entity.Id,
-                        //Name = entity.Name,
-
-                        English = entity.English,
-                    Arabic = entity.Arabic,
-                    Status = entity.Status
+                        Name = entity.Name,
+                        Status = entity.Status
                     });
                 }
 
@@ -153,12 +141,7 @@ namespace Microflake.TheComputerShop.Application.Categories
             {
                 var entity = _context.Categories.Find(model.Id);
 
-                entity.English = model.English;
-                entity.Arabic = model.Arabic;
-
-                entity.Status = model.Status;
-                entity.ModifiedAt = DateTime.UtcNow;
-                entity.ModifiedById = userId;
+                entity.Name = model.Name;
 
                 _context.Entry(entity).State =  EntityState.Modified;
 
@@ -240,10 +223,8 @@ namespace Microflake.TheComputerShop.Application.Categories
                     .Select(x => new ListCategory
                     {
                         Id = x.Id,
-                        Arabic = x.Arabic,
-                        English = x.English,
-                        Status = x.Status,
-                        Created = x.CreatedAt
+                        Name = x.Name,
+                        Status = x.Status
                     })
                     .AsNoTracking()
                     .FirstOrDefaultAsync(x=>x.Id == Id);

@@ -1,7 +1,7 @@
-﻿using Microflake.TheComputerShop.ViewModel;
+﻿using Microflake.Core.ViewModel;
 using System.Collections.Generic;
 
-namespace Microflake.TheComputerShop.Utilities.Response
+namespace Microflake.Core.Utilities.Response
 {
     public interface IResponse
     {

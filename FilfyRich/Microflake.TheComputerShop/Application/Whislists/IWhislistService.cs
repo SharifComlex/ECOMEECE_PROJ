@@ -1,12 +1,12 @@
-﻿using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.WhishList;
+﻿using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.WhishList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Application.Whislists
+namespace Microflake.Core.Application.Whislists
 {
   public  interface IWhislistService
     {

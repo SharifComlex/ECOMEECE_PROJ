@@ -1,4 +1,4 @@
-﻿using Microflake.TheComputerShop.Domain;
+﻿using Microflake.Core.Domain;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 
-namespace Microflake.TheComputerShop.Persistence.Migrations
+namespace Microflake.Core.Persistence.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {

@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity;
-@model Microflake.TheComputerShop.ViewModel.Products.ListProduct
+@model Microflake.Core.ViewModel.Products.ListProduct
 @{
     ViewBag.Title = "FilterProduct";
     //Layout = null;
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                                 <div class="product-caption">
-                                    <h4 class="product-name"><a href="#">@item.English</a></h4>
+                                    <h4 class="product-name"><a href="#">@item.Name</a></h4>
                                     <div class="price-box">
                                         @{var discount = item.Discount * Model.Currency;
                                             var rate = item.SellPrice * Model.Currency;
@@ -118,7 +118,7 @@
                             </div>
                             <div class="col-lg-8 col-md-8">
                                 <div class="product-caption">
-                                    <h4 class="product-name"><a href="single-product.html">@item.English</a></h4>
+                                    <h4 class="product-name"><a href="single-product.html">@item.Name</a></h4>
                                     @*<div class="rating-box">
                                             <ul class="rating d-flex">
                                                 <li><i class="icon-star"></i></li>

@@ -1,5 +1,5 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Controllers
+namespace Microflake.Web.Controllers
 {
     public class SubscribersController : BaseController
     {

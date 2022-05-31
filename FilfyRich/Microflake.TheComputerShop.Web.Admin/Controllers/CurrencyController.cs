@@ -1,5 +1,5 @@
-﻿using Microflake.TheComputerShop.Application.Categories;
-using Microflake.TheComputerShop.Application.Currencies;
+﻿using Microflake.Core.Application.Categories;
+using Microflake.Core.Application.Currencies;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Controllers
+namespace Microflake.Web.Controllers
 {
     public class CurrencyController : Controller
     {

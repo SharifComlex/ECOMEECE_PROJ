@@ -1,10 +1,10 @@
 
-using Microflake.TheComputerShop.Application.Categories;
-using Microflake.TheComputerShop.Application.Products;
+using Microflake.Core.Application.Categories;
+using Microflake.Core.Application.Products;
 
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Utilities.Logger;
-using Microflake.TheComputerShop.Utilities.Response;
+using Microflake.Core.Persistence;
+using Microflake.Core.Utilities.Logger;
+using Microflake.Core.Utilities.Response;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
 using System;
@@ -14,17 +14,17 @@ using System.Reflection;
 using System.Web.Routing;
 using SimpleInjector.Integration.Web;
 using Microsoft.AspNet.Identity;
-using Microflake.TheComputerShop.Domain;
+using Microflake.Core.Domain;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microflake.TheComputerShop.Application.Orders;
-using Microflake.TheComputerShop.Application.DealOfTheWeeks;
-using Microflake.TheComputerShop.Application.Whislists;
-using Microflake.TheComputerShop.Application.Currencies;
-using Microflake.TheComputerShop.Application.ContactUs;
-using Microflake.TheComputerShop.Application.Subscribers;
-using Microflake.TheComputerShop.Application.SubCategories;
+using Microflake.Core.Application.Orders;
+using Microflake.Core.Application.DealOfTheWeeks;
+using Microflake.Core.Application.Whislists;
+using Microflake.Core.Application.Currencies;
+using Microflake.Core.Application.ContactUs;
+using Microflake.Core.Application.Subscribers;
+using Microflake.Core.Application.SubCategories;
 
-namespace Microflake.TheComputerShop.Web.Admin
+namespace Microflake.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {

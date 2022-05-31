@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.ViewModel
+namespace Microflake.Core.ViewModel
 {
    public class AttributeListViewModel
     {

@@ -1,6 +1,6 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.Products;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Application.Products
+namespace Microflake.Core.Application.Products
 {
    public interface IProductService
     {

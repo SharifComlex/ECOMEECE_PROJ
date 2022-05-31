@@ -1,9 +1,9 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Utilities.Logger;
-using Microflake.TheComputerShop.Utilities.Response;
-using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.DealOfTheWeeks;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
+using Microflake.Core.Utilities.Logger;
+using Microflake.Core.Utilities.Response;
+using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.DealOfTheWeeks;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Application.DealOfTheWeeks
+namespace Microflake.Core.Application.DealOfTheWeeks
 {
    public class DealOfTheWeekService : IDealOfTheWeekService
     {
@@ -41,11 +41,8 @@ namespace Microflake.TheComputerShop.Application.DealOfTheWeeks
                     .Select(x => new ListDealOfTheWeek
                     {
                         Id = x.Id,
-                        Arabic = x.Arabic,
-                        English = x.English,
-                        CategoryEnglish = x.SubCategory.Category.English,
-                        CategoryArabic = x.SubCategory.Category.Arabic,
-                        //CategoryName = x.Category.Name,
+                        Name = x.Name,
+                        CategoryName = x.SubCategory.Category.Name,
                         Status = x.Status,
                         Created = x.CreatedAt,
                       
@@ -76,8 +73,7 @@ namespace Microflake.TheComputerShop.Application.DealOfTheWeeks
                     .Select(x => new ListDealOfTheWeek
                     {
                         Id = x.Id,
-                        English = x.English,
-                        Arabic = x.Arabic,
+                        Name = x.Name,
                         //CategoryName = x.Category.Name,
                         Status = x.Status,
                         Created = x.CreatedAt,
@@ -106,7 +102,7 @@ namespace Microflake.TheComputerShop.Application.DealOfTheWeeks
             }
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                DealOfTheWeeks = DealOfTheWeeks.Where(x => x.Title.ToLower().Contains(searchTerm.ToLower())).ToList();
+                DealOfTheWeeks = DealOfTheWeeks.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
             }
             if (minimumPrice.HasValue)
             {
@@ -224,7 +220,7 @@ namespace Microflake.TheComputerShop.Application.DealOfTheWeeks
                     .Select(x => new ItemSelectList
                     {
                         Id = x.Id,
-                        Title = x.Title,
+                        Title = x.Name,
                     }).ToListAsync();
 
                 if (Id.HasValue)
@@ -286,8 +282,6 @@ namespace Microflake.TheComputerShop.Application.DealOfTheWeeks
                     Description = entity.Description,
                    
                     IsNew = entity.IsNew,
-                    Arabic = entity.Arabic,
-                    English = entity.English,
                     ProductImage = entity.Image,
                     ProductImage1 = entity.Image1,
                     Qty = entity.Qty,
@@ -311,8 +305,7 @@ namespace Microflake.TheComputerShop.Application.DealOfTheWeeks
                 var entity = new Product();
 
                 entity.SubCategoryId = model.CategoryId;
-                entity.English = model.English;
-                entity.Arabic = model.Arabic;
+                entity.Name = model.Name;
                 entity.Status = true;
              
                 entity.IsNew = model.IsNew;
@@ -416,8 +409,7 @@ namespace Microflake.TheComputerShop.Application.DealOfTheWeeks
 
                 entity.SubCategoryId = model.CategoryId;
                 entity.SellPrice = model.SellPrice;
-                entity.Arabic = model.Arabic;
-                entity.English = model.English;
+                entity.Name = model.Name;
                 entity.Status = model.Status;
                 entity.Price = model.Price;
                 entity.Description = model.Description;
@@ -537,8 +529,7 @@ namespace Microflake.TheComputerShop.Application.DealOfTheWeeks
                          Id = x.Id,
                          CategoryId = x.SubCategoryId,
                          //CategoryName = x.Category.Name,
-                         English = x.English,
-                         Arabic = x.Arabic,
+                         Name = x.Name,
                          Status = x.Status,
                          Image = x.Image,
                          Image1 = x.Image1,
@@ -560,7 +551,7 @@ namespace Microflake.TheComputerShop.Application.DealOfTheWeeks
             }
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                DealOfTheWeeks = DealOfTheWeeks.Where(x => x.Title.ToLower().Contains(searchTerm.ToLower()));
+                DealOfTheWeeks = DealOfTheWeeks.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower()));
             }
             if (minimumPrice.HasValue)
             {

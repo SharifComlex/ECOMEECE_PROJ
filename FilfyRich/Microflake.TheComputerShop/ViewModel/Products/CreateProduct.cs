@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Microflake.TheComputerShop.ViewModel.Products
+namespace Microflake.Core.ViewModel.Products
 {
    public class CreateProduct
     {
@@ -17,13 +17,11 @@ namespace Microflake.TheComputerShop.ViewModel.Products
         [Required]
         public int Qty { get; set; }
     
-        public string Title { get; set; }
+        public string Name { get; set; }
         [Required]
         public double SellPrice { get; set; }
         [Required]
         public double Price { get; set; }
-        public string English { get; set; }
-        public string Arabic { get; set; }
         public long SubBrandId { get; set; }
        
        

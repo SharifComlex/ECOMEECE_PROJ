@@ -1,7 +1,7 @@
-﻿using Microflake.TheComputerShop.Application.Orders;
-using Microflake.TheComputerShop.ViewModel.Orders;
-using Microflake.TheComputerShop.ViewModel.Products;
-using Microflake.TheComputerShop.Web.Admin.Controllers;
+﻿using Microflake.Core.Application.Orders;
+using Microflake.Core.ViewModel.Orders;
+using Microflake.Core.ViewModel.Products;
+using Microflake.Web.Controllers;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -9,10 +9,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microflake.TheComputerShop.Web.Admin.Models;
-using Microflake.TheComputerShop.Persistence;
+using Microflake.Web.Models;
+using Microflake.Core.Persistence;
 
-namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
+namespace Microflake.Web.Areas.SuperAdmin.Controllers
 {
     [Authorize(Roles = "SuperAdmin")]
     public class OrdersController : BaseController

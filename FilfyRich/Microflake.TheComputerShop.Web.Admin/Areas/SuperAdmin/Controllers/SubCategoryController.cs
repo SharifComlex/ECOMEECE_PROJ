@@ -1,16 +1,16 @@
-﻿using Microflake.TheComputerShop.Application.Categories;
-using Microflake.TheComputerShop.Application.SubCategories;
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.ViewModel.Category;
-using Microflake.TheComputerShop.ViewModel.SubCategories;
-using Microflake.TheComputerShop.Web.Admin.Controllers;
-using Microflake.TheComputerShop.Web.Admin.Models;
+﻿using Microflake.Core.Application.Categories;
+using Microflake.Core.Application.SubCategories;
+using Microflake.Core.Persistence;
+using Microflake.Core.ViewModel.Category;
+using Microflake.Core.ViewModel.SubCategories;
+using Microflake.Web.Controllers;
+using Microflake.Web.Models;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
+namespace Microflake.Web.Areas.SuperAdmin.Controllers
 {
     [Authorize(Roles = "SuperAdmin")]
     public class SubCategoryController : BaseController
@@ -142,7 +142,7 @@ namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
                 foreach (var item in SubCategoriess)
                 {
 
-                    options += "<option value=\"" + item.Id + "\">" + item.English + "</option>";
+                    options += "<option value=\"" + item.Id + "\">" + item.Name + "</option>";
 
                 }
                 return Content(options);

@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity;
-@model Microflake.TheComputerShop.ViewModel.Products.ListProduct
+@model Microflake.Core.ViewModel.Products.ListProduct
 @{ ViewBag.Title = "FilterProduct";
     //Layout = null;
     //Layout = "~/Views/Shared/_Layout2.cshtml";
@@ -54,7 +54,7 @@
                         <a href="#">Clothing,</a>
                         <a href="#">Potato chips</a>
                     </div>
-                    <h3><a href="/Home/Productdetail">@item.English</a></h3>
+                    <h3><a href="/Home/Productdetail">@item.Name</a></h3>
                     <div class="price_box">
                         <span class="old_price">$ @item.Discount</span>
                         <span class="current_price">$@item.SellPrice</span>
@@ -113,7 +113,7 @@
             </div>
             <div class="col-lg-8 col-md-7">
                 <div class="product_content">
-                    <h3><a href="/Home/Productdetail">@item.English</a></h3>
+                    <h3><a href="/Home/Productdetail">@item.Name</a></h3>
                     <div class="product_ratings">
                         <ul>
                             <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>

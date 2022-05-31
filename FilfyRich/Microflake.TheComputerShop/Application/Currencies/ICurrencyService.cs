@@ -1,12 +1,12 @@
-﻿using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.Currency;
+﻿using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.Currency;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Application.Currencies
+namespace Microflake.Core.Application.Currencies
 {
    public interface ICurrencyService
     {

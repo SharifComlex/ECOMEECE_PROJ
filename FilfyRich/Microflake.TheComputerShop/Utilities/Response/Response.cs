@@ -1,11 +1,11 @@
-﻿using Microflake.TheComputerShop.ViewModel;
+﻿using Microflake.Core.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Utilities.Response
+namespace Microflake.Core.Utilities.Response
 {
     public class Response : IResponse
     {

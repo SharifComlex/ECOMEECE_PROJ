@@ -1,5 +1,5 @@
-﻿@using Microflake.TheComputerShop.ViewModel
-@model Microflake.TheComputerShop.ViewModel.Products.ListProduct
+﻿@using Microflake.Core.ViewModel
+@model Microflake.Core.ViewModel.Products.ListProduct
 <!-- slider-main-area start -->
 
 <div class="slider-main-area">
@@ -258,7 +258,7 @@
                                 <div class="list_group_item">
                                     <article class="filter-group">
                                         @foreach (var category in Model.Categorylist)
-                                        {<h4 data-href="@Url.Action("FilterProduct", "Home", new {  categoryID = category.Id ,sortBy = Model.SortBy })" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) " class="filter-title">@category.English</h4>
+                                        {<h4 data-href="@Url.Action("FilterProduct", "Home", new {  categoryID = category.Id ,sortBy = Model.SortBy })" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) " class="filter-title">@category.Name</h4>
                                             @*@*<header class="card-header">
                 <a data-href="@Url.Action("FilterProduct", "Home", new {  categoryID = category.Id ,sortBy = Model.SortBy })"  class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) " data-toggle="collapse" data-target="#collapse_aside1" data-abc="true" aria-expanded="false" class="collapsed">
                     <i class="icon-control fa fa-chevron-down"></i>
@@ -275,7 +275,7 @@
                                                     <li>
                                                         <label class="custom-control">
                                                             <input data-href="@Url.Action("FilterProduct", "Home", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">
-                                                            <span class="custom-control-label">@item.English </span>
+                                                            <span class="custom-control-label">@item.Name </span>
                                                         </label>
                                                     </li>
                                                 }

@@ -1,11 +1,11 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.Category;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.Category;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Application.Categories
+namespace Microflake.Core.Application.Categories
 {
     public interface ICategoryService
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Microflake.TheComputerShop.Lang {
+namespace Microflake.Core.Lang {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Microflake.TheComputerShop.Lang {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microflake.TheComputerShop.Lang.Validations", typeof(Validations).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Microflake.Core.Lang.Validations", typeof(Validations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

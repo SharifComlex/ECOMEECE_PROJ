@@ -1,12 +1,12 @@
-﻿using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.Orders;
+﻿using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Application.Orders
+namespace Microflake.Core.Application.Orders
 {
    public interface IOrderService
     {

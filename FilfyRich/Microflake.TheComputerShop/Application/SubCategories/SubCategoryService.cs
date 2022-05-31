@@ -1,21 +1,19 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Utilities.Logger;
-using Microflake.TheComputerShop.Utilities.Response;
-using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.Category;
-using Microflake.TheComputerShop.ViewModel.SubCategories;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
+using Microflake.Core.Utilities.Logger;
+using Microflake.Core.Utilities.Response;
+using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.SubCategories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Application.SubCategories
+namespace Microflake.Core.Application.SubCategories
 {
- public  class SubCategorieservice : ISubCategoryService
+    public  class SubCategorieservice : ISubCategoryService
     {
         private readonly ApplicationDbContext _context;
         private readonly IResponse _response;
@@ -35,14 +33,13 @@ namespace Microflake.TheComputerShop.Application.SubCategories
                 var list = await _context
                     .SubCategories
                     .AsNoTracking()
-                    .OrderBy(x => x.English)
+                    .OrderBy(x => x.Name)
                     .ToListAsync();
 
                 return _response.Create(true, "Fatched", list.Select(x => new ListSubCategory
                 {
                     Id = x.Id,
-                    English = x.English,
-                    Arabic = x.Arabic,
+                    Name = x.Name,
                     Status = x.Status
                 }).ToList());
             }
@@ -64,7 +61,7 @@ namespace Microflake.TheComputerShop.Application.SubCategories
                     .Select(x => new ItemSelectList
                     {
                         Id = x.Id,
-                        Title = x.English,
+                        Title = x.Name,
                     }).ToListAsync();
 
                 if (Id.HasValue)
@@ -121,9 +118,7 @@ namespace Microflake.TheComputerShop.Application.SubCategories
                     Id = entity.Id,
                     Status = entity.Status,
                     CategoryId = entity.CategoryId,
-                    English = entity.English,
-                    Arabic = entity.Arabic,
-
+                    Name = entity.Name
                 });
             }
             catch (Exception ex)
@@ -140,18 +135,8 @@ namespace Microflake.TheComputerShop.Application.SubCategories
                 var entity = new SubCategory();
 
                 entity.CategoryId = model.CategoryId;
-                entity.English = model.English;
-                entity.Arabic = model.Arabic;
+                entity.Name = model.Name;
                 entity.Status = true;
-
-                /*-------------- CommonEntities Entries ---------------*/
-
-                entity.CreatedAt = DateTime.UtcNow;
-                entity.ModifiedAt = DateTime.UtcNow;
-                entity.CreatedById = userId;
-                entity.ModifiedById = userId;
-
-                /*-----------------------------------------------------*/
 
                 _context.SubCategories.Add(entity);
                 var entityResult = await _context.SaveChangesAsync();
@@ -178,12 +163,8 @@ namespace Microflake.TheComputerShop.Application.SubCategories
 
                 entity.CategoryId = model.CategoryId;
 
-                entity.English = model.English;
-                entity.Arabic = model.Arabic;
+                entity.Name = model.Name;
                 entity.Status = model.Status;
-
-                entity.ModifiedAt = DateTime.UtcNow;
-                entity.ModifiedById = userId;
 
                 _context.Entry(entity).State = EntityState.Modified;
                 var entityResult = await _context.SaveChangesAsync();
@@ -250,35 +231,6 @@ namespace Microflake.TheComputerShop.Application.SubCategories
             }
         }
 
-        //public async Task<ServiceResponse<long>> Delete(long id)
-        //{
-        //    try
-        //    {
-        //        var entity = _context.SubCategories.Find(id);
-
-        //        if (entity != null)
-        //        {
-        //            _context.SubCategories.Remove(entity);
-
-        //            if (await _context.SaveChangesAsync() > 0)
-        //            {
-        //                return _response.Create(true, "Record has been removed.", 0L);
-        //            }
-        //            else
-        //            {
-        //                return _response.Create(false, "Error while updating the record.", entity.Id);
-        //            }
-        //        }
-
-        //        return _response.Create(false, "Record does not exist.", entity.Id);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.Log(ex);
-        //        return _response.Create(false, ex.Message, 0L);
-        //    }
-        //}
-
         public async Task<ListSubCategory> FindSignleListEntity(long Id)
         {
             return await _context
@@ -287,13 +239,9 @@ namespace Microflake.TheComputerShop.Application.SubCategories
                      {
                          Id = x.Id,
                          CategoryId = x.CategoryId,
-                         CategoryName = x.Category.English,
-                        English = x.English,
-                        Arabic = x.Arabic, 
-                        Status = x.Status,
-
-
-                         Created = x.CreatedAt
+                         CategoryName = x.Category.Name,
+                         Name = x.Name,
+                         Status = x.Status,
                      }).SingleOrDefaultAsync(x => x.Id == Id);
         }
     }

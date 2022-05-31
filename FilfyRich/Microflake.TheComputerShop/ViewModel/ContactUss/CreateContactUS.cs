@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.ViewModel.ContactUss
+namespace Microflake.Core.ViewModel.ContactUss
 {
     class CreateContactUS
     {

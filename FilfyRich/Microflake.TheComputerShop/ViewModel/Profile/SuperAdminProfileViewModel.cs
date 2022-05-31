@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.ViewModel.Profile
+namespace Microflake.Core.ViewModel.Profile
 {
    public class SuperAdminProfileViewModel
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.ViewModel.Attributes
+namespace Microflake.Core.ViewModel.Attributes
 {
   public  class CreateAttribute
     {

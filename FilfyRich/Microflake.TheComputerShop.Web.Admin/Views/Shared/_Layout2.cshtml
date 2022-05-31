@@ -23,7 +23,52 @@
     <!--modernizr min js here-->
     <script src="/FrontWeb/assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
+    <style>
+        .check-item {
+            position: relative;
+            padding-left: 30px;
+        }
 
+        .check-item-unChecked::before {
+            position: absolute;
+            content: "";
+            font-family: "Ionicons";
+            display: inline-block;
+            height: 17px;
+            width: 17px;
+            text-align: center;
+            line-height: 17px;
+            border-radius: 3px;
+            border: 1px solid #888;
+            /* color: transparent;*/
+            top: 50%;
+            left: 0;
+            transform: translatey(-50%);
+        }
+
+        .check-item-checked::before {
+            position: absolute;
+            content: "\f383";
+            font-family: "Ionicons";
+            display: inline-block;
+            height: 17px;
+            width: 17px;
+            text-align: center;
+            line-height: 17px;
+            border-radius: 3px;
+            border: 1px solid #888;
+            /* color: transparent;*/
+            top: 50%;
+            left: 0;
+            transform: translatey(-50%);
+        }
+
+        .check-item span {
+            color: #5a5a5a;
+            font-size: 15px;
+            float: right;
+        }
+    </style>
 </head>
 
 <body>

@@ -1,4 +1,4 @@
-﻿using Microflake.TheComputerShop.Persistence;
+﻿using Microflake.Core.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-using Microflake.TheComputerShop.Application.Categories;
-using Microflake.TheComputerShop.Web.Admin.Models;
+using Microflake.Core.Application.Categories;
+using Microflake.Web.Models;
 
-namespace Microflake.TheComputerShop.Web.Admin.Controllers
+namespace Microflake.Web.Controllers
 {
     public class ReportController : BaseController
     {

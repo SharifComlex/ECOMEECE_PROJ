@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Microflake.TheComputerShop.Domain
+namespace Microflake.Core.Domain
 {
     public class AttributeGroup : BaseEntity
     {

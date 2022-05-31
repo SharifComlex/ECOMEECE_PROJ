@@ -1,8 +1,9 @@
-﻿using Microflake.TheComputerShop.Application.Categories;
-using Microflake.TheComputerShop.Application.DealOfTheWeeks;
-using Microflake.TheComputerShop.ViewModel.DealOfTheWeeks;
-using Microflake.TheComputerShop.Web.Admin.Controllers;
-using Microflake.TheComputerShop.Web.Admin.Models;
+﻿using Microflake.Core;
+using Microflake.Core.Application.Categories;
+using Microflake.Core.Application.DealOfTheWeeks;
+using Microflake.Core.ViewModel.DealOfTheWeeks;
+using Microflake.Web.Controllers;
+using Microflake.Web.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
+namespace Microflake.Web.Areas.SuperAdmin.Controllers
 {
     public class DealOfTheWeeksController : BaseController
     {
@@ -60,7 +61,7 @@ namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(CreateDealOfTheWeek model)
         {
-            if (model.English == null && model.Arabic == null)
+            if (model.Name == null)
             {
                 ModelState.AddModelError("English", Language.Language.This_Field_is_Required);
 
@@ -120,7 +121,7 @@ namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(EditDealOfTheWeek model)
         {
-            if (model.English == null && model.Arabic == null)
+            if (model.Name == null)
             {
                 ModelState.AddModelError("English", Language.Language.This_Field_is_Required);
 

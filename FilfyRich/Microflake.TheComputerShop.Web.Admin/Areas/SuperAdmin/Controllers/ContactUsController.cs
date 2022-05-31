@@ -1,4 +1,4 @@
-﻿using Microflake.TheComputerShop.Application.ContactUs;
+﻿using Microflake.Core.Application.ContactUs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
+namespace Microflake.Web.Areas.SuperAdmin.Controllers
 {
     public class ContactUsController : Controller
     {

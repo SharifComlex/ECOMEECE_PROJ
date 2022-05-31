@@ -1,5 +1,5 @@
-﻿using Microflake.TheComputerShop.Application.Orders;
-using Microflake.TheComputerShop.Persistence;
+﻿using Microflake.Core.Application.Orders;
+using Microflake.Core.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Controllers
+namespace Microflake.Web.Controllers
 {
     public class UserDashboardController : BaseController
     {

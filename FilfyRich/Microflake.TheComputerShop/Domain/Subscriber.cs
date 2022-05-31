@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Domain
+namespace Microflake.Core.Domain
 {
    public class Subscriber :BaseEntity
     {

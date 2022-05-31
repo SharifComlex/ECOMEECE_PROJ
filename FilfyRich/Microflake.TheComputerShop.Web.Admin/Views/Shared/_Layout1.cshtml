@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@using Microflake.TheComputerShop.Web.Admin.Language;
+@using Microflake.Web.Language;
 @using System.Data.Entity
 @{
     var routeData = Request.RequestContext.RouteData;
@@ -7,7 +7,7 @@
     var controllerName = routeData.Values["Controller"].ToString();
     Config.BaseUrl = ((areaName != null) ? "/" + areaName.ToString() : "") + "/" + controllerName;
 
-    var CurrentUser = Microflake.TheComputerShop.Utilities.GetCurrentUser.Get(User.Identity.GetUserId());
+    var CurrentUser = Microflake.Core.Utilities.GetCurrentUser.Get(User.Identity.GetUserId());
     var lang = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
 
 
@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@Microflake.TheComputerShop.Lang.Validations.Ecommerce</title>
+    <title>@Microflake.Core.Lang.Validations.Ecommerce</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -592,7 +592,7 @@
 <body class="app sidebar-mini">
     <!-- Navbar-->
     <header class="app-header">
-        <a class="app-header__logo" href="">@Microflake.TheComputerShop.Lang.Validations.Ecommerce</a>
+        <a class="app-header__logo" href="">@Microflake.Core.Lang.Validations.Ecommerce</a>
         <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
         <!-- Navbar Right Menu-->
         <ul class="app-nav">
@@ -685,8 +685,8 @@
                 <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
                 <ul class="dropdown-menu settings-menu dropdown-menu-right">
                     @*<li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>*@
-                    <li><a class="dropdown-item" href="/@areaName/SuperAdminProfile/index"><i class="fa fa-user fa-lg"></i> @Microflake.TheComputerShop.Web.Admin.Language.Language.Profile</a></li>
-                    <li><a class="dropdown-item" href="/Account/LogOff"><i class="fas fa-sign-out-alt fa-lg"></i> @Microflake.TheComputerShop.Web.Admin.Language.Language.Logout</a></li>
+                    <li><a class="dropdown-item" href="/@areaName/SuperAdminProfile/index"><i class="fa fa-user fa-lg"></i> @Microflake.Web.Language.Language.Profile</a></li>
+                    <li><a class="dropdown-item" href="/Account/LogOff"><i class="fas fa-sign-out-alt fa-lg"></i> @Microflake.Web.Language.Language.Logout</a></li>
                 </ul>
             </li>
 
@@ -702,7 +702,7 @@
 
             <div>
               
-                <p class="app-sidebar__user-designation">@Microflake.TheComputerShop.Web.Admin.Language.Language.Admin</p>
+                <p class="app-sidebar__user-designation">@Microflake.Web.Language.Language.Admin</p>
             </div>
         </div>
         <ul class="app-menu">
@@ -723,61 +723,61 @@
             <li class="treeview">
                 <a href="#" data-toggle="treeview" class="app-menu__item">
                     <i class="app-menu__icon fas fa-file-excel"></i>
-                    <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Administration</span>
+                    <span class="app-menu__label">@Microflake.Web.Language.Language.Administration</span>
                     <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
                         <a href="/Superadmin/Products" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Products</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Products</span>
                         </a>
                     </li>
                     <li>
                         <a href="/Superadmin/DealOfTheWeeks" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Deal_Of_The_Week</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Deal_Of_The_Week</span>
                         </a>
                     </li>
                     <li>
                         <a href="/Superadmin/Categories" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Categories</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Categories</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/Superadmin/SubCategory" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.subcategories</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.subcategories</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/Superadmin/Orders" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Orders</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Orders</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/Superadmin/Currency" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Currency</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Currency</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/Superadmin/ContactUs" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Contact_Us</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Contact_Us</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/Superadmin/Subscriber" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Subscribers</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Subscribers</span>
                         </a>
 
                     </li>
@@ -786,35 +786,35 @@
             <li class="treeview">
                 <a href="#" data-toggle="treeview" class="app-menu__item">
                     <i class="app-menu__icon fas fa-file-csv"></i>
-                    <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Reports</span>
+                    <span class="app-menu__label">@Microflake.Web.Language.Language.Reports</span>
                     <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
                         <a href="/report/CategoryWise" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Category_Wise</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Category_Wise</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/report/WeeklyReport" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Weekly_Report</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Weekly_Report</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/report/DailyReport" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Daily_Report</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Daily_Report</span>
                         </a>
 
                     </li>
                     <li>
                         <a href="/report/ProductListYearly" class="app-menu__item">
                             <i class="app-menu__icon fas fa-circle-notch"></i>
-                            <span class="app-menu__label">@Microflake.TheComputerShop.Web.Admin.Language.Language.Yearly_Report</span>
+                            <span class="app-menu__label">@Microflake.Web.Language.Language.Yearly_Report</span>
                         </a>
 
                     </li>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Microflake.TheComputerShop.Utilities.Logger
+namespace Microflake.Core.Utilities.Logger
 {
     public class Logger : ILogger
     {

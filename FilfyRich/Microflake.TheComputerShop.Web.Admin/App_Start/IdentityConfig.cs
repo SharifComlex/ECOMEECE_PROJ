@@ -1,5 +1,5 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 
-namespace Microflake.TheComputerShop.Web.Admin
+namespace Microflake.Web
 {
     public class EmailService : IIdentityMessageService
     {

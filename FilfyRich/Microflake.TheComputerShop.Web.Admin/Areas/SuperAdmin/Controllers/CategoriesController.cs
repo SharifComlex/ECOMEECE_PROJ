@@ -1,13 +1,13 @@
-﻿using Microflake.TheComputerShop.Application.Categories;
-using Microflake.TheComputerShop.ViewModel.Category;
-using Microflake.TheComputerShop.Web.Admin.Controllers;
-using Microflake.TheComputerShop.Web.Admin.Models;
+﻿using Microflake.Core.Application.Categories;
+using Microflake.Core.ViewModel.Category;
+using Microflake.Web.Controllers;
+using Microflake.Web.Models;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
+namespace Microflake.Web.Areas.SuperAdmin.Controllers
 {
     [Authorize(Roles = "SuperAdmin")]
     public class CategoriesController : BaseController
@@ -48,7 +48,7 @@ namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(CreateCategory model)
         {
-            if (model.English == null && model.Arabic == null)
+            if (model.Name == null)
             {
                 ModelState.AddModelError("English", Language.Language.This_Field_is_Required);
 
@@ -79,8 +79,7 @@ namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
                     data = new
                     {
                         result.Data.Id,
-                        result.Data.English,
-                        result.Data.Arabic,
+                        result.Data.Name,
                         result.Data.Status,
                     }
                 }, JsonRequestBehavior.AllowGet);
@@ -100,8 +99,7 @@ namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
             var model = new EditCategory
             {
                 Id = entity.Data.Id,
-                English = entity.Data.English,
-                Arabic = entity.Data.Arabic,
+                Name = entity.Data.Name,
                 Status = entity.Data.Status,
             };
             return PartialView(model);
@@ -111,7 +109,7 @@ namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(EditCategory model)
         {
-            if (model.English == null && model.Arabic == null)
+            if (model.Name == null)
             {
                 ModelState.AddModelError("English", Language.Language.This_Field_is_Required);
 
@@ -143,8 +141,7 @@ namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
                     data = new
                     {
                         result.Data.Id,
-                        result.Data.English,
-                        result.Data.Arabic,
+                        result.Data.Name,
                         result.Data.Status
                     }
                 }, JsonRequestBehavior.AllowGet);

@@ -1,11 +1,11 @@
-﻿using Microflake.TheComputerShop.ViewModel.Attributes;
+﻿using Microflake.Core.ViewModel.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.ViewModel.AttributeGroup
+namespace Microflake.Core.ViewModel.AttributeGroup
 {
    public class ListAttributeGroup
     {

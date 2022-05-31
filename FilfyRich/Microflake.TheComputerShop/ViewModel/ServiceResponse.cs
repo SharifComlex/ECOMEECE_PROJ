@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Microflake.TheComputerShop.ViewModel
+namespace Microflake.Core.ViewModel
 {
     public class ServiceResponse<T>
     {

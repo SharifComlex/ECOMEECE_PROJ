@@ -1,9 +1,9 @@
-﻿using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Utilities.Logger;
-using Microflake.TheComputerShop.Utilities.Response;
-using Microflake.TheComputerShop.ViewModel;
-using Microflake.TheComputerShop.ViewModel.Products;
+﻿using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
+using Microflake.Core.Utilities.Logger;
+using Microflake.Core.Utilities.Response;
+using Microflake.Core.ViewModel;
+using Microflake.Core.ViewModel.Products;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Application.Products
+namespace Microflake.Core.Application.Products
 {
     public class ProductService :IProductService
     {
@@ -42,10 +42,8 @@ namespace Microflake.TheComputerShop.Application.Products
                     .Select(x => new ListProduct
                     {
                        Id= x.Id,
-                       Arabic=x.Arabic,
-                        English = x.English,
-                        CategoryEnglish = x.SubCategory.Category.English,
-                        CategoryArabic = x.SubCategory.Category.Arabic,
+                        Name = x.Name,
+                        CategoryName = x.SubCategory.Category.Name,
                         Status = x.Status,
                         Created = x.CreatedAt,
                         IsFeatured = x.IsFeatured,
@@ -77,8 +75,7 @@ namespace Microflake.TheComputerShop.Application.Products
                     {
                         Id = x.Id,
                         //Name = x.Title,
-                       English=x.English,
-                       Arabic = x.Arabic,
+                        Name = x.Name,
                         Status = x.Status,
                         Created = x.CreatedAt,
                         IsFeatured = x.IsFeatured,
@@ -110,7 +107,7 @@ namespace Microflake.TheComputerShop.Application.Products
             }
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                products = products.Where(x => x.Title.ToLower().Contains(searchTerm.ToLower())).ToList();
+                products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
             }
             if (minimumPrice.HasValue)
             {
@@ -251,7 +248,7 @@ namespace Microflake.TheComputerShop.Application.Products
                     .Select(x => new ItemSelectList
                     {
                         Id = x.Id,
-                        Title = x.Title,
+                        Title = x.Name,
                     }).ToListAsync();
 
                 if (Id.HasValue)
@@ -313,8 +310,7 @@ namespace Microflake.TheComputerShop.Application.Products
                     Description = entity.Description,
                     IsFeatured = entity.IsFeatured,
                     IsNew = entity.IsNew,
-                    Arabic = entity.Arabic,
-                    English = entity.English,
+                    Name = entity.Name,
                     ProductImage = entity.Image,
                   ProductImage1 = entity.Image1,
                   Qty = entity.Qty ,
@@ -337,8 +333,7 @@ namespace Microflake.TheComputerShop.Application.Products
                 var entity = new Product();
 
                 entity.SubCategoryId = model.SubCategoryId;
-                entity.English = model.English;
-                entity.Arabic = model.Arabic;
+                entity.Name = model.Name;
                 entity.Status = true;
                 entity.IsFeatured = model.IsFeatured;
                 entity.IsNew = model.IsNew;
@@ -439,8 +434,7 @@ namespace Microflake.TheComputerShop.Application.Products
 
                 entity.SubCategoryId = model.SubCategoryId;
                 entity.SellPrice = model.SellPrice;
-                entity.Arabic = model.Arabic;
-                entity.English = model.English;
+                entity.Name = model.Name;
                 entity.Status = model.Status;
                 entity.Price = model.Price;
                 entity.Description = model.Description;
@@ -558,10 +552,8 @@ namespace Microflake.TheComputerShop.Application.Products
                      .Select(x => new ListProduct
                      {
                          Id = x.Id,
-                         Arabic = x.Arabic,
-                         English = x.English,
-                         CategoryEnglish = x.SubCategory.Category.English,
-                         CategoryArabic = x.SubCategory.Category.Arabic,
+                         Name = x.Name,
+                         CategoryName = x.SubCategory.Category.Name,
                          Status = x.Status,
                          Created = x.CreatedAt,
                          IsFeatured = x.IsFeatured,
@@ -589,7 +581,7 @@ namespace Microflake.TheComputerShop.Application.Products
             }
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                products = products.Where(x => x.Title.ToLower().Contains(searchTerm.ToLower()));
+                products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower()));
             }
             if (minimumPrice.HasValue)
             {
@@ -647,7 +639,7 @@ namespace Microflake.TheComputerShop.Application.Products
             }
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                products = products.Where(x => x.Title.ToLower().Contains(searchTerm.ToLower()));
+                products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower()));
             }
             if (minimumPrice.HasValue)
             {
@@ -704,7 +696,7 @@ namespace Microflake.TheComputerShop.Application.Products
             }
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                products = products.Where(x => x.Title.ToLower().Contains(searchTerm.ToLower()));
+                products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower()));
             }
             if (minimumPrice.HasValue)
             {

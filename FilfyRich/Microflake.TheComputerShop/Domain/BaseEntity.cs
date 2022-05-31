@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Microflake.TheComputerShop.Domain
+namespace Microflake.Core.Domain
 {
     public class BaseEntity
     {

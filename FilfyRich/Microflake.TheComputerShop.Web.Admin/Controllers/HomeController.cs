@@ -1,10 +1,10 @@
-﻿using Microflake.TheComputerShop.Application.Categories;
-using Microflake.TheComputerShop.Application.Products;
-using Microflake.TheComputerShop.Domain;
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Utilities;
-using Microflake.TheComputerShop.ViewModel.Products;
-using Microflake.TheComputerShop.Web.Admin.Models;
+﻿using Microflake.Core.Application.Categories;
+using Microflake.Core.Application.Products;
+using Microflake.Core.Domain;
+using Microflake.Core.Persistence;
+using Microflake.Core.Utilities;
+using Microflake.Core.ViewModel.Products;
+using Microflake.Web.Models;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Controllers
+namespace Microflake.Web.Controllers
 {
     public class HomeController : BaseController
     {

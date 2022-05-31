@@ -7,22 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Microflake.TheComputerShop.ViewModel.DealOfTheWeeks
+namespace Microflake.Core.ViewModel.DealOfTheWeeks
 {
    public class CreateDealOfTheWeek
     {
 
         public double Discount { get; set; }
 
-        [Required(ErrorMessageResourceType = (typeof(Lang.Validations)), ErrorMessageResourceName = "RequiredQty")]
+        [Required]
 
         public int Qty { get; set; }
-        public string English { get; set; }
-        public string Arabic { get; set; }
-        [Required(ErrorMessageResourceType = (typeof(Lang.Validations)), ErrorMessageResourceName = "RequiredsellingPrice")]
+        public string Name { get; set; }
 
         public double SellPrice { get; set; }
-        [Required(ErrorMessageResourceType = (typeof(Lang.Validations)), ErrorMessageResourceName = "RequiredPrice")]
 
         public double Price { get; set; }
 

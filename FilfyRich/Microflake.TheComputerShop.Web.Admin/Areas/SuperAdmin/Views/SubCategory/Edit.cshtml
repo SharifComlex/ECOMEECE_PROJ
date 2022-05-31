@@ -1,9 +1,9 @@
-﻿@model Microflake.TheComputerShop.ViewModel.SubCategories.EditSubCategory
+﻿@model Microflake.Core.ViewModel.SubCategories.EditSubCategory
 
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "inputForm" }))
 {
-   
+
 
 
 
@@ -20,21 +20,14 @@
         </div>
 
     </div>
-    <div class="form-group"style="margin-left:-15px;margin-right:-15px;">
-        <label class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.subcategories (English)</label>
+    <div class="form-group" style="margin-left:-15px;margin-right:-15px;">
+        <label class="col-md-12">Name</label>
         <div class="col-md-12">
-            @Html.EditorFor(model => model.English, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.English, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group"style="margin-left:-15px;margin-right:-15px;">
-        <label class="col-md-12">@Microflake.TheComputerShop.Web.Admin.Language.Language.subcategories (Arabic)</label>
-        <div class="col-md-12">
-            @Html.EditorFor(model => model.Arabic, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Arabic, "", new { @class = "text-danger" })
-        </div>
-    </div>
     <div class="form-group">
 
 

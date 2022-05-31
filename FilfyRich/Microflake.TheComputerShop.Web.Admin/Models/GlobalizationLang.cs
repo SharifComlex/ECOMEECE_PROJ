@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 
-namespace Microflake.TheComputerShop.Web.Admin.Models
+namespace Microflake.Web.Models
 {
     public class GlobalizationLang
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin
+namespace Microflake.Web.Areas.SuperAdmin
 {
     public class SuperAdminAreaRegistration : AreaRegistration 
     {
@@ -16,7 +16,7 @@ namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin
         {
             context.Routes.MapMvcAttributeRoutes();
             context.MapRoute(
-                "SuperAdmin_default",
+                "SuperAdmin_route",
                 "SuperAdmin/{controller}/{action}/{id}",
 
           new { controller = "Home", action = "Index", id = UrlParameter.Optional }

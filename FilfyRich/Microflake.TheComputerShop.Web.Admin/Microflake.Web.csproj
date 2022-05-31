@@ -12,8 +12,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microflake.TheComputerShop.Web.Admin</RootNamespace>
-    <AssemblyName>Microflake.TheComputerShop.Web.Admin</AssemblyName>
+    <RootNamespace>Microflake.Web</RootNamespace>
+    <AssemblyName>Microflake.Web</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -1334,9 +1334,9 @@
     <Folder Include="Views\Subscribers\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Microflake.TheComputerShop\Microflake.TheComputerShop.csproj">
+    <ProjectReference Include="..\Microflake.TheComputerShop\Microflake.Core.csproj">
       <Project>{2CE38D4E-A388-462F-AD04-76A7955DF49A}</Project>
-      <Name>Microflake.TheComputerShop</Name>
+      <Name>Microflake.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

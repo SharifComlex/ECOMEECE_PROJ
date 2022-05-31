@@ -1,6 +1,7 @@
-﻿using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.ViewModel.Profile;
-using Microflake.TheComputerShop.Web.Admin.Controllers;
+﻿using Microflake.Core;
+using Microflake.Core.Persistence;
+using Microflake.Core.ViewModel.Profile;
+using Microflake.Web.Controllers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using StructureMap;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Areas.SuperAdmin.Controllers
+namespace Microflake.Web.Areas.SuperAdmin.Controllers
 {
     [Authorize(Roles = "SuperAdmin")]
     public class SuperAdminProfileController : BaseController

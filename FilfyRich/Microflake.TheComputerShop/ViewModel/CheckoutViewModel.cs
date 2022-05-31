@@ -1,4 +1,4 @@
-﻿using Microflake.TheComputerShop.Domain;
+﻿using Microflake.Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.ViewModel
+namespace Microflake.Core.ViewModel
 {
     public class CheckoutViewModel
     {

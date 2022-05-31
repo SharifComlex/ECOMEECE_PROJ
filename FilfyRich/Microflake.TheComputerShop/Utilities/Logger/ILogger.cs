@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Utilities.Logger
+namespace Microflake.Core.Utilities.Logger
 {
     public interface ILogger
     {

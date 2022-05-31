@@ -1,8 +1,8 @@
-﻿using Microflake.TheComputerShop.Domain;
+﻿using Microflake.Core.Domain;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 
-namespace Microflake.TheComputerShop.Persistence
+namespace Microflake.Core.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

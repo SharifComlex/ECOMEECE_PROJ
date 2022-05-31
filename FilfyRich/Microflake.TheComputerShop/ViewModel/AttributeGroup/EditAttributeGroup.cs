@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.ViewModel.AttributeGroup
+namespace Microflake.Core.ViewModel.AttributeGroup
 {
    public class EditAttributeGroup
     {

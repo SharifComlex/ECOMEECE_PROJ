@@ -1,6 +1,6 @@
-﻿using Microflake.TheComputerShop.Application.Whislists;
-using Microflake.TheComputerShop.Persistence;
-using Microflake.TheComputerShop.Web.Admin.Models;
+﻿using Microflake.Core.Application.Whislists;
+using Microflake.Core.Persistence;
+using Microflake.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Microflake.TheComputerShop.Web.Admin.Controllers
+namespace Microflake.Web.Controllers
 {
     public class WhislistController : BaseController
     {

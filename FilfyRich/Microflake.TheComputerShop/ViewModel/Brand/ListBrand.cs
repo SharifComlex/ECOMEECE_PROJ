@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.ViewModel.Brand
+namespace Microflake.Core.ViewModel.Brand
 {
   public  class ListBrand
     {

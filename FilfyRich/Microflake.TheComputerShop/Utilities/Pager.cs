@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microflake.TheComputerShop.Utilities
+namespace Microflake.Core.Utilities
 {
     public class Pager
     {

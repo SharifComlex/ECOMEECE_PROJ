@@ -1,4 +1,4 @@
-﻿﻿@model Microflake.TheComputerShop.ViewModel.ShoppingCartViewModel
+﻿﻿@model Microflake.Core.ViewModel.ShoppingCartViewModel
 
     <ul class="mini-cart-sub">
         @foreach (var item in Model.Items)
@@ -24,8 +24,8 @@
             </li>
             <li>
                 <p class="text-center cart-button">
-                    <a href="/shop/CartItems">@Microflake.TheComputerShop.Web.Admin.Language.Language.ViewCart</a>
-                    <a href="/shop/Checkout">@Microflake.TheComputerShop.Web.Admin.Language.Language.Checkout</a>
+                    <a href="/shop/CartItems">@Microflake.Web.Language.Language.ViewCart</a>
+                    <a href="/shop/Checkout">@Microflake.Web.Language.Language.Checkout</a>
                 </p>
             </li>
         </ul>
