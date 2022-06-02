@@ -133,16 +133,6 @@
     <Compile Include="Utilities\Pager.cs" />
     <Compile Include="Utilities\Response\IResponse.cs" />
     <Compile Include="Utilities\Response\Response.cs" />
-    <Compile Include="ViewModel\AttributeGroup\CreateAttributeGroup.cs" />
-    <Compile Include="ViewModel\AttributeGroup\EditAttributeGroup.cs" />
-    <Compile Include="ViewModel\AttributeGroup\ListAttributeGroup.cs" />
-    <Compile Include="ViewModel\AttributeListViewModel.cs" />
-    <Compile Include="ViewModel\Attributes\CreateAttribute.cs" />
-    <Compile Include="ViewModel\Attributes\EditAttribute.cs" />
-    <Compile Include="ViewModel\Attributes\ListAttribute.cs" />
-    <Compile Include="ViewModel\Brand\CreateBrand.cs" />
-    <Compile Include="ViewModel\Brand\EditBrand.cs" />
-    <Compile Include="ViewModel\Brand\ListBrand.cs" />
     <Compile Include="ViewModel\Category\CreateCategory.cs" />
     <Compile Include="ViewModel\Category\EditCategory.cs" />
     <Compile Include="ViewModel\Category\ListCategory.cs" />
@@ -167,9 +157,6 @@
     <Compile Include="ViewModel\ServiceResponse.cs" />
     <Compile Include="ViewModel\ShoppingCartViewModel.cs" />
     <Compile Include="ViewModel\SortByEnum.cs" />
-    <Compile Include="ViewModel\SubBrand\CreateSubBrand.cs" />
-    <Compile Include="ViewModel\SubBrand\EditSubBrand.cs" />
-    <Compile Include="ViewModel\SubBrand\ListSubBrand.cs" />
     <Compile Include="ViewModel\SubCategories\CreateSubCategory.cs" />
     <Compile Include="ViewModel\SubCategories\EditSubCategory.cs" />
     <Compile Include="ViewModel\SubCategories\ListSubCategory.cs" />

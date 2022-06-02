@@ -17,6 +17,7 @@ namespace Microflake.Core.ViewModel.Products
 
         public bool IsNew { get; set; }
 
+        public long CategoryId { get; set; }
         public long SubCategoryId { get; set; }
 
         public string ProductImage { get; set; }

@@ -1,10 +1,7 @@
 ﻿using Microflake.Core.Persistence;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microflake.Core.ViewModel.Category.Validations
 {
@@ -20,16 +17,33 @@ namespace Microflake.Core.ViewModel.Category.Validations
                 try
                 {
                     var obj = validationContext.ObjectInstance;
-                    var id = (long)obj.GetType().GetProperty("Id").GetValue(obj);
+                    var idProperty = obj.GetType().GetProperty("Id");
 
-                    if (db.Categories.Where(x => x.Name == name && x.Id != id).FirstOrDefault() == null)
+                    if (idProperty != null)
                     {
-                        return ValidationResult.Success;
+                        var id = (long)idProperty.GetValue(obj);
+
+                        if (db.Categories.Where(x => x.Name == name && x.Id != id).FirstOrDefault() == null)
+                        {
+                            return ValidationResult.Success;
+                        }
+                        else
+                        {
+                            return new ValidationResult(Lang.Validations.Name_already_in_use_);
+                        }
                     }
-                    else
-                    {
-                        return new ValidationResult(Lang.Validations.Name_already_in_use_);
+                    else {
+                        
+                        if (db.Categories.Where(x => x.Name == name).FirstOrDefault() == null)
+                        {
+                            return ValidationResult.Success;
+                        }
+                        else
+                        {
+                            return new ValidationResult(Lang.Validations.Name_already_in_use_);
+                        }
                     }
+                   
                 }
                 catch (Exception)
                 {
