@@ -1,10 +1,8 @@
 ﻿using Microflake.Core.Application.Categories;
 using Microflake.Core.Application.SubCategories;
 using Microflake.Core.Persistence;
-using Microflake.Core.ViewModel.Category;
 using Microflake.Core.ViewModel.SubCategories;
 using Microflake.Web.Controllers;
-using Microflake.Web.Models;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,8 +23,7 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
             _CategoriesService = CategoriesService;
             _entityService = entityService;
         }
-        // GET: SuperAdmin/SubCategoriess
-        // GET: SuperAdmin/Categoriess
+
         public async Task<ActionResult> Index()
         {
             var list = await _entityService.List();
@@ -48,16 +45,9 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
         public async Task<ActionResult> Create()
         {
             var categoryResult = await _CategoriesService.ToList();
-            //ViewBag.CategoryId = new SelectList(categoryResult.Data, "Id", "Name");
 
-            if (_language)
-            {
-                ViewBag.CategoryId = new MultiSelectList(categoryResult.Data.ToList(), "Id", "Arabic");
-            }
-            else
-            {
-                ViewBag.CategoryId = new MultiSelectList(categoryResult.Data.ToList(), "Id", "English");
-            }
+            ViewBag.CategoryId = new MultiSelectList(categoryResult.Data.ToList(), "Id", "Name");
+
             return PartialView();
         }
         // POST: Categories/Create
@@ -84,16 +74,8 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
             var result = await _entityService.Edit(id);
 
             var categoryResult = await _CategoriesService.ToList();
-            //ViewBag.CategoryId = new SelectList(categoryResult.Data, "Id", "Name");
 
-            if (_language)
-            {
-                ViewBag.CategoryId = new MultiSelectList(categoryResult.Data.ToList(), "Id", "Arabic");
-            }
-            else
-            {
-                ViewBag.CategoryId = new MultiSelectList(categoryResult.Data.ToList(), "Id", "English");
-            }
+            ViewBag.CategoryId = new MultiSelectList(categoryResult.Data.ToList(), "Id", "Name");
 
             return PartialView(result.Data);
         }
@@ -132,13 +114,13 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ByCategoriesId(long? Id)
         {
-            //if (User.Identity.IsAuthenticated)
-            //{
             if (Id.HasValue)
             {
                 var options = "<option value=\"\">" + "Select Sub Categories" + "</option>";
                 var result = await _entityService.List();
+                
                 var SubCategoriess = result.Data.Where(x => x.CategoryId == Id).ToList();
+
                 foreach (var item in SubCategoriess)
                 {
 

@@ -40,6 +40,7 @@ namespace Microflake.Core.Application.SubCategories
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    CategoryId = x.CategoryId,
                     Status = x.Status
                 }).ToList());
             }

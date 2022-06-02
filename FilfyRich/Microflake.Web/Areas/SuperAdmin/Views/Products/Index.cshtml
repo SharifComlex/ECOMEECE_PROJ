@@ -77,26 +77,10 @@
            
               
             {
-                    "data": "English",
-                    "render": function (data, type, full, meta) {
-                       @if (lang == "iv") {
-                           @("return full.English;")
-                       }
-                       else if (lang == "ar"){
-                           @("return full.Arabic;")
-                       }
-                    }
+                    "data": "Name",
             },
                {
-                    "data": "CategoryEnglish",
-                    "render": function (data, type, full, meta) {
-                       @if (lang == "iv") {
-                           @("return full.CategoryEnglish;")
-                       }
-                       else if (lang == "ar"){
-                           @("return full.CategoryArabic;")
-                       }
-                    }
+                   "data": "CategoryName"
             },
                  {
                     "render": function (data, type, full, meta) {

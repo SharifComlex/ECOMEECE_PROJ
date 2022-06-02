@@ -7,6 +7,7 @@ using Microflake.Core.ViewModel.Products;
 using Microflake.Web.Controllers;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,11 +29,8 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
             _entityService = entityService;
             _SubCategoryService = SubCategoryService;
             _CategoryService = CategoryService;
-
-           
         }
-        // GET: SuperAdmin/Products
-        // GET: SuperAdmin/AttributeGroups
+
         public async Task<ActionResult> Index()
         {
             var list = await _entityService.List();
@@ -53,18 +51,11 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
         // GET: Categories/Create
         public async Task<ActionResult> Create()
         {
-            var SubcategoryResult = await _SubCategoryService.List();
-            //ViewBag.SubCategoryId = new SelectList(categoryResult.Data, "Id", "Name");
+            var categoryResult = await _CategoryService.ToList();
 
-            if (_language)
-            {
-                ViewBag.SubCategoryId = new MultiSelectList(SubcategoryResult.Data.ToList(), "Id", "Arabic");
-            }
-            else
-            {
-                ViewBag.SubCategoryId = new MultiSelectList(SubcategoryResult.Data.ToList(), "Id", "English");
-            }
+            ViewBag.CategoryId = new SelectList(categoryResult.Data.ToList(), "Id", "Name");
 
+            ViewBag.SubCategoryId = new SelectList(new List<string>());
 
             return PartialView(new CreateProduct());
         }
@@ -130,17 +121,12 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
             }
             var result = await _entityService.Edit(id);
 
-            var SubcategoryResult = await _SubCategoryService.List();
-            //ViewBag.SubCategoryId = new SelectList(categoryResult.Data, "Id", "Name");
+            var categoryResult = await _CategoryService.ToList();
+            var subCategoryResult = await _SubCategoryService.List();
 
-            if (_language)
-            {
-                ViewBag.SubCategoryId = new MultiSelectList(SubcategoryResult.Data.ToList(), "Id", "Arabic");
-            }
-            else
-            {
-                ViewBag.SubCategoryId = new MultiSelectList(SubcategoryResult.Data.ToList(), "Id", "English");
-            }
+            ViewBag.CategoryId = new SelectList(categoryResult.Data.ToList(), "Id", "Name", result.Data.CategoryId);
+            ViewBag.SubCategoryId = new SelectList(subCategoryResult.Data.Where(x=> x.CategoryId == result.Data.CategoryId).ToList(), "Id", "Name", result.Data.SubCategoryId);
+
             return PartialView(result.Data);
         }
 

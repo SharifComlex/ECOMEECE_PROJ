@@ -10,6 +10,8 @@ namespace Microflake.Core.ViewModel.Products
 {
    public class CreateProduct
     {
+        public long CategoryId { get; set; }
+
         [Required]
         public long SubCategoryId { get; set; }
         public double Discount { get; set; }
