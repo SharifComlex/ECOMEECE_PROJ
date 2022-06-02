@@ -18,7 +18,6 @@ namespace Microflake.Core.ViewModel.AttributeGroup
         public long CategoryId { get; set; }
         public string BrandName { get; set; }
         public string CategoryName { get; set; }
-        public List<Domain.Attribute> Attributes { get; set; }
 
         public string SubBrandName { get; set; }
         public bool Status { get; set; }
