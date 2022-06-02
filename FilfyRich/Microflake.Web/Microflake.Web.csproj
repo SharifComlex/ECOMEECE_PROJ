@@ -1334,7 +1334,7 @@
     <Folder Include="Views\Subscribers\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Microflake.TheComputerShop\Microflake.Core.csproj">
+    <ProjectReference Include="..\Microflake.Core\Microflake.Core.csproj">
       <Project>{2CE38D4E-A388-462F-AD04-76A7955DF49A}</Project>
       <Name>Microflake.Core</Name>
     </ProjectReference>
