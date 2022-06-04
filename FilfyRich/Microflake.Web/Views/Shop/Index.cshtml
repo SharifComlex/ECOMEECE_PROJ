@@ -38,10 +38,6 @@
                             </ul>
 
                         }
-
-                        @*<ul>
-                <li class="check-item check-item-unChecked"><a href="#">Gold </a> <span>(4)</span></li>
-            </ul>*@
                     </div>
 
 
@@ -178,7 +174,7 @@
             </div>
 
         </div>*@
-
+                    <a href="@Url.Action("Index", "Shop")" class="btn mb-4" style="background-color:#9d4d4a; color:white;">Reset Filters</a>
                 </div>
                 <!--sidebar widget end-->
             </div>
@@ -203,8 +199,11 @@
         $('input:checkbox').not(this).prop('checked', false);
       });
         $(".check-item").click(function () {
+            debugger
             if ($(this).hasClass("check-item-unChecked")) {
                 $(this).removeClass("check-item-unChecked");
+                $(".check-item").removeClass("check-item-checked");
+                $(".check-item").addClass("check-item-unChecked");
                 $(this).addClass("check-item-checked");
             }
             else {

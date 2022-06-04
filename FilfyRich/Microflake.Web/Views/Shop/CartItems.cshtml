@@ -42,7 +42,7 @@
                                         var discount = item.Product.Discount * ViewBag.Currency;
                                         <tr>
                                         <td class="product_thumb"><a href="#"><img src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';"></a></td>
-                                        <td class="product-price">@ViewBag.CurrencySimbal @rate </td>
+                                        <td class="product-price">£ @rate </td>
                                         <td class="product_quantity"> 
                                         <a href="/shop/RemoveFromCart/@item.ProductId">
                                                     <input type="button" value="-" class="minus" id="min">
