@@ -1,7 +1,89 @@
 ﻿﻿@model Microflake.Core.ViewModel.ShoppingCartViewModel
+@{  
+   Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <h3>CartI tems</h3>
+                    <ul>
+                        <li><a href="index.html">home</a></li>
+                        <li>&gt;</li>
+                        <li>CartItems</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wishlist_area">
+    <div class="container">
+        <form action="#">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table_desc wishlist">
+                        <div class="cart_page table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="product_name">Product</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product_quantity">Quantity</th>
+                                        <th class="product_total">Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model.Items)
+                                    {
+                                        var rate = item.Product.SellPrice * ViewBag.Currency;
+                                        var discount = item.Product.Discount * ViewBag.Currency;
+                                        <tr>
+                                        <td class="product_thumb"><a href="#"><img src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';"></a></td>
+                                        <td class="product-price">@ViewBag.CurrencySimbal @rate </td>
+                                        <td class="product_quantity"> 
+                                        <a href="/shop/RemoveFromCart/@item.ProductId">
+                                                    <input type="button" value="-" class="minus" id="min">
+                                          </a>
+                                                <input name="qty" readonly type="text" value="@item.Count" class="qty quantity">
+                                                <a href="/shop/AddToCart/@item.ProductId">
+                                                    <input type="button" value="+" class="plus" id="plus">
+                                                </a></td>
+                                       <td class="product_total"><a href="@Url.Action("RemoveFromCart", "Shop", new { id = item.ProductId })"><i class="fa fa-times"></i></a></td>
 
 
-<div class="main-content-wrap pt-100">
+                                            </tr>
+                                        
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <div class="row">
+            <div class="col-12">
+                <div class="wishlist_share">
+                    <h4>Share on:</h4>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                        <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@*<div class="main-content-wrap pt-100">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -72,7 +154,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 @section Scripts{
 <script>
     $('.minus').click(function(){
