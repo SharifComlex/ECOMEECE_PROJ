@@ -130,11 +130,11 @@ namespace Microflake.Web.Controllers
 
                 ViewBag.Currency = 1;
             }
-            if (User.Identity.GetUserId() == null)
-            {
-                ModelState.AddModelError("Name", "Please Login To Add Whishlist");
-                return View(model);
-            }
+            //if (User.Identity.GetUserId() == null)
+            //{
+            //    ModelState.AddModelError("Name", "Please Login To Add Whishlist");
+            //    return View(model);
+            //}
             model.User = UserManager.FindById(User.Identity.GetUserId());
             var UserId = User.Identity.GetUserId();
             var user = _context.Users
@@ -142,21 +142,12 @@ namespace Microflake.Web.Controllers
 
                     .Where(x => x.Id == UserId)
                     .FirstOrDefault();
-            return View(new CheckoutViewModel
+            var checkOutmodel = new CheckoutViewModel
             {
                 Items = items,
-                Total = CalcuateCart(items),
-                User = user,
-                Email =user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Address = user.Address,
-                City = user.City,
-                Country = user.Country,
-                Phone = user.Phone
-             
-
-            });
+                Total = CalcuateCart(items)
+            };
+            return View(checkOutmodel);
         }
         [HttpPost]
         public async Task<ActionResult> Checkout(CheckoutViewModel model)

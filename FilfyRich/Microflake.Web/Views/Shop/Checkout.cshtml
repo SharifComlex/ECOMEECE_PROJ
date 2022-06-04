@@ -1,5 +1,4 @@
 ﻿﻿@model Microflake.Core.ViewModel.CheckoutViewModel
-
 @{
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_FrontEndLayout.cshtml";
@@ -18,9 +17,8 @@
 </div>
 <div class="main-content-wrap pt-100">
     <div class="container">
-        @if (User.Identity.IsAuthenticated)
-        {
-            if (Model.Items != null && Model.Items.Count() > 0)
+      
+            @if (Model.Items != null && Model.Items.Count() > 0)
             {
                 <div class="checkout-area">
                     <div class="row">
@@ -100,7 +98,7 @@
                                                                     <img id="imagePreview" src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
                                                                 </a>
                                                             </td>
-                                                            <td class="t-product-name">@item.Product.Title<strong class="product-quantity"> ×  @item.Count</strong></td>
+                                                            <td class="t-product-name">@item.Product.Name<strong class="product-quantity"> ×  @item.Count</strong></td>
                                                             <td class="t-product-price"><span>@ViewBag.CurrencySimbal @rate </span></td>
 
                                                         </tr>
@@ -145,13 +143,7 @@
                     Your Cart Is Empty
                 </div>
             }
-        }
-        else
-        {
-            <div class="alert alert-warning mt-5" role="alert">
-                Please Login To Checkout
-            </div>
-        }
+       
 
         <!-- checkout-area start -->
         <!-- checkout-area end -->

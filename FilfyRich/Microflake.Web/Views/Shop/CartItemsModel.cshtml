@@ -1,31 +1,37 @@
 ﻿﻿@model Microflake.Core.ViewModel.ShoppingCartViewModel
 
-    <ul class="mini-cart-sub">
-        @foreach (var item in Model.Items)
-        {var rate = item.Product.SellPrice * ViewBag.Currency;
-                               
-            <li class="single-cart">
-                <div class="cart-img">
-                    <a href="single-product.html">
-                        <img id="imagePreview" src="@Config.Products@(item.Product.Image1)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
-                    </a>
-                </div>
-                <div class="cart-info">
-                    <a href="single-product.html">@item.Product.English</a>
-                    <p class="cart-quantity">× @item.Count</p>
-                    <p class="cart-price">@ViewBag.CurrencySimbal @rate </p>
-                </div>
-            </li>
-            }
+<!--mini cart-->
+@foreach (var item in Model.Items)
+{
+    var rate = item.Product.SellPrice * ViewBag.Currency;
 
-            <li class="cart-total-box">
-                <h5>Total :<span class="float-right">@Model.Total</span></h5>
-              
-            </li>
-            <li>
-                <p class="text-center cart-button">
-                    <a href="/shop/CartItems">@Microflake.Web.Language.Language.ViewCart</a>
-                    <a href="/shop/Checkout">@Microflake.Web.Language.Language.Checkout</a>
-                </p>
-            </li>
-        </ul>
+    <div class="cart_item">
+        <div class="cart_img">
+            <a href="#"><img src="@Config.Products@(item.Product.Image1)" onerror="this.src='/Public/default-image.jpg';"></a>
+        </div>
+        <div class="cart_info">
+            <a href="#">@item.Product.Name</a>
+
+            <span class="quantity">Qty:  @item.Count</span>
+            <span class="price_cart">@ViewBag.CurrencySimbal @rate</span>
+
+        </div>
+        @*<div class="cart_remove">
+            <a href="#"><i class="ion-android-close"></i></a>
+        </div>*@
+    </div>
+
+    <div class="cart_total">
+        <span>Subtotal:</span>
+        <span>@Model.Total</span>
+    </div>
+    <div class="mini_cart_footer">
+        <div class="cart_button view_cart">
+            <a href="/shop/CartItems">@Microflake.Web.Language.Language.ViewCart</a>
+        </div>
+        <div class="cart_button checkout">
+            <a class="active" href="/shop/Checkout">@Microflake.Web.Language.Language.Checkout</a>
+        </div>
+
+    </div>
+}

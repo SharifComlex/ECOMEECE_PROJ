@@ -321,9 +321,11 @@
                                     </form>
                                 </div>
                             </div>
-                            <div class="cart_link">
-                                <a href="#"><i class="ion-android-cart"></i><span class="cart_text_quantity"> $138.00</span> <i class="fa fa-angle-down"></i></a>
-                                <span class="cart_quantity">2</span>
+                            <div class="cart_link btn-load">
+                                <a href="#"><i class="ion-android-cart"></i><span class="cart_text_quantity"></span> <i class="fa fa-angle-down"></i></a>
+                                <span class="cart_quantity cartProductsCount">
+                                    <a class=" active" href="@Url.Action("Checkout", "Shop")"><span id="cartProductsCount">0</span></a>
+                                </span>
                                 <!--mini cart-->
                                 <div class="mini_cart">
                                     <div class="cart_close">
@@ -334,47 +336,9 @@
                                             <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
                                         </div>
                                     </div>
-                                    <div class="cart_item">
-                                        <div class="cart_img">
-                                            <a href="#"><img src="/FrontWeb/assets/img/s-product/product.jpg" alt=""></a>
-                                        </div>
-                                        <div class="cart_info">
-                                            <a href="#">Letraset animal</a>
+                                  <div id="Daily">
 
-                                            <span class="quantity">Qty: 1</span>
-                                            <span class="price_cart">$60.00</span>
-
-                                        </div>
-                                        <div class="cart_remove">
-                                            <a href="#"><i class="ion-android-close"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="cart_item">
-                                        <div class="cart_img">
-                                            <a href="#"><img src="/FrontWeb/assets/img/s-product/product2.jpg" alt=""></a>
-                                        </div>
-                                        <div class="cart_info">
-                                            <a href="#">Natural passages</a>
-                                            <span class="quantity">Qty: 1</span>
-                                            <span class="price_cart">$69.00</span>
-                                        </div>
-                                        <div class="cart_remove">
-                                            <a href="#"><i class="ion-android-close"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="cart_total">
-                                        <span>Subtotal:</span>
-                                        <span>138.00</span>
-                                    </div>
-                                    <div class="mini_cart_footer">
-                                        <div class="cart_button view_cart">
-                                            <a href="cart.html">View cart</a>
-                                        </div>
-                                        <div class="cart_button checkout">
-                                            <a class="active" href="checkout.html">Checkout</a>
-                                        </div>
-
-                                    </div>
+                                  </div>
 
                                 </div>
                                 <!--mini cart end-->
@@ -713,7 +677,7 @@
     </div>
     <!-- modal area start-->
     <!--news letter popup start-->
-    <div class="newletter-popup">
+    <!--<div class="newletter-popup">
         <div id="boxes" class="newletter-container">
             <div id="dialog" class="window">
                 <div id="popup2">
@@ -726,9 +690,9 @@
                     <div class="box-content newleter-content">
                         <label class="newletter-label">Enter your email address to subscribe our notification of our new post &amp; features by email.</label>
                         <div id="frm_subscribe">
-                            <form name="subscribe" id="subscribe_popup">
+                            <form name="subscribe" id="subscribe_popup">-->
                                 <!-- <span class="required">*</span><span>Enter you email address here...</span>-->
-                                <input type="text" value="" name="subscribe_pemail" id="subscribe_pemail" placeholder="Enter you email address here...">
+                                <!--<input type="text" value="" name="subscribe_pemail" id="subscribe_pemail" placeholder="Enter you email address here...">
                                 <input type="hidden" value="" name="subscribe_pname" id="subscribe_pname">
                                 <div id="notification"></div>
                                 <a class="theme-btn-outlined" onclick="email_subscribepopup()"><span>Subscribe</span></a>
@@ -737,16 +701,16 @@
                                 <input type="checkbox" id="newsletter_popup_dont_show_again">
                                 <label for="newsletter_popup_dont_show_again">Don't show this popup again</label>
                             </div>
-                        </div>
+                        </div>-->
                         <!-- /#frm_subscribe -->
-                    </div>
+                    <!--</div>-->
                     <!-- /.box-content -->
-                </div>
+                <!--</div>
             </div>
 
-        </div>
+        </div>-->
         <!-- /.box -->
-    </div>
+    <!--</div>-->
 
     <!--news letter popup start-->
     <!-- JS
@@ -773,7 +737,128 @@
     <script src="/FrontWeb/assets/js/main.js"></script>
 
     @RenderSection("Scripts", false)
+    <script>
+        var CurrentPageUrl = "";
+        CurrentPageUrl = window.location.href;
+        $("#sub-form").submit(function (event) {
+            event.preventDefault();
+            debugger
+            $.ajax({
+                type: "Post",
+                url: '/Subscribers/Create',
+                data: $("#sub-form").serialize()
 
+            }).done(
+                function (responce) {
+                    debugger;
+                    if (responce.status == true) {
+
+                        $.simplyToast("Thanks For Subscribing ", 'success');
+                        $("#sub-form").find("input[type=text], textarea,input[type=email]").val("");
+                    } else {
+                        debugger;
+                        for (var i = 0; i < responce.errors.length; i++) {
+                            $("[data-valmsg-for='" + responce.errors[i].Key + "']").html(responce.errors[i].Errors[0]);
+                        }
+                        //Swal.fire(
+                        //    {
+                        //        icon: 'error',
+                        //        title: 'Oops...',
+                        //        text: responce.Message,
+                        //    });
+
+                    }
+                })
+                .debugger(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("F");
+                });
+        });
+
+        $(".language").change(function () {
+
+            window.location.href = "/home/Language?Name=" + $(this).val() + "&url=" + CurrentPageUrl;
+        });
+
+        $.ajax({
+            type: "Post",
+            url: '/Whislist/WhishListCount'
+
+
+        }).done(
+            function (responce) {
+
+                if (responce != null) {
+                    debugger
+                    $("#WhishListCount").html(responce.data);
+                }
+            })
+
+
+
+
+
+        $.ajax({
+            type: "Post",
+            url: '/Shop/ProductCount'
+        }).done(
+            function (responce) {
+
+                if (responce != null) {
+
+                    $("#cartProductsCount").html(responce);
+                } else {
+                    debugger;
+                    $("#Daily").html(responce.message)
+                }
+            })
+
+
+        $(".Whishlisherror").click(function () {
+
+            $.simplyToast("Please Login First To View Whishlist", 'danger');
+
+        });
+
+        $(".btn-load").click(function () {
+
+
+
+            $.ajax({
+                type: "Post",
+                url: '/Shop/CartItemsModel'
+
+
+            }).done(
+                function (responce) {
+
+                    if (responce != null) {
+                        $(".hidetable").hide();
+                        $("#Daily").html(responce);
+                    } else {
+                        debugger;
+                        $("#Daily").html(responce.message)
+                    }
+                })
+
+        });
+
+        $.ajax({
+            type: "Post",
+            url: '/Currency/CurrencyList'
+
+
+        }).done(
+            function (responce) {
+                debugger;
+                if (responce != null) {
+
+                    $("#CurrencyList").html(responce);
+                }
+            })
+
+
+
+    </script>
 
 </body>
 

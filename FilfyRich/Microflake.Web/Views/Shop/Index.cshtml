@@ -11,15 +11,7 @@
             <div class="col-lg-3 col-md-12">
                 <!--sidebar widget start-->
                 <div class="sidebar_widget">
-                    <div class="widget_list widget_categories">
-                        <h2>Categories</h2>
-                        <ul>
-                            <li><a href="#">Clothing</a> </li>
-                            <li><a href="#"> Men</a> </li>
-                            <li><a href="#">Women</a> </li>
 
-                        </ul>
-                    </div>
                     <div class="widget_list widget_filter">
                         <h2>Filter by price</h2>
                         <form action="#">
@@ -29,172 +21,163 @@
 
                         </form>
                     </div>
-
-
-                    <div class="widget_list widget_brands">
-                        <h2>Brands</h2>
-                        <ul>
-                            <li><a href="#">SamSung</a> <span>(1)</span> </li>
-                        </ul>
-                    </div>
                     <div class="widget_list">
                         @foreach (var category in Model.Categorylist)
                         {
-                            <h4 data-href="@Url.Action("FilterProduct", "Shop", new {  categoryID = category.Id ,sortBy = Model.SortBy })" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) " class="filter-title">@category.Name</h4>
+                            <h2 data-href="@Url.Action("FilterProduct", "Shop", new {  categoryID = category.Id ,sortBy = Model.SortBy })" class="dataLink mt-2 @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) " class="filter-title">@category.Name</h2>
 
-                        <ul class="list-menu">
-                            @foreach (var item in Model.SubCategorylist.Where(x => x.CategoryId == category.Id))
-                            {
-                                <li class="check-item">
-                                    <label class="custom-control">
-                                        <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">
-                                        <span class="custom-control-label">@item.Name </span>
-                                    </label>
-                                </li>
-                            }
-                        </ul>
+                            <ul class="list-menu">
+                                @foreach (var item in Model.SubCategorylist.Where(x => x.CategoryId == category.Id))
+                                {
+                                    <li class="check-item check-item-unChecked dataLink" data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })">
+                                        @*  <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">*@
+                                        @* <span class="custom-control-label">@item.Name </span>*@
+                                        <a class=" @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">@item.Name </a>
+                                    </li>
+                                }
+                            </ul>
 
-                    }
-                        <h2>Color</h2>
-                        <ul>
-                            <li class="check-item check-item-unChecked"><a href="#">Gold </a> <span>(4)</span></li>
-                            <li><a href="#"> Green </a> <span>(6)</span></li>
-                            <li><a href="#">White </a> <span>(10)</span></li>
+                        }
 
-                        </ul>
+                        @*<ul>
+                <li class="check-item check-item-unChecked"><a href="#">Gold </a> <span>(4)</span></li>
+            </ul>*@
                     </div>
+
+
+
 
                     @*<div class="widget_list tag-cloud">
-                        <h2>Tags</h2>
-                        <div class="tag_widget">
-                            <ul>
-                                <li><a href="#">asian</a></li>
-                                <li><a href="#">brown</a></li>
-                                <li><a href="#">euro</a></li>
-                                <li><a href="#">fashion</a></li>
-                                <li><a href="#">france</a></li>
-                                <li><a href="#">hat</a></li>
-                                <li><a href="#">t-shirt</a></li>
-                                <li><a href="#">travel</a></li>
-                                <li><a href="#">white</a></li>
-                            </ul>
-                        </div>
+            <h2>Tags</h2>
+            <div class="tag_widget">
+                <ul>
+                    <li><a href="#">asian</a></li>
+                    <li><a href="#">brown</a></li>
+                    <li><a href="#">euro</a></li>
+                    <li><a href="#">fashion</a></li>
+                    <li><a href="#">france</a></li>
+                    <li><a href="#">hat</a></li>
+                    <li><a href="#">t-shirt</a></li>
+                    <li><a href="#">travel</a></li>
+                    <li><a href="#">white</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="widget_list compare_p">
+            <h2>Compare Products</h2>
+            <div class="compare_item">
+                <div class="compare_img">
+                    <a href="#"><img src="/FrontWeb/assets/img/s-product/product.jpg" alt=""></a>
+                </div>
+                <div class="compare_info">
+                    <h3><a href="#">Letraset animal</a></h3>
+                    <div class="product_ratings">
+                        <ul>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        </ul>
                     </div>
-                    <div class="widget_list compare_p">
-                        <h2>Compare Products</h2>
-                        <div class="compare_item">
-                            <div class="compare_img">
-                                <a href="#"><img src="/FrontWeb/assets/img/s-product/product.jpg" alt=""></a>
-                            </div>
-                            <div class="compare_info">
-                                <h3><a href="#">Letraset animal</a></h3>
-                                <div class="product_ratings">
-                                    <ul>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="price_box">
-                                    <span class="old_price">$65.00</span>
-                                    <span class="current_price">$60.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="compare_item ">
-                            <div class="compare_img">
-                                <a href="#"><img src="/FrontWeb/assets/img/s-product/product2.jpg" alt=""></a>
-                            </div>
-                            <div class="compare_info">
-                                <h3><a href="#">Letraset animal</a></h3>
-                                <div class="product_ratings">
-                                    <ul>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="price_box">
-                                    <span class="old_price">$65.00</span>
-                                    <span class="current_price">$60.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="compare_btn">
-                            <a href="#">compare<i class="ion-checkmark-round"></i></a>
-                        </div>
+                    <div class="price_box">
+                        <span class="old_price">$65.00</span>
+                        <span class="current_price">$60.00</span>
                     </div>
-                    <div class="widget_list Featured_p">
-                        <h2>Featured Products</h2>
-                        <div class="Featured_item">
-                            <div class="Featured_img">
-                                <a href="#"><img src="/FrontWeb/assets/img/s-product/product5.jpg" alt=""></a>
-                            </div>
-                            <div class="Featured_info">
-                                <h3><a href="#">Letraset animal</a></h3>
-                                <div class="product_ratings">
-                                    <ul>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="price_box">
-                                    <span class="old_price">$65.00</span>
-                                    <span class="current_price">$60.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="Featured_item">
-                            <div class="Featured_img">
-                                <a href="#"><img src="/FrontWeb/assets/img/s-product/product6.jpg" alt=""></a>
-                            </div>
-                            <div class="Featured_info">
-                                <h3><a href="#">Donec eu furniture</a></h3>
-                                <div class="product_ratings">
-                                    <ul>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="price_box">
-                                    <span class="old_price">$65.00</span>
-                                    <span class="current_price">$60.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="Featured_item bottom">
-                            <div class="Featured_img">
-                                <a href="#"><img src="/FrontWeb/assets/img/s-product/product2.jpg" alt=""></a>
-                            </div>
-                            <div class="Featured_info">
-                                <h3><a href="#">Letraset animal</a></h3>
-                                <div class="product_ratings">
-                                    <ul>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="price_box">
-                                    <span class="old_price">$65.00</span>
-                                    <span class="current_price">$60.00</span>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="compare_item ">
+                <div class="compare_img">
+                    <a href="#"><img src="/FrontWeb/assets/img/s-product/product2.jpg" alt=""></a>
+                </div>
+                <div class="compare_info">
+                    <h3><a href="#">Letraset animal</a></h3>
+                    <div class="product_ratings">
+                        <ul>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="price_box">
+                        <span class="old_price">$65.00</span>
+                        <span class="current_price">$60.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="compare_btn">
+                <a href="#">compare<i class="ion-checkmark-round"></i></a>
+            </div>
+        </div>
+        <div class="widget_list Featured_p">
+            <h2>Featured Products</h2>
+            <div class="Featured_item">
+                <div class="Featured_img">
+                    <a href="#"><img src="/FrontWeb/assets/img/s-product/product5.jpg" alt=""></a>
+                </div>
+                <div class="Featured_info">
+                    <h3><a href="#">Letraset animal</a></h3>
+                    <div class="product_ratings">
+                        <ul>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="price_box">
+                        <span class="old_price">$65.00</span>
+                        <span class="current_price">$60.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="Featured_item">
+                <div class="Featured_img">
+                    <a href="#"><img src="/FrontWeb/assets/img/s-product/product6.jpg" alt=""></a>
+                </div>
+                <div class="Featured_info">
+                    <h3><a href="#">Donec eu furniture</a></h3>
+                    <div class="product_ratings">
+                        <ul>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="price_box">
+                        <span class="old_price">$65.00</span>
+                        <span class="current_price">$60.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="Featured_item bottom">
+                <div class="Featured_img">
+                    <a href="#"><img src="/FrontWeb/assets/img/s-product/product2.jpg" alt=""></a>
+                </div>
+                <div class="Featured_info">
+                    <h3><a href="#">Letraset animal</a></h3>
+                    <div class="product_ratings">
+                        <ul>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="price_box">
+                        <span class="old_price">$65.00</span>
+                        <span class="current_price">$60.00</span>
+                    </div>
+                </div>
+            </div>
 
-                    </div>*@
+        </div>*@
 
                 </div>
                 <!--sidebar widget end-->
