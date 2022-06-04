@@ -3,7 +3,7 @@
 @{ ViewBag.Title = "FilterProduct";
     //Layout = null;
     //Layout = "~/Views/Shared/_Layout2.cshtml";
-    }
+}
 <style>
     .whislist {
         color: red;
@@ -40,56 +40,56 @@
                 foreach (var item in Model.Productlist)
                 {
 
-        <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="single_product">
-                <div class="product_thumb">
-                    <a class="primary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image1)" alt=""></a>
-                    <a class="secondary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image)" alt=""></a>
-                    <div class="quick_button">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal_box" data-placement="top" data-original-title="quick view"> quick view</a>
-                    </div>
-                </div>
-                <div class="product_content">
-                    <div class="tag_cate">
-                        <a href="#">Clothing,</a>
-                        <a href="#">Potato chips</a>
-                    </div>
-                    <h3><a href="/Home/Productdetail">@item.Name</a></h3>
-                    <div class="price_box">
-                        <span class="old_price">$ @item.Discount</span>
-                        <span class="current_price">$@item.SellPrice</span>
-                    </div>
-                    <div class="product_hover">
-                        <div class="product_ratings">
-                            <ul>
-                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                            </ul>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="single_product">
+                            <div class="product_thumb">
+                                <a class="primary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image1)" alt=""></a>
+                                <a class="secondary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image)" alt=""></a>
+                                <div class="quick_button">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal_box" data-placement="top" data-original-title="quick view"> quick view</a>
+                                </div>
+                            </div>
+                            <div class="product_content">
+                                <div class="tag_cate">
+                                    <a href="#">Clothing,</a>
+                                    <a href="#">Potato chips</a>
+                                </div>
+                                <h3><a href="/Home/Productdetail">@item.Name</a></h3>
+                                <div class="price_box">
+                                    <span class="old_price">$ @item.Discount</span>
+                                    <span class="current_price">$@item.SellPrice</span>
+                                </div>
+                                <div class="product_hover">
+                                    <div class="product_ratings">
+                                        <ul>
+                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product_desc">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere metus vitae arcu imperdiet</p>
+                                    </div>
+                                    <div class="action_links">
+                                        <ul>
+                                            <li><a href="wishlist.html" data-placement="top" title="Add to Wishlist" data-bs-toggle="tooltip"><span class="icon icon-Heart"></span></a></li>
+                                            <li class="add_to_cart"><a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })" title="add to cart">add to cart</a></li>
+                                            <li><a href="compare.html" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product_desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere metus vitae arcu imperdiet</p>
-                        </div>
-                        <div class="action_links">
-                            <ul>
-                                <li><a href="wishlist.html" data-placement="top" title="Add to Wishlist" data-bs-toggle="tooltip"><span class="icon icon-Heart"></span></a></li>
-                                <li class="add_to_cart"><a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })" title="add to cart">add to cart</a></li>
-                                <li><a href="compare.html" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> }
+                    </div> }
 
             }
             else
             {
-        <div class="alert alert-warning mt-5" role="alert">
-            Sorry No Record Exist
-        </div>}
+                <div class="alert alert-warning mt-5" role="alert">
+                    Sorry No Record Exist
+                </div>}
 
         </div>
     </div>
@@ -101,55 +101,55 @@
             {
                 foreach (var item in Model.Productlist)
                 {
-        <div class="row">
-            <div class="col-lg-4 col-md-5">
-                <div class="product_thumb">
-                    <a class="primary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image1)" alt=""></a>
-                    <a class="secondary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image)" alt=""></a>
-                    <div class="quick_button">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal_box" data-original-title="quick view"> quick view</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-7">
-                <div class="product_content">
-                    <h3><a href="/Home/Productdetail">@item.Name</a></h3>
-                    <div class="product_ratings">
-                        <ul>
-                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="product_desc">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et </p>
-                    </div>
-                    <div class="price_box">
-                        <span class="old_price">$@item.Discount</span>
-                        <span class="current_price">$@item.SellPrice</span>
-                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                            <div class="product_thumb">
+                                <a class="primary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image1)" alt=""></a>
+                                <a class="secondary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image)" alt=""></a>
+                                <div class="quick_button">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal_box" data-original-title="quick view"> quick view</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-7">
+                            <div class="product_content">
+                                <h3><a href="/Home/Productdetail">@item.Name</a></h3>
+                                <div class="product_ratings">
+                                    <ul>
+                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                        <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product_desc">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco,Proin lectus ipsum, gravida et </p>
+                                </div>
+                                <div class="price_box">
+                                    <span class="old_price">$@item.Discount</span>
+                                    <span class="current_price">$@item.SellPrice</span>
+                                </div>
 
-                    <div class="action_links">
-                        <ul>
-                            <li class="add_to_cart"><a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })" title="add to cart">add to cart</a></li>
-                            <li><a href="wishlist.html" title="Wishlist"><span class="icon icon-Heart"></span></a></li>
+                                <div class="action_links">
+                                    <ul>
+                                        <li class="add_to_cart"><a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })" title="add to cart">add to cart</a></li>
+                                        <li><a href="wishlist.html" title="Wishlist"><span class="icon icon-Heart"></span></a></li>
 
-                            <li><a href="compare.html" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
-                        </ul>
+                                        <li><a href="compare.html" title="compare"><i class="ion-ios-settings-strong"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-                             }
+                }
 
-                    }
-                    else
-                    {
-        <div class="alert alert-warning mt-5" role="alert">
-            Sorry No Record Exist
-        </div>}
+            }
+            else
+            {
+                <div class="alert alert-warning mt-5" role="alert">
+                    Sorry No Record Exist
+                </div>}
         </div>
     </div>
 
@@ -159,14 +159,43 @@
 <div class="shop_toolbar t_bottom">
     <div class="pagination">
         <ul>
-            <li class="current">1</li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li class="next"><a href="#">next</a></li>
-            <li><a href="#">&gt;&gt;</a></li>
+            @if (Model.Pager.CurrentPage > 1)
+            {
+                <li>
+                    <a class="pageDataLink" data-href="@Url.Action("FilterProduct", "Shop")">
+                        <i class="la la-long-arrow-left"></i>First
+                    </a>
+                </li>
+                <li>
+                    <a class="pageDataLink" data-href="@Url.Action("FilterProduct", "Shop", new { page = Model.Pager.CurrentPage - 1, sortBy = Model.SortBy , categoryID = Model.CategoryID})">
+                        <i class="la la-long-arrow-left"></i>Prev
+                    </a>
+                </li>
+            }
+            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                <li class=" @(page == Model.Pager.CurrentPage ? "current" : "")">
+                    <a class="pageDataLink" data-href="@Url.Action("FilterProduct", "Shop", new { page = page , sortBy = Model.SortBy, categoryID = Model.CategoryID})">@page</a>
+                </li>
+            }
+            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <li>
+                    <a class="pageDataLink" data-href="@Url.Action("FilterProduct", "Shop", new { page = Model.Pager.CurrentPage + 1, sortBy = Model.SortBy, categoryID = Model.CategoryID})">
+                        Next <i class="la la-long-arrow-right"></i>
+                    </a>
+                </li>
+                <li class="next">
+                    <a class="pageDataLink" data-href="@Url.Action("FilterProduct", "Shop", new { page = Model.Pager.TotalPages, sortBy = Model.SortBy, categoryID = Model.CategoryID})">
+                        Last <i class="la la-long-arrow-right"></i>
+                    </a>
+                </li>
+            }
         </ul>
     </div>
 </div>
+
+
 <!--shop toolbar end-->
 <!--shop wrapper end-->
 <!-- tab-content start -->
