@@ -40,7 +40,51 @@
                         }
                     </div>
 
+                    <div class="widget_list">
+                        
+                        <h2 class="filter-title">Sorting Filters</h2>
 
+                        <ul class="list-menu">
+
+                            <li class="check-item check-item-unChecked dataLink" data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Default, categoryID = Model.CategoryID  })">
+                                @*  <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">*@
+                                @* <span class="custom-control-label">@item.Name </span>*@
+                                <a class="custom-control-label">Default - Newest </a>
+                            </li>
+                            <li class="check-item check-item-unChecked dataLink" data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.PriceLowToHigh, categoryID = Model.CategoryID  })">
+                                @*  <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">*@
+                                @* <span class="custom-control-label">@item.Name </span>*@  
+                                <a class="custom-control-label">Price: low to high </a>
+                            </li>
+                            <li class="check-item check-item-unChecked dataLink" data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.PriceHighToLow, categoryID = Model.CategoryID  })">
+                                @*  <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">*@
+                                @* <span class="custom-control-label">@item.Name </span>*@
+                                <a class="custom-control-label">Price: high to low </a>
+                            </li>
+                            <li class="check-item check-item-unChecked dataLink" data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between0to500, categoryID = Model.CategoryID  })">
+                                @*  <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">*@
+                                @* <span class="custom-control-label">@item.Name </span>*@
+                                <a class="custom-control-label">Price: 0 to 500 </a>
+                            </li>
+                            <li class="check-item check-item-unChecked dataLink" data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between500to1000, categoryID = Model.CategoryID  })">
+                                @*  <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">*@
+                                @* <span class="custom-control-label">@item.Name </span>*@
+                                <a class="custom-control-label">Price: 500 to 1000 </a>
+                            </li>
+                            <li class="check-item check-item-unChecked dataLink" data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between1000to1500, categoryID = Model.CategoryID  })">
+                                @*  <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">*@
+                                @* <span class="custom-control-label">@item.Name </span>*@
+                                <a class="custom-control-label">Price: 1000 to 1500 </a>
+                            </li>
+                            <li class="check-item check-item-unChecked dataLink" data-href="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between1500to2000, categoryID = Model.CategoryID  })">
+                                @*  <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">*@
+                                @* <span class="custom-control-label">@item.Name </span>*@
+                                <a class="custom-control-label">Price: 1500 to 2000 </a>
+                            </li>
+                        </ul>
+
+                       
+                    </div>
 
 
                     @*<div class="widget_list tag-cloud">

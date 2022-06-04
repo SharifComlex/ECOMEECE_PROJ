@@ -12,9 +12,9 @@ namespace Microflake.Core.ViewModel
         Popularity = 2,
         PriceLowToHigh = 3,
         PriceHighToLow = 4,
-        Between0to50 = 5,
-        Between50to100 = 6,
-        Between100to150 = 7,
-        Between150to200 = 8,
+        Between0to500 = 5,
+        Between500to1000 = 6,
+        Between1000to1500 = 7,
+        Between1500to2000 = 8,
     }
 }

@@ -602,6 +602,21 @@ namespace Microflake.Core.Application.Products
                     case 3:
                         products = products.OrderBy(x => x.SellPrice);
                         break;
+                    case 4:
+                        products = products.OrderByDescending(x => x.SellPrice);
+                        break;
+                    case 5:
+                        products = products.Where(x => x.SellPrice >= 0 && x.SellPrice <= 500);
+                        break;
+                    case 6:
+                        products = products.Where(x => x.SellPrice >= 500 && x.SellPrice <= 1000);
+                        break;
+                    case 7:
+                        products = products.Where(x=>x.SellPrice>=1000 && x.SellPrice<=1500);
+                        break;
+                    case 8:
+                        products = products.Where(x => x.SellPrice >= 1500 && x.SellPrice <= 2000);
+                        break;
                     default:
                         products = products.OrderByDescending(x => x.SellPrice);
                         break;
@@ -660,6 +675,21 @@ namespace Microflake.Core.Application.Products
                     case 3:
                         products = products.OrderBy(x => x.SellPrice);
                         break;
+                    case 4:
+                        products = products.OrderByDescending(x => x.SellPrice);
+                        break;
+                    case 5:
+                        products = products.Where(x => x.SellPrice >= 0 && x.SellPrice <= 500);
+                        break;
+                    case 6:
+                        products = products.Where(x => x.SellPrice >= 500 && x.SellPrice <= 1000);
+                        break;
+                    case 7:
+                        products = products.Where(x => x.SellPrice >= 1000 && x.SellPrice <= 1500);
+                        break;
+                    case 8:
+                        products = products.Where(x => x.SellPrice >= 1500 && x.SellPrice <= 2000);
+                        break;
                     default:
                         products = products.OrderByDescending(x => x.SellPrice);
                         break;
@@ -716,6 +746,21 @@ namespace Microflake.Core.Application.Products
                         break;
                     case 3:
                         products = products.OrderBy(x => x.SellPrice);
+                        break;
+                    case 4:
+                        products = products.OrderByDescending(x => x.SellPrice);
+                        break;
+                    case 5:
+                        products = products.Where(x => x.SellPrice >= 0 && x.SellPrice <= 500);
+                        break;
+                    case 6:
+                        products = products.Where(x => x.SellPrice >= 500 && x.SellPrice <= 1000);
+                        break;
+                    case 7:
+                        products = products.Where(x => x.SellPrice >= 1000 && x.SellPrice <= 1500);
+                        break;
+                    case 8:
+                        products = products.Where(x => x.SellPrice >= 1500 && x.SellPrice <= 2000);
                         break;
                     default:
                         products = products.OrderByDescending(x => x.SellPrice);
