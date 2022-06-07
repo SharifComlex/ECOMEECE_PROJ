@@ -149,14 +149,10 @@ namespace Microflake.Web.Controllers
             };
             return View(checkOutmodel);
         }
+
         [HttpPost]
         public async Task<ActionResult> Checkout(CheckoutViewModel model)
         {
-            if (User.Identity.GetUserId() == null)
-            {
-                ModelState.AddModelError("Name", "Please Login To Add Whishlist");
-                return View(model);
-            }
             var cart = new ShopService(HttpContext);
             var items = await cart.GetCartItemsAsync();
 

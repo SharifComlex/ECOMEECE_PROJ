@@ -12,12 +12,12 @@
             <div class="Checkout_section" id="accordion">
                 <div class="container">
                     <div class="checkout_form">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <form action="#">
-                                    <h3>Billing Details</h3>
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <h3>Shipping Details</h3>
                                     <div class="row">
-                                       
+
                                         @using (Html.BeginForm("Checkout", "Shop", FormMethod.Post, new { id = "" }))
                                         {
                                             @Html.AntiForgeryToken()
@@ -49,6 +49,13 @@
                                                 @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
                                                 @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
                                             </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label" })
+                                                @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                                            </div>
+
                                             <div class="form-group">
                                                 @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label" })
                                                 @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
@@ -59,19 +66,10 @@
                                                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                             </div>
-
-
-                                               <div class="col-md-12 order_button m-2" >
-                                                   <button type="submit">Submit</button>
-                                                   </div> 
-                                          
                                         }
                                     </div>
-
-                                </form>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <form action="#">
+                                </div>
+                                <div class="col-lg-6 col-md-6">
                                     <h3>Your order</h3>
                                     <div class="order_table table-responsive">
                                         <table>
@@ -87,39 +85,40 @@
                                                 {
                                                     var rate = item.Product.SellPrice * ViewBag.Currency;
 
-                                            <tr >
+                                                    <tr>
 
-                                                <td >
-                                                        <img id="imagePreview" src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
-                                                   
-                                                </td>
-                                                <td>@item.Product.Name<strong> × @item.Count</strong></td>
-                                                <td>@ViewBag.CurrencySimbal @rate</td>
+                                                        <td>
+                                                            <img id="imagePreview" src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
 
-                                            </tr>
+                                                        </td>
+                                                        <td>@item.Product.Name<strong> × @item.Count</strong></td>
+                                                        <td>@ViewBag.CurrencySimbal @rate</td>
+
+                                                    </tr>
                                                 }
                                             </tbody>
                                             <tfoot>
                                                 @*<tr>
-                                                    <th>Cart Subtotal</th>
-                                                    <td>$215.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Shipping</th>
-                                                    <td><strong>$5.00</strong></td>
-                                                </tr>*@
+                                <th>Cart Subtotal</th>
+                                <td>$215.00</td>
+                            </tr>
+                            <tr>
+                                <th>Shipping</th>
+                                <td><strong>$5.00</strong></td>
+                            </tr>*@
                                                 <tr class="order_total">
-                                                    <th>Order Total</th> 
+                                                    <th>Order Total</th>
+                                                    <th></th>
                                                     @{
                                                         var Total = Model.Total * ViewBag.Currency;
                                                     }
-                                                    <td><strong>@Total</strong></td>
+                                                    <th><strong>@Total</strong></th>
                                                 </tr>
                                             </tfoot>
                                         </table>
                                     </div>
                                     <div class="payment_method">
-                                        <div class="panel-default">
+                                        @*<div class="panel-default">
                                             <input id="payment" name="check_method" type="radio" data-bs-target="createp_account">
                                             <label for="payment" data-bs-toggle="collapse" data-bs-target="#method" aria-controls="method">Create an account?</label>
 
@@ -128,24 +127,24 @@
                                                     <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="panel-default">
-                                            <input id="payment_defult" name="check_method" type="radio" data-bs-target="createp_account">
-                                            <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">PayPal <img src="~/FrontWeb/assets/img/icon/papyel.png" alt=""></label>
+                                        </div>*@
+                                        @*<div class="panel-default">
+                        <input id="payment_defult" name="check_method" type="radio" data-bs-target="createp_account">
+                        <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">PayPal <img src="~/FrontWeb/assets/img/icon/papyel.png" alt=""></label>
 
-                                            <div id="collapsedefult" class="collapse one" data-parent="#accordion">
-                                                <div class="card-body1">
-                                                    <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="order_button">
-                                            <button type="submit">Proceed to PayPal</button>
-                                        </div>
-                                    </div>
-                                </form>
+                        <div id="collapsedefult" class="collapse one" data-parent="#accordion">
+                            <div class="card-body1">
+                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
                             </div>
                         </div>
+                    </div>*@
+                                        <div class="order_button">
+                                            <button type="submit">Proceed to Pay</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

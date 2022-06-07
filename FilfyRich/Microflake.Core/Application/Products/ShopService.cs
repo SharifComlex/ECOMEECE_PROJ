@@ -4,6 +4,7 @@ using Microflake.Core.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,8 +123,8 @@ namespace Microflake.Core.Application.Products
 
         public async Task<IEnumerable<CartItem>> GetCartItemsAsync()
         {
-            return await _db.CartItems.Include("Product")
-                .Where(c => c.CartId == _cartId).ToArrayAsync();
+            return await _db.CartItems.Include(x=> x.Product)
+                .Where(c => c.CartId == _cartId).ToListAsync();
         }
 
         public async Task<object> CheckoutAsync(CheckoutViewModel model,string userId)
@@ -137,7 +138,7 @@ namespace Microflake.Core.Application.Products
                     LastName = model.LastName,
                     Address = model.Address,
                     City = model.City,
-              
+                    State = "test",
                     PostalCode = model.PostalCode,
                     Country = model.Country,
                     Phone = model.Phone,
@@ -148,30 +149,51 @@ namespace Microflake.Core.Application.Products
                     CreatedAt = DateTime.UtcNow,
                     ModifiedAt = DateTime.UtcNow,
                     OrderBy = userId
-               
-
             };
 
                 foreach (var item in items)
                 {
-                    var detail = new OrderDetals()
-                    {
-                        ProductId = item.ProductId,
-                        UnitPrice = item.Product.Price,
-                        Quantity = item.Count
-                    };
-
                     order.Total += (item.Product.Price * item.Count);
-
-                    order.OrderDetails.Add(detail);
                 }
 
-                // TODO: authorize payment
-                // TODO: assign the transactionid
-
                 _db.Orders.Add(order);
-                return _db.SaveChanges();
-              
+                var result = _db.SaveChanges();
+
+                if (result > 0) {
+                    foreach (var item in items)
+                    {
+                        var detail = new OrderDetals()
+                        {
+                            ProductId = item.ProductId,
+                            UnitPrice = item.Product.Price,
+                            Quantity = item.Count,
+                            OrderId = order.OrderId
+                        };
+
+                        _db.OrderDetals.Add(detail);
+                    }
+
+                    if (_db.SaveChanges() > 0) {
+                        _db.CartItems.RemoveRange(items);
+                        _db.SaveChanges();
+                    }
+                }
+
+                return result;
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
             }
             catch (Exception ex)
             {
