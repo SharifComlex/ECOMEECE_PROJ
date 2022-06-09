@@ -5,14 +5,17 @@ using Microflake.Core.Persistence;
 using Microflake.Core.Utilities;
 using Microflake.Core.ViewModel;
 using Microflake.Core.ViewModel.Products;
+using Microflake.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace Microflake.Web.Controllers
 {
@@ -158,22 +161,118 @@ namespace Microflake.Web.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View(new CheckoutViewModel
-                {
-                    Items = items,
-                    Total = CalcuateCart(items),
-                    User = UserManager.FindById(User.Identity.GetUserId()),
-                    FirstName= model.FirstName,
-                    LastName = model.LastName
+                model.Items = items;
+                model.Total = CalcuateCart(items);
+                model.User = UserManager.FindById(User.Identity.GetUserId());
 
-                });
+                return View(model);
             }
-
 
             var result = await cart.CheckoutAsync(model, User.Identity.GetUserId());
 
-            Response.Cookies["ShoppingCart"].Expires = DateTime.UtcNow;
-            return RedirectToAction("index");
+            if (result > 0) {
+
+                StripeConfiguration.ApiKey = "sk_test_wfSHnvBhrhUVB9pmt1b1DyKz00q1skyVH4";
+
+                try
+                {
+                    using (var _db = new ApplicationDbContext()) {
+
+                        var orderDetail = _db.Orders.FirstOrDefault(x=> x.OrderId == result);
+
+                        var options = new ChargeCreateOptions
+                        {
+                            Amount = (long)orderDetail.Total,
+                            Currency = "GBP",
+                            Description = model.FirstName + " " + model.LastName + ", OrderId =  " + result,
+                            Source = model.stripeToken,
+                        };
+
+                        var service = new ChargeService();
+                        Charge charge = service.Create(options);
+
+                        if (charge.Captured)
+                        {
+                            orderDetail.TransactionId = charge.Id;
+                            orderDetail.PaymentStatus = "Paid";
+
+                            _db.Entry(orderDetail).State = EntityState.Modified;
+                            if (_db.SaveChanges() > 0) {
+
+                                await cart.EmptyCartItemsAsync();
+
+                                Response.Cookies["ShoppingCart"].Expires = DateTime.UtcNow;
+                                return RedirectToAction("index");
+                            }
+                        }
+
+                        _db.Orders.Remove(orderDetail);
+                        _db.SaveChanges();
+                    }
+                }
+                catch (StripeException ex)
+                {
+                    ModelState.AddModelError("stripeToken", ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("stripeToken", ex.Message);
+                }
+
+                model.Items = items;
+                model.Total = CalcuateCart(items);
+                model.User = UserManager.FindById(User.Identity.GetUserId());
+
+                return View(model);
+            }
+            else {
+                model.Items = items;
+                model.Total = CalcuateCart(items);
+                model.User = UserManager.FindById(User.Identity.GetUserId());
+
+                return View(model);
+            }
+        }
+
+        public async Task<ActionResult> Pay(long OrderId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Pay(StripPayModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                StripeConfiguration.ApiKey = "sk_test_wfSHnvBhrhUVB9pmt1b1DyKz00q1skyVH4";
+
+                try
+                {
+                    long ChargeAmount = 0;
+
+                    var options = new ChargeCreateOptions
+                    {
+                        Amount = (ChargeAmount * 100),
+                        Currency = "usd",
+                        Description = model.firstName + " " + model.middleName + " " + model.lastName,
+                        Source = model.stripeToken,
+                    };
+
+                    var service = new ChargeService();
+                    Charge charge = service.Create(options);
+
+                }
+                catch (StripeException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+            }
+
+            return View(model);
         }
         // GET: Shop
         public async Task<ActionResult> Index(int? subcategoryID,string searchTerm, int? Page, int? categoryID, int? minimumPrice, int? maximumPrice, int? sortBy)

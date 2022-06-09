@@ -1,9 +1,6 @@
 ﻿using Microflake.Core.Domain;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Microflake.Core.ViewModel
 {
@@ -18,6 +15,11 @@ namespace Microflake.Core.ViewModel
 
         public ApplicationUser User { get; set; }
 
+        [Required]
+        public string stripeToken { get; set; }
 
+        public string cardnumber { get; set; }
+        public string exp_date { get; set; }
+        public string cvc { get; set; }
     }
 }

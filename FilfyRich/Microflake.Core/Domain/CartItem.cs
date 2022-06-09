@@ -16,7 +16,7 @@ namespace Microflake.Core.Domain
         // this is the cart id this will be unique for every individual visitoor
         public string CartId { get; set; }
 
-        public long ProductId { get; set; }
+        public long? ProductId { get; set; }
         public int Count { get; set; }
 
         [DataType(DataType.DateTime)]

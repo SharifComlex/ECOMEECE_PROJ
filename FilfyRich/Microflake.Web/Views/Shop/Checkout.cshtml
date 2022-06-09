@@ -12,7 +12,7 @@
             <div class="Checkout_section" id="accordion">
                 <div class="container">
                     <div class="checkout_form">
-                        <form method="post">
+                        <form id="payment-form" method="post">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6">
                                     <h3>Shipping Details</h3>
@@ -99,13 +99,13 @@
                                             </tbody>
                                             <tfoot>
                                                 @*<tr>
-                                <th>Cart Subtotal</th>
-                                <td>$215.00</td>
-                            </tr>
-                            <tr>
-                                <th>Shipping</th>
-                                <td><strong>$5.00</strong></td>
-                            </tr>*@
+                                                        <th>Cart Subtotal</th>
+                                                        <td>$215.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Shipping</th>
+                                                        <td><strong>$5.00</strong></td>
+                                                    </tr>*@
                                                 <tr class="order_total">
                                                     <th>Order Total</th>
                                                     <th></th>
@@ -118,28 +118,20 @@
                                         </table>
                                     </div>
                                     <div class="payment_method">
-                                        @*<div class="panel-default">
-                                            <input id="payment" name="check_method" type="radio" data-bs-target="createp_account">
-                                            <label for="payment" data-bs-toggle="collapse" data-bs-target="#method" aria-controls="method">Create an account?</label>
-
-                                            <div id="method" class="collapse one" data-parent="#accordion">
-                                                <div class="card-body1">
-                                                    <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                                        <div class="form-group">
+                                            <span>
+                                                <label for="country">Credit Card<span style='color:red'>*</span></label><br>
+                                            </span>
+                                            <div id="card-element" class="field" style="border:solid 1px #ced4da;padding: 0 10px;"></div>
+                                            <div class="outcome">
+                                                <div class="error"></div>
+                                                <div class="success">
                                                 </div>
                                             </div>
-                                        </div>*@
-                                        @*<div class="panel-default">
-                        <input id="payment_defult" name="check_method" type="radio" data-bs-target="createp_account">
-                        <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">PayPal <img src="~/FrontWeb/assets/img/icon/papyel.png" alt=""></label>
-
-                        <div id="collapsedefult" class="collapse one" data-parent="#accordion">
-                            <div class="card-body1">
-                                <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                            </div>
-                        </div>
-                    </div>*@
-                                        <div class="order_button">
-                                            <button type="submit">Proceed to Pay</button>
+                                            @Html.ValidationMessageFor(model => model.stripeToken, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="order_button" style="margin-top:20px">
+                                            <button type="submit">Make Payment</button>
                                         </div>
                                     </div>
                                 </div>
@@ -162,50 +154,53 @@
         <!-- checkout-area end -->
     </div>
 </div>
-  <!-- jquery -->
-    <script src="/content/FrontEnd/js/vendor/jquery-1.12.4.min.js"></script>
-   
+<!-- jquery -->
+<script src="/content/FrontEnd/js/vendor/jquery-1.12.4.min.js"></script>
+
 @section Scripts{
-<script>
-    $("#Submitform").submit(function (event) {
-        event.preventDefault();
-        debugger
-        $.ajax({
-            type: "Post",
-            url: '/Shop/Checkout',
-            data: $("#Submitform").serialize()
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="~/Scripts/stripe.js"></script>
+    <script>
+        $("#Submitform").submit(function (event) {
+            event.preventDefault();
+            debugger
+            $.ajax({
+                type: "Post",
+                url: '/Shop/Checkout',
+                data: $("#Submitform").serialize()
 
-        }).done(
-            function (responce) {
-                debugger;
-                if (responce.status == true) {
-                    //$(".signup-popup-box").css({"display":"none"});
-                    $.cookie('ShoppingCart', '', { path: '/' });
-                    updateCartProducts();
-
-                    Swal.fire(
-                        {
-                            icon: 'success',
-                            title: '',
-                            text: 'Varification Email has been sent to your account please check',
-                        });
-
-                } else {
+            }).done(
+                function (responce) {
                     debugger;
-                    for (var i = 0; i < responce.errors.length; i++) {
-                        $("[data-valmsg-for='" + responce.errors[i].Key + "']").html(responce.errors[i].Errors[0]);
-                    }
-                    //Swal.fire(
-                    //    {
-                    //        icon: 'error',
-                    //        title: 'Oops...',
-                    //        text: responce.Message,
-                    //    });
+                    if (responce.status == true) {
+                        //$(".signup-popup-box").css({"display":"none"});
+                        $.cookie('ShoppingCart', '', { path: '/' });
+                        updateCartProducts();
 
-                }
-            })
-            .debugger(function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("F");
-            });
-    });
-</script>}
+                        Swal.fire(
+                            {
+                                icon: 'success',
+                                title: '',
+                                text: 'Varification Email has been sent to your account please check',
+                            });
+
+                    } else {
+                        debugger;
+                        for (var i = 0; i < responce.errors.length; i++) {
+                            $("[data-valmsg-for='" + responce.errors[i].Key + "']").html(responce.errors[i].Errors[0]);
+                        }
+                        //Swal.fire(
+                        //    {
+                        //        icon: 'error',
+                        //        title: 'Oops...',
+                        //        text: responce.Message,
+                        //    });
+
+                    }
+                })
+                .debugger(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("F");
+                });
+        });
+    </script>
+}

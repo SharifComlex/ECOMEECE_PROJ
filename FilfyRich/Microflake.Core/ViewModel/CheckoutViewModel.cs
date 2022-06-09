@@ -62,5 +62,12 @@ namespace Microflake.Core.ViewModel
 
 
         // public ApplicationUser User { get; set; }
+
+        [Required]
+        public string stripeToken { get; set; }
+
+        public string cardnumber { get; set; }
+        public string exp_date { get; set; }
+        public string cvc { get; set; }
     }
 }

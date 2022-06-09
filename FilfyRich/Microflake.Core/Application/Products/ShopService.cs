@@ -115,6 +115,7 @@ namespace Microflake.Core.Application.Products
 
             return itemCount;
         }
+
         public int GetCartItemsCount()
         {
             return  _db.CartItems.Include("Product")
@@ -127,7 +128,16 @@ namespace Microflake.Core.Application.Products
                 .Where(c => c.CartId == _cartId).ToListAsync();
         }
 
-        public async Task<object> CheckoutAsync(CheckoutViewModel model,string userId)
+        public async Task<long> EmptyCartItemsAsync()
+        {
+            var items = await _db.CartItems.Include(x => x.Product)
+                .Where(c => c.CartId == _cartId).ToListAsync();
+
+            _db.CartItems.RemoveRange(items);
+            return await _db.SaveChangesAsync();
+        }
+
+        public async Task<long> CheckoutAsync(CheckoutViewModel model,string userId)
         {
             try
             {
@@ -138,13 +148,13 @@ namespace Microflake.Core.Application.Products
                     LastName = model.LastName,
                     Address = model.Address,
                     City = model.City,
-                    State = "test",
                     PostalCode = model.PostalCode,
                     Country = model.Country,
                     Phone = model.Phone,
                     Email = model.Email,
-                    TransactionId = "asd",
+                    TransactionId = "",
                     Status = "Pending",
+                    PaymentStatus = "UnPaid",
                     OrderDate = DateTime.Now,
                     CreatedAt = DateTime.UtcNow,
                     ModifiedAt = DateTime.UtcNow,
@@ -164,7 +174,7 @@ namespace Microflake.Core.Application.Products
                     {
                         var detail = new OrderDetals()
                         {
-                            ProductId = item.ProductId,
+                            ProductId = (long)item.ProductId,
                             UnitPrice = item.Product.Price,
                             Quantity = item.Count,
                             OrderId = order.OrderId
@@ -173,13 +183,10 @@ namespace Microflake.Core.Application.Products
                         _db.OrderDetals.Add(detail);
                     }
 
-                    if (_db.SaveChanges() > 0) {
-                        _db.CartItems.RemoveRange(items);
-                        _db.SaveChanges();
-                    }
+                    _db.SaveChanges();
                 }
 
-                return result;
+                return order.OrderId;
             }
             catch (DbEntityValidationException e)
             {
@@ -225,7 +232,6 @@ namespace Microflake.Core.Application.Products
 
             return cartId;
         }
-
 
     }
 }
