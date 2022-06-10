@@ -1169,6 +1169,7 @@
     <Compile Include="Areas\SuperAdmin\Controllers\SubscriberController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\SuperAdminProfileController.cs" />
     <Compile Include="Controllers\CurrencyController.cs" />
+    <Compile Include="Controllers\CustomProductController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
@@ -1330,6 +1331,7 @@
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Shop\Pay.cshtml" />
+    <Content Include="Views\CustomProduct\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

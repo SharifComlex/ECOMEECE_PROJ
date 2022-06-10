@@ -105,40 +105,20 @@ namespace Microflake.Web.Controllers
             return PartialView(model);
         }
 
-        [Route("home/Language")]
-        public ActionResult SetLanguage(string Name, string url)
-        {
-            if (Name != null)
-            {
-                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(Name);
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(Name);
-            }
-
-            HttpCookie cookie = new HttpCookie("Language");
-            cookie.Value = Name;
-            Response.Cookies.Add(cookie);
-
-            if (!string.IsNullOrEmpty(url))
-            {
-                return Redirect(url);
-            }
-
-            return RedirectToAction("Index");
-        }
-        // GET: Home
-
-
-        public async Task<ActionResult> AboutUs()
+        [Route("AboutUs")]
+        public ActionResult AboutUs()
         {
             
             return View();
         }
 
-        public async Task<ActionResult> ContactUs()
+        [Route("ContactUs")]
+        public ActionResult ContactUs()
         {
 
             return View();
         }
+
         [HttpPost]
         public async Task<ActionResult> ContactUs(ContactUs model)
         {

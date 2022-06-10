@@ -2,32 +2,73 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
-    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-    <form class="login-form" method="post">
-        @Html.AntiForgeryToken()
+<div class="breadcrumbs_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <h3>My account</h3>
+                    <ul>
+                        <li><a href="index.html">home</a></li>
+                        <li>&gt;</li>
+                        <li>My account</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-        <h3 class="login-head">SIGN IN</h3>
-        <div class="form-group mb-3">
-            <label for="emailaddress">Email address</label>
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter your email" })
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+<div class="customer_login">
+    <div class="container">
+        <div class="row">
+            <!--login area start-->
+            <div class="col-lg-6 col-md-6">
+                <div class="account_form">
+                    <h2>login</h2>
+                    <form class="login-form" method="post">
+                        @Html.AntiForgeryToken()
+                        <p>
+                            <label for="emailaddress">Email address</label>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter your email" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </p>
+                        <p>
+                            <label for="password">Password</label>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "password" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </p>
+                        <div class="login_submit">
+                            <button type="submit">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--login area start-->
+            <!--register area start-->
+            <div class="col-lg-6 col-md-6">
+                <div class="account_form register">
+                    <h2>Register</h2>
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+                        <p>
+                            <label>Email address  <span>*</span></label>
+                            <input type="text">
+                        </p>
+                        <p>
+                            <label>Passwords <span>*</span></label>
+                            <input type="password">
+                        </p>
+                        <div class="login_submit">
+                            <button type="submit">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--register area end-->
         </div>
-
-        <div class="form-group mb-3">
-            <label for="password">Password</label>
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "password" })
-            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-        </div>
-      
-        <p>
-            @Html.ActionLink("Register as a new user", "Register")
-        </p>
-        <p>
-            @Html.ActionLink("Forgot your password?", "ForgotPassword")
-        </p>
-        <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
-        </div>
-    </form>
+    </div>
+</div>

@@ -1140,6 +1140,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .logo {
   padding: 0 20px;
+  width:90px;
+  margin:auto;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .logo {

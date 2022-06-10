@@ -11,7 +11,6 @@
 </style>
 
 <!--shop wrapper start-->
-<!--shop toolbar start-->
 <div class="shop_toolbar">
     <div class="list_button">
         <ul class="nav" role="tablist">
@@ -24,12 +23,30 @@
         </ul>
     </div>
     <div class="orderby_wrapper">
+        <h3>Sort By : </h3>
+        <div class=" niceselect_option">
+
+            <form class="select_option" action="#">
+
+                <select name="orderby" id="short">
+                    <option selected="" value="1">Sort by popularity</option>
+                    <option value="2">Sort by popularity</option>
+                    <option value="3">Sort by newness</option>
+                    <option value="4">Sort by price: low to high</option>
+                    <option value="5">Sort by price: high to low</option>
+                    <option value="6">Product Name: Z</option>
+                </select>
+            </form>
+
+
+        </div>
         <div class="page_amount">
             <p> Showing @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + 1) – @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + (Model.Productlist.Where(x => x.IsFeatured == true).Count() < Model.Pager.PageSize ? Model.Productlist.Where(x => x.IsFeatured == true).Count() : Model.Pager.PageSize)) of @Model.Pager.TotalItems Products</p>
         </div>
     </div>
 </div>
 <!--shop toolbar end-->
+
 <!--shop tab product start-->
 <div class="tab-content">
     <div class="tab-pane grid_view fade show active" id="large" role="tabpanel">
