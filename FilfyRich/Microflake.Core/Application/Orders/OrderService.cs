@@ -72,8 +72,8 @@ namespace Microflake.Core.Application.Orders
                         Status = x.Order.Status,
                        SellPrice=x.Product.SellPrice,
                         orderId = x.Order.OrderId,
-                        OrderBy = x.Order.OrderBy
-
+                        OrderBy = x.Order.OrderBy,
+                        Image=x.Product.Image
 
                     }).ToListAsync();
 
@@ -127,7 +127,7 @@ namespace Microflake.Core.Application.Orders
                     .OrderDetals
                     .Select(x => new ListOrder
                     {
-                        Id = x.Product.Id,
+                        Id = x.OrderId,
                         FirstName = x.Order.FirstName,
                         LastName = x.Order.LastName,
                         PRoductTitle = x.Product.Name,
@@ -136,8 +136,8 @@ namespace Microflake.Core.Application.Orders
                         Total = x.Product.Price * x.Quantity,
                         Status = x.Order.Status,
                         SellPrice=x.Product.SellPrice,
-                        orderId = x.Order.OrderId
-
+                        orderId = x.Order.OrderId,
+                        Image =x.Product.Image
                     })
                     .AsNoTracking()
                     .FirstOrDefaultAsync(x => x.orderId == Id);

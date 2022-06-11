@@ -75,18 +75,18 @@
              { "data": "LastName" },
             {
                     "render": function (data, type, full, meta) {
-                        return '<a class="image-link" href="@Config.Products' + full.Id + '.jpg?' + Math.random() +'"><img id="image" class="Image-wrapper" src="@Config.Products' + full.Id + '.jpg?' + Math.random() +'" onerror="this.src=\'/public/default-image.jpg\';"/></a>'
-                    }
+                       return '<a class="image-link" href="@Config.Products' + full.Image +'"><img id="image" class="Image-wrapper" src="@Config.Products' + full.Image  +'" onerror="this.src=\'/public/default-image.jpg\';"/></a>'
+                     }
                 },
-           
+
              { "data": "PRoductTitle" },
              { "data": "UnitPrice" },
              { "data": "Quanty" },
-          
+
              { "data": "Total" },
              { "data": "Status" },
-            
-          
+
+
               {
                     "render": function (data, type, full, meta) {
                         var actions = '';
