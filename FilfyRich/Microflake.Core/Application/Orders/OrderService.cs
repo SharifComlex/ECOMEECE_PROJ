@@ -92,9 +92,9 @@ namespace Microflake.Core.Application.Orders
                 var entity = _context.Orders.Find(model.Id);
 
 
-                entity.CreatedAt = DateTime.UtcNow;
+                entity.CreatedAt = DateTime.Now;
                 entity.CreatedById = userId;
-                entity.ModifiedAt = DateTime.UtcNow;
+                entity.ModifiedAt = DateTime.Now;
                 entity.ModifiedById = userId;
                 entity.Status = model.Status;
                

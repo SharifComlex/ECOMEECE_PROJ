@@ -7,7 +7,7 @@
     <ul class="dorpdown-menu">
         @foreach (var category in Model)
         {
-            <li><a class="dataLink " href="@Url.Action("Index", "Shop", new { categoryID = category.Id })">@category.English</a></li>
+            <li><a class="dataLink " href="@Url.Action("Index", "Shop", new { categoryID = category.Id })">@category.Name</a></li>
         }
     </ul>
 @*<div class="currency">

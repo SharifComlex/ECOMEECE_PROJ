@@ -1,0 +1,17 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1.7em;
+	line-height: 2.8rem;
+	color: #333;
+}
+
+
+/* copyright */
+
+.bv-banners .copyright {
+	display: block;
+	font-size: 10px;
+	color: rgba(255,255,255,0.6);
+	margin-top: 30px;
+	letter-spacing: 1.5px;
+}

@@ -34,7 +34,17 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
                 data = result.Data
             }, JsonRequestBehavior.AllowGet);
         }
+        public async Task<ActionResult> Remove(int id)
+        {
+            var result = await _entityService.Remove(id);
 
+            return Json(new
+            {
+                status = result.Success,
+                message = result.Message,
+                data = result.Data
+            }, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

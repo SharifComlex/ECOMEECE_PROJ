@@ -203,7 +203,7 @@ namespace Microflake.Core.Application.Categories
                 }
                 else
                 {
-                    return _response.Create(false, "Error while updating the record.", id);
+                    return _response.Create(false, "Error while removing the record.", id);
                 }
 
                 //return _response.CreateResponse(true, "record has been removed.", entity.Id);

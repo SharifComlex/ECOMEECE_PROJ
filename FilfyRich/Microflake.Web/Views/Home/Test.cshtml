@@ -1,7 +1,202 @@
 ﻿
 @{
     ViewBag.Title = "Test";
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+    Layout = null;
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BackVision - jQuery Video Background & Slider Plugin</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="http://plugins.gravitysign.com/backvision/css/normalize.css">
+    <link rel="stylesheet" href="http://plugins.gravitysign.com/backvision/css/skeleton.css">
+    <link rel="stylesheet" href="http://plugins.gravitysign.com/backvision/css/backvision.css">
+    <link rel="stylesheet" href="http://plugins.gravitysign.com/backvision/css/style.css">
+    <link rel="icon" type="image/png" href="http://plugins.gravitysign.com/backvision/images/favicon.png">
+
+    <script src="http://plugins.gravitysign.com/backvision/js/jquery-3.3.1.min.js"></script>
+    <script src="http://plugins.gravitysign.com/backvision/js/jquery.easing.1.3.js"></script>
+    <script src="http://plugins.gravitysign.com/backvision/js/jquery.backvision.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#video-background').backvision({
+                videos: [
+                    {
+                        'poster': "~/assets/backvision/demo2/images/demo1.jpg",
+                        'mp4': 'https://www.youtube.com/watch?v=r2oMc4FBYJQ',
+                        'webm': 'https://www.youtube.com/watch?v=r2oMc4FBYJQ',
+                        'ogg': ''
+
+                    },
+                    {
+                        'poster': "~/assets/backvision/demo2/images/demo1.jpg",
+                        'mp4': 'https://www.youtube.com/watch?v=r2oMc4FBYJQ',
+                        'webm': 'https://www.youtube.com/watch?v=r2oMc4FBYJQ',
+                        'ogg': ''
+
+                    },
+                    {
+                        'poster': "~/assets/backvision/demo2/images/demo1.jpg",
+                        'mp4': 'https://www.youtube.com/watch?v=r2oMc4FBYJQ',
+                        'webm': 'https://www.youtube.com/watch?v=r2oMc4FBYJQ',
+                        'ogg': ''
+
+                    },
+                    {
+                        'poster': "~/assets/backvision/demo2/images/demo1.jpg",
+                        'mp4': 'https://www.youtube.com/watch?v=r2oMc4FBYJQ',
+                        'webm': 'https://www.youtube.com/watch?v=r2oMc4FBYJQ',
+                        'ogg': ''
+
+                    }
+                ],
+                introLogo: "~/assets/images/Product/1.jpg",
+                banners: true,
+                loop: false,
+                preloaderColor: '#009797',
+                carousel: true,
+                autoplay: true,
+                fullscreen: true,
+                navigation: true,
+                keyboard: true,
+                offsetMethod: 'quad',
+                muted: false,
+                duration: 1000
+            });
+
+            // backvision api
+            bv_api = $('#video-background').data('api');
+
+        });
+    </script>
+</head>
+<body>
+    <div id="video-background">
+        <ul class="bv-banners">
+            <li>
+                <div id="banner11"
+                     data-time="5:6"
+                     data-position="top-left: 20%, 20%"
+                     data-duration="500"
+                     class="bv-banner bv-zoom-out bv-ease">
+                    <div class="bv-text bv-black">BACKVISION IS A VIDEO BACKGROUND</br>AND SLIDER PLUGIN</div>
+                   @* <br /><a class="bv-link" href="https://codecanyon.net/item/backvision-jquery-video-background-slider-plugin/22815844?ref=flGravity">KEY FEATURES</a>*@
+                </div>
+                <div id="banner12"
+                     data-time="11:3"
+                     data-position="top-left: 40%, 40%"
+                     class="bv-banner bv-move-up">
+                    <div class="bv-text bv-border-white">WITH A TON OF POSSIBILITIES…</div>
+                </div>
+                <div id="banner13"
+                     data-time="14:100"
+                     data-position="top-left: 60%, 30%"
+                     class="bv-banner bv-move-down">
+                    <div class="bv-text bv-red">AND EXTREME PERFORMANCE!</div>
+                    </br><a class="bv-link" href="#next" onclick="bv_api.next();">WANT MORE?</a>
+                </div>
+            </li>
+            <li>
+                <div id="banner21"
+                     data-time="2:3"
+                     data-position="top-left: 38%, 30%"
+                     class="bv-banner">
+                    <div class="bv-text bv-black">YOU CAN DRAG/SWIPE VIDEO</div>
+                </div>
+                <div id="banner22"
+                     data-time="3:2"
+                     data-position="top-left: 50%, 30%"
+                     class="bv-banner">
+                    <div class="bv-text bv-small bv-white">TO THE LEFT OR TO THE RIGHT</div>
+                </div>
+                <div id="banner23"
+                     data-time="6:3"
+                     class="bv-banner bv-move-left">
+                    <div class="bv-text bv-black">YOU CAN TURN SOUND ON/OFF</div>
+                </div>
+                <div id="banner24"
+                     data-time="10:3"
+                     class="bv-banner bv-move-right">
+                    <div class="bv-text bv-white">AND ACTIVATE FULLSCREEN MODE</div>
+                </div>
+                <div id="banner25"
+                     data-time="14:100"
+                     class="bv-banner bv-zoom-out">
+                    <div style="text-align: center">
+                        <div class="bv-text bv-black bv-big">TRY!</div>
+                        </br><a class="bv-link" href="#next" onclick="bv_api.next();">WANT MORE?</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div id="banner31"
+                     data-time="1:2"
+                     class="bv-banner bv-move-down">
+                    <div class="bv-text bv-border-white">EXCEPTIONAL PERFORMANCE</div>
+                </div>
+                <div id="banner32"
+                     data-time="3:2"
+                     class="bv-banner bv-move-down">
+                    <div class="bv-text bv-border-white">RESPONSIVE DESIGN</div>
+                </div>
+                <div id="banner33"
+                     data-time="5:2"
+                     class="bv-banner bv-move-down">
+                    <div class="bv-text bv-border-white">CRISP SVG ICONS</div>
+                </div>
+                <div id="banner34"
+                     data-time="7:2"
+                     class="bv-banner bv-move-down">
+                    <div class="bv-text bv-border-white">TIME CONTROLLED BANNERS</div>
+                </div>
+                <div id="banner35"
+                     data-time="9:2"
+                     class="bv-banner bv-move-down">
+                    <div class="bv-text bv-border-white">YOUR OWN STARTUP LOGO</div>
+                </div>
+                <div id="banner36"
+                     data-time="12:100"
+                     class="bv-banner">
+                    <div class="bv-text bv-black">PURCHASE BACKVISION</br> ON CODECANYON.NET</div>
+                    </br></br><a class="bv-link" href="" target="_blank">BUY NOW!</a>
+                </div>
+            </li>
+            <li>
+                <div id="banner41"
+                     data-time="2:2"
+                     data-position="top-left: 20%, 30%"
+                     class="bv-banner bv-move-down">
+                    <div class="bv-text">MORE EXAMPLES??</div>
+                </div>
+                <div id="banner42"
+                     data-time="4:2"
+                     class="bv-banner bv-zoom-in">
+                    <div class="bv-text bv-black bv-big">NO PROBLEM.</div>
+                </div>
+                <div id="banner43"
+                     data-time="6:100"
+                     class="bv-banner bv-zoom-in">
+                    <div class="bv-text bv-big">
+                        <a class="bv-link" href="http://plugins.gravitysign.com/backvision/demo1" target="_self">DEMO1</a>
+                    </div>
+                    <div class="bv-text bv-big" style="margin-left: 40px;">
+                        <a class="bv-link" href="http://plugins.gravitysign.com/backvision/demo2" target="_self">DEMO2</a>
+                    </div>
+                </div>
+                <div id="banner44"
+                     data-time="10:100"
+                     data-position="bottom-left: 20px, 30px"
+                     class="bv-banner">
+                    <span class="copyright">Copyright  2019. flGravity</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
