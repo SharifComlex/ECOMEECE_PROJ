@@ -41,10 +41,10 @@
                             <tr>
                                 <th>@Microflake.Web.Language.Language.Id</th>
                                 <th>@Microflake.Web.Language.Language.FirstName</th>
-                                <th>@Microflake.Web.Language.Language.LastName</th>
                                 <th>@Microflake.Web.Language.Language.Email</th>
                                 <th>@Microflake.Web.Language.Language.Message</th>
                                 <th>@Microflake.Web.Language.Language.Subject</th>
+                                <th>@Microflake.Web.Language.Language.Action</th>
 
                             </tr>
                         </thead>
@@ -61,14 +61,25 @@
                 var  columns = [
                     { "data": "Id" },
                      { "data": "firstname" },
-                    { "data": "lastname" },
                     { "data": "Email" },
                     { "data": "Message" },
                     { "data": "subject" },
-                   
-               
-               
-               
+
+                {
+                    "render": function (data, type, full, meta) {
+                        var actions = '';
+                        actions += '<div class="dropdown actions__item">';
+                        actions += '<span data-toggle="dropdown" class="zwicon-more-h"></span>';
+                        actions += '<div class="dropdown-menu dropdown-menu-right">';
+                       actions += '<button data-id="' + full.Id + '"  class="btnRemove dropdown-item btn-remove"  data-toggle="tooltip" data-placement="left" title="@Microflake.Web.Language.Language.Remove_Data"><i class="fas fa-trash"></i> &nbsp;&nbsp;@Microflake.Web.Language.Language.Remove</button>';
+                        actions += '</div>';
+                        actions += '</div>';
+
+                        return actions;
+                    }
+                }
+
+
             ];
 
 

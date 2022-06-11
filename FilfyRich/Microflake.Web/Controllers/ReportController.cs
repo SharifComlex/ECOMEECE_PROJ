@@ -30,14 +30,7 @@ namespace Microflake.Web.Controllers
             var categoryResult = await _categoryService.ToList();
             //ViewBag.CategoryId = new SelectList(categoryResult.Data, "Id", "Name");
 
-            if (_language)
-            {
-                ViewBag.CategoryId = new MultiSelectList(categoryResult.Data.ToList(), "Id", "Arabic");
-            }
-            else
-            {
-                ViewBag.CategoryId = new MultiSelectList(categoryResult.Data.ToList(), "Id", "English");
-            }
+            ViewBag.CategoryId = new MultiSelectList(categoryResult.Data.ToList(), "Id", "Name");
             return View();
         }
         public async Task<ActionResult> CategoryWiseProductList(long ProductId)

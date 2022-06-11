@@ -11,6 +11,7 @@ namespace Microflake.Core.Application.ContactUs
   public  interface IContactUsService
     {
 
+        Task<ServiceResponse<long>> Remove(long Id);
         Task<ServiceResponse<List<ListContactUs>>> List();
     }
 }

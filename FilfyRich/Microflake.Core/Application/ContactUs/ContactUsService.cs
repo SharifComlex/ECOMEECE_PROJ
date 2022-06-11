@@ -44,7 +44,7 @@ namespace Microflake.Core.Application.ContactUs
                         lastname = x.lastname
 
 
-                    }).ToListAsync();
+                    }).OrderByDescending(x=>x.Id).ToListAsync();
 
                 return _response.Create(true, "All record has been fetched", list);
             }
@@ -52,6 +52,39 @@ namespace Microflake.Core.Application.ContactUs
             {
                 _logger.Log(ex);
                 return _response.Create(false, ex.Message, new List<ListContactUs>());
+            }
+        }
+        public async Task<ServiceResponse<long>> Remove(long id)
+        {
+            try
+            {
+
+                var entity = _context.ContactUss.Find(id);
+                var result = 0;
+                if (entity == null)
+                {
+                    return _response.Create(false, "record does not exists.", 0L);
+                }
+               
+                    _context.ContactUss.Remove(entity);
+                    result = await _context.SaveChangesAsync();
+               
+                if (result == 1)
+                {
+                    return _response.Create(true, "Record has been removed.", id);
+                }
+                else
+                {
+
+                    return _response.Create(false, "Error while updating the record.", id);
+                }
+
+                //return _response.CreateResponse(true, "record has been removed.", entity.Id);
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return _response.Create(false, ex.Message, 0L);
             }
         }
 

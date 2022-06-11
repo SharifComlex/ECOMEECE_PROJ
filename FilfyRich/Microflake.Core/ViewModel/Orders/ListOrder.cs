@@ -23,6 +23,7 @@ namespace Microflake.Core.ViewModel.Orders
         public string OrderBy { get; set; }
         public string Status { get;  set; }
         public string Currency { get; set; }
+        public string Image { get; set; }
     }
 
 }

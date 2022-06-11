@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from plugins.gravitysign.com/backvision/demo2/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jun 2022 21:44:13 GMT -->
+<head>
+
+  <meta charset="utf-8">
+  <title>BackVision - Demo #2</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/backvision.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.backvision.min.js"></script>
+  <script src="js/scripts.js"></script>
+  <script type="text/javascript">
+  	$(document).ready(function(){
+  		var videos = [
+  			{
+  				poster: 'videos/office.png',
+  				webm: 'videos/office.webm',
+  				mp4: 'videos/office.mp4'
+  			},
+  			{
+  				poster: 'videos/working.png',
+  				webm: 'videos/working.webm',
+  				mp4: 'videos/working.mp4'
+  			}
+  		];
+  		$('#video-header').backvision({
+  			videos: videos,
+  			background: '#fff',
+  			autoSleep: false,
+  			carousel: true,
+  			loop: false,
+  			autoplay: true,
+  			preload: false
+  		});
+  	});
+  </script>
+
+</head>
+<body>
+		
+	<!-- BACKVISION -->
+	<div id="video-header"></div>
+	<!-- BACKVISION -->
+	
+	<header class="header">
+		<a class="home tr" href="http://plugins.gravitysign.com/backvision" title="Home">
+			<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
+			    <defs>
+			        <path id="path-1" d="M0,0 L24,0 L24,24 L0,24 L0,0 Z"></path>
+			    </defs>
+			    <g id="Clipped" transform="translate(14.000000, 14.000000) rotate(-90.000000) translate(-14.000000, -14.000000) translate(2.000000, 2.000000)">
+			        <mask id="mask-2" sketch:name="a" fill="white">
+			            <use xlink:href="#path-1"></use>
+			        </mask>
+			        <g id="a"></g>
+			        <path d="M3,17 L21,17 L21,15 L3,15 L3,17 L3,17 Z M3,20 L21,20 L21,19 L3,19 L3,20 L3,20 Z M3,13 L21,13 L21,10 L3,10 L3,13 L3,13 Z M3,4 L3,8 L21,8 L21,4 L3,4 L3,4 Z" id="Shape" mask="url(#mask-2)"></path>
+			    </g>
+			</svg>
+		</a>
+		<nav>
+			<ul class="menu tr dl">
+				<li><a href="#about">About</a></li>
+				<li><a href="#features">Key Features</a></li>
+				<li><a href="#examples">Examples</a></li>
+				<li><a href="#purchase">Buy Now!</a></li>
+			</ul>
+		</nav>
+		<div class="mobile">
+			<a href="#" class="mobile-menu">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+			</a>
+			<a href="#" class="close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/><path d="M0 0h24v24H0z" fill="none"/></svg></a>
+			<span class="sizer"></span>
+		</div>
+	</header>
+	
+	<div class="container">
+		<div class="row">
+			<div class="eight columns offset-by-two">
+				
+				<section id="about">
+					<h1>About</h1>
+					<p><strong>BackVision</strong> is a cutting-edge video background and media slider plugin. You can use it to loop a single background video or create impressive video/image gallery with fullscreen mode and time controlled banners. It's responsive, fast and flexible!</p> 
+					<p>BackVision uses super fast video processing based on <em>requestAnimationFrame</em> routines, so the playback will be flawless in all modern browsers. It has a fullscreen mode, navigation controls, sound control and progress bar. You can touch-swipe/drag videos in carousel mode with cool accordion effect!</p>
+					<p>Using a <em>banner</em> feature you can setup banners to pop-up at specific second of a video using one of predefined animations. This way you can make your videos more impressive and meaningful.</p>
+				</section>
+								
+				<section id="features">
+					<h3>Key Features</h3>
+					<ul class="disc">
+						<li>Unlimited videos in mp4/webm/ogg formats</li>
+						<li>Scalable and responsive design</li>
+						<li>Sleep mode when out if view</li>
+						<li>Display your logo before first video will start</li>
+						<li>Crisp SVG controls with ability to change their color via plugin options</li>
+						<li>Animated banners that you can setup to pop-up at specific second of your video</li>
+						<li>Accordion effect when touch-swipe/drag to next/previous video</li>
+						<li>Ability to set number of slices for accordion effect</li>
+						<li>Fallback to poster images for unsupported devices or video load error</li>
+						<li>Touch-drag support & navigation controls</li>
+						<li>Keyboard support (next/prev and pause)</li>
+						<li>Support for desktop & mobile devices</li>
+						<li>Fullscreen mode</li>
+						<li>Carousel & autoplay mode</li>
+						<li>Video looping mode</li>
+						<li>Progress bar & sound control</li>
+						<li>API methods & custom events</li>
+						<li>Detailed documentation with examples</li>
+						<li>Simple installation and configuration</li>
+						<li>Author support</li>
+					</ul>
+				</section>
+				
+				
+				<section id="examples">
+					<h3>Usage Examples</h3>
+					<ul class="preview clearfix">
+						<li class="current">
+							<a href="../demo1/index.html" class="preview-link">
+								<img class="tr" src="images/demo1.jpg" alt="Demo #1" />
+								<div class="preview-overlay tr">
+									<div class="preview-wrap">
+										<span>View demo</span>
+										<em>Video header</em>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#" onclick="return false" class="preview-link" target="_self">
+								<img class="tr" src="images/demo2.jpg" alt="Demo #2"/>
+								<div class="preview-overlay tr">
+									<div class="preview-wrap">
+										<span>View demo</span>
+										<em>Video background</em>
+									</div>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</section>
+				
+				<section id="purchase">
+					<h3>Want to buy?</h3>
+					<p>You can purchase BackVision jQuery Plugin on <a href="http://codecanyon.net/">http://codecanyon.net</a> for only $12!</p> 
+					
+					<p class="text-center dbl-margin2 line-btm"><a class="button" href="https://codecanyon.net/item/backvision-jquery-video-background-slider-plugin/22815844?ref=flGravity" target="_blank">Purchase BackVision!</a></p>
+						
+					<p>In case of any questions/ideas please feel free to contact me via my website contact form - <a href="http://gravitysign.com/contacts">here</a> or using comments dashboard on codecanyon.net</p>
+					
+				</section>
+			
+			</div>
+		</div> <!-- .row -->
+		
+		<footer class="footer">
+			<div class="copyright">Copyright @ 2019. flGravity</div>
+		</footer>
+		
+	</div><!-- .container -->
+
+</body>
+
+<!-- Mirrored from plugins.gravitysign.com/backvision/demo2/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jun 2022 21:44:27 GMT -->
+</html>

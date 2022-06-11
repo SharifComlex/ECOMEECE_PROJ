@@ -98,7 +98,7 @@
         var listUrl = "";
         var columns = [];
          $("#SelectYear-Wrapper").hide();
-
+        $("select").select2();
         $("#CategoryID").change(function () {
             date = $(this).val();
             $("#SelectYear-Wrapper").show();
