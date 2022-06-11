@@ -1,5 +1,5 @@
-﻿using Microflake.Core.Application.Categories;
-using Microflake.Core.ViewModel.Category;
+﻿using Microflake.Core.Application.CustomCategories;
+using Microflake.Core.ViewModel.CustomCategories;
 using Microflake.Web.Controllers;
 using Microsoft.AspNet.Identity;
 using System.Linq;
@@ -9,11 +9,11 @@ using System.Web.Mvc;
 namespace Microflake.Web.Areas.SuperAdmin.Controllers
 {
     [Authorize(Roles = "SuperAdmin")]
-    public class CategoriesController : BaseController
+    public class CustomCategoriesController : BaseController
     {
-        private readonly ICategoryService _entityService;
+        private readonly ICustomCategoryService _entityService;
 
-        public CategoriesController(ICategoryService CategoryService)
+        public CustomCategoriesController(ICustomCategoryService CategoryService)
         {
             _entityService = CategoryService;
             
@@ -64,6 +64,7 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
             }
 
             var result = await _entityService.Create(model, User.Identity.GetUserId());
+
             if (result.Success)
             {
                 return Json(new

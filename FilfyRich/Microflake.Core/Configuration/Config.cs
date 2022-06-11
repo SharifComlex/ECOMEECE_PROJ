@@ -9,6 +9,7 @@ namespace Microflake.Core
        // public static string ConnectionString = "data source=207.180.192.176;Initial Catalog=Fashion_Ecommerce;UId=sa;Password=Madinah@tech@321;MultipleActiveResultSets=True";
 
         public static readonly string Products = "/Public/Uploads/Products/";
+        public static readonly string CustomProducts = "/Public/Uploads/CustomProducts/";
 
         public static readonly string Profile = "/Public/Profile/User/";
     }

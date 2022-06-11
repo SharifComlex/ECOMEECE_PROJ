@@ -23,6 +23,10 @@ using Microflake.Core.Application.Currencies;
 using Microflake.Core.Application.ContactUs;
 using Microflake.Core.Application.Subscribers;
 using Microflake.Core.Application.SubCategories;
+using Microflake.Core.Application.CustomCategories;
+using Microflake.Core.Application.CustomColors;
+using Microflake.Core.Application.CustomItems;
+using Microflake.Core.Application.CustomVariations;
 
 namespace Microflake.Web
 {
@@ -57,6 +61,12 @@ namespace Microflake.Web
             _container.Register<IDealOfTheWeekService, DealOfTheWeekService>(Lifestyle.Transient);
             _container.Register<IWhislistService, WhislistService>(Lifestyle.Transient);
             _container.Register<IContactUsService, ContactUsService>(Lifestyle.Transient);
+
+            _container.Register<ICustomCategoryService, CustomCategoryService>(Lifestyle.Transient);
+            _container.Register<ICustomColorService, CustomColorService>(Lifestyle.Transient);
+            _container.Register<ICustomItemService, CustomItemService>(Lifestyle.Transient);
+            _container.Register<ICustomVariationService, CustomVariationService>(Lifestyle.Transient);
+            
             _container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
             
             _container.Verify();

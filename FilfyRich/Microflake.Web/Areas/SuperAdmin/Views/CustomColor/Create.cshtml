@@ -1,0 +1,184 @@
+﻿@model Microflake.Core.ViewModel.CustomColors.CreateProduct
+@{
+    var routeData = Request.RequestContext.RouteData;
+    var area = routeData.DataTokens["area"].ToString();
+    var ControllerName = routeData.Values["Controller"].ToString();
+    var ControllerPath = "/" + ControllerName;
+    var lang = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+}
+<style>
+    textarea {
+        resize: none;
+    }
+
+    #imagePreview {
+        width: 100%;
+    }
+
+    #imagePreview1 {
+        width: 100%;
+    }
+
+    .image-wrapper1 {
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 172px !important;
+        height: 131px !important;
+        overflow: hidden;
+    }
+
+        .image-wrapper1:hover .select-image1 {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    .select-image1 {
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        top: 0;
+        background: rgba(0,0,0,0.5);
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.5s linear;
+        cursor: pointer;
+    }
+
+        .select-image1 i {
+            font-size: 50px;
+            margin: 28% 36%;
+            color: #c0c0c0;
+        }
+    /*2nd*/
+    .image-wrapper {
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 172px !important;
+        height: 131px !important;
+        overflow: hidden;
+    }
+
+        .image-wrapper:hover .select-image {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    .select-image {
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        top: 0;
+        background: rgba(0,0,0,0.5);
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.5s linear;
+        cursor: pointer;
+    }
+
+        .select-image i {
+            font-size: 50px;
+            margin: 28% 36%;
+            color: #c0c0c0;
+        }
+
+    .modal-dialog {
+        width: 80%;
+    }
+</style>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "inputForm" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="form-group" style="margin-left:-15px;margin-right:-15px;">
+                <label class="col-md-12">Name</label>
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>@Microflake.Web.Language.Language.Price</label>
+                @Html.EditorFor(model => model.BuyPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BuyPrice, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>@Microflake.Web.Language.Language.SellPrice</label>
+                @Html.EditorFor(model => model.SellPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SellPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="image-wrapper">
+
+                <img id="imagePreview" src="~/Public/default-image.jpg" />
+                <div class="select-image">
+                    <i class="fa fa-plus"></i>
+                </div>
+            </div>
+            <input type="file" name="Image" class="uploadProfileImage" style="display:none" />
+            @Html.HiddenFor(model => model.Image)
+            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger image-error" })
+            <br />
+        </div>
+    </div>
+
+    <div style="margin-left:-15px;margin-right:-15px;">
+        <div class="form-group">
+            <label class="col-md-12">@Microflake.Web.Language.Language.Category</label>
+            <div class="col-md-12">
+                @Html.DropDownListFor(model => model.CategoryId, null, "Select Category", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label style="margin-left:-15px;margin-right:-15px;" class="col-md-12">@Microflake.Web.Language.Language.Discount</label>
+        @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+    </div>
+}
+<script>
+    $('#inputForm select').select2();
+
+     $(".select-image").click(function () {
+        $(".uploadProfileImage").trigger("click");
+    });
+
+    $(".uploadProfileImage").change(function () {
+        debugger;
+        $(".select-image").html('<i class="fa fa-spinner fa-spin"></i>');
+
+        var profileImage = new FormData();
+        var file = $(this)[0].files[0];
+        profileImage.append("Image", file)
+
+        $.ajax({
+            url: "/@area/CustomColor/upload",
+            type: "post",
+            data: profileImage,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.status) {
+                    $("#Image").val(response.file);
+                    $("#imagePreview").attr("src", "@Config.CustomProducts" + response.file);
+                    $(".select-image").html('<i class="fa fa-plus"></i>');
+                      $(".image-error").html("");
+                } else {
+                    $(".image-error").html(response.message);
+                    $(".select-image").html('<i class="fa fa-plus"></i>');
+                }
+            }
+        });
+    });
+
+</script>

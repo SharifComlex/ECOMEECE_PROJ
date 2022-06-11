@@ -25,6 +25,10 @@ namespace Microflake.Core.Persistence
 
         public DbSet<OrderDetals> OrderDetals { get; set; }
 
+        public DbSet<CustomCategory> CustomCategories { get; set; }
+        public DbSet<CustomColor> CustomColors { get; set; }
+        public DbSet<CustomItem> CustomItems { get; set; }
+        public DbSet<CustomVariation> CustomVariations { get; set; }
 
 
         public DbSet<Product> Products { get; set; }

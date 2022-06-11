@@ -34,3 +34,45 @@ StackTrace   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(T
 
 Inner Exception : Store update, insert, or delete statement affected an unexpected number of rows (0). Entities may have been modified or deleted since entities were loaded. See http://go.microsoft.com/fwlink/?LinkId=472540 for information on understanding and handling optimistic concurrency exceptions.
 ------******------
+DateTime : 06/11/2022 17:43:32
+
+
+MessageA second operation started on this context before a previous asynchronous operation completed. Use 'await' to ensure that any asynchronous operations have completed before calling another method on this context. Any instance members are not guaranteed to be thread safe.
+
+StackTrace   at System.Data.Entity.Internal.ThrowingMonitor.EnsureNotEntered()
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.System.Data.Entity.Infrastructure.IDbAsyncEnumerable<T>.GetAsyncEnumerator()
+   at System.Data.Entity.Internal.Linq.InternalQuery`1.GetAsyncEnumerator()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Data.Entity.Infrastructure.IDbAsyncEnumerable<TResult>.GetAsyncEnumerator()
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ForEachAsync[T](IDbAsyncEnumerable`1 source, Action`1 action, CancellationToken cancellationToken)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ToListAsync[T](IDbAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ToListAsync[T](IDbAsyncEnumerable`1 source)
+   at System.Data.Entity.QueryableExtensions.ToListAsync[TSource](IQueryable`1 source)
+   at Microflake.Core.Application.CustomItems.CustomItemService.<List>d__5.MoveNext() in D:\Microflake\Zeeshan\Caps2022\ECOMEECE_PROJ\FilfyRich\Microflake.Core\Application\CustomItems\CustomItemService.cs:line 62
+DateTime : 06/11/2022 17:52:51
+
+
+MessageA second operation started on this context before a previous asynchronous operation completed. Use 'await' to ensure that any asynchronous operations have completed before calling another method on this context. Any instance members are not guaranteed to be thread safe.
+
+StackTrace   at System.Data.Entity.Internal.ThrowingMonitor.EnsureNotEntered()
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.System.Data.Entity.Infrastructure.IDbAsyncEnumerable<T>.GetAsyncEnumerator()
+   at System.Data.Entity.Internal.Linq.InternalQuery`1.GetAsyncEnumerator()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Data.Entity.Infrastructure.IDbAsyncEnumerable<TResult>.GetAsyncEnumerator()
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ForEachAsync[T](IDbAsyncEnumerable`1 source, Action`1 action, CancellationToken cancellationToken)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ToListAsync[T](IDbAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ToListAsync[T](IDbAsyncEnumerable`1 source)
+   at System.Data.Entity.QueryableExtensions.ToListAsync[TSource](IQueryable`1 source)
+   at Microflake.Core.Application.CustomItems.CustomItemService.<List>d__5.MoveNext() in D:\Microflake\Zeeshan\Caps2022\ECOMEECE_PROJ\FilfyRich\Microflake.Core\Application\CustomItems\CustomItemService.cs:line 62
+DateTime : 06/11/2022 17:53:03
+
+
+MessageA second operation started on this context before a previous asynchronous operation completed. Use 'await' to ensure that any asynchronous operations have completed before calling another method on this context. Any instance members are not guaranteed to be thread safe.
+
+StackTrace   at System.Data.Entity.Internal.ThrowingMonitor.EnsureNotEntered()
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.System.Data.Entity.Infrastructure.IDbAsyncEnumerable<T>.GetAsyncEnumerator()
+   at System.Data.Entity.Internal.Linq.InternalQuery`1.GetAsyncEnumerator()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Data.Entity.Infrastructure.IDbAsyncEnumerable<TResult>.GetAsyncEnumerator()
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ForEachAsync[T](IDbAsyncEnumerable`1 source, Action`1 action, CancellationToken cancellationToken)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ToListAsync[T](IDbAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ToListAsync[T](IDbAsyncEnumerable`1 source)
+   at System.Data.Entity.QueryableExtensions.ToListAsync[TSource](IQueryable`1 source)
+   at Microflake.Core.Application.CustomItems.CustomItemService.<List>d__5.MoveNext() in D:\Microflake\Zeeshan\Caps2022\ECOMEECE_PROJ\FilfyRich\Microflake.Core\Application\CustomItems\CustomItemService.cs:line 62

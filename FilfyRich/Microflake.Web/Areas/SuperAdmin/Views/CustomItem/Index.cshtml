@@ -1,0 +1,147 @@
+﻿@model List<Microflake.Core.ViewModel.CustomItems.ListProduct>
+@{  
+    var routeData = Request.RequestContext.RouteData;
+    var area = routeData.DataTokens["area"].ToString();
+    var ControllerName = routeData.Values["Controller"].ToString();
+    var ControllerPath = "/" + ControllerName;
+    var lang = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+}
+<style>
+    .Image-wrapper{
+         position: relative;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 110px !important;
+            height: 111px !important;
+            overflow: hidden;
+    }
+</style>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/"> @Microflake.Web.Language.Language.Home</a></li>
+                        <li class="breadcrumb-item">@Microflake.Web.Language.Language.Product_Management</li>
+                        <li class="breadcrumb-item active"> @Microflake.Web.Language.Language.List</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Item Management</h4>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body table-responsive">
+                    <p class="sub-header">
+                        <h4 class="card-title">
+                            <button id="btn-add" data-model-title="Add Item" data-model-crud="add" class="btn btn-primary" style="color:#fff"><i class='fa fa-plus'></i> Add Item</button>
+                        </h4>
+                    </p>
+                    <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>@Microflake.Web.Language.Language.Id</th>
+                                <th>@Microflake.Web.Language.Language.Image</th>
+                                <th>@Microflake.Web.Language.Language.Name</th>
+                                <th>@Microflake.Web.Language.Language.Category </th>
+                                <th>@Microflake.Web.Language.Language.Status</th>
+                              @*  <th>@Microflake.Web.Language.Language.IsFeatured</th>*@
+                                <th>@Microflake.Web.Language.Language.Created</th>
+                                <th>@Microflake.Web.Language.Language.Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var columns = [
+            { "data": "Id" },
+            {
+                    "render": function (data, type, full, meta) {
+                        return '<a class="image-link" href="@Config.CustomProducts' + full.Image +'"><img id="image" class="Image-wrapper" src="@Config.CustomProducts' + full.Image  +'" onerror="this.src=\'/public/default-image.jpg\';"/></a>'
+                    }
+                },
+           
+              
+            {
+                    "data": "Name",
+            },
+               {
+                   "data": "CategoryName"
+            },
+                 {
+                    "render": function (data, type, full, meta) {
+                        if (full.Status) {
+                             @if (lang == "iv") {
+                                   @Html.Raw("return \"<span class='center label  label-success'>Enable</span>\";")
+                               }
+                               else if (lang == "ar"){
+                                    @Html.Raw("return \"<span class='center label  label-success'>ممكن</span>\";")
+                               }
+                        } else {
+                            @if (lang == "iv") {
+                                   @Html.Raw("return \"<span class='center label  label-success'>Disable</span>\";")
+                               }
+                               else if (lang == "ar"){
+                                    @Html.Raw("return \"<span class='center label  label-success'>تعطيل</span>\";")
+                               }
+                        }
+                    }
+                },
+              @*{
+                    "render": function (data, type, full, meta) {
+                       if (full.IsFeatured) {
+
+                                   @Html.Raw("return \"<a class='nav-link active'>Featured</a>\";")
+
+                        } else {
+
+                                   @Html.Raw("return \"<span class='center label  label-danger'>Non Featured</span>\";")
+
+                        }
+                    }
+                },*@
+            {
+                "data": "Created",
+                "render": function (data, type, full, meta) {
+
+                    var date = new Date(parseInt(full.Created.replace("/Date(", "").replace(")/", ""), 10));
+                    var day = date.getDate();
+                    var month = date.getMonth() + 1;
+                    var year = date.getFullYear();
+
+                    return day + "-" + month + "-" + year;
+                }
+            },
+               {
+                    "render": function (data, type, full, meta) {
+                        var actions = '';
+                        actions += '<div class="dropdown actions__item">';
+                        actions += '<span data-toggle="dropdown" class="zwicon-more-h"></span>';
+                        actions += '<div class="dropdown-menu dropdown-menu-right">';
+                        actions += '<button data-id="' + full.Id + '" class="btnEdit dropdown-item btn-edit" data-toggle="tooltip" data-model-crud="update" data-placement="left" title="@Microflake.Web.Language.Language.Edit_Data"><i class="fa fa-edit"></i> &nbsp;&nbsp;@Microflake.Web.Language.Language.Edit</button>';
+                        actions += '<button data-id="' + full.Id + '"  class="btnRemove dropdown-item btn-remove"  data-toggle="tooltip" data-placement="left" title="@Microflake.Web.Language.Language.Remove_Data"><i class="fas fa-trash"></i> &nbsp;&nbsp;@Microflake.Web.Language.Language.Remove</button>';
+                        actions += '</div>';
+                        actions += '</div>';
+
+                        return actions;
+                    }
+                }
+        ];
+
+     
+    </script>
+}
