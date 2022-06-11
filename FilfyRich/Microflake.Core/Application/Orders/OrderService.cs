@@ -62,7 +62,7 @@ namespace Microflake.Core.Application.Orders
                     .OrderDetals
                     .Select(x => new ListOrder
                     {
-                        Id = x.Product.Id,
+                        Id = x.OrderId,
                         FirstName = x.Order.FirstName,
                         LastName = x.Order.LastName,
                         PRoductTitle = x.Product.Name,

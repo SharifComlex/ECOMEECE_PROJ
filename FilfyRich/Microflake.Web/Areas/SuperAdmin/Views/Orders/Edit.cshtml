@@ -16,7 +16,6 @@
                <option value="In Progress" @(Model.Status == "In Progress" ? "selected" : string.Empty)>@Microflake.Web.Language.Language.In_Progress</option>
                <option value="Dispatched" @(Model.Status == "Dispatched" ? "selected" : string.Empty)>@Microflake.Web.Language.Language.Dispatched</option>
                <option value="Completed" @(Model.Status == "Completed" ? "selected" : string.Empty)>@Microflake.Web.Language.Language.Completed</option>
-
            </select>
             @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
         </div>
@@ -51,13 +50,13 @@
     </div>*@
 }
 <script>
+    $("select").select2();
     $("#IsPaid").hide();
        $("#switch-1").click(function () {
             debugger;
             var IsFeatured = $("#IsPaid").val();
             if (IsFeatured == "False") {
                 $("#IsPaid").val("True");
-
             } else {
                 $("#IsPaid").val("False");
 
