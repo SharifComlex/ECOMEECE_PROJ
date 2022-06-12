@@ -850,6 +850,7 @@
     <Content Include="content\FrontEnd\style.css" />
     <Content Include="content\images\banner.jpg" />
     <Content Include="content\images\select-caret.svg" />
+    <Content Include="content\js\bideo.js" />
     <Content Include="content\js\bootstrap.min.js" />
     <Content Include="content\js\jquery-3.3.1.min.js" />
     <Content Include="content\js\main.js" />
@@ -864,11 +865,15 @@
     <Content Include="content\js\plugins\jquery.vmap.min.js" />
     <Content Include="content\js\plugins\jquery.vmap.sampledata.js" />
     <Content Include="content\js\plugins\jquery.vmap.world.js" />
+    <Content Include="content\js\plugins\BideoVideo.js" />
     <Content Include="content\js\plugins\moment.min.js" />
     <Content Include="content\js\plugins\pace.min.js" />
     <Content Include="content\js\plugins\select2.min.js" />
     <Content Include="content\js\plugins\sweetalert.min.js" />
     <Content Include="content\js\popper.min.js" />
+    <Content Include="content\night.mp4" />
+    <Content Include="content\pause.png" />
+    <Content Include="content\play.png" />
     <Content Include="content\Site.css" />
     <Content Include="content\vandors\datatables\buttons.bootstrap4.min.css" />
     <Content Include="content\vandors\datatables\buttons.bootstrap4.min.js" />
@@ -902,6 +907,7 @@
     <Content Include="content\vandors\sweetalert2\sweetalert2.min.js" />
     <Content Include="content\vandors\zwicon\fonts\zwicondf5a.svg" />
     <Content Include="content\vandors\zwicon\zwicon.min.css" />
+    <Content Include="content\video_cover.jpeg" />
     <Content Include="FrontWeb\assets\AllCapsAndChips\capswithchips\1-33.jpg" />
     <Content Include="FrontWeb\assets\AllCapsAndChips\capswithchips\1-41.jpg" />
     <Content Include="FrontWeb\assets\AllCapsAndChips\capswithchips\10-24.jpg" />
