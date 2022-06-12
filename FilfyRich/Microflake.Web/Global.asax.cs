@@ -27,6 +27,7 @@ using Microflake.Core.Application.CustomCategories;
 using Microflake.Core.Application.CustomColors;
 using Microflake.Core.Application.CustomItems;
 using Microflake.Core.Application.CustomVariations;
+using Microflake.Core.Application.CustomOrders;
 
 namespace Microflake.Web
 {
@@ -66,7 +67,8 @@ namespace Microflake.Web
             _container.Register<ICustomColorService, CustomColorService>(Lifestyle.Transient);
             _container.Register<ICustomItemService, CustomItemService>(Lifestyle.Transient);
             _container.Register<ICustomVariationService, CustomVariationService>(Lifestyle.Transient);
-            
+
+            _container.Register<ICustomOrderService, CustomOrderService>(Lifestyle.Transient);
             _container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
             
             _container.Verify();

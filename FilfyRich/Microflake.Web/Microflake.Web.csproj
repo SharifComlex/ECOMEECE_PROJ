@@ -1205,6 +1205,7 @@
     <Compile Include="Areas\SuperAdmin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\ContactUsController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\CurrencyController.cs" />
+    <Compile Include="Areas\SuperAdmin\Controllers\CustomOrderController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\CustomVariationsController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\CustomitemController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\DealOfTheWeeksController.cs" />
@@ -1346,6 +1347,8 @@
     <Content Include="Areas\SuperAdmin\Views\CustomVariations\Index.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\CustomColor\GetByCategoryId.cshtml" />
     <Content Include="Areas\SuperAdmin\Views\CustomItem\GetByCategoryId.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\CustomOrder\Index.cshtml" />
+    <Content Include="Areas\SuperAdmin\Views\CustomOrder\Edit.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
