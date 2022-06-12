@@ -1207,6 +1207,7 @@
     <Compile Include="Areas\SuperAdmin\Controllers\SubCategoryController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\SubscriberController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\SuperAdminProfileController.cs" />
+    <Compile Include="Areas\SuperAdmin\Models\CustomItemModel.cs" />
     <Compile Include="Controllers\CurrencyController.cs" />
     <Compile Include="Controllers\CustomProductController.cs" />
     <Compile Include="Controllers\ProductController.cs" />

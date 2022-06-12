@@ -1,23 +1,7 @@
-﻿@{
+﻿@model Microflake.Web.Areas.SuperAdmin.Models.CustomItemModel
+@{
     Layout = "~/Views/Shared/_Layout2.cshtml";
 
-    var chips = new List<string>();
-    chips.Add("/assets/AllCapsAndChips/Chips/10Original/original gold chip/IMG_3368.jpg");
-    chips.Add("/assets/AllCapsAndChips/Chips/13Dice/Gold/20220216_180700.jpeg");
-
-    var caps = new List<string>();
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3041.JPG");
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3042.JPG");
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3043.JPG");
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3044.JPG");
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3045.JPG");
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3046.JPG");
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3047.JPG");
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3048.JPG");
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3050.JPG");
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3051.JPG");
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3052.JPG");
-    caps.Add("/assets/AllCapsAndChips/capsZipped-Final/FR ONLINE CAPS/FrontCaps/IMG_3053.JPG");
 }
 <style>
     .select-chip img, .select-cap img {
@@ -51,13 +35,37 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6">
-                <div class="product-details-tab">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product-details-tab">
 
-                    <div id="img-1" class="zoomWrapper">
-                        <a href="#" style="position:relative;display:block">
-                            <img id="zoom1" src="/assets/AllCapsAndChips/withoutChip/33.png" alt="big-1">
-                            <img id="zoom2" style="position:absolute;left:0px;top:0px;" src="/assets/AllCapsAndChips/withoutChip/33-1.png" alt="">
-                        </a>
+                        <div id="img-1" class="zoomWrapper single-zoom">
+                            <a href="#">
+                                <img id="zoom1" src="" data-zoom-image="">
+                            </a>
+                        </div>
+
+                        <div class="single-zoom-thumb">
+                            <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
+                                <li>
+                                    <a href="#" class="elevatezoom-gallery active" data-update="" data-image="" data-zoom-image="">
+                                        <img src="">
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="#" class="elevatezoom-gallery active" data-update="" data-image="" data-zoom-image="">
+                                        <img src="">
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="#" class="elevatezoom-gallery active" data-update="" data-image="" data-zoom-image="">
+                                        <img src="">
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,82 +98,46 @@
                             <span>Colour</span>
                         </div>
                         <div class="row">
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb select-cap" data-id="33" style="border:solid">
-                                        <img src="/assets/AllCapsAndChips/withoutChip/33.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-3">
-                                <div class="single_portfolio">
-                                    <div class="portfolio_thumb select-cap" data-id="34">
-                                        <img src="/assets/AllCapsAndChips/withoutChip/34.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            @*@foreach (var item in caps)
-                                {
-                                    <div class="col-lg-2 col-md-3">
-                                        <div class="single_portfolio">
-                                            <div class="portfolio_thumb select-cap">
-                                                <img src="@item" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                }*@
-                        </div>
-                        <div class="product_meta chip-title" style="display:block">
-                            <span>Chip </span>
-                        </div>
-                        <div class="chip-wrapper wrapper-33" style="display:block">
-                            <div class="row">
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="single_portfolio">
-                                        <div class="portfolio_thumb select-chip" style="border:solid">
-                                            <img src="/assets/AllCapsAndChips/Chips/10Original/original gold chip/IMG_3368.JPG" data-chip="/assets/AllCapsAndChips/withoutChip/33-1.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="single_portfolio">
-                                        <div class="portfolio_thumb select-chip">
-                                            <img src="/assets/AllCapsAndChips/Chips/10Original/original gold chip/IMG_3369.png" data-chip="/assets/AllCapsAndChips/withoutChip/33-2.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chip-wrapper wrapper-34">
-                            <div class="row">
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="single_portfolio">
-                                        <div class="portfolio_thumb select-chip">
-                                            <img src="/assets/AllCapsAndChips/Chips/10Original/original gold chip/IMG_3368.JPG" data-chip="/assets/AllCapsAndChips/withoutChip/34-1.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-3">
-                                    <div class="single_portfolio">
-                                        <div class="portfolio_thumb select-chip">
-                                            <img src="/assets/AllCapsAndChips/Chips/10Original/original gold chip/IMG_3369.png" data-chip="/assets/AllCapsAndChips/withoutChip/34-2.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @*@foreach (var item in chips)
+                            @foreach (var item in Model.Colors)
                             {
                                 <div class="col-lg-2 col-md-3">
                                     <div class="single_portfolio">
-                                        <div class="portfolio_thumb select-chip">
-                                            <img src="@item" alt="">
+                                        <div class="portfolio_thumb select-cap" data-id="@item.Id">
+                                            <img src="@(Config.CustomProducts +  item.Image)" alt="">
                                         </div>
                                     </div>
                                 </div>
-                            }*@
+                            }
+                        </div>
+                        <div class="product_meta chip-title" style="display:block">
+                            <span>Front Chip</span>
+                        </div>
                         <div class="row">
-
+                            @foreach (var item in Model.Items)
+                            {
+                                <div class="col-lg-2 col-md-3">
+                                    <div class="single_portfolio">
+                                        <div class="portfolio_thumb select-chip1">
+                                            <img src="@(Config.CustomProducts +  item.Image)" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="product_meta chip-title" style="display:block">
+                            <span>Bottom Chip</span>
+                        </div>
+                        <div class="row">
+                            @foreach (var item in Model.Items)
+                            {
+                                <div class="col-lg-2 col-md-3">
+                                    <div class="single_portfolio">
+                                        <div class="portfolio_thumb select-chip2">
+                                            <img src="@(Config.CustomProducts +  item.Image)" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
 
                         <div class="product_variant quantity">
@@ -317,8 +289,20 @@
 
 @section Scripts{
     <script>
-        $(".select-chip").click(function () {
-            $(".select-chip").each(function () {
+
+        $(".select-chip1").click(function () {
+            $(".select-chip1").each(function () {
+                $(this).css({ "border": "none" });
+            })
+
+            $(this).css({ "border": "solid" });
+
+            var url = $(this).find("img").attr("data-chip");
+            $("#zoom2").attr("src", url);
+        });
+
+        $(".select-chip2").click(function () {
+            $(".select-chip2").each(function () {
                 $(this).css({ "border": "none" });
             })
 
@@ -335,20 +319,10 @@
 
             $(this).css({ "border": "solid" });
 
-            $("#zoom2").attr("src", "");
             var url = $(this).find("img").attr("src");
             $("#zoom1").attr("src", url);
-
-            $(".chip-wrapper").hide();
-            $(".chip-title").hide();
-
-            $(".select-chip").each(function () {
-                $(this).css({ "border": "none" });
-            })
-
-            var id = $(this).attr("data-id");
-            $(".wrapper-" + id).show();
-            $(".chip-title").show();
+            $("#zoom1").attr("data-zoom-image", url);
         });
+
     </script>
 }
