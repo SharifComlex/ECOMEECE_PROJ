@@ -133,6 +133,8 @@
     <Compile Include="Domain\CustomCategory.cs" />
     <Compile Include="Domain\CustomColor.cs" />
     <Compile Include="Domain\CustomItem.cs" />
+    <Compile Include="Domain\CustomOrder.cs" />
+    <Compile Include="Domain\CustomOrderDetail.cs" />
     <Compile Include="Domain\CustomVariation.cs" />
     <Compile Include="Domain\Notification.cs" />
     <Compile Include="Domain\Order.cs" />
