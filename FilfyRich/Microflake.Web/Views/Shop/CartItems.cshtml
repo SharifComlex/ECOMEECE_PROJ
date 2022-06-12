@@ -41,21 +41,22 @@
                                         var rate = item.Product.SellPrice * ViewBag.Currency;
                                         var discount = item.Product.Discount * ViewBag.Currency;
                                         <tr>
-                                        <td class="product_thumb"><a href="#"><img src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';"></a></td>
-                                        <td class="product-price">£ @rate </td>
-                                        <td class="product_quantity"> 
-                                        <a href="/shop/RemoveFromCart/@item.ProductId">
+                                            <td class="product_thumb"><a href="#"><img src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';"></a></td>
+                                            <td class="product-price">£ @rate </td>
+                                            <td class="product_quantity">
+                                                <a href="/shop/RemoveFromCart/@item.ProductId">
                                                     <input type="button" value="-" class="minus" id="min">
-                                          </a>
+                                                </a>
                                                 <input name="qty" readonly type="text" value="@item.Count" class="qty quantity">
                                                 <a href="/shop/AddToCart/@item.ProductId">
                                                     <input type="button" value="+" class="plus" id="plus">
-                                                </a></td>
-                                       <td class="product_total"><a href="@Url.Action("RemoveFromCart", "Shop", new { id = item.ProductId })"><i class="fa fa-times"></i></a></td>
+                                                </a>
+                                            </td>
+                                            <td class="product_total"><a href="@Url.Action("RemoveFromCart", "Shop", new { id = item.ProductId })"><i class="fa fa-times"></i></a></td>
 
 
-                                            </tr>
-                                        
+                                        </tr>
+
                                     }
                                 </tbody>
                             </table>
@@ -64,22 +65,30 @@
                     </div>
                 </div>
             </div>
-
-        </form>
-        <div class="row">
-            <div class="col-12">
-                <div class="wishlist_share">
-                    <h4>Share on:</h4>
-                    <ul>
-                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                        <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-                        <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
+            <div class="coupon_area">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="checkout_btn">
+                            <a href="/shop/Index">Continue Shopping</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="coupon_code right">
+                            <h3>Cart Totals</h3>
+                            <div class="coupon_inner">
+                                <div class="cart_subtotal">
+                                    <p>Total</p>
+                                    <p class="cart_amount">@Model.Total</p>
+                                </div>
+                                <div class="checkout_btn">
+                                    <a href="/shop/Checkout">Proceed to Checkout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
 
     </div>
 </div>
@@ -87,7 +96,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form action="#" class="cart-table">
+                <form action="#" class="cart-table">jj
                     <div class="table-content table-responsive">
                         <table class="table">
                             <thead>
