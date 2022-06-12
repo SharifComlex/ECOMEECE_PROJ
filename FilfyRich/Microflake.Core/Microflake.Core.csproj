@@ -105,6 +105,8 @@
     <Compile Include="Application\ContactUs\IContactUsService.cs" />
     <Compile Include="Application\Currencies\CurrencyService.cs" />
     <Compile Include="Application\Currencies\ICurrencyService.cs" />
+    <Compile Include="Application\CustomOrders\CustomOrderService.cs" />
+    <Compile Include="Application\CustomOrders\ICustomOrderService.cs" />
     <Compile Include="Application\CustomVariations\CustomVariationService.cs" />
     <Compile Include="Application\CustomVariations\ICustomVariationService.cs" />
     <Compile Include="Application\CustomItems\CustomItemService.cs" />
@@ -179,6 +181,8 @@
     <Compile Include="ViewModel\CustomCategories\EditCategory.cs" />
     <Compile Include="ViewModel\CustomCategories\ListCategory.cs" />
     <Compile Include="ViewModel\CustomCategories\Validations\CategoryDuplicateName.cs" />
+    <Compile Include="ViewModel\CustomOrder\EditCustomOrder.cs" />
+    <Compile Include="ViewModel\CustomOrder\ListCustomOrder.cs" />
     <Compile Include="ViewModel\CustomVariations\CreateVariation.cs" />
     <Compile Include="ViewModel\CustomVariations\EditVariation.cs" />
     <Compile Include="ViewModel\CustomVariations\ListVariation.cs" />
