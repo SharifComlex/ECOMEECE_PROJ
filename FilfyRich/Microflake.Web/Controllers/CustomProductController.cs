@@ -52,7 +52,7 @@ namespace Microflake.Web.Controllers
                            .FirstOrDefaultAsync(x => x.CustomColorId == productId && x.CustomItemId == frontChip);
 
             if (frontChip != backChip) {
-                model.BackChip = await _context.CustomVariations
+                model.CapBackChip = await _context.CustomVariations
                                .FirstOrDefaultAsync(x => x.CustomColorId == productId && x.CustomItemId == backChip);
             }
 
@@ -62,39 +62,87 @@ namespace Microflake.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Checkout(CustomCheckout model)
         {
+            var _context = new ApplicationDbContext();
+
             if (!ModelState.IsValid)
             {
-                var _context = new ApplicationDbContext();
-
                 model.Product = await _context.CustomVariations
-                               .FirstOrDefaultAsync(x => x.CustomColorId == model.ProductId && x.CustomItemId == model.FrontChipId);
+                              .FirstOrDefaultAsync(x => x.CustomColorId == model.ProductId && x.CustomItemId == model.FrontChipId);
 
                 if (model.FrontChipId != model.BackChipId)
                 {
-                    model.BackChip = await _context.CustomVariations
+                    model.CapBackChip = await _context.CustomVariations
                                    .FirstOrDefaultAsync(x => x.CustomColorId == model.ProductId && x.CustomItemId == model.BackChipId);
                 }
 
                 return View(model);
             }
 
-            var result = await cart.CheckoutAsync(model, User.Identity.GetUserId());
+            model.Product = await _context.CustomVariations
+                              .FirstOrDefaultAsync(x => x.CustomColorId == model.ProductId && x.CustomItemId == model.FrontChipId);
+
+            if (model.FrontChipId != model.BackChipId)
+            {
+                model.CapBackChip = await _context.CustomVariations
+                               .FirstOrDefaultAsync(x => x.CustomColorId == model.ProductId && x.CustomItemId == model.BackChipId);
+            }
+
+            var order = new CustomOrder()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Address = model.Address,
+                City = model.City,
+                PostalCode = model.PostalCode,
+                Country = model.Country,
+                Phone = model.Phone,
+                Email = model.Email,
+                TransactionId = "",
+                Status = "Pending",
+                PaymentStatus = "UnPaid",
+                OrderDate = DateTime.Now
+            };
+
+            var productPrice = model.Product.CustomColor.SellPrice;
+            var frontChipPrice = model.Product.CustomItem.SellPrice;
+            var backChipPrice = 0f;
+
+            if (model.FrontChipId != model.BackChipId)
+            {
+                backChipPrice = model.CapBackChip.CustomItem.SellPrice;
+            }
+            else
+            {
+                backChipPrice = model.Product.CustomItem.SellPrice;
+            }
+
+            order.Total = (productPrice + frontChipPrice + backChipPrice) * model.Qty;
+
+            _context.CustomOrders.Add(order);
+            var result = await _context.SaveChangesAsync();
 
             if (result > 0)
             {
-
-                StripeConfiguration.ApiKey = "sk_test_wfSHnvBhrhUVB9pmt1b1DyKz00q1skyVH4";
-
-                try
+                var orderItem = new CustomOrderDetail()
                 {
-                    using (var _db = new ApplicationDbContext())
+                   CustomColorId = model.ProductId,
+                   CustomItem1Id = model.FrontChipId,
+                   CustomItem2Id = model.BackChipId,
+                   Quantity = model.Qty,
+                   OrderId = order.OrderId
+                };
+
+                _context.CustomOrderDetails.Add(orderItem);
+                result = await _context.SaveChangesAsync();
+
+                if (result > 0) {
+                    StripeConfiguration.ApiKey = "sk_test_wfSHnvBhrhUVB9pmt1b1DyKz00q1skyVH4";
+
+                    try
                     {
-
-                        var orderDetail = _db.Orders.FirstOrDefault(x => x.OrderId == result);
-
                         var options = new ChargeCreateOptions
                         {
-                            Amount = (long)orderDetail.Total,
+                            Amount = (long)order.Total,
                             Currency = "GBP",
                             Description = model.FirstName + " " + model.LastName + ", OrderId =  " + result,
                             Source = model.stripeToken,
@@ -105,47 +153,35 @@ namespace Microflake.Web.Controllers
 
                         if (charge.Captured)
                         {
-                            orderDetail.TransactionId = charge.Id;
-                            orderDetail.PaymentStatus = "Paid";
+                            var updateOrderItem = await _context.CustomOrderDetails.FirstOrDefaultAsync(x => x.OrderDetailId == orderItem.OrderDetailId);
 
-                            _db.Entry(orderDetail).State = EntityState.Modified;
-                            if (_db.SaveChanges() > 0)
+                            updateOrderItem.TransactionId = charge.Id;
+                            updateOrderItem.PaymentStatus = "Paid";
+
+                            _context.Entry(updateOrderItem).State = EntityState.Modified;
+                            
+                            if (_context.SaveChanges() > 0)
                             {
-
-                                await cart.EmptyCartItemsAsync();
-
-                                Response.Cookies["ShoppingCart"].Expires = DateTime.UtcNow;
                                 return RedirectToAction("index");
                             }
                         }
 
-                        _db.Orders.Remove(orderDetail);
-                        _db.SaveChanges();
+                        _context.CustomOrders.Remove(order);
+                        _context.SaveChanges();
+                    }
+                    catch (StripeException ex)
+                    {
+                        ModelState.AddModelError("stripeToken", ex.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("stripeToken", ex.Message);
                     }
                 }
-                catch (StripeException ex)
-                {
-                    ModelState.AddModelError("stripeToken", ex.Message);
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("stripeToken", ex.Message);
-                }
-
-                model.Items = items;
-                model.Total = CalcuateCart(items);
-                model.User = UserManager.FindById(User.Identity.GetUserId());
-
-                return View(model);
             }
-            else
-            {
-                model.Items = items;
-                model.Total = CalcuateCart(items);
-                model.User = UserManager.FindById(User.Identity.GetUserId());
 
-                return View(model);
-            }
+            return View(model);
+
         }
     }
 }

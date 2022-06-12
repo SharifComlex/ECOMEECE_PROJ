@@ -12,11 +12,11 @@ namespace Microflake.Web.Models
         public long ProductId { get; set; }
         public long FrontChipId { get; set; }
         public long BackChipId { get; set; }
-        public long Qty { get; set; }
+        public int Qty { get; set; }
 
 
         public CustomVariation Product { get; set; }
-        public CustomVariation BackChip { get; set; }
+        public CustomVariation CapBackChip { get; set; }
 
         [Required]
         [Display(Name = "First Name")]

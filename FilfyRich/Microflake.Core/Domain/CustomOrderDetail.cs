@@ -22,5 +22,8 @@ namespace Microflake.Core.Domain
         public long? CustomItem2Id { get; set; }
         public virtual CustomItem CustomItem2 { get; set; }
         public virtual CustomOrder Order { get; set; }
+
+        public string TransactionId { get; set; }
+        public string PaymentStatus { get; set; }
     }
 }

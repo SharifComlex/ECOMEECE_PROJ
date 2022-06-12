@@ -109,17 +109,17 @@
                                                     <td>@Model.Product.CustomItem.SellPrice GBP</td>
                                                     @{ frontChipPrice = Model.Product.CustomItem.SellPrice;}
                                                 </tr>
-                                                @if (Model.BackChip != null)
+                                                @if (Model.CapBackChip != null)
                                                 {
                                                     <tr>
 
                                                         <td>
-                                                            <img id="imagePreview" src="@Config.CustomProducts@(Model.BackChip.CustomItem.Image)" style="height:100px; width:100px;" />
+                                                            <img id="imagePreview" src="@Config.CustomProducts@(Model.CapBackChip.CustomItem.Image)" style="height:100px; width:100px;" />
 
                                                         </td>
-                                                        <td>@Model.BackChip.CustomItem.Name</td>
-                                                        <td>@Model.BackChip.CustomItem.SellPrice GBP</td>
-                                                        @{ backChipPrice = Model.BackChip.CustomItem.SellPrice;}
+                                                        <td>@Model.CapBackChip.CustomItem.Name</td>
+                                                        <td>@Model.CapBackChip.CustomItem.SellPrice GBP</td>
+                                                        @{ backChipPrice = Model.CapBackChip.CustomItem.SellPrice;}
                                                     </tr>
                                                 }
                                                 else
