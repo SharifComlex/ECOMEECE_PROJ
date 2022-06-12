@@ -203,15 +203,14 @@
     
     /*---single product activation---*/
     $('.single-product-active').owlCarousel({
-        autoplay: true,
-		loop: true,
-        nav: true,
         autoplay: false,
-        autoplayTimeout: 8000,
-        items: 4,
+        loop: false,
+        nav: false,
+        autoplay: false,
+        items: 3,
         margin:15,
         dots:false,
-        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        //navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
         responsiveClass:true,
 		responsive:{
 				0:{

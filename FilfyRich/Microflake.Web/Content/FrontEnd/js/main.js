@@ -149,8 +149,9 @@ $('.our-brand-active').owlCarousel({
     owl active
 --------------------------- */    
 $('.single-product-active').owlCarousel({
-    loop:true,
-    items:1,
+    loop:false,
+    items: 1,
+    rewind: true,
     autoplay: false,
     dots:false,
     nav:false,

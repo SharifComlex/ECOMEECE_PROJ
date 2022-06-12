@@ -301,15 +301,14 @@
         ).done(function (response) {
             $("#ColorId").html(response);
 
-        });
-
-        $.ajax(
+            $.ajax(
         {
                 url: "/@area/CustomItem/GetByCategoryId?Id=" + id
         }
         ).done(function (response) {
             $("#ItemId").html(response);
 
+        });
         });
 });
 </script>

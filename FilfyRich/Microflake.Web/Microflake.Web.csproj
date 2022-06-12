@@ -1233,6 +1233,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Language.resx</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomCheckout.cs" />
     <Compile Include="Models\GlobalizationLang.cs" />
     <Compile Include="Models\PeakViewModel.cs" />
     <Compile Include="Models\StripPayModel.cs" />
@@ -1391,6 +1392,7 @@
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Shop\Pay.cshtml" />
     <Content Include="Views\CustomProduct\Index.cshtml" />
+    <Content Include="Views\CustomProduct\Checkout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

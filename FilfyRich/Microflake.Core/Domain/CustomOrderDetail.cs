@@ -17,9 +17,9 @@ namespace Microflake.Core.Domain
         public double UnitPrice { get; set; }
         public long CategoryId { get; set; }
         public virtual CustomColor CustomColor { get; set; }
-        public long CustomItem1Id { get; set; }
+        public long? CustomItem1Id { get; set; }
         public virtual CustomItem CustomItem1 { get; set; }
-        public long CustomItem2Id { get; set; }
+        public long? CustomItem2Id { get; set; }
         public virtual CustomItem CustomItem2 { get; set; }
         public virtual CustomOrder Order { get; set; }
     }
