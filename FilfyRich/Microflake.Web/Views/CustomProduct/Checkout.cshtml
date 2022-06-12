@@ -141,7 +141,7 @@
                                                     <th>Order Total</th>
                                                     <th></th>
                                                     @{
-                                                        var Total = (prodcutPrice + frontChipPrice + backChipPrice);
+                                                        var Total = (prodcutPrice + frontChipPrice + backChipPrice) * Model.Qty;
                                                     }
                                                     <th><strong>@Total</strong> GBP</th>
                                                 </tr>
