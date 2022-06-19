@@ -79,8 +79,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="product_d_right">
-                    <form action="/CustomProduct/Checkout" method="get">
-
+                    <form id="CustomAddToCart" action="/Shop/CustomAddToCart" method="get">
                         <h1>Cap Builder</h1>
                         <div class="product_meta">
                             <span>Colour</span>
@@ -90,9 +89,8 @@
                             {
                                 <div class="col-lg-2 col-md-3">
                                     <div class="single_portfolio">
-                                        <div class="portfolio_thumb select-cap" data-id="@item.Id">
-                                            <img src="@(Config.CustomProducts +  item.Image)" alt="">
-                                            <label>@item.SellPrice GBP</label>
+                                        <div id="select-cap-@item.Id" class="portfolio_thumb select-cap" data-id="@item.Id">
+                                            <img src="@(Config.Products +  item.Image)" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -107,8 +105,7 @@
                                 <div class="col-lg-2 col-md-3">
                                     <div class="single_portfolio">
                                         <div class="portfolio_thumb select-chip1" data-id="@item.Id">
-                                            <img src="@(Config.CustomProducts +  item.Image)" alt="">
-                                            <label>@item.SellPrice GBP</label>
+                                            <img src="@(Config.Products +  item.Image)" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -123,8 +120,7 @@
                                 <div class="col-lg-2 col-md-3">
                                     <div class="single_portfolio">
                                         <div class="portfolio_thumb select-chip2" data-id="@item.Id">
-                                            <img src="@(Config.CustomProducts +  item.Image)" alt="">
-                                            <label>@item.SellPrice GBP</label>
+                                            <img src="@(Config.Products +  item.Image)" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +131,7 @@
                             <input name="qty" min="1" max="100" value="1" type="number">
                         </div>
                         <div class="product_variant quantity" style="margin-left:-15px">
-                            <button class="button" type="submit">buy now</button>
+                            <button class="button" type="submit">Add to Cart</button>
                         </div>
                         <input id="productId" type="hidden" value="" name="productId"/>
                         <input id="frontChip" type="hidden" value="" name="frontChip"/>
@@ -167,6 +163,11 @@
 
         $(".select-chip1").click(function () {
             $(".select-chip1").each(function () {
+                $(this).css({ "border": "none" });
+            })
+
+
+            $(".select-chip2").each(function () {
                 $(this).css({ "border": "none" });
             })
 
@@ -234,6 +235,7 @@
             $(".select-chip2").each(function () {
                 $(this).css({ "border": "none" });
             })
+
             $(this).css({ "border": "solid" });
 
             var url = $(this).find("img").attr("src");
@@ -262,5 +264,29 @@
             $("#zoom1").attr("src", url);
             $("#zoom1").attr("data-zoom-image", url);
         });
+
+        $("#CustomAddToCart").submit(function (ev) {
+            if (productId > 0 && frontChip > 0 && backChip > 0) {
+
+            }
+            else {
+                ev.preventDefault();
+                alert("Complete the requirment")
+            }
+        });
+    </script>
+
+    <script>
+        @{ var id = Request.QueryString["Id"];}
+
+        $("#select-cap-@id").css({ "border": "solid" });
+
+        var url = $("#select-cap-@id").find("img").attr("src");
+        $("#zoom1").attr("src", url);
+        $("#zoom1").attr("data-zoom-image", url);
+
+        productId = $("#select-cap-@id").attr("data-id");
+
+        $("#productId").val(productId);
     </script>
 }

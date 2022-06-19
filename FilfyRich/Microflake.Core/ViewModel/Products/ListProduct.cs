@@ -36,6 +36,10 @@ namespace Microflake.Core.ViewModel.Products
      
         public bool IsNew { get; set; }
 
+        public bool IsHasVariation { get; set; }
+        public bool IsVariationOverlay { get; set; }
+
+
         public bool Status { get; set; }
         public string CategoryName { get; set; }
         public DateTime Created { get; set; }

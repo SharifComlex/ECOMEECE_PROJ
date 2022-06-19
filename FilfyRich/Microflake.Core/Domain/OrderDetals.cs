@@ -12,12 +12,20 @@ namespace Microflake.Core.Domain
         [Key]
         public int OrderDetailId { get; set; }
 
-        public int OrderId { get; set; }
-        public long ProductId { get; set; }
+        public bool IsCustom { get; set; }
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
 
+        public long ProductId { get; set; }
         public virtual Product Product { get; set; }
+
+        public long? FrontBadgeId { get; set; }
+        public virtual Product FrontBadge { get; set; }
+
+        public long? BackBadgeId { get; set; }
+        public virtual Product BackBadge { get; set; }
+
+        public int OrderId { get; set; }
         public virtual Order Order { get; set; }
     }
 }

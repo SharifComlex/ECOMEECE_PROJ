@@ -347,6 +347,15 @@ namespace Microflake.Web.Controllers
             return RedirectToAction("CartItems");
         }
 
+        public async Task<ActionResult> CustomAddToCart(int productId, int frontChip,int backChip)
+        {
+            var cart = new ShopService(HttpContext);
+
+            await cart.AddAsync(productId, frontChip, backChip);
+
+            return RedirectToAction("CartItems");
+        }
+
         public async Task<ActionResult> RemoveFromCart(int id)
         {
             var cart = new ShopService(HttpContext);

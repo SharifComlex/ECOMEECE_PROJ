@@ -5,7 +5,7 @@ namespace Microflake.Web.Areas.SuperAdmin.Models
 {
     public class CustomItemModel
     {
-        public List<CustomColor> Colors { get; set; }
-        public List<CustomItem> Items { get; set; }
+        public List<Product> Colors { get; set; }
+        public List<Product> Items { get; set; }
     }
 }

@@ -7,14 +7,11 @@ namespace Microflake.Core.Domain
     {
         public long Id { get; set; }
         
-        public long? CategoryId { get; set; }
-        public virtual CustomCategory Category { get; set; }
+        public long? CapId { get; set; }
+        public virtual Product Cap { get; set; }
 
-        public long? CustomColorId { get; set; }
-        public virtual CustomColor CustomColor { get; set; }
-
-        public long? CustomItemId { get; set; }
-        public virtual CustomItem CustomItem { get; set; }
+        public long? BadgeId { get; set; }
+        public virtual Product Badge { get; set; }
 
         [Column(TypeName = "varchar")]
         [MaxLength(190)]

@@ -7,10 +7,8 @@ using Microflake.Core.ViewModel.CustomVariations;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace Microflake.Core.Application.CustomVariations
 {
@@ -36,12 +34,11 @@ namespace Microflake.Core.Application.CustomVariations
                     .Select(x => new ListVariation
                     {
                         Id = x.Id,
-                        CategoryName = x.Category.Name,
-                        ColorName = x.CustomColor.Name,
-                        ItemName = x.CustomItem.Name,
+                        ColorName = x.Cap.Name,
+                        ItemName = x.Badge.Name,
                         FrontImage = x.FrontImage,
                         BackImage = x.BackImage,
-
+                        BottomImage = x.BottomImage
                     }).ToListAsync();
 
                 return _response.Create(true, "All record has been fetched", list);
@@ -61,9 +58,8 @@ namespace Microflake.Core.Application.CustomVariations
                 
                 var entity = new CustomVariation();
 
-                entity.CategoryId = model.CategoryId;
-                entity.CustomColorId = model.ColorId;
-                entity.CustomItemId = model.ItemId;
+                entity.CapId = model.ColorId;
+                entity.BadgeId = model.ItemId;
 
                 _context.CustomVariations.Add(entity);
 
@@ -118,9 +114,8 @@ namespace Microflake.Core.Application.CustomVariations
                 return _response.Create(true, "Fetched", new EditVariation
                 {
                     Id = entity.Id,
-                    CategoryId = entity.CategoryId,
-                    ColorId = entity.CustomColorId,
-                    ItemId = entity.CustomItemId,
+                    ColorId = entity.CapId,
+                    ItemId = entity.BadgeId,
                     FrontImage = entity.FrontImage,
                     BottomImage = entity.BackImage,
                     BackImage = entity.BackImage
@@ -144,9 +139,8 @@ namespace Microflake.Core.Application.CustomVariations
                     return _response.Create(false, "id deos not exits in the system", new ListVariation());
                 }
 
-                entity.CategoryId = model.CategoryId;
-                entity.CustomColorId = model.ColorId;
-                entity.CustomItemId = model.ItemId;
+                entity.CapId = model.ColorId;
+                entity.BadgeId = model.ItemId;
 
                 _context.Entry(entity).State = EntityState.Modified;
 
@@ -224,12 +218,11 @@ namespace Microflake.Core.Application.CustomVariations
                      .Select(x => new ListVariation
                      {
                          Id = x.Id,
-                         CategoryName =  x.Category.Name,
-                         ColorName = x.CustomColor.Name,
-                         ItemName = x.CustomItem.Name,
+                         ColorName = x.Cap.Name,
+                         ItemName = x.Badge.Name,
                          FrontImage = x.FrontImage,
                          BackImage = x.BackImage,
-                         BottomImage = x.BottomImage,
+                         BottomImage = x.BottomImage
                      }).SingleOrDefaultAsync(x => x.Id == Id);
         }
 

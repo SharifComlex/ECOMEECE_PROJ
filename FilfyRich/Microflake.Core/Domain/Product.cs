@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microflake.Core.Domain
 {
@@ -39,8 +35,10 @@ namespace Microflake.Core.Domain
         [MaxLength(190)]
         public string Image1 { get; set; }
 
+        public bool IsHasVariation { get; set; }
+        public bool IsVariationOverlay { get; set; }
+
         public bool IsPaid { get; set; }
-        // For Deal Of The Week
 
         public bool DealOfTheWeek { get; set; }
         
