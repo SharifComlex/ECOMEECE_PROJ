@@ -1,7 +1,116 @@
-﻿
+﻿@model List<Microflake.Core.ViewModel.CustomOrder.ListCustomOrder>
 @{
-    ViewBag.Title = "Index";
+    var routeData = Request.RequestContext.RouteData;
+    var area = routeData.DataTokens["area"].ToString();
+    var ControllerName = routeData.Values["Controller"].ToString();
+    var ControllerPath = "/" + ControllerName;
+    var lang = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
 }
+<style>
+    .Image-wrapper {
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 110px !important;
+        height: 111px !important;
+        overflow: hidden;
+    }
+</style>
+<div class="container-fluid">
 
-<h2>Index</h2>
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/"> @Microflake.Web.Language.Language.Home</a></li>
+                        <li class="breadcrumb-item">@Microflake.Web.Language.Language.Order_Management</li>
+                        <li class="breadcrumb-item active"> @Microflake.Web.Language.Language.List</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">@Microflake.Web.Language.Language.Order_Management</h4>
+            </div>
+        </div>
+    </div>
 
+
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body table-responsive">
+                    @*<p class="sub-header">
+                            <h4 class="card-title">
+                                <button id="btn-add" data-model-title="Add Product " data-model-crud="add" class="btn btn-primary" style="color:#fff"><i class='fa fa-plus'></i> Add New</button>
+                            </h4>
+                        </p>*@
+                    <table id="data-table" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>@Microflake.Web.Language.Language.FirstName</th>
+                                <th>@Microflake.Web.Language.Language.LastName</th>
+                                <th>Cap</th>
+                                <th>Front Chip</th>
+                                <th>Back Chip</th>
+                                <th>@Microflake.Web.Language.Language.Product Title </th>
+                                <th>@Microflake.Web.Language.Language.Qty</th>
+
+                                <th>@Microflake.Web.Language.Language.Total</th>
+                                <th>@Microflake.Web.Language.Language.Order Status</th>
+                                <th>@Microflake.Web.Language.Language.Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var columns = [
+            { "data": "FirstName" },
+             { "data": "LastName" },
+             {
+                    "render": function (data, type, full, meta) {
+                     return '<a class="image-link" href="@Config.CustomProducts' + full.CustomColorId + '"><img id="image" class="Image-wrapper" src="@Config.CustomProducts' + full.CustomColorId  +'" onerror="this.src=\'/public/default-image.jpg\';"/></a>'
+                    }
+            },
+              {
+                    "render": function (data, type, full, meta) {
+                      return '<a class="image-link" href="@Config.CustomProducts' + full.CustomItem1Id + '"><img id="image" class="Image-wrapper" src="@Config.CustomProducts' + full.CustomItem1Id  +'" onerror="this.src=\'/public/default-image.jpg\';"/></a>'
+                    }
+            },
+               {
+                    "render": function (data, type, full, meta) {
+                       return '<a class="image-link" href="@Config.CustomProducts' + full.CustomItem2Id + '"><img id="image" class="Image-wrapper" src="@Config.CustomProducts' + full.CustomItem2Id  +'" onerror="this.src=\'/public/default-image.jpg\';"/></a>'
+                    }
+              },
+             { "data": "PRoductTitle" },
+             { "data": "Quanty" },
+
+             { "data": "Total" },
+             { "data": "Status" },
+
+
+              {
+                    "render": function (data, type, full, meta) {
+                        var actions = '';
+                        actions += '<div class="dropdown actions__item">';
+                        actions += '<span data-toggle="dropdown" class="zwicon-more-h"></span>';
+                        actions += '<div class="dropdown-menu dropdown-menu-right">';
+                        actions += '<button data-id="' + full.Id + '" class="btnEdit dropdown-item btn-edit" data-toggle="tooltip" data-model-crud="update" data-placement="left" title="@Microflake.Web.Language.Language.Edit_Data"><i class="fa fa-edit"></i> &nbsp;&nbsp;@Microflake.Web.Language.Language.Edit</button>';
+                        actions += '<button data-id="' + full.Id + '"  class="btnRemove dropdown-item btn-remove"  data-toggle="tooltip" data-placement="left" title="@Microflake.Web.Language.Language.Remove_Data"><i class="fas fa-trash"></i> &nbsp;&nbsp;@Microflake.Web.Language.Language.Remove</button>';
+                        actions += '</div>';
+                        actions += '</div>';
+
+                        return actions;
+                    }
+                }
+        ];
+
+
+    </script>
+}

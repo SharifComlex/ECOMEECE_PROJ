@@ -33,7 +33,7 @@ namespace Microflake.Core.Application.CustomOrders
             try
             {
                 var entity = await _context
-                    .Orders
+                    .CustomOrders
                     .FirstOrDefaultAsync(x => x.OrderId == id);
 
                 if (entity != null)
@@ -75,7 +75,7 @@ namespace Microflake.Core.Application.CustomOrders
 
                         CustomItem1Id = x.CustomItem1.Image,
 
-                        CustomItem2Id = x.CustomColor.Image,
+                        CustomItem2Id = x.CustomItem2.Image,
                     })
                     .AsNoTracking()
                     .ToListAsync();
@@ -92,7 +92,7 @@ namespace Microflake.Core.Application.CustomOrders
         {
             try
             {
-                var entity = _context.Orders.Find(model.Id);
+                var entity = _context.CustomOrders.Find(model.Id);
 
 
                 entity.CreatedAt = DateTime.Now;

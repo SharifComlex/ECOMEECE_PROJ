@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microflake.Core.Domain
 {
-   public class CustomOrder
+   public class CustomOrder : BaseEntity
     {
 
         [Key]
