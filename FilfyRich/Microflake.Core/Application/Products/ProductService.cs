@@ -51,7 +51,9 @@ namespace Microflake.Core.Application.Products
                         Image = x.Image,
                         Image1 = x.Image1,
                         Discount = x.Discount,
-                        Qty = x.Qty
+                        Qty = x.Qty,
+                        IsHasVariation = x.IsHasVariation,
+                        IsVariationOverlay = x.IsVariationOverlay
 
                     }).ToListAsync();
 
@@ -293,7 +295,7 @@ namespace Microflake.Core.Application.Products
         {
             try
             {
-                var entity = await _context.Products.SingleOrDefaultAsync(x => x.Id == id);
+                var entity = await _context.Products.Include(x=> x.SubCategory.Category).SingleOrDefaultAsync(x => x.Id == id);
 
                 if (entity == null)
                 {
@@ -305,6 +307,7 @@ namespace Microflake.Core.Application.Products
                    Id=entity.Id,
                    SellPrice =entity.SellPrice,
                     Status = entity.Status,
+                    CategoryId = entity.SubCategory.CategoryId,
                     SubCategoryId = entity.SubCategoryId,
                     Price= entity.Price,
                     Description = entity.Description,
@@ -314,8 +317,9 @@ namespace Microflake.Core.Application.Products
                     ProductImage = entity.Image,
                   ProductImage1 = entity.Image1,
                   Qty = entity.Qty ,
-                  Discount = entity.Discount
-
+                  Discount = entity.Discount,
+                  IsHasVariation = entity.IsHasVariation,
+                  IsVariationOverlay = entity.IsVariationOverlay
                 });
             }
             catch (Exception ex)
@@ -342,6 +346,9 @@ namespace Microflake.Core.Application.Products
                 entity.SellPrice = model.SellPrice;
                 entity.Discount = model.Discount;
                 entity.Qty = model.Qty;
+
+                entity.IsHasVariation = model.IsHasVariation;
+                entity.IsVariationOverlay = model.IsVariationOverlay;
                 /*-------------- CommonEntities Entries ---------------*/
 
                 entity.CreatedAt = DateTime.UtcNow;
@@ -444,6 +451,9 @@ namespace Microflake.Core.Application.Products
                 entity.Discount = model.Discount;
                 entity.ModifiedAt = DateTime.UtcNow;
                 entity.ModifiedById = userId;
+
+                entity.IsHasVariation = model.IsHasVariation;
+                entity.IsVariationOverlay = model.IsVariationOverlay;
 
                 _context.Entry(entity).State = EntityState.Modified;
                 var entityResult = await _context.SaveChangesAsync();

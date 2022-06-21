@@ -89,10 +89,49 @@ namespace Microflake.Core.Application.Products
             await _db.SaveChangesAsync();
         }
 
+        public async Task AddAsync(int productId, int FrontChip, int BackChip)
+        {
+            var product = await _db.Products
+                .SingleOrDefaultAsync(p => p.Id == productId);
+
+            if (product == null)
+            {
+                // TODO: throw exception or do something
+                return;
+            }
+
+            var cartItem = await _db.CartItems
+                .SingleOrDefaultAsync(c => c.ProductId == productId
+                && c.BackChipId == BackChip
+                && c.FrontChipId == FrontChip
+                && c.CartId == _cartId);
+
+            if (cartItem != null)
+            {
+                cartItem.Count++;
+            }
+            else
+            {
+                cartItem = new CartItem
+                {
+                    ProductId = productId,
+                    CartId = _cartId,
+                    Count = 1,
+                    FrontChipId = FrontChip,
+                    BackChipId = BackChip,
+                    DateCreated = DateTime.Now
+                };
+
+                _db.CartItems.Add(cartItem);
+            }
+
+            await _db.SaveChangesAsync();
+        }
+
         public async Task<int> RemoveAsync(int productId)
         {
             var cartItem = await _db.CartItems
-                .SingleOrDefaultAsync(c => c.ProductId == productId && c.CartId == _cartId);
+                .SingleOrDefaultAsync(c => c.CartItemId == productId && c.CartId == _cartId);
 
             var itemCount = 0;
 
@@ -125,6 +164,8 @@ namespace Microflake.Core.Application.Products
         public async Task<IEnumerable<CartItem>> GetCartItemsAsync()
         {
             return await _db.CartItems.Include(x=> x.Product)
+                .Include(x => x.FrontChip)
+                .Include(x => x.BackChip)
                 .Where(c => c.CartId == _cartId).ToListAsync();
         }
 

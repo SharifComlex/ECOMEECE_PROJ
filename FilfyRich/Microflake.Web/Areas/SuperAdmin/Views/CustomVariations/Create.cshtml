@@ -116,18 +116,6 @@
 
     <div style="margin-left:-15px;margin-right:-15px;">
         <div class="form-group">
-            <label class="col-md-12">@Microflake.Web.Language.Language.Category</label>
-            <div class="col-md-12">
-                @Html.DropDownListFor(model => model.CategoryId, null, "Select Category", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-
-            </div>
-        </div>
-
-    </div>
-
-    <div style="margin-left:-15px;margin-right:-15px;">
-        <div class="form-group">
             <label class="col-md-12">Color</label>
             <div class="col-md-12">
                 @Html.DropDownListFor(model => model.ColorId, null, "Select Category", new { @class = "form-control" })

@@ -17,12 +17,17 @@ namespace Microflake.Core.Domain
         public string CartId { get; set; }
 
         public long? ProductId { get; set; }
+        public long? FrontChipId { get; set; }
+        public long? BackChipId { get; set; }
+        
         public int Count { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime DateCreated { get; set; }
 
         public virtual Product Product { get; set; }
+        public virtual Product FrontChip { get; set; }
+        public virtual Product BackChip { get; set; }
 
 
      

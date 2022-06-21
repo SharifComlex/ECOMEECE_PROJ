@@ -26,5 +26,8 @@ namespace Microflake.Core.ViewModel.Products
         public bool Status { get;  set; }
    
         public long Id { get;  set; }
+
+        public bool IsHasVariation { get; set; }
+        public bool IsVariationOverlay { get; set; }
     }
 }

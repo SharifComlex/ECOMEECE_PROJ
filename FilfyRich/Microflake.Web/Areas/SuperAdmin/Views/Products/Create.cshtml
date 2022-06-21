@@ -86,6 +86,14 @@
     .modal-dialog {
         width: 80%;
     }
+
+    #IsHasVariation {
+        display:none;
+    }
+
+    #IsVariationOverlay {
+        display: none;
+    }
 </style>
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "inputForm" }))
 {
@@ -177,6 +185,54 @@
         @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <labels>IsHasVariation</labels>
+                <div class="toggle lg">
+
+                    <label>
+
+                        @if (Model.IsHasVariation)
+                        {
+
+                            <input id="switch-3" style="display:none" type="checkbox" checked><span class="button-indecator"></span>
+                        }
+                        else
+                        {
+
+                            <input id="switch-3" style="display:none" type="checkbox"><span class="button-indecator"></span>
+                        }
+                        <input name="IsHasVariation" id="IsHasVariation" value="False" />
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <labels>IsVariationOverlay</labels>
+                <div class="toggle lg">
+
+                    <label>
+
+                        @if (Model.IsVariationOverlay)
+                        {
+
+                            <input id="switch-4" type="checkbox" checked><span class="button-indecator"></span>
+                        }
+                        else
+                        {
+
+                            <input id="switch-4" type="checkbox"><span class="button-indecator"></span>
+                        }
+                        <input name="IsVariationOverlay" id="IsVariationOverlay" value="False" />
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -229,7 +285,6 @@
     $("#IsFeatured").hide();
      $("#IsNew").hide();
      $("#switch-1").click(function () {
-            debugger;
             var IsFeatured = $("#IsFeatured").val();
             if (IsFeatured == "False") {
                 $("#IsFeatured").val("True");
@@ -241,7 +296,6 @@
             }
      });
        $("#switch-2").click(function () {
-            debugger;
             var IsNew = $("#IsNew").val();
             if (IsNew == "False") {
                 $("#IsNew").val("True");
@@ -252,6 +306,37 @@
 
             }
         });
+
+    $("#switch-3").click(function () {
+        var IsHasVariation = $("#IsHasVariation").val();
+        if (IsHasVariation == "False") {
+            $("#IsHasVariation").val("True");
+
+            var IsVariationOverlay = $("#IsVariationOverlay").val();
+
+            if (IsVariationOverlay == "True") {
+                $("#switch-4").trigger("click");
+            }
+
+        } else {
+            $("#IsHasVariation").val("False");
+        }
+    });
+
+    $("#switch-4").click(function () {
+        var IsVariationOverlay = $("#IsVariationOverlay").val();
+        if (IsVariationOverlay == "False") {
+            $("#IsVariationOverlay").val("True");
+            var IsHasVariation = $("#IsHasVariation").val();
+
+            if (IsHasVariation == "True") {
+                $("#switch-3").trigger("click");
+            }
+
+        } else {
+            $("#IsVariationOverlay").val("False");
+        }
+    });
 
       $('#inputForm select').select2();
      $(".select-image").click(function () {
@@ -322,15 +407,15 @@
 
 
 
-    $("#CategoryId").change(function () {
+     $("#CategoryId").change(function () {
         var id = $(this).val();
-        $.ajax(
-        {
-                url: "/@area/SubCategory/ByCategoriesId/" + id
-        }
-    ).done(function (response) {
-        $("#SubCategoryId").html(response);
 
+        $.ajax({
+            url: "/@area/SubCategory/ByCategoriesId/" + id,
+            type: "get",
+            success: function (response) {
+                $("#SubCategoryId").html(response);
+            }
+        });
     });
-});
 </script>

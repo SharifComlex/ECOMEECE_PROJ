@@ -1,13 +1,10 @@
 ﻿using Microflake.Core;
-using Microflake.Core.Application.CustomCategories;
-using Microflake.Core.Application.CustomColors;
-using Microflake.Core.Application.CustomItems;
 using Microflake.Core.Application.CustomVariations;
+using Microflake.Core.Application.Products;
 using Microflake.Core.ViewModel.CustomVariations;
 using Microflake.Web.Controllers;
 using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,20 +17,14 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
     public class CustomVariationsController : BaseController
     {
         private readonly ICustomVariationService _entityService;
-        private readonly ICustomColorService _colorsService;
-        private readonly ICustomItemService _itemsService;
-        private readonly ICustomCategoryService _categoryService;
+        private readonly IProductService _productService;
 
         public CustomVariationsController(ICustomVariationService entityService,
-            ICustomColorService colorsService,
-            ICustomItemService itemsService,
-            ICustomCategoryService categoryService
+           IProductService productService
             )
         {
             _entityService = entityService;
-            _colorsService = colorsService;
-            _itemsService = itemsService;
-            _categoryService = categoryService;
+            _productService = productService;
         }
 
         public async Task<ActionResult> Index()
@@ -56,11 +47,10 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
         // GET: Categories/Create
         public async Task<ActionResult> Create()
         {
-            var categoryResult = await _categoryService.ToList();
+            var productResult = await _productService.List();
 
-            ViewBag.CategoryId = new SelectList(categoryResult.Data.ToList(), "Id", "Name");
-            ViewBag.ColorId = new SelectList(new List<string>());
-            ViewBag.ItemId = new SelectList(new List<string>());
+            ViewBag.ColorId = new SelectList(productResult.Data.Where(x=> x.IsHasVariation).ToList(), "Id", "Name");
+            ViewBag.ItemId = new SelectList(productResult.Data.Where(x=>x.IsVariationOverlay).ToList(), "Id", "Name");
 
             return PartialView(new CreateVariation());
         }
@@ -96,13 +86,10 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
             }
             var result = await _entityService.Edit(id);
 
-            var categoryResult = await _categoryService.ToList();
-            var colorResult = await _colorsService.List();
-            var itemResult = await _itemsService.List();
+            var productResult = await _productService.List();
 
-            ViewBag.CategoryId = new SelectList(categoryResult.Data.ToList(), "Id", "Name", result.Data.CategoryId);
-            ViewBag.ColorId = new SelectList(colorResult.Data.ToList(), "Id", "Name", result.Data.ColorId);
-            ViewBag.ItemId = new SelectList(itemResult.Data.ToList(), "Id", "Name", result.Data.ItemId);
+            ViewBag.ColorId = new SelectList(productResult.Data.Where(x => x.IsHasVariation).ToList(), "Id", "Name", result.Data.ColorId);
+            ViewBag.ItemId = new SelectList(productResult.Data.Where(x => x.IsVariationOverlay).ToList(), "Id", "Name", result.Data.ItemId);
 
             return PartialView(result.Data);
         }

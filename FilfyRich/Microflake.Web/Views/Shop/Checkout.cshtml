@@ -89,7 +89,8 @@
 
                                                         <td>
                                                             <img id="imagePreview" src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
-
+                                                            <img src="@Config.Products@(item.BackChip?.Image)" style="height:50px; width:50px;">
+                                                            <img src="@Config.Products@(item.FrontChip?.Image)" style="height:50px; width:50px;">
                                                         </td>
                                                         <td>@item.Product.Name<strong> × @item.Count</strong></td>
                                                         <td>@ViewBag.CurrencySimbal @rate</td>

@@ -7,9 +7,7 @@ using Microflake.Core.Utilities.Logger;
 using Microflake.Core.Utilities.Response;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
-using System;
 using System.Web.Mvc;
-using SimpleInjector.Lifestyles;
 using System.Reflection;
 using System.Web.Routing;
 using SimpleInjector.Integration.Web;
@@ -23,11 +21,7 @@ using Microflake.Core.Application.Currencies;
 using Microflake.Core.Application.ContactUs;
 using Microflake.Core.Application.Subscribers;
 using Microflake.Core.Application.SubCategories;
-using Microflake.Core.Application.CustomCategories;
-using Microflake.Core.Application.CustomColors;
-using Microflake.Core.Application.CustomItems;
 using Microflake.Core.Application.CustomVariations;
-using Microflake.Core.Application.CustomOrders;
 
 namespace Microflake.Web
 {
@@ -63,12 +57,8 @@ namespace Microflake.Web
             _container.Register<IWhislistService, WhislistService>(Lifestyle.Transient);
             _container.Register<IContactUsService, ContactUsService>(Lifestyle.Transient);
 
-            _container.Register<ICustomCategoryService, CustomCategoryService>(Lifestyle.Transient);
-            _container.Register<ICustomColorService, CustomColorService>(Lifestyle.Transient);
-            _container.Register<ICustomItemService, CustomItemService>(Lifestyle.Transient);
             _container.Register<ICustomVariationService, CustomVariationService>(Lifestyle.Transient);
 
-            _container.Register<ICustomOrderService, CustomOrderService>(Lifestyle.Transient);
             _container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
             
             _container.Verify();

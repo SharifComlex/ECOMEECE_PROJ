@@ -41,7 +41,13 @@
                                         var rate = item.Product.SellPrice * ViewBag.Currency;
                                         var discount = item.Product.Discount * ViewBag.Currency;
                                         <tr>
-                                            <td class="product_thumb"><a href="#"><img src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';"></a></td>
+                                            <td class="product_thumb">
+                                                <a href="#">
+                                                    <img src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';">
+                                                </a>
+                                                <img src="@Config.Products@(item.BackChip?.Image)" style="height:50px; width:50px;">
+                                                <img src="@Config.Products@(item.FrontChip?.Image)" style="height:50px; width:50px;">
+                                            </td>
                                             <td class="product-price">£ @rate </td>
                                             <td class="product_quantity">
                                                 <a href="/shop/RemoveFromCart/@item.ProductId">
@@ -52,7 +58,7 @@
                                                     <input type="button" value="+" class="plus" id="plus">
                                                 </a>
                                             </td>
-                                            <td class="product_total"><a href="@Url.Action("RemoveFromCart", "Shop", new { id = item.ProductId })"><i class="fa fa-times"></i></a></td>
+                                            <td class="product_total"><a href="@Url.Action("RemoveFromCart", "Shop", new { id = item.CartItemId })"><i class="fa fa-times"></i></a></td>
 
 
                                         </tr>

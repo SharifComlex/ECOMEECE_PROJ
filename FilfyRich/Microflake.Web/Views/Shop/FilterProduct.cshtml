@@ -25,8 +25,8 @@
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="single_product">
                             <div class="product_thumb">
-                                <a class="primary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image)" style="width:350px;height:250px" alt=""></a>
-                                <a class="secondary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image1)" style="width:350px;height:250px" alt=""></a>
+                                <a class="primary_img" href="@((item.IsHasVariation)? "/CustomProduct?Id=" + item.Id:"/Home/Productdetail")"><img src="@Config.Products@(item.Image)" style="width:350px;height:250px" alt=""></a>
+                                <a class="secondary_img" href="@((item.IsHasVariation)? "/CustomProduct?Id=" + item.Id:"/Home/Productdetail")"><img src="@Config.Products@(item.Image)" style="width:350px;height:250px" alt=""></a>
                                 @*<div class="quick_button">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#modal_box" data-placement="top" data-original-title="quick view"> quick view</a>
                                 </div>*@
@@ -36,7 +36,7 @@
                                     <a href="#">@item.SubCategory.Name</a>
                                     <a href="#">@item.SubCategory.Category.Name</a>
                                 </div>
-                                <h3><a href="/Home/Productdetail">@item.Name</a></h3>
+                                <h3><a href="@((item.IsHasVariation)? "/CustomProduct?Id" + item.Id:"/Home/Productdetail")">@item.Name</a></h3>
                                 <div class="price_box">
                                     <span class="old_price">$ @item.Discount</span>
                                     <span class="current_price">$@item.SellPrice</span>
@@ -56,9 +56,12 @@
                                     </div>
                                     <div class="action_links">
                                         <ul>
-                                           @* <li><a href="wishlist.html" data-placement="top" title="Add to Wishlist" data-bs-toggle="tooltip"><span class="icon icon-Heart"></span></a></li>*@
-                                            <li class="add_to_cart"><a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })" title="add to cart">add to cart</a></li>
-                                           @* <li><a href="compare.html" title="compare"><i class="ion-ios-settings-strong"></i></a></li>*@
+                                            @* <li><a href="wishlist.html" data-placement="top" title="Add to Wishlist" data-bs-toggle="tooltip"><span class="icon icon-Heart"></span></a></li>*@
+                                            @if (!item.IsHasVariation)
+                                            {
+                                                <li class="add_to_cart"><a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })" title="add to cart">add to cart</a></li>
+                                            }
+                                            @* <li><a href="compare.html" title="compare"><i class="ion-ios-settings-strong"></i></a></li>*@
                                         </ul>
                                     </div>
                                 </div>
@@ -86,7 +89,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="product_thumb">
-                                <a class="primary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image1)" style="width:350px;height:350px" alt=""></a>
+                                <a class="primary_img" href="@((item.IsHasVariation)? "/CustomProduct?Id=" + item.Id:"/Home/Productdetail")"><img src="@Config.Products@(item.Image)" style="width:350px;height:350px" alt=""></a>
                                 <a class="secondary_img" href="/Home/Productdetail"><img src="@Config.Products@(item.Image)"  style="width:350px;height:350px" alt=""></a>
                                 @*<div class="quick_button">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#modal_box" data-original-title="quick view"> quick view</a>
@@ -95,7 +98,7 @@
                         </div>
                         <div class="col-lg-8 col-md-7">
                             <div class="product_content">
-                                <h3><a href="/Home/Productdetail">@item.Name</a></h3>
+                                <h3><a href="@((item.IsHasVariation)? "/CustomProduct?Id=" + item.Id:"/Home/Productdetail")">@item.Name</a></h3>
                                 <div class="product_ratings">
                                     <ul>
                                         @*<li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
@@ -115,7 +118,10 @@
 
                                 <div class="action_links">
                                     <ul>
-                                        <li class="add_to_cart"><a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })" title="add to cart">add to cart</a></li>
+                                        @if (!item.IsHasVariation)
+                                        {
+                                            <li class="add_to_cart"><a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })" title="add to cart">add to cart</a></li>
+                                        }
                                         @*<li><a href="wishlist.html" title="Wishlist"><span class="icon icon-Heart"></span></a></li>*@
                                         @*<li><a href="compare.html" title="compare"><i class="ion-ios-settings-strong"></i></a></li>*@
                                     </ul>
