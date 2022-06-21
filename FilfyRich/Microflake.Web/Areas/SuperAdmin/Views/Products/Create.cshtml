@@ -357,7 +357,7 @@
             data: profileImage,
             contentType: false,
             processData: false,
-            success: function (response) {
+            success: function (response) {debugger
                 if (response.status) {
                     $("#ProductImage").val(response.file);
                     $("#imagePreview").attr("src", "@Config.Products" + response.file);
@@ -391,7 +391,7 @@
             data: profileImage,
             contentType: false,
             processData: false,
-            success: function (response) {
+            success: function (response) {debugger
                 if (response.status) {
                     $("#ProductImage1").val(response.file);
                     $("#imagePreview1").attr("src", "@Config.Products" + response.file);
