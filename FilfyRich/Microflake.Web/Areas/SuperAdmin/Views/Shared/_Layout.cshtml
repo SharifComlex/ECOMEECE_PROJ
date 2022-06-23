@@ -1020,7 +1020,7 @@ var english = {
             });
 
             $("#btn-add").click(function () {
-                debugger;
+               
                 var $btn = $(this);
                 $btn.find("i").removeClass("fa-plus");
                 $btn.find("i").addClass("fa-spinner");
@@ -1118,7 +1118,6 @@ var english = {
                     url: url,
                     data: formData,
                     success: function (response) {
-                        debugger
                         if (!response.status && !response.validation) {
                             $(".text-danger").html("");
 
@@ -1131,7 +1130,6 @@ var english = {
                                 dataTable.order([0, 'desc']).draw(false);
                                 $("#modal").modal("hide");
                             } else if (currentCrud == "update") {
-                                debugger
                                 if ($("[data-grid-id='" + response.data.Id + "']").next().hasClass("child")) {
                                     $("[data-grid-id='" + response.data.Id + "']").next().remove();
                                 }
@@ -1163,7 +1161,7 @@ var english = {
         $("body").on("blur", "#InputForm input", function () {
             var id = $(this).attr("id");
             var str = $(this).val();
-            debugger;
+           
             if (id == "Arabic") {
                 var pattern = /[\u0600-\u06FF\u0750-\u077F]/;
                 result = pattern.test(str);

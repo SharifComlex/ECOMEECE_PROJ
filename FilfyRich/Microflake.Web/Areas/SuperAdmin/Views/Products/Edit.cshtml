@@ -77,13 +77,6 @@
         width: 80%;
     }
 
-    #IsHasVariation {
-        display: none;
-    }
-
-    #IsVariationOverlay {
-        display: none;
-    }
 </style>
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "inputForm" }))
 {
@@ -91,8 +84,7 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.Status)
-    @Html.HiddenFor(x => x.IsFeatured)
-    @Html.HiddenFor(x => x.IsNew)
+
     <div class="row">
         <div class="col-md-7">
 
@@ -201,7 +193,7 @@
 
                             <input id="switch-3" type="checkbox"><span class="button-indecator"></span>
                         }
-                        <input name="IsHasVariation" id="IsHasVariation" value="False" />
+                        @Html.HiddenFor(x => x.IsHasVariation)
                     </label>
                 </div>
             </div>
@@ -223,7 +215,7 @@
 
                             <input id="switch-4" type="checkbox"><span class="button-indecator"></span>
                         }
-                        <input name="IsVariationOverlay" id="IsVariationOverlay" value="False" />
+                        @Html.HiddenFor(x=> x.IsVariationOverlay)
                     </label>
                 </div>
             </div>
@@ -248,7 +240,7 @@
 
                             <input id="switch-1" type="checkbox"><span class="button-indecator"></span>
                         }
-                        <input name="IsFeatured" hidden id="IsFeatured" value="False" />
+                        @Html.HiddenFor(x => x.IsFeatured)
                     </label>
                 </div>
             </div>
@@ -270,7 +262,7 @@
 
                             <input id="switch-2" name="IsNew" type="checkbox"><span class="button-indecator"></span>
                         }
-                        <input name="IsNew" hidden id="IsFeatured" value="False" />
+                        @Html.HiddenFor(x => x.IsNew)
                     </label>
                 </div>
             </div>
