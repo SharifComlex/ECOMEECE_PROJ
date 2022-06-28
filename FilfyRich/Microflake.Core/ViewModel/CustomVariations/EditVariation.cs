@@ -7,9 +7,6 @@ namespace Microflake.Core.ViewModel.CustomVariations
         public long Id { get; set; }
 
         [Required]
-        public long? CategoryId { get; set; }
-
-        [Required]
         public long? ColorId { get; set; }
 
         [Required]
@@ -17,7 +14,7 @@ namespace Microflake.Core.ViewModel.CustomVariations
 
         public string FrontImage { get; set; }
 
-        public string BackImage { get; set; }
+        //public string BackImage { get; set; }
 
         public string BottomImage { get; set; }
 

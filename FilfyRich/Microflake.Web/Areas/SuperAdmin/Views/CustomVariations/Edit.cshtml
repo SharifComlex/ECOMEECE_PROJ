@@ -149,7 +149,7 @@
             @Html.ValidationMessageFor(model => model.FrontImage, "", new { @class = "text-danger image-error1" })
             <br />
         </div>
-        <label class="col-md-12">Back Image</label>
+        @*<label class="col-md-12">Back Image</label>
         <div class="col-md-12">
             <div class="image-wrapper2">
                 <img id="imagePreview2" src="@Config.CustomProducts@(Model.BackImage)" />
@@ -161,7 +161,7 @@
             @Html.HiddenFor(model => model.BackImage)
             @Html.ValidationMessageFor(model => model.BackImage, "", new { @class = "text-danger image-error2" })
             <br />
-        </div>
+        </div>*@
         <label class="col-md-12">Bottom Image</label>
         <div class="col-md-12">
             <div class="image-wrapper3">

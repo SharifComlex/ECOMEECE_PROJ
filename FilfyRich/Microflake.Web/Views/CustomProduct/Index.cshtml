@@ -1,6 +1,6 @@
 ﻿@model Microflake.Web.Areas.SuperAdmin.Models.CustomItemModel
 @{
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+
 
 }
 <style>
@@ -13,12 +13,44 @@
     }
 
     .owl-nav {
-        display:none !important
+        display: none !important
     }
 
     .portfolio_thumb {
-        text-align:center;
+        text-align: center;
     }
+
+    #image-wrapper {
+        width: 70%;
+        margin: auto;
+    }
+
+    .product-item-list {
+        width: 100%;
+        text-align: center;
+    }
+
+        .product-item-list li {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+            .product-item-list li img {
+                width: 150px !important;
+            }
+
+            .product-item-list li:first-child {
+                margin-right: 10px;
+            }
+
+    .select-chip1, .select-chip2 {
+        cursor: pointer;
+    }
+
+    .select-shadow {
+        box-shadow: -3px -3px 10px 3px #c09578, 3px 3px 10px 3px #c09578;
+    }
+
 </style>
 
 <div class="breadcrumbs_area">
@@ -43,39 +75,18 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6">
-                <div class="col-lg-6 col-md-6">
-                    <div class="product-details-tab">
-
-                        <div id="img-1" class="zoomWrapper single-zoom">
-                            <a href="#">
-                                <img id="zoom1" src="" data-zoom-image="">
-                            </a>
-                        </div>
-
-                        <div class="single-zoom-thumb">
-                            <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
-                                <li>
-                                    <a href="#" class="elevatezoom-gallery active" data-update data-image="" data-zoom-image="">
-                                        <img class="zoom2 load-image" src="">
-                                    </a>
-
-                                </li>
-                                <li>
-                                    <a href="#" class="elevatezoom-gallery active" data-update data-image="" data-zoom-image="">
-                                        <img class="zoom3 load-image" src="">
-                                    </a>
-
-                                </li>
-                                <li>
-                                    <a href="#" class="elevatezoom-gallery active" data-update data-image="" data-zoom-image="">
-                                        <img class="zoom4 load-image" src="">
-                                    </a>
-
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="jzoom">
+                    <img id="zoom1" src="">
                 </div>
+                <ul class="product-item-list">
+                    <li>
+                        <img id="zoom2" class="load-image" src="">
+
+                    </li>
+                    <li>
+                        <img id="zoom3" class="load-image" src="">
+                    </li>
+                </ul>
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="product_d_right">
@@ -133,9 +144,9 @@
                         <div class="product_variant quantity" style="margin-left:-15px">
                             <button class="button" type="submit">Add to Cart</button>
                         </div>
-                        <input id="productId" type="hidden" value="" name="productId"/>
-                        <input id="frontChip" type="hidden" value="" name="frontChip"/>
-                        <input id="backChip" type="hidden" value="" name="backChip"/>
+                        <input id="productId" type="hidden" value="" name="productId" />
+                        <input id="frontChip" type="hidden" value="" name="frontChip" />
+                        <input id="backChip" type="hidden" value="" name="backChip" />
                     </form>
                     <div class="priduct_social">
                         <ul>
@@ -156,26 +167,28 @@
 
 
 @section Scripts{
+
+    <script src="~/assets/vendors/jzoom/jzoom.js"></script>
     <script>
         var productId = 0;
         var frontChip = 0;
         var backChip = 0;
-
+        var plugin;
         $(".select-chip1").click(function () {
             $(".select-chip1").each(function () {
-                $(this).css({ "border": "none" });
+                $(this).removeClass("select-shadow");
             })
 
 
             $(".select-chip2").each(function () {
-                $(this).css({ "border": "none" });
+                $(this).removeClass("select-shadow");
             })
 
             frontChip = $(this).attr("data-id");
             $("#frontChip").val(frontChip);
             $("#backChip").val(frontChip);
 
-            $(this).css({ "border": "solid" });
+            $(this).addClass("select-shadow");
 
             $.ajax(
                 {
@@ -183,18 +196,8 @@
                 }
             ).done(function (response) {
                 $("#zoom1").attr("src", "@Config.CustomProducts" + response.FrontImage);
-
-                $(".zoom2").attr("src", "@Config.CustomProducts" + response.FrontImage);
-                $(".zoom2").parent().attr("data-image", "@Config.CustomProducts" + response.FrontImage);
-                $(".zoom2").parent().attr("data-zoom-image", "@Config.CustomProducts" + response.FrontImage);
-
-                $(".zoom3").attr("src", "@Config.CustomProducts" + response.BackImage);
-                $(".zoom3").parent().attr("data-image", "@Config.CustomProducts" + response.BackImage);
-                $(".zoom3").parent().attr("data-zoom-image", "@Config.CustomProducts" + response.BackImage);
-
-                $(".zoom4").attr("src", "@Config.CustomProducts" + response.BottomImage);
-                $(".zoom4").parent().attr("data-image", "@Config.CustomProducts" + response.BottomImage);
-                $(".zoom4").parent().attr("data-zoom-image", "@Config.CustomProducts" + response.BottomImage);
+                $("#zoom2").attr("src", "@Config.CustomProducts" + response.FrontImage);
+                $("#zoom3").attr("src", "@Config.CustomProducts" + response.BottomImage);
 
             });
         });
@@ -202,91 +205,67 @@
         $(".select-chip2").click(function () {
 
             $(".select-chip2").each(function () {
-                $(this).css({ "border": "none" });
+                $(this).removeClass("select-shadow");
             })
 
             backChip = $(this).attr("data-id");
             $("#backChip").val(backChip);
-            $(this).css({ "border": "solid" });
+            $(this).addClass("select-shadow");
 
              $.ajax(
                 {
                      url: "/CustomProduct/ItemDetail?ProductId=" + productId + "&ItemId=" + backChip
                 }
             ).done(function (response) {
-                 $(".zoom4").attr("src", "@Config.CustomProducts" + response.BottomImage);
-                 $(".zoom4").parent().attr("data-image", "@Config.CustomProducts" + response.BottomImage);
-                 $(".zoom4").parent().attr("data-zoom-image", "@Config.CustomProducts" + response.BottomImage);
-
+                $("#zoom3").attr("src", "@Config.CustomProducts" + response.BottomImage);
                 $("#zoom1").attr("src", "@Config.CustomProducts" + response.BottomImage);
-                $("#zoom1").attr("data-zoom-image", "@Config.CustomProducts" + response.BottomImage);
             });
         });
 
         $(".select-cap").click(function () {
             $(".select-cap").each(function () {
-                $(this).css({ "border": "none" });
+                $(this).removeClass("select-shadow");
             })
 
             $(".select-chip1").each(function () {
-                $(this).css({ "border": "none" });
+                $(this).removeClass("select-shadow");
             })
 
             $(".select-chip2").each(function () {
-                $(this).css({ "border": "none" });
+                $(this).removeClass("select-shadow");
             })
 
-            $(this).css({ "border": "solid" });
+            $(this).addClass("select-shadow");
 
             var url = $(this).find("img").attr("src");
-            $("#zoom1").attr("src", url);
-            $("#zoom1").attr("data-zoom-image", url);
+            $(".jzoom").html('<img id="zoom1" src="' + url + '">');
+            $("#zoom1").magicZoom();
 
             productId = $(this).attr("data-id");
 
             $("#productId").val(productId);
 
-             $(".zoom2").attr("src","");
-            $(".zoom2").parent().attr("data-image", "");
-            $(".zoom2").parent().attr("data-zoom-image", "");
-
+            $(".zoom2").attr("src","");
             $(".zoom3").attr("src", "");
-            $(".zoom3").parent().attr("data-image", "");
-            $(".zoom3").parent().attr("data-zoom-image", "");
 
-            $(".zoom4").attr("src", "");
-            $(".zoom4").parent().attr("data-image", "");
-            $(".zoom4").parent().attr("data-zoom-image", "");
         });
 
-        $(".load-image").click(function () {
-            var url = $(this).attr("src");
-            $("#zoom1").attr("src", url);
-            $("#zoom1").attr("data-zoom-image", url);
-        });
-
-        $("#CustomAddToCart").submit(function (ev) {
-            if (productId > 0 && frontChip > 0 && backChip > 0) {
-
-            }
-            else {
-                ev.preventDefault();
-                alert("Complete the requirment")
-            }
-        });
+ 
     </script>
 
     <script>
         @{ var id = Request.QueryString["Id"];}
 
-        $("#select-cap-@id").css({ "border": "solid" });
+        $("#select-cap-@id").addClass("select-shadow");
 
         var url = $("#select-cap-@id").find("img").attr("src");
-        $("#zoom1").attr("src", url);
-        $("#zoom1").attr("data-zoom-image", url);
+        $(".jzoom").html('<img id="zoom1" src="' + url + '">');
+        $(".jzoom #zoom1").magicZoom();
 
         productId = $("#select-cap-@id").attr("data-id");
 
         $("#productId").val(productId);
+        
+
     </script>
 }

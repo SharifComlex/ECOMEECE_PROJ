@@ -22,7 +22,7 @@ namespace Microflake.Core.ViewModel.CustomVariations
         [Required]
         public string FrontImage { get; set; }
 
-        [Required]
+       // [Required]
         public string BackImage { get; set; }
 
         [Required]

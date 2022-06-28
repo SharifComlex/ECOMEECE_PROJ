@@ -74,14 +74,14 @@ namespace Microflake.Core.Application.CustomVariations
                   
                 }
 
-                if (!string.IsNullOrEmpty(model.BackImage))
-                {
-                    entity.BackImage = model.BackImage;
-                    _context.Entry(entity).State = EntityState.Modified;
+                //if (!string.IsNullOrEmpty(model.BackImage))
+                //{
+                //    entity.BackImage = model.BackImage;
+                //    _context.Entry(entity).State = EntityState.Modified;
 
-                    await _context.SaveChangesAsync();
+                //    await _context.SaveChangesAsync();
 
-                }
+                //}
 
                 if (!string.IsNullOrEmpty(model.BottomImage))
                 {
@@ -118,7 +118,7 @@ namespace Microflake.Core.Application.CustomVariations
                     ItemId = entity.BadgeId,
                     FrontImage = entity.FrontImage,
                     BottomImage = entity.BackImage,
-                    BackImage = entity.BackImage
+                    //BackImage = entity.BackImage
                 });
             }
             catch (Exception ex)
@@ -155,14 +155,14 @@ namespace Microflake.Core.Application.CustomVariations
 
                 }
 
-                if (!string.IsNullOrEmpty(model.BackImage))
-                {
-                    entity.BackImage = model.BackImage;
-                    _context.Entry(entity).State = EntityState.Modified;
+                //if (!string.IsNullOrEmpty(model.BackImage))
+                //{
+                //    entity.BackImage = model.BackImage;
+                //    _context.Entry(entity).State = EntityState.Modified;
 
-                    await _context.SaveChangesAsync();
+                //    await _context.SaveChangesAsync();
 
-                }
+                //}
 
                 if (!string.IsNullOrEmpty(model.BottomImage))
                 {
