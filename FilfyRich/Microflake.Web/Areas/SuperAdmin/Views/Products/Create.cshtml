@@ -350,7 +350,7 @@
             data: profileImage,
             contentType: false,
             processData: false,
-            success: function (response) {debugger
+            success: function (response) {
                 if (response.status) {
                     $("#ProductImage").val(response.file);
                     $("#imagePreview").attr("src", "@Config.Products" + response.file);
