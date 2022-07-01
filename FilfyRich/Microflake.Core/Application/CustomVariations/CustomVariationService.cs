@@ -117,7 +117,7 @@ namespace Microflake.Core.Application.CustomVariations
                     ColorId = entity.CapId,
                     ItemId = entity.BadgeId,
                     FrontImage = entity.FrontImage,
-                    BottomImage = entity.BackImage,
+                    BottomImage = entity.BottomImage,
                     //BackImage = entity.BackImage
                 });
             }

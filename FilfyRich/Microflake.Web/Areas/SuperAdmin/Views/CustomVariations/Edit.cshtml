@@ -119,7 +119,7 @@
             <div class="col-md-12">
                 @Html.DropDownListFor(model => model.ColorId, null, "Select", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ColorId, "", new { @class = "text-danger" })
-
+                <img id="img101" src="" width="100" />
             </div>
         </div>
     </div>
@@ -130,7 +130,7 @@
             <div class="col-md-12">
                 @Html.DropDownListFor(model => model.ItemId, null, "Select", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ItemId, "", new { @class = "text-danger" })
-
+                <img id="img102" src="" width="100" />
             </div>
         </div>
     </div>
@@ -279,24 +279,42 @@
         });
     });
 
-     $("#CategoryId").change(function () {
+     $("#ColorId").change(function () {
         var id = $(this).val();
         $.ajax(
         {
-                url: "/@area/CustomColor/GetByCategoryId?Id=" + id
+                url: "/@area/Products/GetImageById?Id=" + id
         }
         ).done(function (response) {
-            $("#ColorId").html(response);
-
+            $("#img101").attr("src", "@Config.Products" + response.data.Image);
         });
+    });
 
+    $("#ItemId").change(function () {
+        var id = $(this).val();
         $.ajax(
         {
-                url: "/@area/CustomItem/GetByCategoryId?Id=" + id
+                url: "/@area/Products/GetImageById?Id=" + id
         }
         ).done(function (response) {
-            $("#ItemId").html(response);
-
+            $("#img102").attr("src", "@Config.Products" + response.data.Image);
         });
-});
+    });
+
+    $.ajax(
+        {
+            url: "/@area/Products/GetImageById?Id=" + $("#ColorId").val()
+        }
+        ).done(function (response) {
+            $("#img101").attr("src", "@Config.Products" + response.data.Image);
+
+             $.ajax(
+            {
+                url: "/@area/Products/GetImageById?Id=" + $("#ItemId").val()
+            }
+            ).done(function (response) {
+                $("#img102").attr("src", "@Config.Products" + response.data.Image);
+            });
+        });
+
 </script>

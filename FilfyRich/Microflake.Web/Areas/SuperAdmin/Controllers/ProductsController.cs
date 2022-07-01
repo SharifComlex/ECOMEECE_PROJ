@@ -69,31 +69,7 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
 
             }
 
-            if (model.Price > model.SellPrice)
-            {
-                ModelState.AddModelError("SellPrice", Language.Language.Selling_Price_Should_Be_greater_than_Purchase);
-
-            }
-            if (model.Discount < model.SellPrice || model.Discount < model.Price)
-            {
-                ModelState.AddModelError("Discount", Language.Language.Enter_Discount_As_Compare_to_Original_Price);
-
-            }
-            if (model.Qty == 0 ||model.Qty < 0 )
-            {
-                ModelState.AddModelError("Qty", Language.Language.Enter_A_Valid_Quantity);
-
-            }
-            if (model.Price == 0 || model.Price < 0)
-            {
-                ModelState.AddModelError("Price",  Language.Language.Enter_A_Valid_Price);
-
-            }
-            if (model.SellPrice == 0 || model.SellPrice < 0)
-            {
-                ModelState.AddModelError("SellPrice", Language.Language.Enter_A_Valid_Price);
-
-            }
+           
             if (!ModelState.IsValid)
             {
                 return ValidationErrors();
@@ -141,31 +117,6 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
 
             }
 
-            if (model.Price > model.SellPrice)
-            {
-                ModelState.AddModelError("SellPrice", Language.Language.Selling_Price_Should_Be_greater_than_Purchase);
-
-            }
-            if (model.Discount < model.SellPrice || model.Discount < model.Price)
-            {
-                ModelState.AddModelError("Discount", Language.Language.Enter_Discount_As_Compare_to_Original_Price);
-
-            }
-            if (model.Qty == 0 || model.Qty < 0)
-            {
-                ModelState.AddModelError("Qty", Language.Language.Enter_A_Valid_Quantity);
-
-            }
-            if (model.Price == 0 || model.Price < 0)
-            {
-                ModelState.AddModelError("Price", Language.Language.Enter_A_Valid_Price);
-
-            }
-            if (model.SellPrice == 0 || model.SellPrice < 0)
-            {
-                ModelState.AddModelError("SellPrice", Language.Language.Enter_A_Valid_Price);
-
-            }
             if (!ModelState.IsValid)
             {
                 return ValidationErrors();
@@ -184,6 +135,18 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
         public async Task<ActionResult> Remove(long Id)
         {
             var result = await _entityService.Delete(Id);
+
+            return Json(new
+            {
+                status = result.Success,
+                message = result.Message,
+                data = result.Data
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> GetImageById(long Id)
+        {
+            var result = await _entityService.GetProductImage(Id);
 
             return Json(new
             {

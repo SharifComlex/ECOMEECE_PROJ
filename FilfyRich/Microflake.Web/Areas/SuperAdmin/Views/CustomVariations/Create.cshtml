@@ -116,22 +116,22 @@
 
     <div style="margin-left:-15px;margin-right:-15px;">
         <div class="form-group">
-            <label class="col-md-12">Color</label>
+            <label class="col-md-12">Cap</label>
             <div class="col-md-12">
-                @Html.DropDownListFor(model => model.ColorId, null, "Select Category", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.ColorId, null, "Select Cap", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ColorId, "", new { @class = "text-danger" })
-
+                <img id="img101" src="" width="100"/>
             </div>
         </div>
     </div>
 
     <div style="margin-left:-15px;margin-right:-15px;">
         <div class="form-group">
-            <label class="col-md-12">Item</label>
+            <label class="col-md-12">Badge</label>
             <div class="col-md-12">
-                @Html.DropDownListFor(model => model.ItemId, null, "Select Category", new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.ItemId, null, "Select Badge", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ItemId, "", new { @class = "text-danger" })
-
+                <img id="img102" src="" width="100" />
             </div>
         </div>
     </div>
@@ -213,8 +213,6 @@
         });
     });
 
-
-
      $(".select-image2").click(function () {
         $(".uploadImage2").trigger("click");
     });
@@ -280,23 +278,25 @@
         });
     });
 
-     $("#CategoryId").change(function () {
+    $("#ColorId").change(function () {
         var id = $(this).val();
         $.ajax(
         {
-                url: "/@area/CustomColor/GetByCategoryId?Id=" + id
+                url: "/@area/Products/GetImageById?Id=" + id
         }
         ).done(function (response) {
-            $("#ColorId").html(response);
-
-            $.ajax(
-        {
-                url: "/@area/CustomItem/GetByCategoryId?Id=" + id
-        }
-        ).done(function (response) {
-            $("#ItemId").html(response);
-
+            $("#img101").attr("src", "@Config.Products" + response.data.Image);
         });
+    });
+
+    $("#ItemId").change(function () {
+        var id = $(this).val();
+        $.ajax(
+        {
+                url: "/@area/Products/GetImageById?Id=" + id
+        }
+        ).done(function (response) {
+            $("#img102").attr("src", "@Config.Products" + response.data.Image);
         });
 });
 </script>

@@ -65,7 +65,30 @@ namespace Microflake.Core.Application.Products
                 return _response.Create(false, ex.Message, new List<ListProduct>());
             }
         }
-       
+
+        public async Task<ServiceResponse<ListProduct>> GetProductImage(long Id)
+        {
+            try
+            {
+                var list = await _context
+                    .Products
+                    .Where(x => x.DealOfTheWeek == false)
+                    .Select(x => new ListProduct
+                    {
+                        Id = x.Id,
+                        Image = x.Image,
+                        Image1 = x.Image1,
+                    }).FirstOrDefaultAsync(x=> x.Id == Id);
+
+                return _response.Create(true, "All record has been fetched", list);
+            }
+            catch (Exception ex)
+            {
+                //_logger.Log(ex);
+                return _response.Create(false, ex.Message, new ListProduct());
+            }
+        }
+
         public async Task<ServiceResponse<List<ListProduct>>> ProductList(int Page, int recordSize, int? categoryID)
         {
             try

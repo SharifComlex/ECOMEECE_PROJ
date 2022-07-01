@@ -173,7 +173,6 @@
         var productId = 0;
         var frontChip = 0;
         var backChip = 0;
-        var plugin;
 
         $(".select-chip1").click(function () {
             $(".select-chip1").each(function () {
@@ -252,8 +251,8 @@
 
             $("#productId").val(productId);
 
-            $(".zoom2").attr("src","");
-            $(".zoom3").attr("src", "");
+            $("#zoom2").attr("src","");
+            $("#zoom3").attr("src", "");
 
             $(document).ready(function () {
                 $('#zoom1').imageZoom({
@@ -261,6 +260,16 @@
                 });
             });
 
+        });
+
+        $('.load-image').click(function () {
+            var url = $(this).attr("src");
+            $(".jzoom").html('<img id="zoom1" src="' + url + '">');
+
+
+            $('#zoom1').imageZoom({
+                zoom: 200
+            });
         });
 
     </script>

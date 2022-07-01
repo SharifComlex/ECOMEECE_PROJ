@@ -16,6 +16,8 @@ namespace Microflake.Core.Application.Products
         Task<ServiceResponse<List<ListProduct>>> List();
         IEnumerable<Product> List(int? subcategoryID, string searchTerm, int Page, int recordSize,int? categoryID, int? minimumPrice, int? maximumPrice  ,int? sortBy);
 
+        Task<ServiceResponse<ListProduct>> GetProductImage(long Id);
+
         Task<ServiceResponse<SelectList>> SelectList(long? Id);
 
         Task<ServiceResponse<Product>> Get(long Id);
