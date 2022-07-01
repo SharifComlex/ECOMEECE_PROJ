@@ -278,7 +278,7 @@ namespace Microflake.Web.Controllers
         public async Task<ActionResult> Index(int? subcategoryID,string searchTerm, int? Page, int? categoryID, int? minimumPrice, int? maximumPrice, int? sortBy)
         {
             ListProduct model = new ListProduct();
-            int recordSize = 8;
+            int recordSize = 9;
             Page = Page.HasValue ? Page.Value > 0 ? Page.Value : 1 : 1;
             model.Productlist =  _entityService.List(subcategoryID,searchTerm, Page.Value, recordSize, categoryID , minimumPrice, maximumPrice , sortBy);
             //ViewBag.Categorylist =await _categoryService.ToList();
@@ -311,7 +311,7 @@ namespace Microflake.Web.Controllers
         public async Task<ActionResult> FilterProduct(int? subcategoryID, string searchTerm, int? Page, int? categoryID, int? minimumPrice, int? maximumPrice, int? sortBy)
         {
             ListProduct model = new ListProduct();
-            int recordSize = 8;
+            int recordSize = 9;
             Page = Page.HasValue ? Page.Value > 0 ? Page.Value : 1 : 1;
             model.Productlist = _entityService.List(subcategoryID,searchTerm, Page.Value, recordSize, categoryID, minimumPrice, maximumPrice, sortBy);
             var TotalRecords = _entityService.ProductCount(subcategoryID, searchTerm, Page.Value, recordSize, categoryID, minimumPrice, maximumPrice, sortBy);
