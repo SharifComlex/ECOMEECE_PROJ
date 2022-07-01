@@ -763,6 +763,16 @@
     <Content Include="assets\vendors\fullcalendar\daygrid\main.min.css" />
     <Content Include="assets\vendors\fullcalendar\daygrid\main.min.js" />
     <Content Include="assets\vendors\fullcalendar\interaction\main.min.js" />
+    <Content Include="assets\vendors\image-zoom\css\image-zoom.css" />
+    <Content Include="assets\vendors\image-zoom\css\style.css" />
+    <Content Include="assets\vendors\image-zoom\dist\css\image-zoom.css" />
+    <Content Include="assets\vendors\image-zoom\dist\js\image-zoom.js" />
+    <Content Include="assets\vendors\image-zoom\dist\js\image-zoom.min.js" />
+    <Content Include="assets\vendors\image-zoom\Gulpfile.js" />
+    <Content Include="assets\vendors\image-zoom\index.html" />
+    <Content Include="assets\vendors\image-zoom\js\image-zoom.js" />
+    <Content Include="assets\vendors\image-zoom\js\vendor\jquery.min.js" />
+    <Content Include="assets\vendors\image-zoom\src\scripts\app.js" />
     <Content Include="assets\vendors\jqTree\jqtree-2.html" />
     <Content Include="assets\vendors\jqTree\jqtree.html" />
     <Content Include="assets\vendors\jquery-mask-plugin\jquery.mask.min.js" />
@@ -784,7 +794,6 @@
     <Content Include="assets\vendors\jqvmap\maps\jquery.vmap.usa.js" />
     <Content Include="assets\vendors\jqvmap\maps\jquery.vmap.world.js" />
     <Content Include="assets\vendors\jszip\jszip.min.js" />
-    <Content Include="assets\vendors\jzoom\jzoom.js" />
     <Content Include="assets\vendors\lightgallery\css\lightgallery.min.css" />
     <Content Include="assets\vendors\lightgallery\fonts\lgd641.svg" />
     <Content Include="assets\vendors\lightgallery\img\loading.gif" />
@@ -1482,6 +1491,14 @@
     <Content Include="assets\vendors\zwicon\fonts\zwicondf5a.eot" />
     <Content Include="assets\vendors\zwicon\fonts\zwicondf5a.ttf" />
     <Content Include="assets\vendors\zwicon\fonts\zwicondf5a.woff" />
+    <Content Include="assets\vendors\image-zoom\.browserslistrc" />
+    <Content Include="assets\vendors\image-zoom\.editorconfig" />
+    <Content Include="assets\vendors\image-zoom\.github\workflows\codeql-analysis.yml" />
+    <Content Include="assets\vendors\image-zoom\.gitignore" />
+    <Content Include="assets\vendors\image-zoom\package-lock.json" />
+    <Content Include="assets\vendors\image-zoom\package.json" />
+    <Content Include="assets\vendors\image-zoom\README.md" />
+    <Content Include="assets\vendors\image-zoom\src\scss\image-zoom.scss" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -1523,7 +1540,6 @@
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Shop\Pay.cshtml" />
     <Content Include="Views\CustomProduct\Index.cshtml" />
-    <Content Include="Views\CustomProduct\Checkout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1569,7 +1585,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3647</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3647/</IISUrl>
+          <IISUrl>http://localhost:36499/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -167,13 +167,14 @@
 
 
 @section Scripts{
-
-    <script src="~/assets/vendors/jzoom/jzoom.js"></script>
+    <link href="~/assets/vendors/image-zoom/dist/css/image-zoom.css" rel="stylesheet" />
+    <script src="~/assets/vendors/image-zoom/dist/js/image-zoom.min.js"></script>
     <script>
         var productId = 0;
         var frontChip = 0;
         var backChip = 0;
         var plugin;
+
         $(".select-chip1").click(function () {
             $(".select-chip1").each(function () {
                 $(this).removeClass("select-shadow");
@@ -199,6 +200,10 @@
                 $("#zoom2").attr("src", "@Config.CustomProducts" + response.FrontImage);
                 $("#zoom3").attr("src", "@Config.CustomProducts" + response.BottomImage);
 
+                $('#zoom1').imageZoom({
+                    zoom: 200
+                });
+
             });
         });
 
@@ -219,6 +224,10 @@
             ).done(function (response) {
                 $("#zoom3").attr("src", "@Config.CustomProducts" + response.BottomImage);
                 $("#zoom1").attr("src", "@Config.CustomProducts" + response.BottomImage);
+
+                $('#zoom1').imageZoom({
+                    zoom: 200
+                });
             });
         });
 
@@ -239,8 +248,6 @@
 
             var url = $(this).find("img").attr("src");
             $(".jzoom").html('<img id="zoom1" src="' + url + '">');
-            $("#zoom1").magicZoom();
-
             productId = $(this).attr("data-id");
 
             $("#productId").val(productId);
@@ -248,9 +255,14 @@
             $(".zoom2").attr("src","");
             $(".zoom3").attr("src", "");
 
+            $(document).ready(function () {
+                $('#zoom1').imageZoom({
+                    zoom: 200
+                });
+            });
+
         });
 
- 
     </script>
 
     <script>
@@ -260,12 +272,16 @@
 
         var url = $("#select-cap-@id").find("img").attr("src");
         $(".jzoom").html('<img id="zoom1" src="' + url + '">');
-        $(".jzoom #zoom1").magicZoom();
 
         productId = $("#select-cap-@id").attr("data-id");
 
         $("#productId").val(productId);
         
 
+        $(document).ready(function () {
+            $('#zoom1').imageZoom({
+                zoom: 200
+            });
+        });
     </script>
 }
