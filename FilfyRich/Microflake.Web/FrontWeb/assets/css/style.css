@@ -5361,6 +5361,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   margin-bottom: 30px;
+  padding-bottom:10px;
 }
 .single_product:hover {
   background: #ffffff;
@@ -5371,6 +5372,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   top: 66%;
   opacity: 1;
   visibility: visible;
+  width: 100%;
+  padding-top:15px;
 }
 
 .product_ratings {
@@ -7323,7 +7326,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .pagination ul li {
   display: inline-block;
-  width: 30px;
+  width: 60px;
   height: 30px;
   line-height: 30px;
   text-align: center;
