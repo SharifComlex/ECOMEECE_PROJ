@@ -1,5 +1,5 @@
 ﻿@model Microflake.Core.ViewModel.SubCategories.CreateSubCategory
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "inputForm" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "inputForm", autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
 

@@ -918,7 +918,7 @@
 
     @RenderSection("Scripts", false)
 
-    <script>
+<script>
 
          var CurrentPageUrl = "";
         CurrentPageUrl = window.location.href;
@@ -1020,7 +1020,7 @@ var english = {
             });
 
             $("#btn-add").click(function () {
-               
+
                 var $btn = $(this);
                 $btn.find("i").removeClass("fa-plus");
                 $btn.find("i").addClass("fa-spinner");
@@ -1078,7 +1078,7 @@ var english = {
                 });
             });
 
-            $("body").on("click",".btn-remove",function () {
+            @*$("body").on("click",".btn-remove",function () {
                 var $btn = $(this);
                 var id = $btn.attr("data-id");
 
@@ -1100,7 +1100,7 @@ var english = {
                         $(".page-loader").hide();
                     }
                 });
-            });
+            });*@
 
             $("body").on("click",".btn-submit",function (e) {
                 var url = $("#inputForm").attr("action");
@@ -1161,7 +1161,7 @@ var english = {
         $("body").on("blur", "#InputForm input", function () {
             var id = $(this).attr("id");
             var str = $(this).val();
-           
+
             if (id == "Arabic") {
                 var pattern = /[\u0600-\u06FF\u0750-\u077F]/;
                 result = pattern.test(str);
@@ -1206,12 +1206,78 @@ var english = {
         });
 
 
+            $("#data-table").on("click", ".btnRemove", function () {
+                var id = $(this).attr("data-id");
+
+                var btn = $(this);
+                currentSelectRow = $(this);
+
+                $(btn).parent().parent().find("span").removeClass('zwicon-more-h');
+                $(btn).parent().parent().find("span").addClass('fa fa-spinner fa-spin');
+
+
+                Swal.fire({
+                    title: "Are you sure.",
+                    text: "you want to delete this?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: "Yes Delete This."
+                }).then((result) => {
+                    if (result.value) {debugger
+                        $.ajax({
+                            url: "@Config.BaseUrl/remove/" + id,
+                            type: 'get',
+                            success: function (response) {
+                                if (response.status == true) {
+                                    dataTable.row($("[data-grid-id='" + id + "']")).remove().draw(false);
+                                }
+                                $(".page-loader").hide(); 
+                                //if (response.status) {
+                                //    // Table.row($(currentSelectRow).parents('tr')).remove().draw(false);
+
+                                //    if ($("[data-grid-id='" + id + "']").next().hasClass("child")) {
+                                //        $("[data-grid-id='" + id + "']").next().remove();
+                                //    }
+
+                                //    Table.row($("[data-grid-id='" + id + "']")).remove().draw(false);
+
+                                //    Crudnotify('success', response.message);
+                                //} else {
+                                //    Crudnotify('danger', response.message);
+                                //}
+
+                                //$(btn).parent().parent().find("span").removeClass('fa fa-spinner fa-spin');
+                                //$(btn).parent().parent().find("span").addClass('zwicon-more-h');
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                debugger
+                                $(btn).parent().parent().find("span").removeClass('fa fa-spinner fa-spin');
+                                $(btn).parent().parent().find("span").addClass('zwicon-more-h');
+
+                                console.log(textStatus, errorThrown);
+                                Crudnotify('danger', errorThrown);
+                            }
+                        });
+                    } else {
+                        debugger
+                        $(btn).parent().parent().find("span").removeClass('fa fa-spinner fa-spin');
+                        $(btn).parent().parent().find("span").addClass('zwicon-more-h');
+                    }
+                })
+            });
 
              $("body").on("click",".zwicon-refresh-double",function () {
                 dataTable.ajax.reload();
             });
         });
-    </script>
+
+
+    function Crudnotify(style, message) {
+        $.simplyToast(message, style);
+    }
+</script>
 
 
     <script src="~/Scripts/simplytoast/simply-toast.min.js"></script>
