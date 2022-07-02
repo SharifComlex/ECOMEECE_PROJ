@@ -258,3 +258,17 @@ StackTrace   at System.Data.Entity.Core.EntityClient.EntityConnection.<OpenAsync
 
 Inner Exception : The connection was not closed. The connection's current state is connecting.
 ------******------
+DateTime : 02/07/2022 21:03:04
+
+
+MessageA second operation started on this context before a previous asynchronous operation completed. Use 'await' to ensure that any asynchronous operations have completed before calling another method on this context. Any instance members are not guaranteed to be thread safe.
+
+StackTrace   at System.Data.Entity.Internal.ThrowingMonitor.EnsureNotEntered()
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.System.Data.Entity.Infrastructure.IDbAsyncEnumerable<T>.GetAsyncEnumerator()
+   at System.Data.Entity.Internal.Linq.InternalQuery`1.GetAsyncEnumerator()
+   at System.Data.Entity.Infrastructure.DbQuery`1.System.Data.Entity.Infrastructure.IDbAsyncEnumerable<TResult>.GetAsyncEnumerator()
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ForEachAsync[T](IDbAsyncEnumerable`1 source, Action`1 action, CancellationToken cancellationToken)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ToListAsync[T](IDbAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ToListAsync[T](IDbAsyncEnumerable`1 source)
+   at System.Data.Entity.QueryableExtensions.ToListAsync[TSource](IQueryable`1 source)
+   at Microflake.Core.Application.Categories.CategoryService.<ToList>d__4.MoveNext() in C:\Zeeshan Munawar\Backup\Ecommerce\ECOMEECE_PROJ\FilfyRich\Microflake.Core\Application\Categories\CategoryService.cs:line 33

@@ -2,12 +2,25 @@
 @using Microflake.Core.ViewModel
 @model Microflake.Core.ViewModel.Products.ListProduct
 @{ ViewBag.Title = "FilterProduct";
-    //Layout = null;
-    //Layout = "~/Views/Shared/_Layout2.cshtml";
+    Layout = null;
 }
 <style>
     .whislist {
         color: red;
+    }
+
+    .niceselect_option {
+        cursor: pointer;
+        font-weight: 400;
+        line-height: 40px;
+        list-style: none;
+        min-height: 40px;
+        outline: none;
+        padding-left: 18px;
+        padding-right: 29px;
+        text-align: left;
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
     }
 </style>
 
@@ -23,7 +36,7 @@
     <div class="orderby_wrapper">
         <h3>Sort By : </h3>
         <div>
-            <select id="dataLinkTest" class=" niceselect_option">
+            <select id="dataLinkTest" class="niceselect_option">
                 <option class=" @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Popularity ? "selected" : string.Empty : string.Empty)" value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Popularity, categoryID = Model.CategoryID  })">New Entered</option>
                 <option class=" @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.PriceLowToHigh ? "selected" : string.Empty : string.Empty)" value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.PriceLowToHigh, categoryID = Model.CategoryID  })">Sort by price: low to high</option>
                 <option class=" @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.PriceHighToLow ? "selected" : string.Empty : string.Empty)" value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.PriceHighToLow, categoryID = Model.CategoryID  })">Sort by price: high to low</option>

@@ -120,7 +120,7 @@ namespace Microflake.Core.Application.Products
         }
         public IEnumerable<Product> List(int? subcategoryID, string searchTerm, int Page, int recordSize, int? categoryID, int? minimumPrice, int? maximumPrice, int? sortBy)
         {
-            var currency = _context.Currencies.ToList();
+           // var currency = _context.Currencies.ToList();
             var products = _context.Products.ToList();
             if (categoryID.HasValue)
             {
