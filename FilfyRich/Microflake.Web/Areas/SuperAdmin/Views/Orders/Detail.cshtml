@@ -4,7 +4,7 @@
     ViewBag.Title = "Detail";
 }
 
-<div class="app-title">
+@*<div class="app-title">
     <div>
         <h1><i class="fa fa-file-text-o"></i> Order Detail</h1>
     </div>
@@ -12,7 +12,7 @@
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
         <li class="breadcrumb-item"><a>Order Detail</a></li>
     </ul>
-</div>
+</div>*@
 
 <div class="row">
     <div class="col-md-12">
@@ -42,49 +42,56 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Qty</th>
+                                    <th>Image</th>
                                     <th>Product</th>
-                                    <th>Serial #</th>
-                                    <th>Description</th>
-                                    <th>Subtotal</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>The Hunger Games</td>
-                                    <td>455-981-221</td>
-                                    <td>El snort testosterone trophy driving gloves handsome</td>
-                                    <td>$41.32</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>City of Bones</td>
-                                    <td>247-925-726</td>
-                                    <td>Wes Anderson umami biodiesel</td>
-                                    <td>$75.52</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>The Maze Runner</td>
-                                    <td>545-457-47</td>
-                                    <td>Terry Richardson helvetica tousled street art master</td>
-                                    <td>$15.25</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>The Fault in Our Stars</td>
-                                    <td>757-855-857</td>
-                                    <td>Tousled lomo letterpress</td>
-                                    <td>$03.44</td>
-                                </tr>
+                                @foreach (var item in Model.OrderDetails)
+                                {
+                                    var rate = item.Product.SellPrice * ViewBag.Currency;
+
+                                    <tr>
+
+                                        <td>
+                                            <img id="imagePreview" src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
+                                            @if (item.Product.IsHasVariation == true)
+                                            {
+                                                <img src="@Config.Products@(item.BackBadge?.Image)" style="height:50px; width:50px;">
+                                                <img src="@Config.Products@(item.FrontBadge?.Image)" style="height:50px; width:50px;">
+                                            }
+                                        </td>
+                                        <td>@item.Product.Name<strong> × @item.Product.Qty</strong></td>
+                                        <td>@ViewBag.CurrencySimbal @rate</td>
+
+                                    </tr>
+                                }
                             </tbody>
+                            <tfoot>
+                                @*<tr>
+                                    <th>Cart Subtotal</th>
+                                    <td>$215.00</td>
+                                </tr>
+                                <tr>
+                                    <th>Shipping</th>
+                                    <td><strong>$5.00</strong></td>
+                                </tr>*@
+                                <tr class="order_total">
+                                    <th>Order Total</th>
+                                    <th></th>
+                                    @{
+                                        var Total = Model.Total * ViewBag.Currency;
+                                    }
+                                    <th><strong>@Total</strong></th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
-                <div class="row d-print-none mt-2">
+                @*<div class="row d-print-none mt-2">
                     <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a></div>
-                </div>
+                </div>*@
             </section>
         </div>
     </div>

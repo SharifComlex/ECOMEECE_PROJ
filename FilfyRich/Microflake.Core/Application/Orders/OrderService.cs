@@ -32,27 +32,29 @@ namespace Microflake.Core.Application.Orders
         {
             try
             {
-                var entity = await _context
-                    .Orders
-                    .Include(x=>x.OrderDetails)
-                    .FirstOrDefaultAsync(x => x.OrderId == id);
+                var entity = from o in _context.Orders.AsQueryable().Where(x => x.OrderId == id)
+                               join od in _context.OrderDetals.AsQueryable()
+                               .Include(x=>x.Product).Include(x=>x.FrontBadge) 
+                               .Include(x => x.BackBadge) on o.OrderId equals od.OrderId
+
+                               select new OrderDetail
+                               {
+                                   FirstName = o.FirstName,
+                                   LastName = o.LastName,
+                                   Address = o.Address,
+                                   Country = o.Country,
+                                   City = o.City,
+                                   PostalCode = o.PostalCode,
+                                   Email = o.Email,
+                                   OrderDetails = od,
+                                   Status = o.Status,
+                                   Total = o.Total,
+                                   CreatedAt = o.CreatedAt
+                               };
 
                 if (entity != null)
                 {
-                    return _response.Create(true, "Fatched", new OrderDetail
-                    {
-                        FirstName = entity.FirstName,
-                        LastName = entity.LastName,
-                        Address = entity.Address,
-                        Country  = entity.Country,
-                        City = entity.City,
-                        PostalCode = entity.PostalCode,
-                        Email = entity.Email,
-                        OrderDetails = entity.OrderDetails,
-                        Status = entity.Status,
-                        Total = entity.Total,
-                        CreatedAt = entity.CreatedAt
-                    });
+                    return _response.Create(true, "Fatched", entity.FirstOrDefault());
                 }
 
                 return _response.Create(false, "Not Fatched", new OrderDetail());

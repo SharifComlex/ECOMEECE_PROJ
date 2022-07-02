@@ -44,7 +44,7 @@ namespace Microflake.Core.ViewModel.Orders
 
         public string Email { get; set; }
 
-        public virtual List<OrderDetals> OrderDetails { get; set; }
+        public virtual OrderDetals OrderDetails { get; set; }
 
     }
 }
