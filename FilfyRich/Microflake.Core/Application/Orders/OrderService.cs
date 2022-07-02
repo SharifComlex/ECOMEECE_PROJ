@@ -46,7 +46,7 @@ namespace Microflake.Core.Application.Orders
                                    City = o.City,
                                    PostalCode = o.PostalCode,
                                    Email = o.Email,
-                                   OrderDetails = od,
+                                   OrderDetails = o.OrderDetails,
                                    Status = o.Status,
                                    Total = o.Total,
                                    CreatedAt = o.CreatedAt

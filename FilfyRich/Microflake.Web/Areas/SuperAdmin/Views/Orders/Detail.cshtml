@@ -19,23 +19,18 @@
         <div class="tile">
             <section class="invoice">
                 <div class="row mb-4">
-                    <div class="col-6">
-                        <h2 class="page-header"><i class="fa fa-globe"></i> Vali Inc</h2>
-                    </div>
-                    <div class="col-6">
-                        <h5 class="text-right">Date: 01/01/2016</h5>
+                   
+                    <div class="col-12">
+                        <h5 class="text-left"><strong>Order Created</strong>Date: 01/01/2016</h5>
                     </div>
                 </div>
                 <div class="row invoice-info">
-                    <div class="col-4">
-                        From
-                        <address><strong>Vali Inc.</strong><br>518 Akshar Avenue<br>Gandhi Marg<br>New Delhi<br>Email: hello@vali.com</address>
+                    <div class="col-6">
+                        <address><strong>Name</strong> Zeeshan Munawar<br><strong>Email:</strong> hello@vali.com</address>
                     </div>
-                    <div class="col-4">
-                        To
-                        <address><strong>John Doe</strong><br>795 Folsom Ave, Suite 600<br>San Francisco, CA 94107<br>Phone: (555) 539-1037<br>Email: john.doe@example.com</address>
+                    <div class="col-6">
+                        <address><strong>Order Id: 12312</strong><br><strong>Address</strong>795 Folsom Ave, Suite 600 San Francisco, CA 94107 </address>
                     </div>
-                    <div class="col-4"><b>Invoice #007612</b><br><br><b>Order ID:</b> 4F3S8J<br><b>Payment Due:</b> 2/22/2014<br><b>Account:</b> 968-34567</div>
                 </div>
                 <div class="row">
                     <div class="col-12 table-responsive">
@@ -56,14 +51,14 @@
 
                                         <td>
                                             <img id="imagePreview" src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
-                                            @if (item.Product.IsHasVariation == true)
+                                            @*@if (item.Product.IsHasVariation == true)
                                             {
                                                 <img src="@Config.Products@(item.BackBadge?.Image)" style="height:50px; width:50px;">
                                                 <img src="@Config.Products@(item.FrontBadge?.Image)" style="height:50px; width:50px;">
-                                            }
+                                            }*@
                                         </td>
                                         <td>@item.Product.Name<strong> × @item.Product.Qty</strong></td>
-                                        <td>@ViewBag.CurrencySimbal @rate</td>
+                                        <td>@ViewBag.CurrencySimbal @item.Product.SellPrice</td>
 
                                     </tr>
                                 }
