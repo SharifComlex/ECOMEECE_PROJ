@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microflake.Core.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -42,8 +43,8 @@ namespace Microflake.Core.ViewModel.Orders
         public string Phone { get; set; }
 
         public string Email { get; set; }
-        public string FrontBadge { get; set; }
-        public string BackBadge { get; set; }
+
+        public virtual List<OrderDetals> OrderDetails { get; set; }
 
     }
 }

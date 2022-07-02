@@ -48,9 +48,7 @@ namespace Microflake.Core.Application.Orders
                         City = entity.City,
                         PostalCode = entity.PostalCode,
                         Email = entity.Email,
-                        Image = entity.OrderDetails.FirstOrDefault().Product.Image,
-                        FrontBadge = entity.OrderDetails.FirstOrDefault().FrontBadge.Image,
-                        BackBadge = entity.OrderDetails.FirstOrDefault().BackBadge.Image,
+                        OrderDetails = entity.OrderDetails,
                         Status = entity.Status,
                         Total = entity.Total,
                         CreatedAt = entity.CreatedAt
