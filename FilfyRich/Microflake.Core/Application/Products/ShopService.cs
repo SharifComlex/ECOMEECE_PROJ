@@ -204,7 +204,7 @@ namespace Microflake.Core.Application.Products
 
                 foreach (var item in items)
                 {
-                    order.Total += (item.Product.Price * item.Count);
+                    order.Total += (item.Product.SellPrice * item.Count);
                 }
 
                 _db.Orders.Add(order);
@@ -216,7 +216,7 @@ namespace Microflake.Core.Application.Products
                         var detail = new OrderDetals()
                         {
                             ProductId = (long)item.ProductId,
-                            UnitPrice = item.Product.Price,
+                            UnitPrice = item.Product.SellPrice,
                             Quantity = item.Count,
                             OrderId = order.OrderId
                         };
