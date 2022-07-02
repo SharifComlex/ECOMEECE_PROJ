@@ -54,6 +54,13 @@ namespace Microflake.Web.Areas.SuperAdmin.Controllers
           
             return PartialView(result.Data);
         }
+        public async Task<ActionResult> Detail(int id)
+        {
+            var result = await _entityService.Detail(id);
+
+
+            return PartialView(result.Data);
+        }
 
 
         [HttpPost]

@@ -28,6 +28,44 @@ namespace Microflake.Core.Application.Orders
 
         }
 
+        public  async Task<ServiceResponse<OrderDetail>> Detail(long id)
+        {
+            try
+            {
+                var entity = await _context
+                    .Orders
+                    .Include(x=>x.OrderDetails)
+                    .FirstOrDefaultAsync(x => x.OrderId == id);
+
+                if (entity != null)
+                {
+                    return _response.Create(true, "Fatched", new OrderDetail
+                    {
+                        FirstName = entity.FirstName,
+                        LastName = entity.LastName,
+                        Address = entity.Address,
+                        Country  = entity.Country,
+                        City = entity.City,
+                        PostalCode = entity.PostalCode,
+                        Email = entity.Email,
+                        Image = entity.OrderDetails.FirstOrDefault().Product.Image,
+                        FrontBadge = entity.OrderDetails.FirstOrDefault().FrontBadge.Image,
+                        BackBadge = entity.OrderDetails.FirstOrDefault().BackBadge.Image,
+                        Status = entity.Status,
+                        Total = entity.Total,
+                        CreatedAt = entity.CreatedAt
+                    });
+                }
+
+                return _response.Create(false, "Not Fatched", new OrderDetail());
+            }
+            catch (Exception ex)
+            {
+                _logger.Log(ex);
+                return _response.Create(false, ex.Message, new OrderDetail());
+            }
+        }
+
         public async Task<ServiceResponse<EditOrder>> Edit(long id)
         {
             try

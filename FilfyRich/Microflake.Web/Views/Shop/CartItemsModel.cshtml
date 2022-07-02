@@ -7,7 +7,7 @@
 
     <div class="cart_item">
         <div class="cart_img">
-            <a href="#"><img src="@Config.Products@(item.Product.Image1)" onerror="this.src='/Public/default-image.jpg';"></a>
+            <a href="#"><img src="@Config.Products@(item.Product.Image)" onerror="this.src='/Public/default-image.jpg';"></a>
         </div>
         <div class="cart_info">
             <a href="#">@item.Product.Name</a>
@@ -17,21 +17,20 @@
 
         </div>
         @*<div class="cart_remove">
-            <a href="#"><i class="ion-android-close"></i></a>
-        </div>*@
-    </div>
-
-    <div class="cart_total">
-        <span>Subtotal:</span>
-        <span>@Model.Total</span>
-    </div>
-    <div class="mini_cart_footer">
-        <div class="cart_button view_cart">
-            <a href="/shop/CartItems">@Microflake.Web.Language.Language.ViewCart</a>
-        </div>
-        <div class="cart_button checkout">
-            <a class="active" href="/shop/Checkout">@Microflake.Web.Language.Language.Checkout</a>
-        </div>
-
+                <a href="#"><i class="ion-android-close"></i></a>
+            </div>*@
     </div>
 }
+<div class="cart_total">
+    <span>Subtotal:</span>
+    <span>@Model.Total</span>
+</div>
+<div class="mini_cart_footer">
+    <div class="cart_button view_cart">
+        <a href="/shop/CartItems">@Microflake.Web.Language.Language.ViewCart</a>
+    </div>
+    <div class="cart_button checkout">
+        <a class="active" href="/shop/Checkout">@Microflake.Web.Language.Language.Checkout</a>
+    </div>
+
+</div>

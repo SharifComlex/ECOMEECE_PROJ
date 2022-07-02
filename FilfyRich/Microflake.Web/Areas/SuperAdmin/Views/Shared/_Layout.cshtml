@@ -921,7 +921,7 @@
 
     @RenderSection("Scripts", false)
 
-    <script>
+<script>
 
          var CurrentPageUrl = "";
         CurrentPageUrl = window.location.href;
@@ -1067,6 +1067,32 @@ var english = {
                     type: "GET",
                     timeout: 5000,
                     url: "@Config.BaseUrl/edit/" + id,
+                    success: function (data) {
+                        $(".modal-title").html($btn.attr("data-model-title"));
+                        $(".modal-body").html(data);
+                        $("#modal").modal("show");
+
+                        $(".page-loader").hide();
+                    },
+                    error: function (ex) {
+                        $("#modal").modal("show");
+                        $(".page-loader").hide();
+                    }
+                });
+            });
+              $("body").on("click",".btn-detail",function () {
+                var $btn = $(this);
+
+                currentCrud = $btn.attr("data-model-crud");
+
+                var id =  $btn.attr("data-id");
+                $(".page-loader").show();
+
+                $.ajax({
+                    cache: false,
+                    type: "GET",
+                    timeout: 5000,
+                    url: "@Config.BaseUrl/Detail/" + id,
                     success: function (data) {
                         $(".modal-title").html($btn.attr("data-model-title"));
                         $(".modal-body").html(data);
@@ -1284,7 +1310,7 @@ var english = {
     function Crudnotify(style, message) {
         $.simplyToast(message, style);
     }
-    </script>
+</script>
     @if (lang == "ar")
     {
         <script>

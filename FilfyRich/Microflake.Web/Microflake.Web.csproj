@@ -1499,6 +1499,7 @@
     <Content Include="assets\vendors\image-zoom\package.json" />
     <Content Include="assets\vendors\image-zoom\README.md" />
     <Content Include="assets\vendors\image-zoom\src\scss\image-zoom.scss" />
+    <Content Include="Areas\SuperAdmin\Views\Orders\Detail.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

@@ -175,6 +175,7 @@
     <Compile Include="ViewModel\ItemSelectList.cs" />
     <Compile Include="ViewModel\Orders\EditOrder.cs" />
     <Compile Include="ViewModel\Orders\ListOrder.cs" />
+    <Compile Include="ViewModel\Orders\OrderDetail.cs" />
     <Compile Include="ViewModel\Products\CreateProduct.cs" />
     <Compile Include="ViewModel\Products\EditProduct.cs" />
     <Compile Include="ViewModel\Products\ListProduct.cs" />
