@@ -38,33 +38,32 @@
                                 </div>
                                 <h3><a href="@((item.IsHasVariation)? "/CustomProduct?Id" + item.Id:"/Home/Productdetail")">@item.Name</a></h3>
                                 <div class="price_box">
-                                    <span class="old_price">$ @item.Discount</span>
-                                    <span class="current_price">$@item.SellPrice</span>
+                                    @if (item.Discount < item.SellPrice)
+                                    {
+                                        <span class="old_price">$ @item.Discount</span>
+                                        <span class="current_price">$@item.SellPrice</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="current_price">$@item.SellPrice</span>
+                                    }
+
                                 </div>
-                                <div class="product_hover">
-                                    <div class="product_ratings">
-                                        <ul>
-                                            @*<li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-star-outline"></i></a></li>*@
-                                        </ul>
+                                @if (!item.IsHasVariation)
+                                {
+                                    <div class="product_hover">
+                                        <div class="action_links">
+                                            <ul>
+                                                @if (!item.IsHasVariation)
+                                                {
+                                                    <li class="add_to_cart"><a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })" title="add to cart">add to cart</a></li>
+                                                }
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="product_desc">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere metus vitae arcu imperdiet</p>
-                                    </div>
-                                    <div class="action_links">
-                                        <ul>
-                                            @* <li><a href="wishlist.html" data-placement="top" title="Add to Wishlist" data-bs-toggle="tooltip"><span class="icon icon-Heart"></span></a></li>*@
-                                            @if (!item.IsHasVariation)
-                                            {
-                                                <li class="add_to_cart"><a href="@Url.Action("AddtoCart", "shop", new { controller = "Shop", id = item.Id })" title="add to cart">add to cart</a></li>
-                                            }
-                                            @* <li><a href="compare.html" title="compare"><i class="ion-ios-settings-strong"></i></a></li>*@
-                                        </ul>
-                                    </div>
-                                </div>
+                                }
+
+
                             </div>
                         </div>
                     </div> }

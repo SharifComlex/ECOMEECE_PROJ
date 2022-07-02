@@ -172,7 +172,7 @@ namespace Microflake.Web.Controllers
 
             if (result > 0) {
 
-                StripeConfiguration.ApiKey = "sk_test_wfSHnvBhrhUVB9pmt1b1DyKz00q1skyVH4";
+                StripeConfiguration.ApiKey = "sk_test_51LA8LSA2T7xDNF0lMDd9YbipfEmze0PhS8NMUaHDoAKJESU0VhK2xoBxjBpz9AMGOtZbNkxNOvKIJZV4uiohbdnH00JVaU877v";
 
                 try
                 {
@@ -182,7 +182,7 @@ namespace Microflake.Web.Controllers
 
                         var options = new ChargeCreateOptions
                         {
-                            Amount = (long)orderDetail.Total,
+                            Amount = (long)(orderDetail.Total * 100),
                             Currency = "GBP",
                             Description = model.FirstName + " " + model.LastName + ", OrderId =  " + result,
                             Source = model.stripeToken,
