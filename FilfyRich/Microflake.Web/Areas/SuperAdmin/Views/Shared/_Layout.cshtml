@@ -686,11 +686,11 @@
                 </a>
             </li>
             @*<li>
-                <a href="/Superadmin/DealOfTheWeeks" class="app-menu__item">
-                    <i class="app-menu__icon fas fa-tachometer-alt"></i>
-                    <span class="app-menu__label">@Microflake.Web.Language.Language.Deal_Of_The_Week</span>
-                </a>
-            </li>*@
+                    <a href="/Superadmin/DealOfTheWeeks" class="app-menu__item">
+                        <i class="app-menu__icon fas fa-tachometer-alt"></i>
+                        <span class="app-menu__label">@Microflake.Web.Language.Language.Deal_Of_The_Week</span>
+                    </a>
+                </li>*@
             <li>
                 <a href="/Superadmin/Categories" class="app-menu__item">
                     <i class="app-menu__icon fas fa-th"></i>
@@ -726,12 +726,12 @@
 
             </li>
             @*<li>
-            <a href="/Superadmin/Currency" class="app-menu__item">
-                <i class="app-menu__icon fe-airplay"></i>
-                <span class="app-menu__label">Currency</span>
-            </a>
+                    <a href="/Superadmin/Currency" class="app-menu__item">
+                        <i class="app-menu__icon fe-airplay"></i>
+                        <span class="app-menu__label">Currency</span>
+                    </a>
 
-        </li>*@
+                </li>*@
             <li>
                 <a href="/Superadmin/ContactUs" class="app-menu__item">
                     <i class="app-menu__icon fas fa-comment-alt"></i>
@@ -740,11 +740,11 @@
 
             </li>
             @*<li>
-                <a href="/Superadmin/Subscriber" class="app-menu__item">
-                    <i class="app-menu__icon fe-airplay"></i>
-                    <span class="app-menu__label">Subscribers</span>
-                </a>
-            </li>*@
+                    <a href="/Superadmin/Subscriber" class="app-menu__item">
+                        <i class="app-menu__icon fe-airplay"></i>
+                        <span class="app-menu__label">Subscribers</span>
+                    </a>
+                </li>*@
             <li class="treeview">
                 <a href="#" data-toggle="treeview" class="app-menu__item">
                     <i class="app-menu__icon fas fa-file-excel"></i>
@@ -832,6 +832,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
 
+
+
+    <script src="~/Scripts/simplytoast/simply-toast.min.js"></script>
     <script src="~/Content/vandors/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 
     <!-- select2 -->
@@ -918,7 +921,7 @@
 
     @RenderSection("Scripts", false)
 
-<script>
+    <script>
 
          var CurrentPageUrl = "";
         CurrentPageUrl = window.location.href;
@@ -1129,11 +1132,14 @@ var english = {
                                 dataTable.row.add(response.data).draw(false);
                                 dataTable.order([0, 'desc']).draw(false);
                                 $("#modal").modal("hide");
+
+                                Crudnotify('success', response.message);
                             } else if (currentCrud == "update") {
                                 if ($("[data-grid-id='" + response.data.Id + "']").next().hasClass("child")) {
                                     $("[data-grid-id='" + response.data.Id + "']").next().remove();
                                 }
 
+                                Crudnotify('success', response.message);
                                 dataTable.row($("[data-grid-id='" + response.data.Id + "']")).remove().draw(false);
                                 dataTable.row.add(response.data).draw(false);
 
@@ -1233,7 +1239,8 @@ var english = {
                                 if (response.status == true) {
                                     dataTable.row($("[data-grid-id='" + id + "']")).remove().draw(false);
                                 }
-                                $(".page-loader").hide(); 
+                                Crudnotify('success', response.message);
+                                $(".page-loader").hide();
                                 //if (response.status) {
                                 //    // Table.row($(currentSelectRow).parents('tr')).remove().draw(false);
 
@@ -1277,10 +1284,7 @@ var english = {
     function Crudnotify(style, message) {
         $.simplyToast(message, style);
     }
-</script>
-
-
-    <script src="~/Scripts/simplytoast/simply-toast.min.js"></script>
+    </script>
     @if (lang == "ar")
     {
         <script>
