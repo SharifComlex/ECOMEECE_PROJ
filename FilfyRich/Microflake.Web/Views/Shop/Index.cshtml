@@ -89,7 +89,7 @@
                                 </select>
                             </div>
                             <div class="page_amount">
-                                <p> Showing @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + 1) – @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + (Model.Productlist.Where(x => x.IsFeatured == true).Count() < Model.Pager.PageSize ? Model.Productlist.Where(x => x.IsFeatured == true).Count() : Model.Pager.PageSize)) of @Model.Pager.TotalItems Products</p>
+                                <p> Showing @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + 1) – @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + (Model.Productlist.Count() < Model.Pager.PageSize ? Model.Productlist.Count() : Model.Pager.PageSize)) of @Model.Pager.TotalItems Products</p>
                             </div>
                         </div>
                     </div>
