@@ -66,33 +66,7 @@
             <div class="col-lg-9 col-md-12">
                 <div class="shop-products-wrapper" >
                     <!--shop wrapper start-->
-                    <div class="shop_toolbar">
-                        <div class="list_button">
-                            <ul class="nav" role="tablist">
-                                <li>
-                                    <a class="active" data-bs-toggle="tab" href="#large" role="tab" aria-controls="large" aria-selected="true"><i class="ion-grid"></i></a>
-                                </li>
-                               
-                            </ul>
-                        </div>
-                        <div class="orderby_wrapper">
-                            <h3>Sort By : </h3>
-                            <div >
-                                <select id="dataLinkTest" class=" niceselect_option">
-                                    <option class=" @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Popularity ? "selected" : string.Empty : string.Empty)" value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Popularity, categoryID = Model.CategoryID  })">New Entered</option>
-                                    <option class=" @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.PriceLowToHigh ? "selected" : string.Empty : string.Empty)" value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.PriceLowToHigh, categoryID = Model.CategoryID  })">Sort by price: low to high</option>
-                                    <option class=" @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.PriceHighToLow ? "selected" : string.Empty : string.Empty)" value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.PriceHighToLow, categoryID = Model.CategoryID  })">Sort by price: high to low</option>
-                                    <option class=" @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between0to500 ? "selected" : string.Empty : string.Empty)" value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between0to500, categoryID = Model.CategoryID  })">Price Between: 0 to 500 </option>
-                                    <option class=" @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between500to1000 ? "selected" : string.Empty : string.Empty)" value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between500to1000, categoryID = Model.CategoryID  })">Price Between: 500 to 1000</option>
-                                    <option class=" @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between1000to1500 ? "selected" : string.Empty : string.Empty)" value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between1000to1500, categoryID = Model.CategoryID  })">Price Between: 1000 to 1500</option>
-                                    <option class=" @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between1500to2000 ? "selected" : string.Empty : string.Empty)" value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between1500to2000, categoryID = Model.CategoryID  })">Price Between: 1500 to 2000</option>
-                                </select>
-                            </div>
-                            <div class="page_amount">
-                                <p> Showing @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + 1) – @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + (Model.Productlist.Count() < Model.Pager.PageSize ? Model.Productlist.Count() : Model.Pager.PageSize)) of @Model.Pager.TotalItems Products</p>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!--shop toolbar end-->
                     <div id="ProductsDiv">
                         @{
