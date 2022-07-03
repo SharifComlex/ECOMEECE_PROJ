@@ -21,6 +21,8 @@
                                         @using (Html.BeginForm("Checkout", "Shop", FormMethod.Post, new { id = "" }))
                                         {
                                             @Html.AntiForgeryToken()
+                                            @Html.HiddenFor(x => x.GrandTotal)
+                                            @Html.HiddenFor(x => x.ShippingCharges)
                                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                                             <div class="form-group">
@@ -113,25 +115,25 @@
                                             </tfoot>
                                         </table>
                                     </div>
+                                    <h3>Shipping charges</h3>
                                     <div class="payment_method">
-                                        <div class="panel-default">
-                                            <input id="payment" name="check_method" type="radio" data-bs-target="createp_account">
-                                            <label for="payment" data-bs-toggle="collapse" data-bs-target="#method" aria-controls="method">Standard Delivery £ 2.99 ( 2-3 working daysVia DPD/Royal Mail)</label>
+                                        <div class="panel-default  mb-4">
+                                            <input class="shipment" checked value="Standard" name="GrandTotal" type="radio" data-bs-target="createp_account">
+                                            <label for="payment" data-bs-toggle="collapse" data-bs-target="#method" aria-controls="method">Standard Delivery £ 2.99</label> <br /><span style="padding-left:23px">( 2-3 working daysVia DPD/Royal Mail)</span>
 
                                         </div>
-                                        <div class="panel-default">
-                                            <input id="payment_defult" name="check_method" type="radio" data-bs-target="createp_account">
-                                            <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">Next WOrking Day £ 4.99 (DPD/Royal Mail) </label>
+                                        <div class="panel-default  mb-4">
+                                            <input class="shipment" value="NDay" name="GrandTotal" type="radio" data-bs-target="createp_account">
+                                            <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">Next Working Day £ 4.99  </label> <br /> <span style="padding-left:23px">(DPD/Royal Mail)</span>
 
 
                                         </div>
-                                        <div class="panel-default">
-                                            <input id="payment_defult" name="check_method" type="radio" data-bs-target="createp_account">
-                                            <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">Saturday £ 7.99 (DPD/Royal Mail) </label>
+                                        <div class="panel-default  mb-4">
+                                            <input class="shipment" value="Saturday" name="GrandTotal" type="radio" data-bs-target="createp_account">
+                                            <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">Saturday £ 7.99  </label> <br /><span style="padding-left:23px">(DPD/Royal Mail)</span>
 
                                         </div>
-                                        <div class="panel-default">
-                                            <input id="payment_defult" name="check_method" type="radio" data-bs-target="createp_account">
+                                        <div class="panel-default  mb-4">
                                             <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">Free Delivery on UK Order over £ 80.00</label>
 
                                         </div>
@@ -145,14 +147,14 @@
                                                     @{
                                                         var Totals = Model.Total * ViewBag.Currency;
                                                     }
-                                                    <td><strong>£  @Total</strong></td>
+                                                    <td><strong class="grandtotal">£ @Total</strong></td>
                                                 </tr>
-                                               
-                                               
+
+
                                             </tfoot>
                                         </table>
                                     </div>
-                                    
+
                                     <div class="payment_method">
                                         <div class="form-group">
                                             <span>
@@ -200,7 +202,46 @@
 @section Scripts{
     <script src="https://js.stripe.com/v3/"></script>
     <script src="~/Scripts/stripe.js"></script>
+
+
     <script>
+        var shipment = $(".shipment").val();
+            if (shipment == "Standard") {
+                $(".grandtotal").html("");
+                $(".grandtotal").html("£" + parseFloat(  @Model.Total + 2.99).toFixed(2));
+                $("#ShippingCharges").val(parseFloat(2.99).toFixed(2));
+                $("#GrandTotal").val(parseFloat(  @Model.Total + 2.99).toFixed(2));
+            } else if (shipment == "NDay") {
+                $(".grandtotal").html("");
+                $(".grandtotal").html("£" + parseFloat(  @Model.Total + 4.99).toFixed(2));
+                $("#ShippingCharges").val(parseFloat(4.99).toFixed(2));
+                $("#GrandTotal").val(parseFloat(  @Model.Total + 4.99).toFixed(2));
+            } else if (shipment == "Saturday") {
+                $(".grandtotal").html("");
+                $(".grandtotal").html("£" + parseFloat(  @Model.Total + 7.99).toFixed(2));
+                $("#ShippingCharges").val(parseFloat(7.99).toFixed(2));
+                $("#GrandTotal").val(parseFloat(  @Model.Total + 7.99).toFixed(2));
+        }
+        $(".shipment").click(function () {
+            var shipment = $(this).val();
+            if (shipment == "Standard") {
+                $(".grandtotal").html("");
+                $(".grandtotal").html("£" + parseFloat(  @Model.Total + 2.99).toFixed(2));
+                $("#ShippingCharges").val(parseFloat(2.99).toFixed(2));
+                $("#GrandTotal").val(parseFloat(  @Model.Total + 2.99).toFixed(2));
+            } else if (shipment == "NDay") {
+                $(".grandtotal").html("");
+                $(".grandtotal").html("£" + parseFloat(  @Model.Total + 4.99).toFixed(2));
+                $("#ShippingCharges").val(parseFloat(4.99).toFixed(2));
+                $("#GrandTotal").val(parseFloat(  @Model.Total + 4.99).toFixed(2));
+            } else if (shipment == "Saturday") {
+                $(".grandtotal").html("");
+                $(".grandtotal").html("£" + parseFloat(  @Model.Total + 7.99).toFixed(2));
+                $("#ShippingCharges").val(parseFloat(7.99).toFixed(2));
+                $("#GrandTotal").val(parseFloat(  @Model.Total + 7.99).toFixed(2));
+            }
+        });
+
         $("#Submitform").submit(function (event) {
             event.preventDefault();
             debugger

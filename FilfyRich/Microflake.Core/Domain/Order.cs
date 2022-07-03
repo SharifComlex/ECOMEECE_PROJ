@@ -53,6 +53,8 @@ namespace Microflake.Core.Domain
         public string Status { get; set; }
         public string OrderBy { get;  set; }
         public string PaymentStatus { get; set; }
+        public double GrandTotal { get; set; }
+        public double ShippingCharges { get; set; }
 
         public Order()
         {

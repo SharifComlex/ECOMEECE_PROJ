@@ -144,6 +144,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Validations.resx</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207031145203_grandtotal.cs" />
+    <Compile Include="Migrations\202207031145203_grandtotal.designer.cs">
+      <DependentUpon>202207031145203_grandtotal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -199,6 +203,9 @@
     <EmbeddedResource Include="Lang\Validations.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Validations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207031145203_grandtotal.resx">
+      <DependentUpon>202207031145203_grandtotal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

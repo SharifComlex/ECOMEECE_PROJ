@@ -17,7 +17,8 @@ namespace Microflake.Core.ViewModel
         public IEnumerable<CartItem> Items { get; set; }
         public double Total { get; set; }
 
-
+        public double GrandTotal { get; set; }
+        public double ShippingCharges { get; set; }
         public ApplicationUser User { get; set; }
 
         [Required]

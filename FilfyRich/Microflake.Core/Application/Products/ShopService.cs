@@ -199,7 +199,9 @@ namespace Microflake.Core.Application.Products
                     OrderDate = DateTime.Now,
                     CreatedAt = DateTime.UtcNow,
                     ModifiedAt = DateTime.UtcNow,
-                    OrderBy = userId
+                    OrderBy = userId,
+                    GrandTotal = model.GrandTotal,
+                    ShippingCharges = model.ShippingCharges
             };
 
                 foreach (var item in items)
@@ -220,7 +222,8 @@ namespace Microflake.Core.Application.Products
                             Quantity = item.Count,
                             OrderId = order.OrderId,
                             FrontBadgeId = item.FrontChipId,
-                            BackBadgeId = item.BackChipId
+                            BackBadgeId = item.BackChipId,
+                            
                         };
 
                         if (detail.FrontBadgeId != null && detail.BackBadgeId != null) {
