@@ -43,7 +43,7 @@ namespace Microflake.Core.Application.Orders
                        Address = x.Address,
                        ShippingCharges = x.ShippingCharges,
                        Quanty = x.OrderDetails.Select(q => q.Quantity).Sum(),
-                       Total = x.OrderDetails.Select(q => q.Quantity * q.UnitPrice).Sum(),
+                       Total = x.OrderDetails.Select(q => q.Quantity * q.UnitPrice).Sum() + x.ShippingCharges,
                        Status = x.Status,
                        CreatedAt = x.CreatedAt,
                        Items = x.OrderDetails.Select(o => new OrderDetail
@@ -113,7 +113,7 @@ namespace Microflake.Core.Application.Orders
                         FirstName = x.FirstName,
                         LastName = x.LastName,
                         Quanty = x.OrderDetails.Select(q=> q.Quantity).Sum(),
-                        Total = x.OrderDetails.Select(q => q.Quantity * q.UnitPrice).Sum(),
+                        Total = x.OrderDetails.Select(q => q.Quantity * q.UnitPrice).Sum() + x.ShippingCharges,
                         Status = x.Status,
                     }).ToListAsync();
 
