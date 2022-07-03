@@ -102,25 +102,57 @@
                                                 }
                                             </tbody>
                                             <tfoot>
-                                                @*<tr>
-                                                        <th>Cart Subtotal</th>
-                                                        <td>$215.00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Shipping</th>
-                                                        <td><strong>$5.00</strong></td>
-                                                    </tr>*@
                                                 <tr class="order_total">
-                                                    <th>Order Total</th>
-                                                    <th></th>
+                                                    <th>Sub Total</th>
+                                                    <td></td>
                                                     @{
                                                         var Total = Model.Total * ViewBag.Currency;
                                                     }
-                                                    <th><strong>@Total</strong></th>
+                                                    <th><strong>£ @Total</strong></th>
                                                 </tr>
                                             </tfoot>
                                         </table>
                                     </div>
+                                    <div class="payment_method">
+                                        <div class="panel-default">
+                                            <input id="payment" name="check_method" type="radio" data-bs-target="createp_account">
+                                            <label for="payment" data-bs-toggle="collapse" data-bs-target="#method" aria-controls="method">Standard Delivery £ 2.99 ( 2-3 working daysVia DPD/Royal Mail)</label>
+
+                                        </div>
+                                        <div class="panel-default">
+                                            <input id="payment_defult" name="check_method" type="radio" data-bs-target="createp_account">
+                                            <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">Next WOrking Day £ 4.99 (DPD/Royal Mail) </label>
+
+
+                                        </div>
+                                        <div class="panel-default">
+                                            <input id="payment_defult" name="check_method" type="radio" data-bs-target="createp_account">
+                                            <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">Saturday £ 7.99 (DPD/Royal Mail) </label>
+
+                                        </div>
+                                        <div class="panel-default">
+                                            <input id="payment_defult" name="check_method" type="radio" data-bs-target="createp_account">
+                                            <label for="payment_defult" data-bs-toggle="collapse" data-bs-target="#collapsedefult" aria-controls="collapsedefult">Free Delivery on UK Order over £ 80.00</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="order_table table-responsive">
+                                        <table>
+                                            <tfoot>
+                                                <tr class="order_total" style="border-top: 1px solid #ddd; background-color:lightgray;">
+                                                    <th>Grand Total</th>
+                                                    <td></td>
+                                                    @{
+                                                        var Totals = Model.Total * ViewBag.Currency;
+                                                    }
+                                                    <td><strong>£  @Total</strong></td>
+                                                </tr>
+                                               
+                                               
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    
                                     <div class="payment_method">
                                         <div class="form-group">
                                             <span>
