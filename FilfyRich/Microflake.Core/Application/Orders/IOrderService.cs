@@ -11,7 +11,7 @@ namespace Microflake.Core.Application.Orders
    public interface IOrderService
     {
         Task<ServiceResponse<EditOrder>> Edit(long id);
-        Task<ServiceResponse<OrderDetail>> Detail(long id);
+        Task<ServiceResponse<ListOrder>> Detail(long id);
         Task<ServiceResponse<ListOrder>> Update(EditOrder model, string userId);
 
         Task<ServiceResponse<List<ListOrder>>> List();

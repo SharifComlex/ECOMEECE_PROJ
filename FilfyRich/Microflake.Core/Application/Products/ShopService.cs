@@ -218,8 +218,17 @@ namespace Microflake.Core.Application.Products
                             ProductId = (long)item.ProductId,
                             UnitPrice = item.Product.SellPrice,
                             Quantity = item.Count,
-                            OrderId = order.OrderId
+                            OrderId = order.OrderId,
+                            FrontBadgeId = item.FrontChipId,
+                            BackBadgeId = item.BackChipId
                         };
+
+                        if (detail.FrontBadgeId != null && detail.BackBadgeId != null) {
+                            if (detail.FrontBadgeId.HasValue && detail.BackBadgeId.HasValue)
+                            {
+                                detail.IsCustom = true;
+                            }
+                        }
 
                         _db.OrderDetals.Add(detail);
                     }

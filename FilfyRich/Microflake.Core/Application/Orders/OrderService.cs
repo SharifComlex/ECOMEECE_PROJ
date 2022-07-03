@@ -28,41 +28,49 @@ namespace Microflake.Core.Application.Orders
 
         }
 
-        public  async Task<ServiceResponse<OrderDetail>> Detail(long id)
+        public  async Task<ServiceResponse<ListOrder>> Detail(long id)
         {
             try
             {
-                var entity = from o in _context.Orders.AsQueryable().Where(x => x.OrderId == id)
-                               join od in _context.OrderDetals.AsQueryable()
-                               .Include(x=>x.Product).Include(x=>x.FrontBadge) 
-                               .Include(x => x.BackBadge) on o.OrderId equals od.OrderId
+                var entity = await _context
+                   .Orders
+                   .Select(x => new ListOrder
+                   {
+                       Id = x.OrderId,
+                       FirstName = x.FirstName,
+                       LastName = x.LastName,
+                       Email = x.Email,
+                       Address = x.Address,
+                       Quanty = x.OrderDetails.Select(q => q.Quantity).Sum(),
+                       Total = x.OrderDetails.Select(q => q.Quantity * q.UnitPrice).Sum(),
+                       Status = x.Status,
+                       CreatedAt = x.CreatedAt,
+                       Items = x.OrderDetails.Select(o => new OrderDetail
+                       {
+                           OrderId = o.OrderId,
+                           Name = o.Product.Name,
+                           CapImage = o.Product.Image,
+                           FrontBadge = o.FrontBadge.Image,
+                           BackBadge = o.BackBadge.Image,
+                           IsCustom = o.IsCustom,
+                           Quantity = o.Quantity,
+                           UnitPrice = o.UnitPrice
+                       })
+                       .ToList()
+                   }).FirstOrDefaultAsync(x=> x.Id == id);
 
-                               select new OrderDetail
-                               {
-                                   FirstName = o.FirstName,
-                                   LastName = o.LastName,
-                                   Address = o.Address,
-                                   Country = o.Country,
-                                   City = o.City,
-                                   PostalCode = o.PostalCode,
-                                   Email = o.Email,
-                                   OrderDetails = o.OrderDetails,
-                                   Status = o.Status,
-                                   Total = o.Total,
-                                   CreatedAt = o.CreatedAt
-                               };
 
                 if (entity != null)
                 {
-                    return _response.Create(true, "Fatched", entity.FirstOrDefault());
+                    return _response.Create(true, "Fatched", entity);
                 }
 
-                return _response.Create(false, "Not Fatched", new OrderDetail());
+                return _response.Create(false, "Not Fatched", new ListOrder());
             }
             catch (Exception ex)
             {
                 _logger.Log(ex);
-                return _response.Create(false, ex.Message, new OrderDetail());
+                return _response.Create(false, ex.Message, new ListOrder());
             }
         }
 
@@ -97,22 +105,15 @@ namespace Microflake.Core.Application.Orders
             try
             {
                 var list = await _context
-                    .OrderDetals
+                    .Orders
                     .Select(x => new ListOrder
                     {
                         Id = x.OrderId,
-                        FirstName = x.Order.FirstName,
-                        LastName = x.Order.LastName,
-                        PRoductTitle = x.Product.Name,
-                        Quanty = x.Quantity,
-                        UnitPrice = x.UnitPrice,
-                        Total = x.Product.Price * x.Quantity,
-                        Status = x.Order.Status,
-                       SellPrice=x.Product.SellPrice,
-                        orderId = x.Order.OrderId,
-                        OrderBy = x.Order.OrderBy,
-                        Image=x.Product.Image
-
+                        FirstName = x.FirstName,
+                        LastName = x.LastName,
+                        Quanty = x.OrderDetails.Select(q=> q.Quantity).Sum(),
+                        Total = x.OrderDetails.Select(q => q.Quantity * q.UnitPrice).Sum(),
+                        Status = x.Status,
                     }).ToListAsync();
 
                 return _response.Create(true, "All record has been fetched", list);
@@ -168,14 +169,10 @@ namespace Microflake.Core.Application.Orders
                         Id = x.OrderId,
                         FirstName = x.Order.FirstName,
                         LastName = x.Order.LastName,
-                        PRoductTitle = x.Product.Name,
                         Quanty = x.Quantity,
-                        UnitPrice = x.UnitPrice,
                         Total = x.Product.Price * x.Quantity,
                         Status = x.Order.Status,
-                        SellPrice=x.Product.SellPrice,
                         orderId = x.Order.OrderId,
-                        Image =x.Product.Image
                     })
                     .AsNoTracking()
                     .FirstOrDefaultAsync(x => x.orderId == Id);

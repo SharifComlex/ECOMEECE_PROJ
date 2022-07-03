@@ -14,16 +14,17 @@ namespace Microflake.Core.ViewModel.Orders
 
         public string FirstName { get;  set; }
         public string LastName { get;  set; }
-        public string PRoductTitle { get;  set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+
         public int Quanty { get;  set; }
-        public double UnitPrice { get;  set; }
         public double Total { get;  set; }
 
-        public double SellPrice { get; set; }
-        public string OrderBy { get; set; }
         public string Status { get;  set; }
-        public string Currency { get; set; }
-        public string Image { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public List<OrderDetail> Items { get; set; }
     }
 
 }

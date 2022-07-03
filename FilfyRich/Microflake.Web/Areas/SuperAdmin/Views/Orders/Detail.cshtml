@@ -1,4 +1,4 @@
-﻿@model Microflake.Core.ViewModel.Orders.OrderDetail
+﻿@model Microflake.Core.ViewModel.Orders.ListOrder
 
 @{
     ViewBag.Title = "Detail";
@@ -21,15 +21,15 @@
                 <div class="row mb-4">
                    
                     <div class="col-12">
-                        <h5 class="text-left"><strong>Order Created</strong>Date: 01/01/2016</h5>
+                        <h5 class="text-left"><strong>Order Created</strong>Date: @Model.CreatedAt.ToString("dd-MM-yyyy hh:mm tt")</h5>
                     </div>
                 </div>
                 <div class="row invoice-info">
                     <div class="col-6">
-                        <address><strong>Name</strong> Zeeshan Munawar<br><strong>Email:</strong> hello@vali.com</address>
+                        <address><strong>Name: @Model.FirstName @Model.LastName</strong><br><strong>Email: @Model.Email</strong></address>
                     </div>
                     <div class="col-6">
-                        <address><strong>Order Id: 12312</strong><br><strong>Address</strong>795 Folsom Ave, Suite 600 San Francisco, CA 94107 </address>
+                        <address><strong>Order Id: @Model.Id</strong><br><strong>Address</strong>@Model.Address </address>
                     </div>
                 </div>
                 <div class="row">
@@ -39,26 +39,26 @@
                                 <tr>
                                     <th>Image</th>
                                     <th>Product</th>
+                                    <th>Qty</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.OrderDetails)
+                                @foreach (var item in Model.Items)
                                 {
-                                    var rate = item.Product.SellPrice * ViewBag.Currency;
-
                                     <tr>
 
                                         <td>
-                                            <img id="imagePreview" src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
-                                            @*@if (item.Product.IsHasVariation == true)
+                                            <img id="imagePreview" src="@Config.Products@(item.CapImage)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
+                                            @if (item.IsCustom == true)
                                             {
-                                                <img src="@Config.Products@(item.BackBadge?.Image)" style="height:50px; width:50px;">
-                                                <img src="@Config.Products@(item.FrontBadge?.Image)" style="height:50px; width:50px;">
-                                            }*@
+                                                <img src="@Config.Products@(item.FrontBadge)" style="height:50px; width:50px;">
+                                                <img src="@Config.Products@(item.BackBadge)" style="height:50px; width:50px;">
+                                            }
                                         </td>
-                                        <td>@item.Product.Name<strong> × @item.Product.Qty</strong></td>
-                                        <td>@ViewBag.CurrencySimbal @item.Product.SellPrice</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Quantity</td>
+                                        <td>£ @(item.Quantity *  item.UnitPrice)</td>
 
                                     </tr>
                                 }
@@ -73,12 +73,8 @@
                                     <td><strong>$5.00</strong></td>
                                 </tr>*@
                                 <tr class="order_total">
-                                    <th>Order Total</th>
-                                    <th></th>
-                                    @{
-                                        var Total = Model.Total * ViewBag.Currency;
-                                    }
-                                    <th><strong>@Total</strong></th>
+                                    <th colspan="3">Order Total</th>
+                                    <th><strong>£ @Model.Total</strong></th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -92,3 +88,6 @@
     </div>
 </div>
 
+<script>
+    $(".btn-submit").hide();
+</script>
