@@ -85,7 +85,7 @@
                                             <tbody>
                                                 @foreach (var item in Model.Items)
                                                 {
-                                                    var rate = item.Product.SellPrice * ViewBag.Currency;
+                                                    var rate = item.Product.SellPrice;
 
                                                     <tr>
 
@@ -108,7 +108,7 @@
                                                     <th>Sub Total</th>
                                                     <td></td>
                                                     @{
-                                                        var Total = Model.Total * ViewBag.Currency;
+                                                        var Total = Model.Total ;
                                                     }
                                                     <th><strong>£ @Total</strong></th>
                                                 </tr>
@@ -145,7 +145,7 @@
                                                     <th>Grand Total</th>
                                                     <td></td>
                                                     @{
-                                                        var Totals = Model.Total * ViewBag.Currency;
+                                                        var Totals = Model.Total ;
                                                     }
                                                     <td><strong class="grandtotal">£ @Total</strong></td>
                                                 </tr>
@@ -200,7 +200,7 @@
 <script src="/content/FrontEnd/js/vendor/jquery-1.12.4.min.js"></script>
 
 @section Scripts{
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3"></script>
     <script src="~/Scripts/stripe.js"></script>
 
 
@@ -256,7 +256,7 @@
                     if (responce.status == true) {
                         //$(".signup-popup-box").css({"display":"none"});
                         $.cookie('ShoppingCart', '', { path: '/' });
-                        updateCartProducts();
+                        //updateCartProducts();
 
                         Swal.fire(
                             {
