@@ -50,6 +50,7 @@
 
                                         <td>
                                             <img id="imagePreview" src="@Config.Products@(item.CapImage)" style="height:100px; width:100px;" onerror="this.src='/Public/default-image.jpg';" />
+                                            <br/>
                                             @if (item.IsCustom == true)
                                             {
                                                 <img src="@Config.Products@(item.FrontBadge)" style="height:50px; width:50px;">
@@ -77,8 +78,8 @@
                                     <th><strong>£ @Model.ShippingCharges</strong></th>
                                 </tr>
                                 <tr class="order_total">
-                                    <th colspan="3">Order Total</th>
-                                    <th><strong>£ @Model.Total</strong></th>
+                                    <th colspan="2">Order Total</th>
+                                    <th colspan="2" style="text-align:right"><strong>£ @Model.Total</strong></th>
                                 </tr>
                             </tfoot>
                         </table>
