@@ -41,6 +41,7 @@ namespace Microflake.Core.Application.Orders
                        LastName = x.LastName,
                        Email = x.Email,
                        Address = x.Address,
+                       ShippingCharges = x.ShippingCharges,
                        Quanty = x.OrderDetails.Select(q => q.Quantity).Sum(),
                        Total = x.OrderDetails.Select(q => q.Quantity * q.UnitPrice).Sum(),
                        Status = x.Status,

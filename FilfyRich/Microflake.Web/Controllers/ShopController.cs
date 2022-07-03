@@ -176,39 +176,36 @@ namespace Microflake.Web.Controllers
 
                 try
                 {
-                    using (var _db = new ApplicationDbContext()) {
+                    var _db = new ApplicationDbContext();
+                    var orderDetail = _db.Orders.FirstOrDefault(x => x.OrderId == result);
 
-                        var orderDetail = _db.Orders.FirstOrDefault(x=> x.OrderId == result);
+                    var options = new ChargeCreateOptions
+                    {
+                        Amount = (long)(orderDetail.Total * 100),
+                        Currency = "GBP",
+                        Description = model.FirstName + " " + model.LastName + ", OrderId =  " + result,
+                        Source = model.stripeToken,
+                    };
 
-                        var options = new ChargeCreateOptions
+                    var service = new ChargeService();
+                    Charge charge = service.Create(options);
+
+                    if (charge.Captured)
+                    {
+                        orderDetail.TransactionId = charge.Id;
+                        orderDetail.PaymentStatus = "Paid";
+
+                        _db.Entry(orderDetail).State = EntityState.Modified;
+                        if (_db.SaveChanges() > 0)
                         {
-                            Amount = (long)(orderDetail.Total * 100),
-                            Currency = "GBP",
-                            Description = model.FirstName + " " + model.LastName + ", OrderId =  " + result,
-                            Source = model.stripeToken,
-                        };
 
-                        var service = new ChargeService();
-                        Charge charge = service.Create(options);
+                            await cart.EmptyCartItemsAsync();
 
-                        if (charge.Captured)
-                        {
-                            orderDetail.TransactionId = charge.Id;
-                            orderDetail.PaymentStatus = "Paid";
-
-                            _db.Entry(orderDetail).State = EntityState.Modified;
-                            if (_db.SaveChanges() > 0) {
-
-                                await cart.EmptyCartItemsAsync();
-
-                                Response.Cookies["ShoppingCart"].Expires = DateTime.UtcNow;
-                                return RedirectToAction("index");
-                            }
+                            Response.Cookies["ShoppingCart"].Expires = DateTime.UtcNow;
+                            return RedirectToAction("index");
                         }
-
-                        _db.Orders.Remove(orderDetail);
-                        _db.SaveChanges();
                     }
+
                 }
                 catch (StripeException ex)
                 {
@@ -218,6 +215,11 @@ namespace Microflake.Web.Controllers
                 {
                     ModelState.AddModelError("stripeToken", ex.Message);
                 }
+
+                var _db1 = new ApplicationDbContext();
+                var orderDetail1 = _db1.Orders.FirstOrDefault(x => x.OrderId == result);
+                _db1.Orders.Remove(orderDetail1);
+                _db1.SaveChanges();
 
                 model.Items = items;
                 model.Total = CalcuateCart(items);

@@ -18,6 +18,7 @@ namespace Microflake.Core.ViewModel.Orders
         public string Address { get; set; }
 
         public int Quanty { get;  set; }
+        public double ShippingCharges { get;  set; }
         public double Total { get;  set; }
 
         public string Status { get;  set; }
