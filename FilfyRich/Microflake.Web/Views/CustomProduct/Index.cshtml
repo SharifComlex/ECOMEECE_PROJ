@@ -51,6 +51,27 @@
         box-shadow: -3px -3px 10px 3px #c09578, 3px 3px 10px 3px #c09578;
     }
 
+
+    #btn-submit {
+        border: 0;
+        font-size: 16px;
+        margin-left: 20px;
+        background: #c09578;
+        height: 42px;
+        line-height: 42px;
+        text-transform: capitalize;
+        min-width: 270px;
+    }
+
+    #btn-submit:hover {
+        background: #242424;
+    }
+
+    #error-message {
+        color:red;
+        display:block;
+        margin-bottom:10px;
+    }
 </style>
 
 <div class="breadcrumbs_area">
@@ -140,8 +161,9 @@
                             <label>quantity</label>
                             <input name="qty" min="1" max="100" value="1" type="number">
                         </div>
-                        <div class="product_variant quantity" style="margin-left:-15px">
-                            <button class="button" type="submit">Add to Cart</button>
+                        <span id="error-message"></span>
+                        <div class="product_variant quantity" style="margin-left:-20px">
+                            <input id="btn-submit" class="button" type="submit" value="Add to Cart">
                         </div>
                         <input id="productId" type="hidden" value="" name="productId" />
                         <input id="frontChip" type="hidden" value="" name="frontChip" />
@@ -184,6 +206,7 @@
             })
 
             frontChip = $(this).attr("data-id");
+            backChip = $(this).attr("data-id");
             $("#frontChip").val(frontChip);
             $("#backChip").val(frontChip);
 
@@ -194,6 +217,9 @@
                     url: "/CustomProduct/ItemDetail?ProductId=" + productId + "&ItemId=" + frontChip
                 }
             ).done(function (response) {
+                $(".jzoom").html('<img id="zoom1" src="' + url + '">');
+                $("#error-message").html("");
+
                 $("#zoom1").attr("src", "@Config.CustomProducts" + response.FrontImage);
                 $("#zoom2").attr("src", "@Config.CustomProducts" + response.FrontImage);
                 $("#zoom3").attr("src", "@Config.CustomProducts" + response.BottomImage);
@@ -202,6 +228,9 @@
                     zoom: 200
                 });
 
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: $(".jzoom").offset().top
+                }, 1000);
             });
         });
 
@@ -219,13 +248,19 @@
                 {
                      url: "/CustomProduct/ItemDetail?ProductId=" + productId + "&ItemId=" + backChip
                 }
-            ).done(function (response) {
+             ).done(function (response) {
+                 $(".jzoom").html('<img id="zoom1" src="' + url + '">');
+
                 $("#zoom3").attr("src", "@Config.CustomProducts" + response.BottomImage);
                 $("#zoom1").attr("src", "@Config.CustomProducts" + response.BottomImage);
 
                 $('#zoom1').imageZoom({
                     zoom: 200
                 });
+
+                 $([document.documentElement, document.body]).animate({
+                     scrollTop: $(".jzoom").offset().top
+                 }, 1000);
             });
         });
 
@@ -249,6 +284,10 @@
             productId = $(this).attr("data-id");
 
             $("#productId").val(productId);
+            $("#frontChip").val("0");
+            $("#backChip").val("0");
+            frontChip = 0;
+            backChip = 0;
 
             $("#zoom2").attr("src","");
             $("#zoom3").attr("src", "");
@@ -271,6 +310,12 @@
             });
         });
 
+        $("#CustomAddToCart").submit(function (event) {
+            if (frontChip == 0 || backChip == 0) {
+                event.preventDefault();
+                $("#error-message").html("Please select at least one badge.");
+            }
+        });
     </script>
 
     <script>

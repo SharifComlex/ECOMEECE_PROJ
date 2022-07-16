@@ -102,15 +102,16 @@
                 $(this).addClass("check-item-unChecked");
             }
         })
+
         $("#dataLinkTest").change(function () {
-            debugger
+
             var url = $("#dataLinkTest").val();
 
             if (url != "" || url != undefined) {
                 GetData(url);
             }
         });
-         $(".dataLink").click(function () {debugger
+        $(".dataLink").click(function () {debugger
 
         var url = $(this).attr("data-href");
 
@@ -118,7 +119,7 @@
             GetData(url);
         }
         });
-         function GetData(dUrl) {
+        function GetData(dUrl) {
 
 		console.log("getdata in");
 		//showLoader();

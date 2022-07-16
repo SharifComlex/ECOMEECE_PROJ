@@ -10,8 +10,12 @@ namespace Microflake.Web.Controllers
     public class CustomProductController : Controller
     {
         // GET: CustomProduct
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(long? Id)
         {
+            if (!Id.HasValue) {
+                return Redirect("/Shop");
+            }
+
             var _context = new ApplicationDbContext();
             var products = await _context.Products.ToListAsync();
             var caps = products.Where(x => x.IsHasVariation).ToList();

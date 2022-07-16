@@ -349,11 +349,20 @@ namespace Microflake.Web.Controllers
             return RedirectToAction("CartItems");
         }
 
-        public async Task<ActionResult> CustomAddToCart(int productId, int frontChip,int backChip)
+        public async Task<ActionResult> CustomAddToCart(int? productId, int? frontChip,int? backChip)
         {
+            if (!productId.HasValue || !frontChip.HasValue || !backChip.HasValue)
+            {
+                return Redirect("/Shop");
+            }
+
+            if (productId.Value == 0 || frontChip.Value == 0 || backChip.Value == 0) {
+                return Redirect("/Shop");
+            }
+
             var cart = new ShopService(HttpContext);
 
-            await cart.AddAsync(productId, frontChip, backChip);
+            await cart.AddAsync(productId.Value, frontChip.Value, backChip.Value);
 
             return RedirectToAction("CartItems");
         }
