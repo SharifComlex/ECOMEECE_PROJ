@@ -147,6 +147,8 @@ namespace Microflake.Core.Application.Products
             {
                 switch (sortBy.Value)
                 {
+                    case 1:
+                        break;
                     case 2:
                         products = products.OrderByDescending(x => x.Id).ToList();
                         break;

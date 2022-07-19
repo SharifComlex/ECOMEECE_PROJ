@@ -51,7 +51,15 @@
                                                     <img src="@Config.Products@(item.FrontChip?.Image)" style="height:50px; width:50px;">
                                                 }
                                             </td>
-                                            <td class="product-price">£ @rate </td>
+                                            <td class="product-price">
+                                                £ @rate
+                                                @if (item.Product.IsHasVariation == true)
+                                                {
+                                                    <div style="color:red;font-size:10px;">
+                                                        Free chip badges
+                                                    </div>
+                                                }
+                                            </td>
                                             <td class="product_quantity">
                                                 <a href="/shop/RemoveFromCart/@item.ProductId">
                                                     <input type="button" value="-" class="minus" id="min">

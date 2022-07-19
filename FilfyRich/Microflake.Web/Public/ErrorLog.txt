@@ -272,3 +272,15 @@ StackTrace   at System.Data.Entity.Internal.ThrowingMonitor.EnsureNotEntered()
    at System.Data.Entity.Infrastructure.IDbAsyncEnumerableExtensions.ToListAsync[T](IDbAsyncEnumerable`1 source)
    at System.Data.Entity.QueryableExtensions.ToListAsync[TSource](IQueryable`1 source)
    at Microflake.Core.Application.Categories.CategoryService.<ToList>d__4.MoveNext() in C:\Zeeshan Munawar\Backup\Ecommerce\ECOMEECE_PROJ\FilfyRich\Microflake.Core\Application\Categories\CategoryService.cs:line 33
+DateTime : 7/16/2022 1:27:14 PM
+
+
+MessageThe context cannot be used while the model is being created. This exception may be thrown if the context is used inside the OnModelCreating method or if the same context instance is accessed by multiple threads concurrently. Note that instance members of DbContext and related classes are not guaranteed to be thread safe.
+
+StackTrace   at System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   at System.Data.Entity.Internal.InternalContext.Initialize()
+   at System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   at System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   at System.Data.Entity.Internal.Linq.InternalSet`1.AsNoTracking()
+   at System.Data.Entity.Infrastructure.DbQuery`1.AsNoTracking()
+   at Microflake.Core.Application.Categories.CategoryService.<ToList>d__4.MoveNext() in D:\Microflake\Zeeshan\Caps2022\ECOMEECE_PROJ\FilfyRich\Microflake.Core\Application\Categories\CategoryService.cs:line 33
