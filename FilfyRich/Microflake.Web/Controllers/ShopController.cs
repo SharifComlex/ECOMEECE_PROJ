@@ -202,6 +202,7 @@ namespace Microflake.Web.Controllers
                             await cart.EmptyCartItemsAsync();
 
                             Response.Cookies["ShoppingCart"].Expires = DateTime.UtcNow;
+                            TempData["Checkout"] = "Created";
                             return RedirectToAction("index");
                         }
                     }
@@ -279,6 +280,7 @@ namespace Microflake.Web.Controllers
         // GET: Shop
         public async Task<ActionResult> Index(int? subcategoryID,string searchTerm, int? Page, int? categoryID, int? minimumPrice, int? maximumPrice, int? sortBy)
         {
+            ViewBag.created = TempData["Checkout"];
             ListProduct model = new ListProduct();
             int recordSize = 9;
             Page = Page.HasValue ? Page.Value > 0 ? Page.Value : 1 : 1;
