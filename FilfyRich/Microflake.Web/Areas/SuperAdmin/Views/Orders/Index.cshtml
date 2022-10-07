@@ -73,7 +73,7 @@
              { "data": "Quanty" },
             {
                 "render": function (data, type, full, meta) {
-                    return "£ " + full.Total;
+                    return "£ " + parseFloat(full.Total).toFixed(2) ;
                 }
             },
              { "data": "Status" },

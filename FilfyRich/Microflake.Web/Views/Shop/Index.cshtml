@@ -1,13 +1,13 @@
 ﻿@using Microflake.Core.ViewModel
 @model Microflake.Core.ViewModel.Products.ListProduct
-@{ 
+@{
     ViewBag.Title = "Index";
-    
+
 }
 
 @Html.HiddenFor(x => x.MaximumPrice)
 
-<div class="breadcrumbs_area">
+@*<div class="breadcrumbs_area">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -22,9 +22,9 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
-<div class="shop_area shop_fullwidth shop_reverse">
+<div class="shop_area shop_fullwidth shop_reverse mt-2">
     <div class="container">
         <div class="row">
 
@@ -64,9 +64,8 @@
                 <!--sidebar widget end-->
             </div>
             <div class="col-lg-9 col-md-12">
-                <div class="shop-products-wrapper" >
+                <div class="shop-products-wrapper">
                     <!--shop wrapper start-->
-                    
                     <!--shop toolbar end-->
                     <div id="ProductsDiv">
                         @{
@@ -79,13 +78,17 @@
                 </div>
 
             </div>
+        </div>
     </div>
 </div>
-</div>
 @section scripts{
+    @if (ViewBag.created == "Created")
+    {
+        <script>
+            $.simplyToast("Order Placed SUccessfully", "success");
+        </script>
+    }
     <script>
-        
-
       $('input:checkbox').click(function() {
         $('input:checkbox').not(this).prop('checked', false);
       });
@@ -137,7 +140,7 @@
         })
         .fail(function (XMLHttpRequest, textStatus, errorThrown) {
         	console.log("fail");
-        	
+
         })
 		.always(function(){
 			console.log("always");
@@ -171,7 +174,7 @@
         $("#amount").val( "£" + $( "#slider-range" ).slider( "values", 0 ) +
        " - £" + $( "#slider-range" ).slider( "values", 1 ) );
 
-      
+
         function PriceRangeChange(min,max){debugger
 		$.ajax({
 			url: '@Url.Action("FilterProduct", "Shop")',
@@ -188,7 +191,7 @@
         	$("#ProductsDiv").html(response);
         })
         .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-        	
+
         });
 	}
 
