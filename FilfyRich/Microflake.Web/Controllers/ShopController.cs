@@ -103,7 +103,7 @@ namespace Microflake.Web.Controllers
             }
             else
             {
-                ViewBag.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Base_Currency == true).Simbal;
+                //ViewBag.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Base_Currency == true).Simbal;
 
                 ViewBag.Currency = 1;
             }
@@ -305,7 +305,7 @@ namespace Microflake.Web.Controllers
             }
             else
             {
-                model.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Base_Currency == true).Simbal;
+                //model.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Base_Currency == true).Simbal;
 
                 model.Currency = 1;
             }

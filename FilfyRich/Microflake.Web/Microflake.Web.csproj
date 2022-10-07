@@ -1541,6 +1541,7 @@
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Shop\Pay.cshtml" />
     <Content Include="Views\CustomProduct\Index.cshtml" />
+    <Content Include="Views\CustomProduct\Index-backup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
