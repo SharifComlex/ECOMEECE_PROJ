@@ -12,6 +12,10 @@
         display: none;
     }
 
+    .portfolio_thumb {
+        text-align: center;
+    }
+
     #image-wrapper {
         width: 70%;
         margin: auto;
@@ -40,7 +44,7 @@
     }
 
     .select-shadow {
-        border: 1px solid orange !important;
+        box-shadow: -3px -3px 10px 3px #c09578, 3px 3px 10px 3px #c09578;
     }
 
 
@@ -121,13 +125,18 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6">
-                <div class="jzoom1">
+                <div class="jzoom">
                     <img id="zoom1" src="">
                 </div>
-                <div class="jzoom2">
-                    <img id="zoom2" src="">
-                </div>
+                <ul class="product-item-list">
+                    <li>
+                        <img id="zoom2" class="load-image" src="">
 
+                    </li>
+                    <li>
+                        <img id="zoom3" class="load-image" src="">
+                    </li>
+                </ul>
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="product_d_right">
@@ -140,7 +149,7 @@
                             {
                                 <div class="col-lg-2 col-md-3">
                                     <div class="single_portfolio">
-                                        <div id="select-cap-@item.Id" class="select-cap" data-id="@item.Id">
+                                        <div id="select-cap-@item.Id" class="portfolio_thumb select-cap" data-id="@item.Id">
                                             <img src="@(Config.Products +  item.Image)" alt="">
                                         </div>
                                     </div>
@@ -157,7 +166,7 @@
                                     @foreach (var item in Model.Items)
                                     {
                                         <li>
-                                            <a href="#" class="select-chip1" data-id="@item.Id">
+                                            <a href="#" class="portfolio_thumb select-chip1" data-id="@item.Id">
                                                 <img src="@(Config.Products +  item.Image)" alt="">
                                             </a>
                                         </li>
@@ -171,11 +180,11 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <ul class="owl-carousel front-chips chips-wrapper back-chips">
+                                <ul class="owl-carousel front-chips chips-wrapper">
                                     @foreach (var item in Model.Items)
                                     {
                                         <li>
-                                            <a href="#" class="select-chip2" data-id="@item.Id">
+                                            <a href="#" class="portfolio_thumb select-chip2" data-id="@item.Id">
                                                 <img src="@(Config.Products +  item.Image)" alt="">
                                             </a>
                                         </li>
@@ -223,7 +232,12 @@
         var backChip = 0;
 
         $(".select-chip1").click(function () {
-            $(".select-shadow").each(function () {
+            $(".select-chip1").each(function () {
+                $(this).removeClass("select-shadow");
+            })
+
+
+            $(".select-chip2").each(function () {
                 $(this).removeClass("select-shadow");
             })
 
@@ -232,52 +246,103 @@
             $("#frontChip").val(frontChip);
             $("#backChip").val(frontChip);
 
-            $(this).parent().addClass("select-shadow");
+            $(this).addClass("select-shadow");
 
             $.ajax(
                 {
                     url: "/CustomProduct/ItemDetail?ProductId=" + productId + "&ItemId=" + frontChip
                 }
             ).done(function (response) {
-                $(".jzoom1").html('<img id="zoom1" src="">');
-                $(".jzoom2").html('<img id="zoom2" src="">');
+                $(".jzoom").html('<img id="zoom1" src="' + url + '">');
                 $("#error-message").html("");
 
                 $("#zoom1").attr("src", "@Config.CustomProducts" + response.FrontImage);
-                $("#zoom2").attr("src", "@Config.CustomProducts" + response.BottomImage);
+                $("#zoom2").attr("src", "@Config.CustomProducts" + response.FrontImage);
+                $("#zoom3").attr("src", "@Config.CustomProducts" + response.BottomImage);
 
                 $('#zoom1').imageZoom({
                     zoom: 200
                 });
 
-                $('#zoom2').imageZoom({
-                    zoom: 200
-                });
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: $(".jzoom").offset().top
+                }, 1000);
             });
         });
 
         $(".select-chip2").click(function () {
 
-            $(".back-chips").find("li").each(function () {
+            $(".select-chip2").each(function () {
                 $(this).removeClass("select-shadow");
             })
 
             backChip = $(this).attr("data-id");
             $("#backChip").val(backChip);
-            $(this).parent().addClass("select-shadow");
+            $(this).addClass("select-shadow");
 
              $.ajax(
                 {
                      url: "/CustomProduct/ItemDetail?ProductId=" + productId + "&ItemId=" + backChip
                 }
              ).done(function (response) {
-                $(".jzoom2").html('<img id="zoom2" src="">');
+                 $(".jzoom").html('<img id="zoom1" src="' + url + '">');
 
-                $("#zoom2").attr("src", "@Config.CustomProducts" + response.BottomImage);
+                $("#zoom3").attr("src", "@Config.CustomProducts" + response.BottomImage);
+                $("#zoom1").attr("src", "@Config.CustomProducts" + response.BottomImage);
 
-                $('#zoom2').imageZoom({
+                $('#zoom1').imageZoom({
                     zoom: 200
                 });
+
+                 $([document.documentElement, document.body]).animate({
+                     scrollTop: $(".jzoom").offset().top
+                 }, 1000);
+            });
+        });
+
+        $(".select-cap").click(function () {
+            $(".select-cap").each(function () {
+                $(this).removeClass("select-shadow");
+            })
+
+            $(".select-chip1").each(function () {
+                $(this).removeClass("select-shadow");
+            })
+
+            $(".select-chip2").each(function () {
+                $(this).removeClass("select-shadow");
+            })
+
+            $(this).addClass("select-shadow");
+
+            var url = $(this).find("img").attr("src");
+            $(".jzoom").html('<img id="zoom1" src="' + url + '">');
+            productId = $(this).attr("data-id");
+
+            $("#productId").val(productId);
+            $("#frontChip").val("0");
+            $("#backChip").val("0");
+            frontChip = 0;
+            backChip = 0;
+
+            $("#zoom2").attr("src","");
+            $("#zoom3").attr("src", "");
+
+            $(document).ready(function () {
+                $('#zoom1').imageZoom({
+                    zoom: 200
+                });
+            });
+
+        });
+
+        $('.load-image').click(function () {
+            var url = $(this).attr("src");
+            $(".jzoom").html('<img id="zoom1" src="' + url + '">');
+
+
+            $('#zoom1').imageZoom({
+                zoom: 200
             });
         });
 
@@ -295,7 +360,7 @@
         $("#select-cap-@id").addClass("select-shadow");
 
         var url = $("#select-cap-@id").find("img").attr("src");
-        $(".jzoom1").html('<img id="zoom1" src="' + url + '">');
+        $(".jzoom").html('<img id="zoom1" src="' + url + '">');
 
         productId = $("#select-cap-@id").attr("data-id");
 
