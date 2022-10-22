@@ -16,6 +16,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Net.Mail;
+using System.Net;
+using System.Web.UI.WebControls;
+using System.Net.Http;
 
 namespace Microflake.Web.Controllers
 {
@@ -117,7 +121,7 @@ namespace Microflake.Web.Controllers
 
             if (!await cart.GetCartItemsCountAsync())
             {
-                return Redirect("/shop/Checkout");
+                return Redirect("/shop/CartItems");
             }
 
             if (!ModelState.IsValid)
@@ -162,7 +166,7 @@ namespace Microflake.Web.Controllers
                         {
 
                             await cart.EmptyCartItemsAsync();
-
+                            await SendEmail(orderDetail.Email, orderDetail.OrderId);
                             Response.Cookies["ShoppingCart"].Expires = DateTime.UtcNow;
                             TempData["Checkout"] = "Created";
                             return RedirectToAction("index");
@@ -363,7 +367,56 @@ namespace Microflake.Web.Controllers
 
         private static double CalcuateCart(IEnumerable<CartItem> items)
         {
-            return items.Sum(item => (item.Product.SellPrice * item.Count));
+            return items.Where(x=> x.Product.Qty > 0).Sum(item => (item.Product.SellPrice * item.Count));
+        }
+
+        public async Task<ActionResult> orderReceipt(int id)
+        {
+            using (var db = new ApplicationDbContext()) {
+                var order = await db.Orders.FirstOrDefaultAsync(x => x.OrderId == id);
+
+                if (order == null) {
+                    return Content("");
+                }
+
+                var orderItems = await db.OrderDetals.Include(x=> x.Product)
+                                 .Include(x=> x.FrontBadge)
+                                 .Include(x=> x.BackBadge)
+                                 .Where(x=> x.OrderId == order.OrderId).ToListAsync();
+
+                return PartialView(new ReceiptModel()
+                {
+                    Order = order,
+                    Items = orderItems
+                });
+            }
+        }
+
+        private async Task<int> SendEmail(string email,long Id)
+        {
+            try
+            {
+                SmtpClient client = new SmtpClient("relay-hosting.secureserver.net", 465);
+                client.EnableSsl = true;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential("info@filfyrich.com", "Goldboots1");
+
+                MailMessage message = new MailMessage("info@filfyrich.com", email);
+                message.Subject = "Order Receipt";
+
+                using (var httpClient = new HttpClient()) {
+                    httpClient.DefaultRequestHeaders.Add("User-Agent", "Web");
+                    message.Body = await httpClient.GetStringAsync("http://filfyrich.co.uk/shop/orderReceipt/" + Id);
+                }
+                   
+
+                client.Send(message);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return 1;
         }
     }
 }

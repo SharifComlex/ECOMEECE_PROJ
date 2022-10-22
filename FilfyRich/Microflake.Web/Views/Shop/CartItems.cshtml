@@ -1,6 +1,6 @@
 ﻿﻿@model Microflake.Core.ViewModel.ShoppingCartViewModel
 @{  
-  
+
 }
 <div class="breadcrumbs_area">
     <div class="container">
@@ -35,9 +35,43 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    @{ 
+                                        float total = 0f;
+                                    }
                                     @foreach (var item in Model.Items)
                                     {
+                                        if (item.Product.Qty > 0) {
+                                            total += ((float)item.Product.SellPrice * item.Count);
+                                        }
+                                        bool outOfStock = false;
+
+                                        if (item.Product.Qty < 1) {
+                                            outOfStock = true;
+                                        }
+
+                                        if (item.FrontChip!= null)
+                                        {
+                                            if (item.FrontChip.Qty < 1) {
+                                                outOfStock = true;
+                                            }
+                                        }
+
+                                        if (item.BackChip != null)
+                                        {
+                                            if (item.BackChip.Qty < 1)
+                                            {
+                                                outOfStock = true;
+                                            }
+                                        }
+
+                                        if (item.FrontChip != null && item.BackChip != null )
+                                        {
+                                            if (item.FrontChip.Id == item.BackChip.Id && item.FrontChip.Qty < 2)
+                                            {
+                                                outOfStock = true;
+                                            }
+                                        }
+
                                         var rate = item.Product.SellPrice;
                                         var discount = item.Product.Discount;
                                         <tr>
@@ -56,6 +90,10 @@
                                                     {
                                                         <img src="@Config.Products@(item.FrontChip.Image)" style="height:50px; width:50px;">
                                                     }
+                                                }
+                                                @if (outOfStock)
+                                                {
+                                                    <div style="color: red;">Out Of Stock</div>
                                                 }
                                             </td>
                                             <td class="product-price">
@@ -101,11 +139,14 @@
                             <div class="coupon_inner">
                                 <div class="cart_subtotal">
                                     <p>Total</p>
-                                    <p class="cart_amount">£ @Model.Total</p>
+                                    <p class="cart_amount">£ @total</p>
                                 </div>
-                                <div class="checkout_btn">
-                                    <a href="/shop/Checkout">Proceed to Checkout</a>
-                                </div>
+                                @if (total > 0)
+                                {
+                                    <div class="checkout_btn">
+                                        <a href="/shop/Checkout">Proceed to Checkout</a>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
