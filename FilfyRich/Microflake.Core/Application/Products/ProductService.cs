@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -120,95 +121,87 @@ namespace Microflake.Core.Application.Products
         }
         public IEnumerable<Product> List(int? subcategoryID, string searchTerm, int Page, int recordSize, int? categoryID, int? minimumPrice, int? maximumPrice, int? sortBy)
         {
-           // var currency = _context.Currencies.ToList();
-            var products = _context.Products.ToList();
-            if (categoryID.HasValue)
-            {
-                products = products.Where(x => x.SubCategory.Category.Id == categoryID.Value).ToList();
-            }
-            if (subcategoryID.HasValue)
-            {
-                products = products.Where(x => x.SubCategory.Id == subcategoryID.Value).ToList();
-            }
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
-            }
-            if (minimumPrice.HasValue)
-            {
-                products = products.Where(x => x.SellPrice >= minimumPrice.Value).ToList();
-            }
+            using (var db = new ApplicationDbContext()) {
+                var products = db.Products.Include(x=>x.SubCategory).Include(x=> x.SubCategory.Category);
 
-            if (maximumPrice.HasValue)
-            {
-                products = products.Where(x => x.SellPrice <= maximumPrice.Value).ToList();
-            }
-            if (sortBy.HasValue)
-            {
-                switch (sortBy.Value)
+                Expression<Func<Product, bool>> byCategory = x => 1 == 1;
+
+                if (categoryID.HasValue)
                 {
-                    case 1:
-                        break;
-                    case 2:
-                        products = products.OrderByDescending(x => x.Id).ToList();
-                        break;
-                    case 3:
-                        products = products.OrderBy(x => x.SellPrice).ToList();
-                        break;
-                    case 5:
-                        products = products.Where(x => x.SellPrice >= 0 && x.SellPrice<= 500).ToList();
-                        break;
-                    case 6:
-                        products = products.Where(x => x.SellPrice >= 500 && x.SellPrice <= 1000).ToList();
-                        break;
-                    case 7:
-                        products = products.Where(x => x.SellPrice >= 1000 && x.SellPrice <= 1500).ToList();
-                        break;
-                    case 8:
-                        products = products.Where(x => x.SellPrice >= 1500 && x.SellPrice <= 2000).ToList();
-                        break;
-                    default:
-                        products = products.OrderByDescending(x => x.SellPrice).ToList();
-                        break;
+                    byCategory = x => x.SubCategory.Category.Id == categoryID.Value;
                 }
+
+                Expression<Func<Product, bool>> bySubCategory = x => 1 == 1;
+
+                if (subcategoryID.HasValue)
+                {
+                    bySubCategory = x => x.SubCategoryId == subcategoryID.Value;
+                }
+
+                Expression<Func<Product, bool>> searhByName = x => 1 == 1;
+
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    searhByName = x => x.Name.ToLower().Contains(searchTerm.ToLower());
+                }
+
+                Expression<Func<Product, bool>> byMinimumPrice = x => 1 == 1;
+
+                if (minimumPrice.HasValue)
+                {
+                    byMinimumPrice = x => x.SellPrice >= minimumPrice.Value;
+                }
+
+                Expression<Func<Product, bool>> byMaximumPrice = x => 1 == 1;
+
+                if (maximumPrice.HasValue)
+                {
+                    byMaximumPrice = x => x.SellPrice <= maximumPrice.Value;
+                }
+
+                Expression<Func<Product, bool>> byPriceRange = x => 1 == 1;
+
+                if (!sortBy.HasValue)
+                {
+                    sortBy = 0;
+                }
+
+                if (sortBy == 5) {
+                    byPriceRange = x => x.SellPrice >= 0 && x.SellPrice <= 500;
+                }
+                else if (sortBy == 6) {
+                    byPriceRange = x => x.SellPrice >= 500 && x.SellPrice <= 1000;
+                }
+                else if (sortBy == 7)
+                {
+                    byPriceRange = x => x.SellPrice >= 1000 && x.SellPrice <= 1500;
+                }
+                else if (sortBy == 8)
+                {
+                    byPriceRange = x => x.SellPrice >= 1500 && x.SellPrice <= 2000;
+                }
+
+                products = products.Where(byCategory)
+                               .Where(bySubCategory)
+                               .Where(searhByName)
+                               .Where(byMinimumPrice)
+                               .Where(byMaximumPrice)
+                               .Where(byPriceRange);
+
+                if (sortBy == 2)
+                {
+                    products = products.OrderByDescending(x => x.Id);
+                }
+                else if (sortBy == 3)
+                {
+                    products = products.OrderBy(x => x.SellPrice);
+                }
+                else {
+                    products = products.OrderBy(x => x.Id);
+                }
+
+                return  products.Skip((Page - 1) * recordSize).Take(recordSize).ToList();
             }
-            //if (!string.IsNullOrEmpty(searchTerm))
-            //{
-            //    jobpost = jobpost.Where(x => x.Title.ToLower().Contains(searchTerm.ToLower()));
-            //}
-            //if (!string.IsNullOrEmpty(JobType))
-            //{
-            //    jobpost = jobpost.Where(x => x.JobType.Contains(JobType));
-            //}
-            //var skip = (Page - 1) * recordSize;
-            // skip takes ordered values kis bhi bse pay karlo
-           //var basecurrency =  currency.FirstOrDefault(x => x.Base_Currency == true);
-           // var cookiecurrency = currency.FirstOrDefault(x => x.Name == Currency);
-           // if (cookiecurrency != null )
-           // {
-           //     foreach (var item in products)
-           //     {
-           //       var i =   item.SellPrice* cookiecurrency.Currency_Rate;
-           //         //if (basecurrency.Currency_Rate < cookiecurrency.Currency_Rate)
-           //         //{
-           //         if ( i >item.SellPrice )
-           //         {
-           //             item.SellPrice = i;
-           //         }
-                   
-           //         //}
-           //         //else
-           //         //{
-
-           //         //}
-
-           //     }
-
-           // }
-         
-            return products.Skip((Page - 1) * recordSize).Take(recordSize).ToList();
-
-
         }
         public async Task<IEnumerable<CartItem>> GetCartItemsAsync()
         {
@@ -604,72 +597,62 @@ namespace Microflake.Core.Application.Products
         // for SHop COntroller
         public int ProductCount(int? subcategoryID, string searchTerm, int Page, int recordSize, int? categoryID, int? minimumPrice, int? maximumPrice, int? sortBy)
         {
-
-            var products = _context.Products.Where(x=>x.DealOfTheWeek == false).AsQueryable();
-            if (categoryID.HasValue)
-            {
-                products = products.Where(x => x.SubCategory.Category.Id == categoryID.Value);
-            }
-            if (subcategoryID.HasValue)
-            {
-                products = products.Where(x => x.SubCategory.Id == subcategoryID.Value);
-            }
-            if (!string.IsNullOrEmpty(searchTerm))
-            {
-                products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower()));
-            }
-            if (minimumPrice.HasValue)
-            {
-                products = products.Where(x => x.SellPrice >= minimumPrice.Value);
-            }
-
-            if (maximumPrice.HasValue)
-            {
-                products = products.Where(x => x.SellPrice <= maximumPrice.Value);
-            }
-            if (sortBy.HasValue)
-            {
-                switch (sortBy.Value)
+            using (var db = new ApplicationDbContext()) {
+                var products = db.Products.Where(x => x.DealOfTheWeek == false).AsQueryable();
+                if (categoryID.HasValue)
                 {
-                    case 2:
-                        products = products.OrderByDescending(x => x.Id);
-                        break;
-                    case 3:
-                        products = products.OrderBy(x => x.SellPrice);
-                        break;
-                    case 4:
-                        products = products.OrderByDescending(x => x.SellPrice);
-                        break;
-                    case 5:
-                        products = products.Where(x => x.SellPrice >= 0 && x.SellPrice <= 500);
-                        break;
-                    case 6:
-                        products = products.Where(x => x.SellPrice >= 500 && x.SellPrice <= 1000);
-                        break;
-                    case 7:
-                        products = products.Where(x=>x.SellPrice>=1000 && x.SellPrice<=1500);
-                        break;
-                    case 8:
-                        products = products.Where(x => x.SellPrice >= 1500 && x.SellPrice <= 2000);
-                        break;
-                    default:
-                        products = products.OrderByDescending(x => x.SellPrice);
-                        break;
+                    products = products.Where(x => x.SubCategory.Category.Id == categoryID.Value);
                 }
+                if (subcategoryID.HasValue)
+                {
+                    products = products.Where(x => x.SubCategory.Id == subcategoryID.Value);
+                }
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower()));
+                }
+                if (minimumPrice.HasValue)
+                {
+                    products = products.Where(x => x.SellPrice >= minimumPrice.Value);
+                }
+
+                if (maximumPrice.HasValue)
+                {
+                    products = products.Where(x => x.SellPrice <= maximumPrice.Value);
+                }
+                if (sortBy.HasValue)
+                {
+                    switch (sortBy.Value)
+                    {
+                        case 2:
+                            products = products.OrderByDescending(x => x.Id);
+                            break;
+                        case 3:
+                            products = products.OrderBy(x => x.SellPrice);
+                            break;
+                        case 4:
+                            products = products.OrderByDescending(x => x.SellPrice);
+                            break;
+                        case 5:
+                            products = products.Where(x => x.SellPrice >= 0 && x.SellPrice <= 500);
+                            break;
+                        case 6:
+                            products = products.Where(x => x.SellPrice >= 500 && x.SellPrice <= 1000);
+                            break;
+                        case 7:
+                            products = products.Where(x => x.SellPrice >= 1000 && x.SellPrice <= 1500);
+                            break;
+                        case 8:
+                            products = products.Where(x => x.SellPrice >= 1500 && x.SellPrice <= 2000);
+                            break;
+                        default:
+                            products = products.OrderByDescending(x => x.SellPrice);
+                            break;
+                    }
+                }
+
+                return products.Count();
             }
-            //if (!string.IsNullOrEmpty(searchTerm))
-            //{
-            //    jobpost = jobpost.Where(x => x.Title.ToLower().Contains(searchTerm.ToLower()));
-            //}
-            //if (!string.IsNullOrEmpty(JobType))
-            //{
-            //    jobpost = jobpost.Where(x => x.JobType.Contains(JobType));
-            //}
-       
-            // skip takes ordered values kis bhi bse pay karlo
-            return products.Count();
-
-
         }
 
 

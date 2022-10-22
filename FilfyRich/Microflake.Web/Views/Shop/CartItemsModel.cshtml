@@ -3,7 +3,7 @@
 <!--mini cart-->
 @foreach (var item in Model.Items)
 {
-    var rate = item.Product.SellPrice * ViewBag.Currency;
+    var rate = item.Product.SellPrice;
 
     <div class="cart_item">
         <div class="cart_img">
@@ -16,14 +16,11 @@
             <span class="price_cart">£ @rate</span>
 
         </div>
-        @*<div class="cart_remove">
-                <a href="#"><i class="ion-android-close"></i></a>
-            </div>*@
     </div>
 }
 <div class="cart_total">
     <span>Subtotal:</span>
-    <span>@Model.Total</span>
+    <span>£ @Model.Total</span>
 </div>
 <div class="mini_cart_footer">
     <div class="cart_button view_cart">

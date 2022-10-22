@@ -169,10 +169,92 @@ namespace Microflake.Core.Application.Products
                 .Where(c => c.CartId == _cartId).ToListAsync();
         }
 
+        public async Task<bool> IsItemOutOfStockAsync(long Id)
+        {
+            var result = await _db.Products.FirstOrDefaultAsync(x=> x.Id == Id);
+
+            if (result.Qty > 0) {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<int> GetItemQtyAsync(long Id)
+        {
+            var result = await _db.Products.FirstOrDefaultAsync(x => x.Id == Id);
+
+            if (result == null) {
+                return 0;
+            }
+
+            return result.Qty;
+        }
+
+
+        public async Task<bool> GetCartItemsCountAsync()
+        {
+            var result = await _db.CartItems.Include(x => x.Product)
+                .Include(x => x.FrontChip)
+                .Include(x => x.BackChip)
+                .Where(c => c.CartId == _cartId).ToListAsync();
+
+            foreach (var item in result)
+            {
+                if (item.Product.Qty < item.Count) {
+                    return false;
+                }
+
+                if (item.FrontChip != null && item.BackChip != null) {
+                    if (item.FrontChip.Id == item.BackChip.Id && item.FrontChip.Qty <2) {
+                        return false;
+                    }
+                }
+
+                if (item.FrontChip != null)
+                {
+                    if (item.FrontChip.Qty < 1)
+                    {
+                        return false;
+                    }
+                }
+
+                if (item.BackChip != null)
+                {
+                    if (item.BackChip.Qty < 1)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
         public async Task<long> EmptyCartItemsAsync()
         {
             var items = await _db.CartItems.Include(x => x.Product)
                 .Where(c => c.CartId == _cartId).ToListAsync();
+
+            foreach (var item in items)
+            {
+                item.Product.Qty = item.Product.Qty - item.Count;
+                
+                if (item.FrontChip != null) {
+                    item.FrontChip.Qty = item.FrontChip.Qty - 1;
+                    _db.Entry(item.FrontChip).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
+                }
+
+                if (item.BackChip != null)
+                {
+                    item.BackChip.Qty = item.BackChip.Qty - 1;
+                    _db.Entry(item.BackChip).State = EntityState.Modified;
+                    await _db.SaveChangesAsync();
+                }
+
+                _db.Entry(item.Product).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
+            }
 
             _db.CartItems.RemoveRange(items);
             return await _db.SaveChangesAsync();
@@ -257,8 +339,7 @@ namespace Microflake.Core.Application.Products
             }
             catch (Exception ex)
             {
-
-                throw;
+                return 0;
             }
 
         }

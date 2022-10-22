@@ -100,7 +100,19 @@
         cursor: pointer;
     }
 
-    .select-image i {
+    .select-image1 i {
+        font-size: 50px;
+        margin: 28% 36%;
+        color: #c0c0c0;
+    }
+
+    .select-image2 i {
+        font-size: 50px;
+        margin: 28% 36%;
+        color: #c0c0c0;
+    }
+
+    .select-image3 i {
         font-size: 50px;
         margin: 28% 36%;
         color: #c0c0c0;
@@ -188,6 +200,7 @@
     $(".uploadImage1").change(function () {
 
         $(".select-image1").html('<i class="fa fa-spinner fa-spin"></i>');
+        $(".select-image1").css({ "visibility": "visible" });
 
         var profileImage = new FormData();
         var file = $(this)[0].files[0];
@@ -209,6 +222,8 @@
                     $(".image-error1").html(response.message);
                     $(".select-image1").html('<i class="fa fa-plus"></i>');
                 }
+
+                $(".select-image1").css({ "visibility": "hidden" });
             }
         });
     });
@@ -220,6 +235,7 @@
     $(".uploadImage2").change(function () {
 
         $(".select-image2").html('<i class="fa fa-spinner fa-spin"></i>');
+        $(".select-image2").css({ "visibility": "visible" });
 
         var profileImage = new FormData();
         var file = $(this)[0].files[0];
@@ -241,6 +257,8 @@
                     $(".image-error2").html(response.message);
                     $(".select-image2").html('<i class="fa fa-plus"></i>');
                 }
+
+                $(".select-image2").css({ "visibility": "hidden" });
             }
         });
     });
@@ -253,6 +271,7 @@
     $(".uploadImage3").change(function () {
 
         $(".select-image3").html('<i class="fa fa-spinner fa-spin"></i>');
+        $(".select-image3").css({ "visibility": "visible" });
 
         var profileImage = new FormData();
         var file = $(this)[0].files[0];
@@ -274,6 +293,8 @@
                     $(".image-error3").html(response.message);
                     $(".select-image3").html('<i class="fa fa-plus"></i>');
                 }
+
+                $(".select-image3").css({ "visibility": "hidden" });
             }
         });
     });

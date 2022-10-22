@@ -56,31 +56,17 @@ namespace Microflake.Web.Controllers
                 _userManager = value;
             }
         }
+
         public async Task<ActionResult> CartItems()
         {
-            CheckoutViewModel model = new CheckoutViewModel();
             var cart = new ShopService(HttpContext);
             var items = await cart.GetCartItemsAsync();
-            if (Currency != null && Currency != "")
-            {
-                ViewBag.Currency = _context.Currencies.FirstOrDefault(x => x.Name == Currency).Currency_Rate;
-                ViewBag.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Name == Currency).Simbal;
-
-            }
-            else
-            {
-                ViewBag.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Base_Currency == true).Simbal;
-
-                ViewBag.Currency = 1;
-            }
-            //model.User = UserManager.FindById(User.Identity.GetUserId());
+           
             return View(new ShoppingCartViewModel
             {
                 Items = items,
                 Total = CalcuateCart(items),
-                User = UserManager.FindById(User.Identity.GetUserId()),
-             
-
+                User = UserManager.FindById(User.Identity.GetUserId())
             });
         }
 
@@ -90,30 +76,17 @@ namespace Microflake.Web.Controllers
             var items =  cart.GetCartItemsCount();
             return items;
         }
-            public async Task<ActionResult> CartItemsModel()
+
+        public async Task<ActionResult> CartItemsModel()
         {
-            CheckoutViewModel model = new CheckoutViewModel();
             var cart = new ShopService(HttpContext);
             var items = await cart.GetCartItemsAsync();
-            if (Currency != null && Currency != "")
-            {
-                ViewBag.Currency = _context.Currencies.FirstOrDefault(x => x.Name == Currency).Currency_Rate;
-                ViewBag.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Name == Currency).Simbal;
 
-            }
-            else
-            {
-                //ViewBag.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Base_Currency == true).Simbal;
-
-                ViewBag.Currency = 1;
-            }
-            //model.User = UserManager.FindById(User.Identity.GetUserId());
             return PartialView(new ShoppingCartViewModel
             {
                 Items = items,
                 Total = CalcuateCart(items),
-                User = UserManager.FindById(User.Identity.GetUserId()),
-
+                User = UserManager.FindById(User.Identity.GetUserId())
             });
         }
         public async Task<ActionResult> Checkout()
@@ -121,30 +94,13 @@ namespace Microflake.Web.Controllers
             CheckoutViewModel model = new CheckoutViewModel();
             var cart = new ShopService(HttpContext);
             var items = await cart.GetCartItemsAsync();
-            if (Currency != null && Currency != "")
-            {
-                ViewBag.Currency = _context.Currencies.FirstOrDefault(x => x.Name == Currency).Currency_Rate;
-                ViewBag.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Name == Currency).Simbal;
 
-            }
-            else
-            {
-                ViewBag.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Base_Currency == true).Simbal;
-
-                ViewBag.Currency = 1;
-            }
-            //if (User.Identity.GetUserId() == null)
-            //{
-            //    ModelState.AddModelError("Name", "Please Login To Add Whishlist");
-            //    return View(model);
-            //}
             model.User = UserManager.FindById(User.Identity.GetUserId());
             var UserId = User.Identity.GetUserId();
             var user = _context.Users
-                   
-
                     .Where(x => x.Id == UserId)
                     .FirstOrDefault();
+
             var checkOutmodel = new CheckoutViewModel
             {
                 Items = items,
@@ -158,6 +114,11 @@ namespace Microflake.Web.Controllers
         {
             var cart = new ShopService(HttpContext);
             var items = await cart.GetCartItemsAsync();
+
+            if (!await cart.GetCartItemsCountAsync())
+            {
+                return Redirect("/shop/Checkout");
+            }
 
             if (!ModelState.IsValid)
             {
@@ -196,6 +157,7 @@ namespace Microflake.Web.Controllers
                         orderDetail.PaymentStatus = "Paid";
 
                         _db.Entry(orderDetail).State = EntityState.Modified;
+
                         if (_db.SaveChanges() > 0)
                         {
 
@@ -247,6 +209,12 @@ namespace Microflake.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var cart = new ShopService(HttpContext);
+
+                if (!await cart.GetCartItemsCountAsync()) {
+                    return Redirect("/shop/Checkout");
+                }
+
                 StripeConfiguration.ApiKey = "sk_test_wfSHnvBhrhUVB9pmt1b1DyKz00q1skyVH4";
 
                 try
@@ -277,74 +245,64 @@ namespace Microflake.Web.Controllers
 
             return View(model);
         }
+
         // GET: Shop
         public async Task<ActionResult> Index(int? subcategoryID,string searchTerm, int? Page, int? categoryID, int? minimumPrice, int? maximumPrice, int? sortBy)
         {
-            ViewBag.created = TempData["Checkout"];
-            ListProduct model = new ListProduct();
-            int recordSize = 9;
-            Page = Page.HasValue ? Page.Value > 0 ? Page.Value : 1 : 1;
-            model.Productlist =  _entityService.List(subcategoryID,searchTerm, Page.Value, recordSize, categoryID , minimumPrice, maximumPrice , sortBy);
-            //ViewBag.Categorylist =await _categoryService.ToList();
-            model.SubCategorylist = _context.SubCategories.ToList();
-            model.Categorylist = _context.Categories.ToList();
-            var TotalRecords =  _entityService.ProductCount(subcategoryID, searchTerm, Page.Value, recordSize, categoryID, minimumPrice, maximumPrice, sortBy);
-            model.Whislists = _context.Whislists.ToList();
-            model.SearchTerm = searchTerm;
-            model.SortBy = sortBy;
-            model.CategoryID = categoryID;
-            model.SubCategoryID = subcategoryID;
-            model.MaximumPrice = _entityService.GetMaximumPrice();
-            model.Pager= new Pager(TotalRecords, Page, recordSize);
-            if (Currency != null && Currency != "")
-            {
-                model.Currency = _context.Currencies.FirstOrDefault(x => x.Name == Currency).Currency_Rate;
-                model.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Name == Currency).Simbal;
-               
+            using (var db = new ApplicationDbContext()) {
+                ViewBag.created = TempData["Checkout"];
+                ViewBag.outofstock = TempData["outofstock"];
 
-            }
-            else
-            {
-                //model.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Base_Currency == true).Simbal;
+                ListProduct model = new ListProduct();
+                int recordSize = 9;
+                Page = Page.HasValue ? Page.Value > 0 ? Page.Value : 1 : 1;
+                model.Productlist = _entityService.List(subcategoryID, searchTerm, Page.Value, recordSize, categoryID, minimumPrice, maximumPrice, sortBy);
+                //ViewBag.Categorylist =await _categoryService.ToList();
+                model.SubCategorylist = await db.SubCategories.ToListAsync();
+                model.Categorylist = await db.Categories.ToListAsync();
+                var TotalRecords = _entityService.ProductCount(subcategoryID, searchTerm, Page.Value, recordSize, categoryID, minimumPrice, maximumPrice, sortBy);
+                model.Whislists = await _context.Whislists.ToListAsync();
+                model.SearchTerm = searchTerm;
+                model.SortBy = sortBy;
+                model.CategoryID = categoryID;
+                model.SubCategoryID = subcategoryID;
+                model.MaximumPrice = _entityService.GetMaximumPrice();
+                model.Pager = new Pager(TotalRecords, Page, recordSize);
 
-                model.Currency = 1;
+                return View(model);
             }
-            return View(model);
         }
        
         public async Task<ActionResult> FilterProduct(int? subcategoryID, string searchTerm, int? Page, int? categoryID, int? minimumPrice, int? maximumPrice, int? sortBy)
         {
-            ListProduct model = new ListProduct();
-            int recordSize = 9;
-            Page = Page.HasValue ? Page.Value > 0 ? Page.Value : 1 : 1;
-            model.Productlist = _entityService.List(subcategoryID,searchTerm, Page.Value, recordSize, categoryID, minimumPrice, maximumPrice, sortBy);
-            var TotalRecords = _entityService.ProductCount(subcategoryID, searchTerm, Page.Value, recordSize, categoryID, minimumPrice, maximumPrice, sortBy);
-            model.Pager = new Pager(TotalRecords, Page, recordSize);
-            model.SortBy = sortBy;
-            model.Whislists = _context.Whislists.ToList();
-            model.CategoryID = categoryID;
-            model.SubCategoryID = subcategoryID;
-            model.MaximumPrice =Convert.ToDouble( maximumPrice);
-            model.SearchTerm = searchTerm;
-            if (Currency != null && Currency != "")
-            {
-                model.Currency = _context.Currencies.FirstOrDefault(x => x.Name == Currency).Currency_Rate;
-                model.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Name == Currency).Simbal;
+            using (var db = new ApplicationDbContext()) {
+                ListProduct model = new ListProduct();
 
+                int recordSize = 9;
+                Page = Page.HasValue ? Page.Value > 0 ? Page.Value : 1 : 1;
+                model.Productlist = _entityService.List(subcategoryID, searchTerm, Page.Value, recordSize, categoryID, minimumPrice, maximumPrice, sortBy);
+                var TotalRecords = _entityService.ProductCount(subcategoryID, searchTerm, Page.Value, recordSize, categoryID, minimumPrice, maximumPrice, sortBy);
+                model.Pager = new Pager(TotalRecords, Page, recordSize);
+                model.SortBy = sortBy;
+                model.Whislists = await _context.Whislists.ToListAsync();
+                model.CategoryID = categoryID;
+                model.SubCategoryID = subcategoryID;
+                model.MaximumPrice = Convert.ToDouble(maximumPrice);
+                model.SearchTerm = searchTerm;
 
+                return PartialView(model);
             }
-            else
-            {
-                model.CurrencySimbal = _context.Currencies.FirstOrDefault(x => x.Base_Currency == true).Simbal;
-
-                model.Currency = 1;
-            }
-            return PartialView(model);
         }
 
         public async Task<ActionResult> AddToCart(int id)
         {
             var cart = new ShopService(HttpContext);
+
+            if (!await cart.IsItemOutOfStockAsync(id))
+            {
+                TempData["outofstock"] = "outofstock";
+                return RedirectToAction("index");
+            }
 
             await cart.AddAsync(id);
 
@@ -363,6 +321,31 @@ namespace Microflake.Web.Controllers
             }
 
             var cart = new ShopService(HttpContext);
+
+            if (!await cart.IsItemOutOfStockAsync(productId.Value))
+            {
+                TempData["outofstock"] = "outofstock";
+                return RedirectToAction("index");
+            }
+
+            if (!await cart.IsItemOutOfStockAsync(frontChip.Value))
+            {
+                TempData["outofstock"] = "outofstock";
+                return RedirectToAction("index");
+            }
+
+            if (!await cart.IsItemOutOfStockAsync(backChip.Value))
+            {
+                TempData["outofstock"] = "outofstock";
+                return RedirectToAction("index");
+            }
+
+            if (frontChip.Value == backChip.Value) {
+                if (await cart.GetItemQtyAsync(frontChip.Value)< 2) {
+                    TempData["outofstock"] = "outofstock";
+                    return RedirectToAction("index");
+                }
+            }
 
             await cart.AddAsync(productId.Value, frontChip.Value, backChip.Value);
 

@@ -99,9 +99,8 @@
         font-size: 18px;
         -webkit-transition: 0.3s;
         transition: 0.3s;
-        opacity: 0;
-        visibility: hidden;
     }
+
 </style>
 
 <div class="breadcrumbs_area">
@@ -147,55 +146,65 @@
                                 </div>
                             }
                         </div>
-                        <div class="product_meta chip-title" style="display:block">
-                            <span>Front Chip</span>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul class="owl-carousel front-chips chips-wrapper">
-                                    @foreach (var item in Model.Items)
-                                    {
-                                        <li>
-                                            <a href="#" class="select-chip1" data-id="@item.Id">
-                                                <img src="@(Config.Products +  item.Image)" alt="">
-                                            </a>
-                                        </li>
-
-                                    }
-                                </ul>
+                        @if (Model.Items.Count() > 0)
+                        {
+                            <div class="product_meta chip-title" style="display:block">
+                                <span>Front Chip</span>
                             </div>
-                        </div>
-                        <div class="product_meta chip-title" style="display:block">
-                            <span>Bottom Chip</span>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul class="owl-carousel front-chips chips-wrapper back-chips">
-                                    @foreach (var item in Model.Items)
-                                    {
-                                        <li>
-                                            <a href="#" class="select-chip2" data-id="@item.Id">
-                                                <img src="@(Config.Products +  item.Image)" alt="">
-                                            </a>
-                                        </li>
 
-                                    }
-                                </ul>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="owl-carousel front-chips chips-wrapper">
+                                        @foreach (var item in Model.Items)
+                                        {
+                                            <li>
+                                                <a href="#" class="select-chip1" data-id="@item.Id">
+                                                    <img src="@(Config.Products + item.Image)" alt="">
+                                                </a>
+                                            </li>
+
+                                        }
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-       
-                        <div class="product_variant quantity" style="margin-top:15px;">
-                            <label>quantity</label>
-                            <input name="qty" min="1" max="100" value="1" type="number">
-                        </div>
-                        <span id="error-message"></span>
-                        <div class="product_variant quantity" style="margin-left:-20px">
-                            <input id="btn-submit" class="button" type="submit" value="Add to Cart">
-                        </div>
-                        <input id="productId" type="hidden" value="" name="productId" />
-                        <input id="frontChip" type="hidden" value="" name="frontChip" />
-                        <input id="backChip" type="hidden" value="" name="backChip" />
+                            <div class="product_meta chip-title" style="display:block">
+                                <span>Bottom Chip</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="owl-carousel front-chips chips-wrapper back-chips">
+                                        @foreach (var item in Model.Items)
+                                        {
+                                            <li>
+                                                <a href="#" class="select-chip2" data-id="@item.Id">
+                                                    <img src="@(Config.Products + item.Image)" alt="">
+                                                </a>
+                                            </li>
+
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="product_variant quantity" style="margin-top:15px;">
+                                <label>quantity</label>
+                                <input name="qty" min="1" max="100" value="1" type="number">
+                            </div>
+                            <span id="error-message"></span>
+                            <div class="product_variant quantity" style="margin-left:-20px">
+                                <input id="btn-submit" class="button" type="submit" value="Add to Cart">
+                            </div>
+                            <input id="productId" type="hidden" value="" name="productId" />
+                            <input id="frontChip" type="hidden" value="" name="frontChip" />
+                            <input id="backChip" type="hidden" value="" name="backChip" />
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning mt-5" role="alert">
+                                Sorry no option is available
+                            </div>
+                        }
                     </form>
                     <div class="priduct_social">
                         <ul>

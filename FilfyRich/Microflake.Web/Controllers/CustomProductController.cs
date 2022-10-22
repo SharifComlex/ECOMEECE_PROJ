@@ -17,9 +17,14 @@ namespace Microflake.Web.Controllers
             }
 
             var _context = new ApplicationDbContext();
-            var products = await _context.Products.ToListAsync();
-            var caps = products.Where(x => x.IsHasVariation).ToList();
-            var badges = products.Where(x => x.IsVariationOverlay).ToList();
+            var caps = await _context.Products.Where(x=> x.Qty > 0 && x.Id == Id.Value).ToListAsync();
+
+            if (caps.Count == 0) {
+                return Redirect("/Shop");
+            }
+
+            var badgeIds = await _context.CustomVariations.Where(x => x.CapId == Id).Select(x=> x.BadgeId.Value).ToListAsync();
+            var badges = await _context.Products.Where(x => x.Qty > 2 && badgeIds.Contains(x.Id)).ToListAsync();
 
             return View(new CustomItemModel
             {

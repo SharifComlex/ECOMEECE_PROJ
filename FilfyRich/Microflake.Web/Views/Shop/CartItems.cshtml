@@ -38,8 +38,8 @@
 
                                     @foreach (var item in Model.Items)
                                     {
-                                        var rate = item.Product.SellPrice * ViewBag.Currency;
-                                        var discount = item.Product.Discount * ViewBag.Currency;
+                                        var rate = item.Product.SellPrice;
+                                        var discount = item.Product.Discount;
                                         <tr>
                                             <td class="product_thumb">
                                                 <a href="#">
@@ -47,8 +47,15 @@
                                                 </a>
                                                 @if (item.Product.IsHasVariation == true)
                                                 {
-                                                    <img src="@Config.Products@(item.BackChip?.Image)" style="height:50px; width:50px;">
-                                                    <img src="@Config.Products@(item.FrontChip?.Image)" style="height:50px; width:50px;">
+                                                    if (item.BackChip != null)
+                                                    {
+                                                        <img src="@Config.Products@(item.BackChip.Image)" style="height:50px; width:50px;">
+                                                    }
+
+                                                    if (item.FrontChip != null)
+                                                    {
+                                                        <img src="@Config.Products@(item.FrontChip.Image)" style="height:50px; width:50px;">
+                                                    }
                                                 }
                                             </td>
                                             <td class="product-price">
@@ -70,7 +77,6 @@
                                                 </a>
                                             </td>
                                             <td class="product_total"><a href="@Url.Action("RemoveFromCart", "Shop", new { id = item.CartItemId })"><i class="fa fa-times"></i></a></td>
-
 
                                         </tr>
 
@@ -95,7 +101,7 @@
                             <div class="coupon_inner">
                                 <div class="cart_subtotal">
                                     <p>Total</p>
-                                    <p class="cart_amount">@Model.Total</p>
+                                    <p class="cart_amount">£ @Model.Total</p>
                                 </div>
                                 <div class="checkout_btn">
                                     <a href="/shop/Checkout">Proceed to Checkout</a>

@@ -337,8 +337,8 @@
     });
 
     $(".uploadProfileImage").change(function () {
-        debugger;
         $(".select-image").html('<i class="fa fa-spinner fa-spin"></i>');
+        $(".select-image").css({ "visibility": "visible" });
 
         var profileImage = new FormData();
         var file = $(this)[0].files[0];
@@ -360,6 +360,8 @@
                     $(".image-error").html(response.message);
                     $(".select-image").html('<i class="fa fa-plus"></i>');
                 }
+
+                $(".select-image").css({ "visibility": "hidden" });
             }
         });
     });
@@ -371,8 +373,8 @@
     });
 
     $(".uploadProfileImage1").change(function () {
-        debugger;
         $(".select-image1").html('<i class="fa fa-spinner fa-spin"></i>');
+        $(".select-image1").css({ "visibility": "visible" });
 
         var profileImage = new FormData();
         var file = $(this)[0].files[0];
@@ -394,6 +396,7 @@
                     $(".image-error").html(response.message);
                     $(".select-image1").html('<i class="fa fa-plus"></i>');
                 }
+                $(".select-image1").css({ "visibility": "hidden" });
             }
         });
     });

@@ -8,21 +8,21 @@
 @Html.HiddenFor(x => x.MaximumPrice)
 
 @*<div class="breadcrumbs_area">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="breadcrumb_content">
-                    <h3>Caps</h3>
-                    <ul>
-                        <li><a href="/">home</a></li>
-                        <li>&gt;</li>
-                        <li>Shop</li>
-                    </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <h3>Caps</h3>
+                        <ul>
+                            <li><a href="/">home</a></li>
+                            <li>&gt;</li>
+                            <li>Shop</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 
 <div class="shop_area shop_fullwidth shop_reverse mt-2">
     <div class="container">
@@ -34,11 +34,10 @@
 
                     <div class="widget_list widget_filter">
                         <h2>Filter by price</h2>
-                        <form action="#">
+                        <form action="#" class="mb-8">
                             <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 100%;"></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;"></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span></div>
                             <input type="text" name="text" id="amount">
-                            <button type="submit">Filter</button>
-
+                            <div style="clear:both"></div>
                         </form>
                     </div>
                     <div class="widget_list">
@@ -50,8 +49,6 @@
                                 @foreach (var item in Model.SubCategorylist.Where(x => x.CategoryId == category.Id))
                                 {
                                     <li class="check-item check-item-unChecked dataLink" data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })">
-                                        @*  <input data-href="@Url.Action("FilterProduct", "Shop", new {  subcategoryID = item.Id ,sortBy = Model.SortBy })" type="checkbox" class="dataLink @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">*@
-                                        @* <span class="custom-control-label">@item.Name </span>*@
                                         <a class=" @(Model.CategoryID.HasValue && Model.CategoryID.Value == category.Id ? "checked" : string.Empty) custom-control-input">@item.Name </a>
                                     </li>
                                 }
@@ -67,6 +64,34 @@
                 <div class="shop-products-wrapper">
                     <!--shop wrapper start-->
                     <!--shop toolbar end-->
+                    <div class="shop_toolbar">
+                        <div class="list_button">
+                            <ul class="nav" role="tablist">
+                                <li>
+                                    <a class="active" data-bs-toggle="tab" href="#large" role="tab" aria-controls="large" aria-selected="true"><i class="ion-grid"></i></a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="orderby_wrapper">
+                            <h3>Sort By : </h3>
+                            <div>
+                                <select id="dataLinkTest">
+                                    <option @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Default ? "selected" : "" : "") value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Default, categoryID = Model.CategoryID  })">Featured</option>
+                                    <option @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Popularity ? "selected" : "" : "") value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Popularity, categoryID = Model.CategoryID  })">New Entered</option>
+                                    <option @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.PriceLowToHigh ? "selected" : "" : "") value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.PriceLowToHigh, categoryID = Model.CategoryID  })">Sort by price: low to high</option>
+                                    <option @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.PriceHighToLow ? "selected" : "" : "") value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.PriceHighToLow, categoryID = Model.CategoryID  })">Sort by price: high to low</option>
+                                    <option @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between0to500 ? "selected" : "" : "") value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between0to500, categoryID = Model.CategoryID  })">Price Between: 0 to 500 </option>
+                                    <option @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between500to1000 ? "selected" : "" : "") value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between500to1000, categoryID = Model.CategoryID  })">Price Between: 500 to 1000</option>
+                                    <option @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between1000to1500 ? "selected" : "" : "") value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between1000to1500, categoryID = Model.CategoryID  })">Price Between: 1000 to 1500</option>
+                                    <option @(Model.SortBy.HasValue ? Model.SortBy.Value == (int)SortByEnum.Between1500to2000 ? "selected" : "" : "") value="@Url.Action("FilterProduct", "Shop", new { sortBy = (int)SortByEnum.Between1500to2000, categoryID = Model.CategoryID  })">Price Between: 1500 to 2000</option>
+                                </select>
+                            </div>
+                            <div class="page_amount">
+                                <p> Showing @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + 1) – @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + (Model.Productlist.Count() < Model.Pager.PageSize ? Model.Productlist.Count() : Model.Pager.PageSize)) of @Model.Pager.TotalItems Products</p>
+                            </div>
+                        </div>
+                    </div>
                     <div id="ProductsDiv">
                         @{
 
@@ -88,12 +113,19 @@
             $.simplyToast("Order Placed SUccessfully", "success");
         </script>
     }
+
+    @if (ViewBag.outofstock == "outofstock")
+    {
+        <script>
+            $.simplyToast("Product is of stock", "danger");
+        </script>
+    }
+
     <script>
       $('input:checkbox').click(function() {
         $('input:checkbox').not(this).prop('checked', false);
       });
         $(".check-item").click(function () {
-            debugger
             if ($(this).hasClass("check-item-unChecked")) {
                 $(this).removeClass("check-item-unChecked");
                 $(".check-item").removeClass("check-item-checked");
@@ -106,22 +138,23 @@
             }
         })
 
-        $("#dataLinkTest").change(function () {
-
+        $(document).on("change", "#dataLinkTest", function () {
             var url = $("#dataLinkTest").val();
 
             if (url != "" || url != undefined) {
                 GetData(url);
             }
         });
+
         $(".dataLink").click(function () {debugger
 
-        var url = $(this).attr("data-href");
+            var url = $(this).attr("data-href");
 
-        if (url != "" || url != undefined) {
-            GetData(url);
-        }
+            if (url != "" || url != undefined) {
+                GetData(url);
+            }
         });
+
         function GetData(dUrl) {
 
      	//showLoader();
@@ -195,6 +228,7 @@
         });
 	}
 
+        $('#dataLinkTest').niceSelect();
     </script>
 }
 
