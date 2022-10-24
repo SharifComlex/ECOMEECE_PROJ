@@ -189,19 +189,19 @@
                                     total += item.Quantity * (float)item.Product.SellPrice;
                                     <tr>
                                         <td align="left" width="25%" style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-                                            <img src="@Config.Products@(item.Product.Image)" style="height:100px; width:100px;">
+                                            <img src="http://filfyrich.co.uk@Config.Products@(item.Product.Image)" style="height:100px; width:100px;">
                                         </td>
                                         <td align="left" width="25%" style="padding: 6px 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                                             @if (item.Product.IsHasVariation == true)
                                             {
                                                 if (item.FrontBadge != null)
                                                 {
-                                                    <img src="@Config.Products@(item.FrontBadge.Image)" style="height:50px; width:50px;">
+                                                    <img src="http://filfyrich.co.uk@Config.Products@(item.FrontBadge.Image)" style="height:50px; width:50px;">
                                                 }
 
                                                 if (item.BackBadge != null)
                                                 {
-                                                    <img src="@Config.Products@(item.BackBadge.Image)" style="height:50px; width:50px;">
+                                                    <img src="http://filfyrich.co.uk@Config.Products@(item.BackBadge.Image)" style="height:50px; width:50px;">
                                                 }
                                             }
                                         </td>

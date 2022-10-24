@@ -392,17 +392,21 @@ namespace Microflake.Web.Controllers
             }
         }
 
-        private async Task<int> SendEmail(string email,long Id)
+        public async Task<int> SendEmail(string email,long Id)
         {
             try
             {
-                SmtpClient client = new SmtpClient("relay-hosting.secureserver.net", 465);
+                //SmtpClient client = new SmtpClient("relay-hosting.secureserver.net", 25);
+                SmtpClient client = new SmtpClient("smtpout.secureserver.net", 587);
+
                 client.EnableSsl = true;
                 client.UseDefaultCredentials = false;
+                client.Timeout = 10000;
                 client.Credentials = new NetworkCredential("info@filfyrich.com", "Goldboots1");
 
                 MailMessage message = new MailMessage("info@filfyrich.com", email);
                 message.Subject = "Order Receipt";
+                message.IsBodyHtml = true;
 
                 using (var httpClient = new HttpClient()) {
                     httpClient.DefaultRequestHeaders.Add("User-Agent", "Web");
@@ -414,6 +418,7 @@ namespace Microflake.Web.Controllers
             }
             catch (Exception ex)
             {
+                throw;
             }
 
             return 1;
